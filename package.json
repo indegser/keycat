@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "mongoose": "^5.3.13",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2"
+  }
+}
