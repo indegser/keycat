@@ -10,9 +10,9 @@ module.exports = {
     filename: 'xafe.js',
   },
   resolve: {
-    modules: ['node_modules'],
+    modules: ['node_modules', path.resolve(ROOT, 'src', 'server')],
     extensions: ['.js'],
   },
-  target: 'node',
-  // externals: [nodeExternals()],
+  // target: 'node',
+  externals: [nodeExternals()],
 };
