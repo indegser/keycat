@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import Account from 'db/models/Account';
+import models from 'db/models';
 const router = new Router()
 
 router.post('/sign-up', async (ctx) => {
@@ -9,12 +9,8 @@ router.post('/sign-up', async (ctx) => {
   } = ctx.request.body;
 
   try {
-    const account = new Account({ pin, privateKey })
-    const created = await account.save()
-
-    console.log(created)
-  
-    ctx.body = created
+    const account = await models.account.save({ pin, privateKey })
+    ctx.body = account
   } catch (err) {
     console.error(err)
   }

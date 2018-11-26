@@ -1,20 +1,15 @@
-import mongoose from 'mongoose';
+import { Database } from 'arangojs'
 
 const {
-  MONGO_INITDB_ROOT_USERNAME: USERNAME,
-  MONGO_INITDB_ROOT_PASSWORD: PASSWORD,
-  MONGO_INITDB_DATABASE: DATABASE,
+  ARANGO_ROOT_PASSWORD: PASSWORD,
 } = process.env;
 
-console.log(
-  USERNAME,
-  PASSWORD,
-  DATABASE,
-)
+const db = new Database()
+db.useDatabase('xafe')
+db.useBasicAuth('root', PASSWORD)
 
-mongoose.connect(
-  `mongodb://${USERNAME}:${PASSWORD}@localhost/${DATABASE}`,
-  {
-    useNewUrlParser: true,
-  }
-);
+db.createDatabase('xafe')
+  .then(log => console.log(log))
+  .catch(err => console.error('111'))
+
+export default db

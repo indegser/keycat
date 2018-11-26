@@ -3,7 +3,7 @@ services:
   db:
     container_name: xafe-db
     ports:
-      - "27017:27017"
-    image: mongo
+      - "8529:8529"
+    image: arangodb
     env_file:
       - .env
