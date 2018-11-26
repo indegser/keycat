@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { colors } from 'design/constants';
 import { Input } from 'design/atoms/Input';
 import { useApi } from 'hook/api-hook';
+import { getAccounts } from 'api/eos';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -39,6 +40,8 @@ const ActionDesc = styled('p')`
   line-height: 1.4286;
   color: ${colors.text.secondary};
 `;
+
+getAccounts()
 
 const App = () => {
   return (
