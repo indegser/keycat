@@ -3,5 +3,7 @@ services:
   db:
     container_name: xafe-db
     ports:
-      - "27018:27018"
+      - "27017:27017"
     image: mongo
+    env_file:
+      - .env

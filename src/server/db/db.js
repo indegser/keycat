@@ -6,4 +6,15 @@ const {
   MONGO_INITDB_DATABASE: DATABASE,
 } = process.env;
 
-mongoose.connect(`mongodb://${USERNAME}:${PASSWORD}@localhost/${DATABASE}`);
+console.log(
+  USERNAME,
+  PASSWORD,
+  DATABASE,
+)
+
+mongoose.connect(
+  `mongodb://${USERNAME}:${PASSWORD}@localhost/${DATABASE}`,
+  {
+    useNewUrlParser: true,
+  }
+);

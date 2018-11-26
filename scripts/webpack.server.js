@@ -13,6 +13,6 @@ module.exports = {
     modules: ['node_modules', path.resolve(ROOT, 'src', 'server')],
     extensions: ['.js'],
   },
-  // target: 'node',
+  target: 'node',
   externals: [nodeExternals()],
 };
