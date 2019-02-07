@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { colors } from 'design/constants';
 import { Input } from 'design/atoms/Input';
 import { useApi } from 'hook/api-hook';
-import { getAccounts, signPin } from 'api/eos';
+import { getAccounts, signPin, buyram } from 'api/eos';
 import { api } from 'api/api';
+import PageTab from './PageTab';
 
 // const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
 
@@ -44,47 +45,73 @@ const ActionDesc = styled('p')`
   color: ${colors.text.secondary};
 `;
 
-
 const App = () => {
+  const [page, setPage] = useState('transaction');
+
   async function handleSubmit(e) {
     e.preventDefault();
-    const form = e.target
+    const form = e.target;
+    const bytes = form.elements['bytes'].value;
     const accountNameFromForm = form.elements['name'].value;
     const privateKey = form.elements['password'].value;
-
     const [accountName] = await getAccounts(privateKey);
     if (accountNameFromForm !== accountName) {
       alert('Account name is different!');
       return;
     }
     
-    location.reload();
+    if (page === 'login') {
+      alert(`Hello! ${accountName}`);    
+      location.reload();
+    }
+
+    const result = await buyram({
+      bytes,
+      pk: privateKey,
+      accountName,
+    });
+
+    alert(JSON.stringify(result.processed.receipt));
   }
+
+  const isTx = page === 'transaction';
 
   return (
     <>
       <GlobalStyle />
       <AppContainer>
         <ActionBox>
+          <PageTab page={page} setPage={setPage} />
           <ActionHeadline>
-            <h1>Sign Up</h1>
-            <div>to continue to eosdaq.com</div>
+            <h1>
+              {isTx ? 'Buy Ram' : 'Login'}
+            </h1>
           </ActionHeadline>
           <form
             onSubmit={handleSubmit}
           >
-            <Input
-              name="name"
-              type="text"
-              placeholder="Account name"
-            />
-            <Input
-              name="password"
-              type="password"
-              placeholder="Private key"
-            />
+            {isTx && (
+              <Input
+                name="bytes"
+                type="number"
+                placeholder="8192"
+                defaultValue="32"
+              />
+            )}
+            <div style={{ display: isTx ? 'none' : 'block' }}>
+              <Input
+                name="name"
+                type="text"
+                placeholder="Account name"
+              />
+              <Input
+                name="password"
+                type="password"
+                placeholder="Private key"
+              />
+            </div>
             <ActionDesc>
-              <strong>xafe</strong>는 모든 블록체인을 지원하는 웹 월렛입니다. 현재 지원하는 블록체인은 EOS이며, 앞으로 Tron, Ethereum을 지원할 예정입니다.
+              <strong>xafe</strong>는 브라우저의 Password manager를 활용한 웹 지갑입니다. 첫 사용 시에 비밀번호 저장을 누르면 안전하게 사용가능합니다.
             </ActionDesc>
             <button type="submit">
               Next

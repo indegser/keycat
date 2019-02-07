@@ -7,7 +7,7 @@ import {
 
 import ecc from 'eosjs-ecc'
 
-const rpc = new JsonRpc('http://jungle2.cryptolions.io:80')
+const rpc = new JsonRpc('https://api.jungle.alohaeos.com')
 
 export const getAccounts = async (pk) => {
   const pub = await ecc.privateToPublic(pk)
@@ -21,6 +21,35 @@ export const getAccounts = async (pk) => {
   } catch (err) {
     console.error(err)
   }
+}
+
+export const buyram = async ({ bytes, accountName, pk }) => {
+  const sig = new JsSignatureProvider([pk]);
+  const api = new Api({
+    rpc,
+    signatureProvider: sig,
+    textDecoder: new TextDecoder(),
+    textEncoder: new TextEncoder(),
+  });
+
+  return api.transact({
+    actions: [{
+      account: 'eosio',
+      name: 'buyrambytes',
+      authorization: [{
+        permission: 'active',
+        actor: accountName,
+      }],
+      data: {
+        payer: accountName,
+        receiver: accountName,
+        bytes,
+      }
+    }]
+  }, {
+    blocksBehind: 3,
+    expireSeconds: 30,
+  });
 }
 
 export const signPin = (pin, pk) => {
