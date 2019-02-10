@@ -14,4 +14,8 @@ export const Input = styled('input')`
   padding: 0 16px;
   box-sizing: border-box;
   font-size: 14px;
+
+  &:focus {
+    border: 1px solid #08f;
+  }
 `;

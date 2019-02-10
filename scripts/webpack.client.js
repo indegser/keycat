@@ -35,9 +35,7 @@ module.exports = {
   ],
   devServer: {
     hot: true,
-    proxy: {
-      '/api': 'http://localhost:3001'
-    },
+    host: '0.0.0.0',
     contentBase: path.resolve(ROOT, 'dist'),
   }
 }

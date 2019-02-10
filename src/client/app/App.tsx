@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { colors } from 'design/constants';
 import { Input } from 'design/atoms/Input';
@@ -47,11 +47,18 @@ const ActionDesc = styled('p')`
 
 const App = () => {
   const [page, setPage] = useState('transaction');
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const input = ref.current;
+    input.focus();
+    input.select();
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const bytes = form.elements['bytes'].value;
+    const bytes = (form.elements['bytes'] || {}).value;
     const accountNameFromForm = form.elements['name'].value;
     const privateKey = form.elements['password'].value;
     const [accountName] = await getAccounts(privateKey);
@@ -98,12 +105,14 @@ const App = () => {
                 defaultValue="32"
               />
             )}
-            <div style={{ display: isTx ? 'none' : 'block' }}>
-              <Input
-                name="name"
-                type="text"
-                placeholder="Account name"
-              />
+            <Input
+              name="name"
+              type="text"
+              ref={ref}
+              autoFocus={true}
+              placeholder="Account name"
+            />
+            <div style={{ marginLeft: isTx ? '-9999999px' : '0px' }}>
               <Input
                 name="password"
                 type="password"
