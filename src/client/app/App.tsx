@@ -6,6 +6,7 @@ import { useApi } from 'hook/api-hook';
 import { getAccounts, signPin, buyram } from 'api/eos';
 import { api } from 'api/api';
 import PageTab from './PageTab';
+import Viewer from './Viewer';
 
 // const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
 
@@ -29,7 +30,7 @@ const AppContainer = styled('div')`
 
 const ActionBox = styled('div')`
   margin: 0 auto;
-  max-width: 450px;
+  max-width: 360px;
   width: 100%;
   padding: 32px;
   background: #fff;
@@ -37,7 +38,9 @@ const ActionBox = styled('div')`
 `;
 
 const ActionHeadline = styled('div')`
-  text-align: center;
+  h1 {
+    font-size: 48px;
+  }
 `;
 
 const ActionDesc = styled('p')`
@@ -47,12 +50,18 @@ const ActionDesc = styled('p')`
 
 const App = () => {
   const [page, setPage] = useState('transaction');
-  const ref = useRef(null);
+  const [name, setName] = useState(localStorage.getItem('x-name'));
+  const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const input = ref.current;
-    input.focus();
-    input.select();
+    if (input.value) {
+      const xName = localStorage.getItem('x-name');
+      if (input.value !== xName) {
+        localStorage.setItem('x-name', input.value);
+        setName(input.value);
+      }
+    }
   }, [])
 
   async function handleSubmit(e) {
@@ -94,6 +103,7 @@ const App = () => {
               {isTx ? 'Buy Ram' : 'Login'}
             </h1>
           </ActionHeadline>
+          <Viewer name={name} />
           <form
             onSubmit={handleSubmit}
           >
@@ -105,14 +115,14 @@ const App = () => {
                 defaultValue="32"
               />
             )}
-            <Input
-              name="name"
-              type="text"
-              ref={ref}
-              autoFocus={true}
-              placeholder="Account name"
-            />
-            <div style={{ marginLeft: isTx ? '-9999999px' : '0px' }}>
+            <div style={{ visibility: isTx ? 'collapse' : 'visible' }}>
+              <Input
+                name="name"
+                type="text"
+                ref={ref}
+                autoFocus={true}
+                placeholder="Account name"
+              />
               <Input
                 name="password"
                 type="password"
