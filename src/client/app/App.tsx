@@ -7,6 +7,7 @@ import { getAccounts, signPin, buyram } from 'api/eos';
 import { api } from 'api/api';
 import PageTab from './PageTab';
 import Viewer from './Viewer';
+import { Button } from 'design/atoms/Button';
 
 // const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
 
@@ -51,6 +52,9 @@ const ActionDesc = styled('p')`
 const App = () => {
   const [page, setPage] = useState('transaction');
   const [name, setName] = useState(localStorage.getItem('x-name'));
+  const [form, setForm] = useState({
+    isSubmitting: false,
+  })
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -65,6 +69,7 @@ const App = () => {
   }, [])
 
   async function handleSubmit(e) {
+    setForm({ isSubmitting: true });
     e.preventDefault();
     const form = e.target;
     const bytes = (form.elements['bytes'] || {}).value;
@@ -87,6 +92,7 @@ const App = () => {
       accountName,
     });
 
+    setForm({ isSubmitting: false });
     alert(JSON.stringify(result.processed.receipt));
   }
 
@@ -115,7 +121,11 @@ const App = () => {
                 defaultValue="32"
               />
             )}
-            <div style={{ visibility: isTx ? 'collapse' : 'visible' }}>
+            <div style={{
+              visibility: isTx ? 'collapse' : 'visible',
+              height: isTx ? 0 : 'auto', 
+            }}
+            >
               <Input
                 name="name"
                 type="text"
@@ -132,9 +142,9 @@ const App = () => {
             <ActionDesc>
               <strong>xafe</strong>는 브라우저의 Password manager를 활용한 웹 지갑입니다. 첫 사용 시에 비밀번호 저장을 누르면 안전하게 사용가능합니다.
             </ActionDesc>
-            <button type="submit">
+            <Button disabled={form.isSubmitting} type="submit">
               Next
-            </button>
+            </Button>
           </form>
         </ActionBox>
       </AppContainer>
