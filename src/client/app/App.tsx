@@ -82,8 +82,7 @@ const App = () => {
     }
     
     if (page === 'login') {
-      alert(`Hello! ${accountName}`);   
-      window.parent.postMessage({ type: 'login', payload: accountName }, 'http://localhost:8080'); 
+      window.opener.postMessage({ type: 'login', payload: accountName }, '*'); 
       location.reload();
     }
 
