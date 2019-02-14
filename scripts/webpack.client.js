@@ -36,6 +36,7 @@ module.exports = {
   devServer: {
     hot: true,
     host: '0.0.0.0',
+    historyApiFallback: true,
     contentBase: path.resolve(ROOT, 'dist'),
   }
 }

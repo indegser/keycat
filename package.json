@@ -4,6 +4,7 @@
     "exchange": "parcel src/exchange/index.html"
   },
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "eosjs": "^20.0.0-beta2",
     "eosjs-ecc": "^4.0.4",
     "formik": "^1.3.2",

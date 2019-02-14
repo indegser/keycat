@@ -23,7 +23,7 @@ export const getAccounts = async (pk) => {
   }
 }
 
-export const buyram = async ({ bytes, accountName, pk }) => {
+export const buyram = async (payload, pk) => {
   const sig = new JsSignatureProvider([pk]);
   const api = new Api({
     rpc,
@@ -32,21 +32,7 @@ export const buyram = async ({ bytes, accountName, pk }) => {
     textEncoder: new TextEncoder(),
   });
 
-  return api.transact({
-    actions: [{
-      account: 'eosio',
-      name: 'buyrambytes',
-      authorization: [{
-        permission: 'active',
-        actor: accountName,
-      }],
-      data: {
-        payer: accountName,
-        receiver: accountName,
-        bytes,
-      }
-    }]
-  }, {
+  return api.transact(payload, {
     blocksBehind: 3,
     expireSeconds: 30,
   });

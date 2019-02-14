@@ -55,19 +55,6 @@ const App = () => {
   const [form, setForm] = useState({
     isSubmitting: false,
   })
-  const ref = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const input = ref.current;
-    if (input.value) {
-      const xName = localStorage.getItem('x-name');
-      if (input.value !== xName) {
-        localStorage.setItem('x-name', input.value);
-        setName(input.value);
-      }
-    }
-  }, [])
-
   async function handleSubmit(e) {
     setForm({ isSubmitting: true });
     e.preventDefault();
@@ -129,7 +116,6 @@ const App = () => {
               <Input
                 name="name"
                 type="text"
-                ref={ref}
                 autoFocus={true}
                 placeholder="Account name"
               />
