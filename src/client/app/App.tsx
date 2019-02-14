@@ -50,7 +50,7 @@ const ActionDesc = styled('p')`
 `;
 
 const App = () => {
-  const [page, setPage] = useState('transaction');
+  const [page, setPage] = useState('login');
   const [name, setName] = useState(localStorage.getItem('x-name'));
   const [form, setForm] = useState({
     isSubmitting: false,
@@ -82,7 +82,8 @@ const App = () => {
     }
     
     if (page === 'login') {
-      alert(`Hello! ${accountName}`);    
+      alert(`Hello! ${accountName}`);   
+      window.parent.postMessage({ type: 'login', payload: accountName }, 'http://localhost:8080'); 
       location.reload();
     }
 
