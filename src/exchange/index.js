@@ -35,7 +35,7 @@ document.getElementById('buyram').addEventListener('click', () => {
       },
     }],
   };
-  openPopup(`/transaction?payload=${JSON.stringify(transaction)}`);
+  openPopup(`/transaction?accountName=${accountName}&payload=${JSON.stringify(transaction)}`);
 });
 
 window.addEventListener('message', (e) => {

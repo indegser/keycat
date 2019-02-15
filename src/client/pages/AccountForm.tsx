@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'design/atoms/Input';
 
-const AccountForm = ({ isTx }) => {
+const AccountForm = ({ isTx, accountName }) => {
   return (
     <div style={{
       visibility: isTx ? 'collapse' : 'visible',
@@ -9,8 +9,9 @@ const AccountForm = ({ isTx }) => {
     }}
     >
       <Input
-        name="name"
-        type="text"
+        name="email"
+        type="email"
+        defaultValue={accountName}
         autoFocus={true}
         placeholder="Account name"
       />
