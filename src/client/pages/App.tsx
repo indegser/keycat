@@ -6,6 +6,9 @@ import { set, get } from 'idb-keyval';
 import Account from 'design/moles/Account';
 import Login from './login/Login';
 import AddAccount from 'design/moles/AddAccount';
+import { media } from 'design/utils';
+import { Router } from '@reach/router';
+import Transaction from './tx/Transaction';
 
 // const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
 /**
@@ -23,29 +26,191 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  /*
+
+  /*
+
+  XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
+  
+  */
+  
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #fff;
+    color: black;
+  }
+  
+  /* Gray DOCTYPE selectors like WebKit */
+  .xml .hljs-meta {
+    color: #c0c0c0;
+  }
+  
+  .hljs-comment,
+  .hljs-quote {
+    color: #007400;
+  }
+  
+  .hljs-tag,
+  .hljs-attribute,
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-name {
+    color: #aa0d91;
+  }
+  
+  .hljs-variable,
+  .hljs-template-variable {
+    color: #3F6E74;
+  }
+  
+  .hljs-code,
+  .hljs-string,
+  .hljs-meta-string {
+    color: #c41a16;
+  }
+  
+  .hljs-regexp,
+  .hljs-link {
+    color: #0E0EFF;
+  }
+  
+  .hljs-title,
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-number {
+    color: #1c00cf;
+  }
+  
+  .hljs-section,
+  .hljs-meta {
+    color: #643820;
+  }
+  
+  
+  .hljs-class .hljs-title,
+  .hljs-type,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-params {
+    color: #5c2699;
+  }
+  
+  .hljs-attr {
+    color: #836C28;
+  }
+  
+  .hljs-subst {
+    color: #000;
+  }
+  
+  .hljs-formula {
+    background-color: #eee;
+    font-style: italic;
+  }
+  
+  .hljs-addition {
+    background-color: #baeeba;
+  }
+  
+  .hljs-deletion {
+    background-color: #ffc8bd;
+  }
+  
+  .hljs-selector-id,
+  .hljs-selector-class {
+    color: #9b703f;
+  }
+  
+  .hljs-doctag,
+  .hljs-strong {
+    font-weight: bold;
+  }
+  
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  
+
 `;
 
 const AppContainer = styled('div')`
   display: flex;
-  // align-items: center;
+  flex-direction: column;
   min-height: 100vh;
+
+  &:before, &:after {
+    content: '';
+    height: 24px;
+    flex: 1 1;
+  }
 `;
 
-const ActionBox = styled('div')`
+const AppBox = styled('div')`
   margin: 0 auto;
-  width: 100%;
-  background: #fff;
+  ${media.greaterThan('601px')`
+    width: 450px;
+    border: 1px solid #dadce0;
+    background: #fff;
+    border-radius: 8px;
+    flex: 0 0 auto;
+  `}
+`;
+
+const AppIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 40px;
+    height: auto;
+    display: block;
+  }
+`;
+
+const AppAction = styled('div')`
+  ${media.greaterThan('601px')`
+    height: auto;
+    min-height: 500px;
+  `}
+
+  ${media.greaterThan('450px')`
+    padding: 48px 40px 36px;
+  `}
+
+  padding: 24px 24px 36px;
 `;
 
 const ActionHeadline = styled('div')`
-  h1 {
-    font-size: 48px;
-  }
+  padding-top: 16px;
+  font-size: 24px;
+  line-height: 1.3333;
+  margin: 0;
+  text-align: center;
+`;
+
+const ActionContent = styled.div`
+  ${media.greaterThan('450px')`
+    border-width: 0 40px;
+    margin: auto -40px;
+  `}
+
+  margin: auto -24px;
+  padding: 24px 0 0;
+  vertical-align: top;
+  font-size: 14px;
+  display: inline-block;
+  transform: translateZ(0);
+  border: 0 solid transparent;
+  border-width: 0 24px;
+  width: 100%;
 `;
 
 const ActionDesc = styled('p')`
   line-height: 1.4286;
-  padding: 0 24px;
   margin-top: 40px;
   color: ${colors.text.secondary};
 `;
@@ -112,36 +277,22 @@ const App = () => {
     <>
       <GlobalStyle />
       <AppContainer>
-        <ActionBox>
-          <ActionHeadline>
-            <h1>
-              {isAccounts ? 'Accounts' : 'Log in'}
-            </h1>
-          </ActionHeadline>
-          {isAccounts ? (
-            <div>
-              {accounts.map((accountName) => {
-                return (
-                  <Account
-                    key={accountName}
-                    accountName={accountName}
-                    handleClick={onAccountChoose}
-                  />
-                );
-              })}
-              <AddAccount handleClick={onAddAccount} />
-            </div>
-          ) : (
-            <Login
-              isAddAccount={isAddAccount}
-              accounts={accounts}
-              accountName={isAddAccount ? '' : stage.slice(stages[1].length + 1)}
-            />
-          )}
-          <ActionDesc>
-            <strong>xafe</strong>는 브라우저의 Password manager를 활용한 웹 지갑입니다. 첫 사용 시에 비밀번호 저장을 누르면 안전하게 사용가능합니다.
-          </ActionDesc>
-        </ActionBox>
+        <AppBox>
+          <AppAction>
+            <AppIconContainer>
+              <img src="https://cdn.eosdaq.com/images/icon/alien.png" />
+            </AppIconContainer>
+            <ActionHeadline>
+              {isAccounts ? 'Accounts' : 'Sign in'}
+            </ActionHeadline>
+            <ActionContent>
+              <Router>
+                <Transaction path="/transaction" />
+                <Login path="/login" />
+              </Router>
+            </ActionContent>
+          </AppAction>
+        </AppBox>
       </AppContainer>
     </>
   )

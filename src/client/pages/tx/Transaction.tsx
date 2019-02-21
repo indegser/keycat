@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import { withFormik, Form } from 'formik';
 import AccountForm from 'pages/AccountForm';
 import { buyram } from 'api/eos';
+import Action from './Action';
+import { Button } from 'design/atoms/Button';
 
 const Transaction = (props) => {
   const params = new URL(location.href).searchParams;
   const [accountName, setAccountName] = useState(params.get('accountName'));
+  const [payload, setPayload] = useState(JSON.parse(params.get('payload')));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     let payload = params.get('payload');
-    const accountName = params.get('accountName');
 
     if (!payload) {
       return null;
@@ -28,14 +31,31 @@ const Transaction = (props) => {
 
   if (!accountName) return null;
 
+  for (const action of payload.actions) {
+    const { name, account, authorization, data } = action;
+
+  }
+
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <Form noValidate>
       <AccountForm isTx accountName={accountName} />
-      <button type="submit">
-        Action!
-      </button>
-    </form>
+      {payload.actions.map(action => (
+        <Action key={action.name} action={action} />
+      ))}
+      <Button type="submit">
+        Next
+      </Button>
+    </Form>
   );
 }
 
-export default Transaction;
+export default withFormik({
+  validateOnBlur: false,
+  validateOnChange: false,
+  mapPropsToValues: () => ({
+    pk: '',
+  }),
+  handleSubmit: (_, form) => {
+    console.log(form);
+  },
+})(Transaction);
