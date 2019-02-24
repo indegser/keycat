@@ -25,6 +25,10 @@ module.exports = {
           transpileOnly: true,
         }
       }]},
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
+      }
     ],
   },
   plugins: [

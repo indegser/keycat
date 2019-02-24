@@ -30,7 +30,7 @@ const Container = styled('div')`
 const AddAccount = ({ handleClick }) => {
   return (
     <Container onClick={handleClick}>
-      다른 계정 등록
+      Register account
     </Container>
   );
 }

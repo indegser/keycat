@@ -3,6 +3,7 @@ import { get } from 'idb-keyval';
 
 const initialState = {
   accounts: [],
+  init: false,
   fetchingAccounts: true,
   selectedAccount: null,
 }
@@ -20,10 +21,14 @@ export const DataProvider = ({ children }) => {
         dispatch({
           ...state,
           accounts,
+          init: true,
           fetchingAccounts: false,
         });
       })
   }, []);
+
+  const { init } = state;
+  if (!init) return null;
 
   return (
     <DataContext.Provider value={state}>

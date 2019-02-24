@@ -6,6 +6,7 @@ import Identifier from 'design/moles/fields/Identifier';
 import { getAccounts } from 'api/eos';
 import { saveAccountToIDB } from 'actions/accountActions';
 import { useData } from 'context/DataContext';
+import SelectedAccount from 'design/organs/SelectedAccount';
 
 const SigninPassword = (props) => {
   const { identifier } = props.location.state;
@@ -30,7 +31,10 @@ const SigninPassword = (props) => {
       {() => {
         return (
           <Form noValidate>
-            <Identifier />
+            <div style={{ display: 'none' }}>
+              <Identifier />
+            </div>
+            <SelectedAccount identifier={identifier} />
             <Password />
             <Button type="submit">
               Next

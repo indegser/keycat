@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from '@reach/router';
 import styled from 'styled-components';
 
 const Container = styled('div')`
@@ -49,14 +50,21 @@ const Address = styled('div')`
   word-break: break-all;
 `;
 
-const Account = ({ accountName, handleClick }) => {
-  const initial = accountName.slice(0, 1);
+const Account = ({ identifier }) => {
+  const initial = identifier.slice(0, 1);
+
+  const handleClick = () => {
+    navigate('/signin/password', {
+      state: { identifier },
+    });
+  }
+
   return (
-    <Container onClick={() => handleClick(accountName)}>
+    <Container onClick={handleClick}>
       <Identicon>{initial}</Identicon>
       <div>
         <Name>
-          {accountName}
+          {identifier}
         </Name>
         <Address>
           indegser@gmail.com

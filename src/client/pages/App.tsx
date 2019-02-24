@@ -1,15 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { colors } from 'design/constants';
-import { getAccounts, signPin, buyram } from 'api/eos';
 import { set, get } from 'idb-keyval';
-import Account from 'design/moles/Account';
-import Login from './login/Login';
-import AddAccount from 'design/moles/AddAccount';
 import { media } from 'design/utils';
 import { Router } from '@reach/router';
 import Transaction from './tx/Transaction';
-import Accounts from './accounts/Accounts';
 import Signin from './signin/Signin';
 
 // const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
@@ -27,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
   }
   /*
 
@@ -238,33 +237,6 @@ const App = () => {
       })
   }, []);
 
-  // async function handleSubmit(e) {
-  //   setForm({ isSubmitting: true });
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const accountNameFromForm = form.elements['name'].value;
-  //   const privateKey = form.elements['password'].value;
-  //   const [accountName] = await getAccounts(privateKey);
-  //   if (accountNameFromForm !== accountName) {
-  //     alert('Account name is different!');
-  //     return;
-  //   }
-
-  //   const uniqueAccounts = [accountName].reduce((res, accountName) => {
-  //     if (!res.includes(accountName)) {
-  //       res.push(accountName);
-  //     }
-  //     return res;
-  //   }, accounts);
-
-  //   await set('accounts', JSON.stringify(uniqueAccounts));
-  //   setForm({ isSubmitting: false });
-  //   location.reload();
-  //   if (window.opener) {
-  //     window.opener.postMessage({ type: 'login', payload: accountName }, '*'); 
-  //   }
-  // }
-
   const onAccountChoose = (accountName) => {
     setStage(stages[1] + `@${accountName}`);
   }
@@ -289,7 +261,6 @@ const App = () => {
             </ActionHeadline>
             <ActionContent>
               <Router>
-                <Accounts path="/" />
                 <Transaction path="/transaction" />
                 <Signin path="/signin/*" />
               </Router>
