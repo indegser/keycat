@@ -9,6 +9,8 @@ import AddAccount from 'design/moles/AddAccount';
 import { media } from 'design/utils';
 import { Router } from '@reach/router';
 import Transaction from './tx/Transaction';
+import Accounts from './accounts/Accounts';
+import Signin from './signin/Signin';
 
 // const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
 /**
@@ -287,8 +289,9 @@ const App = () => {
             </ActionHeadline>
             <ActionContent>
               <Router>
+                <Accounts path="/" />
                 <Transaction path="/transaction" />
-                <Login path="/login" />
+                <Signin path="/signin/*" />
               </Router>
             </ActionContent>
           </AppAction>

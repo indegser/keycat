@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from './Router';
+import { DataProvider } from 'context/DataContext';
 
 const render = () => {
   ReactDOM.render(
-    <Router />,
+    <DataProvider>
+      <Router />
+    </DataProvider>,
     document.getElementById('app'),
   )
 }
