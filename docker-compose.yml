@@ -1,9 +1,0 @@
-version: '3'
-services:
-  db:
-    container_name: xafe-db
-    ports:
-      - "8529:8529"
-    image: arangodb
-    env_file:
-      - .env

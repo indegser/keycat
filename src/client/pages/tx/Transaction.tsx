@@ -4,11 +4,17 @@ import AccountForm from 'pages/AccountForm';
 import { buyram } from 'api/eos';
 import Action from './Action';
 import { Button } from 'design/atoms/Button';
+import Identifier from 'design/moles/fields/Identifier';
+import Password from 'design/moles/fields/Password';
+
+interface Props {
+  path?: string,
+}
 
 const Transaction = (props) => {
   const params = new URL(location.href).searchParams;
-  const [accountName, setAccountName] = useState(params.get('accountName'));
-  const [payload, setPayload] = useState(JSON.parse(params.get('payload')));
+  const identifier = params.get('identifier');
+  const payload = params.get('payload');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,19 +35,10 @@ const Transaction = (props) => {
     }
   }
 
-  if (!accountName) return null;
-
-  for (const action of payload.actions) {
-    const { name, account, authorization, data } = action;
-
-  }
-
   return (
     <Form noValidate>
-      <AccountForm isTx accountName={accountName} />
-      {payload.actions.map(action => (
-        <Action key={action.name} action={action} />
-      ))}
+      <Identifier hidden />
+      <Password />
       <Button type="submit">
         Next
       </Button>
@@ -52,9 +49,14 @@ const Transaction = (props) => {
 export default withFormik({
   validateOnBlur: false,
   validateOnChange: false,
-  mapPropsToValues: () => ({
-    pk: '',
-  }),
+  mapPropsToValues: () => {
+    const params = new URL(location.href).searchParams;
+    return {
+      password: '',
+      payload: params.get('payload'),
+      identifier: params.get('identifier'),
+    };
+  },
   handleSubmit: (_, form) => {
     console.log(form);
   },

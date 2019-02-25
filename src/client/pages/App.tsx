@@ -261,7 +261,7 @@ const App = () => {
             </ActionHeadline>
             <ActionContent>
               <Router>
-                <Transaction path="/transaction" />
+                <Transaction path="/transaction/*" />
                 <Signin path="/signin/*" />
               </Router>
             </ActionContent>

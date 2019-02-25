@@ -1,2 +1,2 @@
-# xafe
+# peekaboo
 Safe web wallet for blockchains
