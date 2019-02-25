@@ -7,6 +7,7 @@ import { getAccounts } from 'api/eos';
 import { saveAccountToIDB } from 'actions/accountActions';
 import { useData } from 'context/DataContext';
 import SelectedAccount from 'design/organs/SelectedAccount';
+import { postMessage } from 'api/popup';
 
 const SigninPassword = (props) => {
   const { identifier } = props.location.state;
@@ -26,6 +27,7 @@ const SigninPassword = (props) => {
         }
 
         await saveAccountToIDB(accounts, account);
+        postMessage({ type: 'signin', payload: identifier });
       }}
     >
       {() => {

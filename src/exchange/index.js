@@ -1,9 +1,8 @@
 const state = new Map();
 
-const baseUri = 'http://172.16.100.28:8080';
+const baseUri = 'http://localhost:8080';
 
 const loginBox = document.getElementById('login');
-
 
 let popup;
 const openPopup = (pathname) => {
@@ -15,27 +14,27 @@ const openPopup = (pathname) => {
 }
 
 loginBox.addEventListener('click', () => {
-  openPopup('/');
+  openPopup('/signin');
 });
 
 document.getElementById('buyram').addEventListener('click', () => {
-  const accountName = state.get('accountName');
+  const identifier = state.get('identifier');
   const transaction = {
     actions: [{
       account: 'eosio',
       name: 'buyrambytes',
       authorization: [{
         permission: 'active',
-        actor: accountName,
+        actor: identifier,
       }],
       data: {
-        payer: accountName,
-        receiver: accountName,
+        payer: identifier,
+        receiver: identifier,
         bytes: 4096,
       },
     }],
   };
-  openPopup(`/transaction?accountName=${accountName}&payload=${JSON.stringify(transaction)}`);
+  openPopup(`/transaction?identifier=${identifier}&payload=${JSON.stringify(transaction, null, 2)}`);
 });
 
 window.addEventListener('message', (e) => {
@@ -46,9 +45,9 @@ window.addEventListener('message', (e) => {
 
   const { data: { type, payload } } = e;
   switch (type) {
-    case 'login':
+    case 'signin':
       alert(`loggged in as ${payload}`);
-      state.set('accountName', payload);
+      state.set('identifier', payload);
       break;
     case 'tx':
       alert(`success ${payload}`);

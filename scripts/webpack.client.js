@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const ROOT = path.resolve(__dirname, '..')
 
@@ -28,13 +29,20 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader',
-      }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlPlugin({
       template: path.resolve(ROOT, 'src', 'client', 'client.html'),
+    }),
+    new MonacoWebpackPlugin({
+      languages: ['json'],
     }),
   ],
   devServer: {
