@@ -1,7 +1,8 @@
 import React from 'react';
 import { navigate } from '@reach/router';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import { Button } from 'design/atoms/Button';
+import Identifier from 'design/moles/fields/Identifier';
 
 const SigninIdentifier = (props) => {
   return (
@@ -18,7 +19,7 @@ const SigninIdentifier = (props) => {
       {() => {
         return (
           <Form noValidate>
-            <Field name="identifier" type="email" />
+            <Identifier />
             <Button type="submit">
               Next
             </Button>
