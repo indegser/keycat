@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { colors } from 'design/constants';
-import { set, get } from 'idb-keyval';
 import { media } from 'design/utils';
 import { Router } from '@reach/router';
 import Transaction from './tx/Transaction';
 import Signin from './signin/Signin';
 import AppTitle from 'design/organs/app-title/AppTitle';
-
-// const pk = 5Jvk3KJoU6iJTWGsE7LQG5fbzfYWR8EwCGkDVM7meVgvj6JxdLP
-/**
- * abcdefghijk1 : 5KV78xxPvL7jYStndAxY4W8b9C91HUpTos7FMyAXAHrhYaHRTc8
- * xafe11111111 : 5JbhPaE6GWs2XqFsjTvvdcjLb5CdVDSSrgypudog54e1muKQbjn
- */
 
 const GlobalStyle = createGlobalStyle`
   html {
