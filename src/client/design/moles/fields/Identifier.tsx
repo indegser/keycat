@@ -2,7 +2,13 @@ import React from 'react';
 import { Field } from 'formik';
 import { Input } from 'design/atoms/Input';
 
-const Identifier = () => {
+interface Props {
+  hidden?: boolean,
+}
+
+const Identifier = (props: Props) => {
+  const { hidden } = props;
+
   return (
     <Field
       name="identifier"
@@ -11,6 +17,8 @@ const Identifier = () => {
         <Input
           {...field}
           type="email"
+          aria-hidden={hidden}
+          tabIndex={hidden ? -1 : 0}
           autoCorrect="false"
           placeholder="Account name"
         />

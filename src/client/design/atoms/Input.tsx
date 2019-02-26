@@ -15,6 +15,10 @@ export const Input = styled('input')`
   box-sizing: border-box;
   font-size: 14px;
 
+  &[aria-hidden] {
+    display: none;
+  }
+
   &:focus {
     border: 1px solid #08f;
     box-shadow: 0px 0px 1px 3px #0088ff3b

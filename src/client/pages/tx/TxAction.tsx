@@ -1,8 +1,7 @@
-import React from 'react';
-import hljs from 'highlight.js';
-import json from 'highlight.js/lib/languages/json';
-hljs.registerLanguage('json', json);
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import * as monaco from 'monaco-editor';
+
 
 const ActionCard = styled.div`
   background: #fefefe;
@@ -24,22 +23,31 @@ const ActionPayload = styled.div`
   padding: 8px;
   border: 1px solid #eee;
   margin-top: 8px;
+  height: 240px;
 `;
 
 
-const Action = ({ action }) => {
+const TxAction = ({ action }) => {
+  const ref = useRef(null);
   const payload = action.data;
-  const hilite = hljs.highlight('json', JSON.stringify(payload, null, 2));
+
+  useEffect(() => {
+    monaco.editor.create(ref.current, {
+      language: 'json',
+      wordWrap: "on",
+      autoIndent: true,
+      value: JSON.stringify(payload),
+    });
+  }, []);
+
   return (
     <ActionCard>
       <ActionName>
         {action.name}
       </ActionName>
-      <ActionPayload>
-        <span dangerouslySetInnerHTML={{ __html: hilite.value.replace(/\n/g, '<br />') }} />
-      </ActionPayload>
+      <ActionPayload ref={ref} />
     </ActionCard>
   );
 }
 
-export default Action;
+export default TxAction;
