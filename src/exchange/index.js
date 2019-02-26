@@ -46,8 +46,8 @@ window.addEventListener('message', (e) => {
   const { data: { type, payload } } = e;
   switch (type) {
     case 'signin':
-      alert(`loggged in as ${payload}`);
       state.set('identifier', payload);
+      console.log(`logged in as ${payload}`);
       break;
     case 'tx':
       alert(`success ${payload}`);

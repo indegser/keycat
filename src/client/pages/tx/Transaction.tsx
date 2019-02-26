@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { withFormik, Form } from 'formik';
 import AccountForm from 'pages/AccountForm';
-import { buyram } from 'api/eos';
+import { buyram, transact } from 'api/eos';
 import TxAction from './TxAction';
 import { Button } from 'design/atoms/Button';
 import Identifier from 'design/moles/fields/Identifier';
 import Password from 'design/moles/fields/Password';
 import SelectedAccount from 'design/organs/SelectedAccount';
 import TxPayload from './TxPayload';
+import { postMessage } from 'api/popup';
 
 interface Props {
   path?: string,
@@ -59,7 +60,8 @@ export default withFormik({
       identifier: params.get('identifier'),
     };
   },
-  handleSubmit: (values, form) => {
-    console.log(values, form);
+  handleSubmit: async ({ payload, password }) => {
+    const result = await transact(JSON.parse(payload), password);
+    postMessage({ type: 'tx', payload: result });
   },
 })(Transaction);

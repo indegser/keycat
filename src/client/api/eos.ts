@@ -23,6 +23,21 @@ export const getAccounts = async (pk) => {
   }
 }
 
+export const transact = async (payload, password) => {
+  const sig = new JsSignatureProvider([password]);
+  const api = new Api({
+    rpc,
+    signatureProvider: sig,
+    textDecoder: new TextDecoder(),
+    textEncoder: new TextEncoder(),
+  });
+
+  return api.transact(payload, {
+    blocksBehind: 3,
+    expireSeconds: 30,
+  });
+}
+
 export const buyram = async (payload, pk) => {
   const sig = new JsSignatureProvider([pk]);
   const api = new Api({
