@@ -20,7 +20,7 @@ const AppTitle = () => {
     <AppTitleStyled>
       <Router>
         <TransactionTitle path="/transaction" />
-        <SignInTitle path="/sign-in" />
+        <SignInTitle path="/signin/*" />
       </Router>
     </AppTitleStyled>
   );

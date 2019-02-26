@@ -1,14 +1,25 @@
 import React from 'react';
+import { Match } from '@reach/router';
 
 interface Props {
-  path: string
+  path: string,
+  location: any,
 }
 
 const SignInTitle = (props: Props) => {
+  const getIdentifier = () => {
+    const { state } = props.location;
+    return state ? state.identifier : '';
+  }
+
   return (
-    <h1>
-      Choose an account
-    </h1>
+    <Match path="/signin/accounts">
+      {({ match }) => (
+        <h1>
+          {!!match ? 'Choose an account' : `Hi ${getIdentifier()}`}
+        </h1>
+      )}
+    </Match>
   );
 }
 
