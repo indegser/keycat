@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withFormik, Form } from 'formik';
-import AccountForm from 'pages/AccountForm';
-import { buyram, transact } from 'api/eos';
-import TxAction from './TxAction';
+import { transact } from 'api/eos';
 import { Button } from 'design/atoms/Button';
 import Identifier from 'design/moles/fields/Identifier';
 import Password from 'design/moles/fields/Password';
@@ -10,30 +8,7 @@ import SelectedAccount from 'design/organs/SelectedAccount';
 import TxPayload from './TxPayload';
 import { postMessage } from 'api/popup';
 
-interface Props {
-  path?: string,
-}
-
 const Transaction = (props: any) => {
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   let payload = params.get('payload');
-
-  //   if (!payload) {
-  //     return null;
-  //   }
-  //   payload = JSON.parse(payload);
-  //   const privateKey = form.elements['password'].value;
-
-  //   try {
-  //     const result = await buyram(payload, privateKey);
-  //     window.opener.postMessage({ type: 'tx', payload: result.processed.id }, '*');
-  //   } catch (err) {
-  //     alert(JSON.stringify(err));
-  //   }
-  // }
-
   const { values: { identifier, payload } } = props;
 
   return (

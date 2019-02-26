@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import styled from 'styled-components';
 
 const Container = styled('div')`
@@ -27,11 +28,13 @@ const Container = styled('div')`
   }
 `;
 
-const AddAccount = ({ handleClick }) => {
+const AddAccount = () => {
   return (
-    <Container onClick={handleClick}>
-      Register account
-    </Container>
+    <Link to="/signin/identifier">
+      <Container>
+        Register account
+      </Container>  
+    </Link>
   );
 }
 
