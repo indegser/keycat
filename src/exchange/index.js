@@ -1,24 +1,16 @@
-const state = new Map();
+import pkb from 'pkbjs';
+const wallet = pkb();
 
-const baseUri = 'http://localhost:8080';
-
-const loginBox = document.getElementById('login');
-
-let popup;
-const openPopup = (pathname) => {
-  popup = window.open(baseUri + pathname, 'xafe', 'height=800,width=640');
-  if (popup) {
-    popup.focus();
-  }
-  return popup;
-}
-
-loginBox.addEventListener('click', () => {
-  openPopup('/signin');
-});
+(() => {
+  wallet.signin().then((r) => {
+    setTimeout(() => {
+      alert(`Hello ${r} from exchange.`);
+    }, 0)
+  })
+})()
 
 document.getElementById('buyram').addEventListener('click', () => {
-  const identifier = state.get('identifier');
+  const identifier = wallet.getIdentifier();
   const transaction = {
     actions: [{
       account: 'eosio',
@@ -34,27 +26,31 @@ document.getElementById('buyram').addEventListener('click', () => {
       },
     }],
   };
-  openPopup(`/transaction?identifier=${identifier}&payload=${JSON.stringify(transaction, null, 2)}`);
+
+  wallet.transaction(transaction)
+    .then(r => {
+      console.log(r);
+    });
 });
 
-window.addEventListener('message', (e) => {
-  if (!e.origin.includes('8080')) return;
-  if (popup) {
-    popup.close();
-  }
+// window.addEventListener('message', (e) => {
+//   if (!e.origin.includes('8080')) return;
+//   if (popup) {
+//     popup.close();
+//   }
 
-  const { data: { type, payload } } = e;
-  switch (type) {
-    case 'signin':
-      state.set('identifier', payload);
-      console.log(`logged in as ${payload}`);
-      break;
-    case 'tx':
-      alert(`success ${payload}`);
-      break;
-    default:
-      return;
-  }
-});
+//   const { data: { type, payload } } = e;
+//   switch (type) {
+//     case 'signin':
+//       state.set('identifier', payload);
+//       console.log(`logged in as ${payload}`);
+//       break;
+//     case 'tx':
+//       alert(`success ${payload}`);
+//       break;
+//     default:
+//       return;
+//   }
+// });
 
 

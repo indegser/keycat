@@ -3,7 +3,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/eosjs-ecc@4.0.4/lib/eosjs-ecc.min.js"
+    integrity="sha512-dYFDmK/d9r3/NCp6toLtfkwOjSMRBaEzaGAx1tfRItC0nsI0hVLERk05iNBQR7uDNI7ludYhcBI4vUiFHdjsTQ=="
+    crossorigin="anonymous"></script>
     <title>Exchange demo</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      input {
+        background: transparent;
+        border: 1px solid #ddd;
+        box-shadow: 0px;
+        padding: 8px;
+        font-size: 16px;
+      }
+
+      button {
+        background: #08f;
+        border: 0px;
+        box-shadow: 0px;
+        font-size: 16px;
+        color: white;
+        border-radius: 4px;
+        padding: 8px 16px;
+      }
+
+      #create-account-div {
+        margin: 50px;
+      }
+    </style>
   </head>
 <body>
   <div id="login">
@@ -13,6 +46,12 @@
   <button id="buyram">
     Buy Ram
   </button>
+  <div id="create-account-div">
+    <input type="text" name="identifier" id="identifier">
+    <button id="create-account">
+      Create Account
+    </button>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>

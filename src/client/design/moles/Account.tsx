@@ -1,6 +1,7 @@
 import React from 'react';
 import { navigate } from '@reach/router';
 import styled from 'styled-components';
+import { appendSearchParamsToUrl } from 'utils/utils';
 
 const Container = styled('div')`
   padding: 10px 24px 12px 24px;
@@ -71,7 +72,8 @@ const Account = ({ identifier }) => {
   const initial = identifier.slice(0, 1);
 
   const handleClick = () => {
-    navigate('/signin/password', {
+    const to = appendSearchParamsToUrl('/signin/password');
+    navigate(to, {
       state: { identifier },
     });
   }

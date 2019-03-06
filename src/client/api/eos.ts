@@ -1,9 +1,9 @@
 import {
   Api,
   JsonRpc,
-  RpcError,
-  JsSignatureProvider,
 } from 'eosjs';
+
+import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'; 
 
 import ecc from 'eosjs-ecc'
 

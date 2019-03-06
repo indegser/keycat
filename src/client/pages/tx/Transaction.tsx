@@ -10,7 +10,6 @@ import { postMessage } from 'api/popup';
 
 const Transaction = (props: any) => {
   const { values: { identifier, payload } } = props;
-
   return (
     <Form noValidate>
       <SelectedAccount identifier={identifier} />
