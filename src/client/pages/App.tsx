@@ -5,6 +5,7 @@ import { Router } from '@reach/router';
 import Transaction from './tx/Transaction';
 import Signin from './signin/Signin';
 import AppTitle from 'design/organs/app-title/AppTitle';
+import Status from './status/Status';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -23,19 +24,22 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const AppContainer = styled('div')`
+const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
-  &:before, &:after {
-    content: '';
-    height: 24px;
-    flex: 1 1;
-  }
+  ${media.greaterThan('601px')`
+    &:before, &:after {
+      content: '';
+      height: 24px;
+      flex: 1 1;
+    }
+  `}
+
 `;
 
-const AppBox = styled('div')`
+const AppBox = styled.div`
   margin: 0 auto;
   ${media.greaterThan('601px')`
     width: 450px;
@@ -52,13 +56,13 @@ const AppIconContainer = styled.div`
   align-items: center;
 
   img {
-    width: 40px;
+    width: 32px;
     height: auto;
     display: block;
   }
 `;
 
-const AppAction = styled('div')`
+const AppAction = styled.div`
   ${media.greaterThan('601px')`
     height: auto;
     min-height: 500px;
@@ -69,6 +73,10 @@ const AppAction = styled('div')`
   `}
 
   padding: 24px 24px 36px;
+  box-sizing: border-box;
+  ${media.lessThan('450px')`
+    width: 100vw;
+  `}
 `;
 
 const ActionContent = styled.div`
@@ -103,6 +111,7 @@ const App = () => {
               <Router>
                 <Transaction path="/transaction/*" />
                 <Signin path="/signin/*" />
+                <Status path="/status/*" />
               </Router>
             </ActionContent>
           </AppAction>

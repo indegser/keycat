@@ -4,7 +4,7 @@ export const Input = styled('input')`
   padding: 0px;
   margin: 0px;
   width: 100%;
-  height: 42px;
+  height: 60px;
   line-height: 42px;
   border: 0;
   outline: 0;
@@ -13,7 +13,7 @@ export const Input = styled('input')`
   padding: 0 16px;
   border: 1px solid #ddd;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 17px;
 
   &[aria-hidden] {
     display: none;

@@ -8,3 +8,7 @@ export const colors = {
     primary: '#0057FF',
   },
 };
+
+export const breakpoints = {
+  SMALL: '450px',
+};

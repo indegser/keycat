@@ -6,6 +6,5 @@ export const postMessage = (message) => {
     ...message,
     id: new URL(location.href).searchParams.get('id'),
   };
-  console.log(messageWithId);
   opener.postMessage(messageWithId, '*');
 };

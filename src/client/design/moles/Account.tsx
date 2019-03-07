@@ -2,14 +2,16 @@ import React from 'react';
 import { navigate } from '@reach/router';
 import styled from 'styled-components';
 import { appendSearchParamsToUrl } from 'utils/utils';
+import { media } from 'design/utils';
+import { breakpoints } from 'design/constants';
 
-const Container = styled('div')`
+const Container = styled.div`
   padding: 10px 24px 12px 24px;
   cursor: pointer;
   font-size: 15px;
   grid-gap: 0 12px;
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: max-content auto;
   white-space: normal;
   align-items: center;
   position: relative;
@@ -27,9 +29,14 @@ const Container = styled('div')`
     bottom: 0;
     height: 0;
   }
+
+  ${media.lessThan(breakpoints.SMALL)`
+    padding-left: 0px;
+    padding-right: 0px;
+  `}
 `;
 
-const Identicon = styled('div')`
+const Identicon = styled.div`
   width: 28px;
   height: 28px;
   border-radius: 999rem;
@@ -41,13 +48,13 @@ const Identicon = styled('div')`
   font-family: menlo, consolas, monospace;
 `;
 
-const Name = styled('div')`
+const Name = styled.div`
   font-size: 15px;
   font-weight: 600;
   line-height: 1.25;
 `;
 
-const Address = styled('div')`
+const Address = styled.div`
   color: #3c4043;
   font-size: 13px;
   word-break: break-all;
