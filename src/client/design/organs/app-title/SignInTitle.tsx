@@ -13,10 +13,10 @@ const SignInTitle = (props: Props) => {
   }
 
   return (
-    <Match path="/signin/accounts">
+    <Match path="/signin/password">
       {({ match }) => (
         <h1>
-          {!!match ? 'Choose an account' : `Hi ${getIdentifier()}`}
+          {!match ? 'Choose an account' : `Hi ${getIdentifier()}`}
         </h1>
       )}
     </Match>
