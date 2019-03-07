@@ -9,7 +9,7 @@ interface Props {
 const SignInTitle = (props: Props) => {
   const getIdentifier = () => {
     const { state } = props.location;
-    return state ? state.identifier : '';
+    return state ? state.username : '';
   }
 
   return (

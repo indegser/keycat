@@ -8,9 +8,10 @@ const SigninIdentifier = (props) => {
   return (
     <Formik
       initialValues={{
-        identifier: '',
+        username: '',
       }}
       onSubmit={(values, form) => {
+        console.log(values);
         navigate('/signin/password', {
           state: values,
         });

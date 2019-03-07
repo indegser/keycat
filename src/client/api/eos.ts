@@ -7,7 +7,8 @@ import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 
 import ecc from 'eosjs-ecc'
 
-const rpc = new JsonRpc('https://api.jungle.alohaeos.com')
+// const rpc = new JsonRpc('https://api.jungle.alohaeos.com')
+const rpc = new JsonRpc('http://172.16.100.15:18888');
 
 export const getAccounts = async (pk) => {
   const pub = await ecc.privateToPublic(pk)

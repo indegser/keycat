@@ -1,18 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const ROOT = path.resolve(__dirname, '..')
 
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-source-map',
   output: {
     path: path.resolve(ROOT, 'dist'),
     publicPath: '/',
-    filename: 'xafe-app.js',
+    filename: 'pkb.js',
   },
   resolve: {
     modules: ['node_modules', path.resolve(ROOT, 'src', 'client')],
@@ -29,11 +28,7 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader',
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
+      }
     ],
   },
   plugins: [
@@ -41,10 +36,14 @@ module.exports = {
     new HtmlPlugin({
       template: path.resolve(ROOT, 'src', 'client', 'client.html'),
     }),
-    new MonacoWebpackPlugin({
-      languages: ['json'],
-    }),
+    // new MonacoWebpackPlugin({
+    //   languages: ['json'],
+    // }),
   ],
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
   devServer: {
     hot: true,
     host: '0.0.0.0',

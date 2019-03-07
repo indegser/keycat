@@ -74,7 +74,7 @@ const Account = ({ identifier }) => {
   const handleClick = () => {
     const to = appendSearchParamsToUrl('/signin/password');
     navigate(to, {
-      state: { identifier },
+      state: { username: identifier },
     });
   }
 

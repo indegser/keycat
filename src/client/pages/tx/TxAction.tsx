@@ -23,22 +23,13 @@ const ActionPayload = styled.div`
   padding: 8px;
   border: 1px solid #eee;
   margin-top: 8px;
-  height: 240px;
+  height: 10px;
 `;
 
 
 const TxAction = ({ action }) => {
   const ref = useRef(null);
   const payload = action.data;
-
-  useEffect(() => {
-    monaco.editor.create(ref.current, {
-      language: 'json',
-      wordWrap: "on",
-      autoIndent: true,
-      value: JSON.stringify(payload),
-    });
-  }, []);
 
   return (
     <ActionCard>

@@ -10,33 +10,31 @@ import SelectedAccount from 'design/organs/SelectedAccount';
 import { postMessage } from 'api/popup';
 
 const SigninPassword = (props) => {
-  const { identifier } = props.location.state;
+  const { username } = props.location.state;
   const { accounts } = useData();
   return (
     <Formik
       initialValues={{
-        identifier,
+        username,
         password: '',
       }}
       onSubmit={async (values) => {
-        const { identifier, password } = values;
+        const { username, password } = values;
         const [account] = await getAccounts(password);
-        if (account !== identifier) {
+        if (account !== username) {
           alert('Different account name found');
           return;
         }
 
         await saveAccountToIDB(accounts, account);
-        postMessage({ type: 'signin', payload: identifier });
+        postMessage({ type: 'signin', payload: username });
       }}
     >
       {() => {
         return (
           <Form noValidate>
-            <div style={{ display: 'none' }}>
-              <Identifier />
-            </div>
-            <SelectedAccount identifier={identifier} />
+            <Identifier hidden />
+            <SelectedAccount identifier={username} />
             <Password />
             <Button type="submit">
               Next

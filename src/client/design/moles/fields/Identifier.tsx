@@ -11,12 +11,13 @@ const Identifier = (props: Props) => {
 
   return (
     <Field
-      name="identifier"
-      type="email"
+      name="username"
+      type="text"
       render={({ field }) => (
         <Input
           {...field}
-          type="email"
+          type="text"
+          autoComplete="username"
           aria-hidden={hidden}
           tabIndex={hidden ? -1 : 0}
           autoCorrect="false"

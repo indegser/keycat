@@ -31,7 +31,7 @@ export default withFormik({
     return {
       password: '',
       payload: params.get('payload'),
-      identifier: params.get('identifier'),
+      username: params.get('identifier'),
     };
   },
   handleSubmit: async ({ payload, password }) => {
