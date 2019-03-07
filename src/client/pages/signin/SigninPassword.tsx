@@ -6,6 +6,7 @@ import Password from 'design/moles/fields/Password';
 import Identifier from 'design/moles/fields/Identifier';
 import SelectedAccount from 'design/organs/SelectedAccount';
 import { appendSearchParamsToUrl } from 'utils/utils';
+import Submit from 'design/moles/fields/Submit';
 
 const SigninPassword = (props) => {
   const { username } = props.location.state;
@@ -33,9 +34,7 @@ const SigninPassword = (props) => {
             <Identifier hidden />
             <SelectedAccount identifier={username} />
             <Password />
-            <Button type="submit">
-              Next
-            </Button>
+            <Submit />
           </Form>
         )
       }}

@@ -7,6 +7,7 @@ import Password from 'design/moles/fields/Password';
 import SelectedAccount from 'design/organs/SelectedAccount';
 import TxPayload from './TxPayload';
 import { postMessage } from 'api/popup';
+import Submit from 'design/moles/fields/Submit';
 
 const Transaction = (props: any) => {
   const { values: { identifier, payload } } = props;
@@ -16,9 +17,7 @@ const Transaction = (props: any) => {
       <Identifier hidden />
       <TxPayload payload={payload} />
       <Password />
-      <Button type="submit">
-        Next
-      </Button>
+      <Submit />
     </Form>
   );
 }
