@@ -8,3 +8,11 @@ export const postMessage = (message) => {
   };
   opener.postMessage(messageWithId, '*');
 };
+
+window.addEventListener('beforeunload', (e) => {
+  const { opener } = window;
+  opener.postMessage({
+    id: new URL(location.href).searchParams.get('id'),
+    type: 'closed',
+  }, '*');
+}, false);

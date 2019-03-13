@@ -1,5 +1,10 @@
 import pkb from 'pkbjs';
-const wallet = pkb();
+const wallet = pkb({
+  blockchain: 'eos',
+  nodes: [
+    ''
+  ],
+});
 
 (() => {
   wallet.signin().then((r) => {
