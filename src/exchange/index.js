@@ -1,18 +1,19 @@
 import pkb from 'pkbjs';
-const wallet = pkb({
-  blockchain: 'eos',
-  nodes: [
-    ''
-  ],
-});
+const wallet = pkb();
+wallet.useNetwork('local', [
+  "http://nodeos.eosdaq.test:18888",
+]);
 
-(() => {
-  wallet.signin().then((r) => {
-    setTimeout(() => {
-      alert(`Hello ${r} from exchange.`);
-    }, 0)
-  })
-})()
+document.getElementById('login')
+  .addEventListener('click', () => {
+    const useTestnet = document.getElementById('testnet').checked;
+    const nodes = useTestnet ? [
+      "http://nodeos.eosdaq.test:18888",
+    ] : null;
+    wallet.useNetwork(`eos@${useTestnet ? 'local' : 'junglenet'}`, nodes);
+    wallet.signin()
+      .then(r => console.log(r));
+  });
 
 document.getElementById('buyram').addEventListener('click', () => {
   const identifier = wallet.getIdentifier();

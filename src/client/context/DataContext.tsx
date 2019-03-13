@@ -4,6 +4,7 @@ import { get } from 'idb-keyval';
 const initialState = {
   accounts: [],
   init: false,
+  id: null,
   fetchingAccounts: true,
   selectedAccount: null,
 }
@@ -21,14 +22,27 @@ export const DataProvider = ({ children }) => {
         dispatch({
           ...state,
           accounts,
-          init: true,
           fetchingAccounts: false,
         });
       })
+
+    window.addEventListener('message', (e) => {
+      if (e.origin !== location.origin) {
+        const { type, payload } = e.data;
+        if (type !== 'init') return;
+
+        dispatch({
+          ...state,
+          init: true,
+          ...payload,
+        })
+      }
+    })
   }, []);
 
-  const { init } = state;
-  if (!init) return null;
+  const { init, fetchingAccounts } = state;
+  console.log(state);
+  if (!init || fetchingAccounts) return null;
 
   return (
     <DataContext.Provider value={state}>

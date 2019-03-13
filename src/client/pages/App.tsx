@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { media } from 'design/utils';
 import { Router } from '@reach/router';
@@ -6,6 +6,7 @@ import Transaction from './tx/Transaction';
 import Signin from './signin/Signin';
 import AppTitle from 'design/organs/app-title/AppTitle';
 import Status from './status/Status';
+import { useMessageChannel } from 'hook/appHook';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -97,6 +98,8 @@ const ActionContent = styled.div`
 `;
 
 const App = () => {
+  useMessageChannel();
+
   return (
     <>
       <GlobalStyle />

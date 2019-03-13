@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from './Router';
-import { DataProvider } from 'context/DataContext';
+import { StoreProvider } from 'store/store';
 
 const render = () => {
   ReactDOM.render(
-    <DataProvider>
+    <StoreProvider>
       <Router />
-    </DataProvider>,
+    </StoreProvider>,
     document.getElementById('app'),
   )
 }

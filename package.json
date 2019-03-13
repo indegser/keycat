@@ -7,11 +7,14 @@
     "@reach/router": "^1.2.1",
     "eosjs": "^20.0.0-ffffff.0",
     "eosjs-ecc": "^4.0.4",
+    "eventemitter3": "^3.1.0",
     "formik": "^1.5.1",
     "idb-keyval": "^3.1.0",
     "monaco-editor": "^0.15.6",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5",
     "styled-components": "^4.1.1",
     "styled-media-query": "^2.1.1",
     "webpack": "^4.26.0"
@@ -19,6 +22,7 @@
   "devDependencies": {
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
+    "@types/redux-actions": "^2.3.2",
     "css-loader": "^2.1.0",
     "fork-ts-checker-webpack-plugin": "^0.5.0",
     "html-webpack-plugin": "^4.0.0-beta.4",
