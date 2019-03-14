@@ -7,9 +7,6 @@ import JsSignatureProvider from 'eosjs/dist/eosjs-jssig';
 
 import ecc from 'eosjs-ecc'
 
-// const rpc = new JsonRpc('https://api.jungle.alohaeos.com')
-const rpc = new JsonRpc('http://172.16.100.15:18888');
-
 export const getAccounts = async (pk, nodes) => {
   const rpc = new JsonRpc(nodes[0]);
   const pub = await ecc.privateToPublic(pk)
@@ -22,7 +19,8 @@ export const getAccounts = async (pk, nodes) => {
   }
 }
 
-export const transact = async (payload, password) => {
+export const transact = async ({ payload, password }, nodes) => {
+  const rpc = new JsonRpc(nodes[0]);
   const sig = new JsSignatureProvider([password]);
   const api = new Api({
     rpc,
@@ -31,22 +29,7 @@ export const transact = async (payload, password) => {
     textEncoder: new TextEncoder(),
   });
 
-  return api.transact(payload, {
-    blocksBehind: 3,
-    expireSeconds: 30,
-  });
-}
-
-export const buyram = async (payload, pk) => {
-  const sig = new JsSignatureProvider([pk]);
-  const api = new Api({
-    rpc,
-    signatureProvider: sig,
-    textDecoder: new TextDecoder(),
-    textEncoder: new TextEncoder(),
-  });
-
-  return api.transact(payload, {
+  return api.transact(JSON.parse(payload), {
     blocksBehind: 3,
     expireSeconds: 30,
   });

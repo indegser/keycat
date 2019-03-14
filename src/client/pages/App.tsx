@@ -117,7 +117,7 @@ const App = () => {
             <AppTitle />
             <ActionContent>
               <Router>
-                <Transaction path="/transaction/*" />
+                <Transaction path="/transaction" />
                 <Signin path="/signin/*" />
                 <Status path="/status/*" />
               </Router>

@@ -1,12 +1,15 @@
 import Peekaboo from 'pkbjs';
 
+let peekaboo;
+
 document.getElementById('login')
   .addEventListener('click', () => {
     const useTestnet = document.getElementById('testnet').checked;
     const nodes = useTestnet ? [
       "http://nodeos.eosdaq.test:18888",
     ] : null;
-    const peekaboo = new Peekaboo({
+
+    peekaboo = new Peekaboo({
       network: {
         name: `eos@${useTestnet ? 'local' : 'junglenet'}`,
         nodes,
@@ -14,28 +17,33 @@ document.getElementById('login')
     });
 
     peekaboo.signin()
-      .then(r => console.log(r));
+      .then(identifier => {
+        localStorage.setItem('identifier', identifier);
+      });
   });
 
 document.getElementById('buyram').addEventListener('click', () => {
-  const identifier = peekaboo.getIdentifier();
+  const identifier = localStorage.getItem('identifier');
+
   const transaction = {
     actions: [{
       account: 'eosio',
-      name: 'buyrambytes',
+      name: 'delegatebw',
       authorization: [{
         permission: 'active',
         actor: identifier,
       }],
       data: {
-        payer: identifier,
+        from: identifier,
         receiver: identifier,
-        bytes: 4096,
+        stake_net_quantity: '1.0000 EOS',
+        stake_cpu_quantity: '1.0000 EOS',
+        transfer: false,
       },
     }],
   };
 
-  peekaboo.transaction(transaction)
+  peekaboo.transaction(identifier, transaction)
     .then(r => {
       console.log(r);
     });
