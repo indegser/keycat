@@ -1,12 +1,10 @@
 import React from 'react';
 import { withFormik, Form } from 'formik';
 import { transact } from 'api/eos';
-import { Button } from 'design/atoms/Button';
 import Identifier from 'design/moles/fields/Identifier';
 import Password from 'design/moles/fields/Password';
 import SelectedAccount from 'design/organs/SelectedAccount';
 import TxPayload from './TxPayload';
-import { postMessage } from 'api/popup';
 import Submit from 'design/moles/fields/Submit';
 
 const Transaction = (props: any) => {
@@ -35,6 +33,6 @@ export default withFormik({
   },
   handleSubmit: async ({ payload, password }) => {
     const result = await transact(JSON.parse(payload), password);
-    postMessage({ type: 'tx', payload: result });
+    // postMessage({ type: 'tx', payload: result });
   },
 })(Transaction);

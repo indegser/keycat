@@ -1,8 +1,4 @@
-import pkb from 'pkbjs';
-const wallet = pkb();
-wallet.useNetwork('local', [
-  "http://nodeos.eosdaq.test:18888",
-]);
+import Peekaboo from 'pkbjs';
 
 document.getElementById('login')
   .addEventListener('click', () => {
@@ -10,13 +6,19 @@ document.getElementById('login')
     const nodes = useTestnet ? [
       "http://nodeos.eosdaq.test:18888",
     ] : null;
-    wallet.useNetwork(`eos@${useTestnet ? 'local' : 'junglenet'}`, nodes);
-    wallet.signin()
+    const peekaboo = new Peekaboo({
+      network: {
+        name: `eos@${useTestnet ? 'local' : 'junglenet'}`,
+        nodes,
+      }
+    });
+
+    peekaboo.signin()
       .then(r => console.log(r));
   });
 
 document.getElementById('buyram').addEventListener('click', () => {
-  const identifier = wallet.getIdentifier();
+  const identifier = peekaboo.getIdentifier();
   const transaction = {
     actions: [{
       account: 'eosio',
@@ -33,30 +35,8 @@ document.getElementById('buyram').addEventListener('click', () => {
     }],
   };
 
-  wallet.transaction(transaction)
+  peekaboo.transaction(transaction)
     .then(r => {
       console.log(r);
     });
 });
-
-// window.addEventListener('message', (e) => {
-//   if (!e.origin.includes('8080')) return;
-//   if (popup) {
-//     popup.close();
-//   }
-
-//   const { data: { type, payload } } = e;
-//   switch (type) {
-//     case 'signin':
-//       state.set('identifier', payload);
-//       console.log(`logged in as ${payload}`);
-//       break;
-//     case 'tx':
-//       alert(`success ${payload}`);
-//       break;
-//     default:
-//       return;
-//   }
-// });
-
-

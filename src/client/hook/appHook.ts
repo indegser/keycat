@@ -7,11 +7,11 @@ import { accountActions } from "store/ducks/accountDuck";
 export const useMessageChannel = () => {
   const { dispatch } = useStore();
 
-  const setConfig = async ({ network, id }) => {
+  const setConfig = async ({ network, id }, port) => {
     sessionStorage.setItem('id', id);
     const accounts = await getAccountsWithNetwork(network);
     dispatch(accountActions.set({ accounts }));
-    dispatch(configActions.set({ network, id }));
+    dispatch(configActions.set({ network, port }));
   }
 
   useEffect(() => {
@@ -24,7 +24,14 @@ export const useMessageChannel = () => {
       const { data: { type, payload } } = e;
 
       if (type === 'config') {
-        setConfig(payload);
+        const [port] = e.ports;
+        setConfig(payload, port);
+
+        window.addEventListener('beforeunload', (e) => {
+          port.postMessage({
+            type: 'closed',
+          });
+        }, false);
       }
     })
   }, []);

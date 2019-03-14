@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { getAccounts } from 'api/eos';
-import { saveAccountToIDB } from 'actions/accountActions';
-import { useData } from 'context/DataContext';
-import { postMessage } from 'api/popup';
 import { saveAccount } from 'api/idb';
 import { useStore } from 'store/store';
 
 const Status = ({ path, location }) => {
-  const { state: { config: { network }}} = useStore();
+  const { state: { config: { port, network }}} = useStore();
 
   const runTask = async (type, values) => {
     const { username, password } = values;
@@ -19,7 +16,7 @@ const Status = ({ path, location }) => {
     }
   
     await saveAccount(network, username);
-    postMessage({ type: 'signin', payload: username });
+    port.postMessage({ type: 'signin', payload: username });
   }
 
   useEffect(() => {

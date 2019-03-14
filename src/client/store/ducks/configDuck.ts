@@ -10,7 +10,7 @@ export const configActions = {
 
 const initialState = {
   network: null,
-  id: null,
+  port: null,
 }
 
 export type IConfigState = {
@@ -19,17 +19,17 @@ export type IConfigState = {
     blockchain: string,
     nodes: [string],
   },
-  id: string,
+  port: MessagePort,
 }
 
 export const configReducer = handleActions<IConfigState>({
   [configActions.set.toString()]: (state, { payload }) => {
-    const { network, id } = payload;
+    const { network, port } = payload;
     const { name, nodes } = network;
     const preset = networkPreset[name];
     return {
       ...state,
-      id,
+      port,
       network: preset ? { ...preset, name } : {
         blockchain: name.split('@')[0],
         name,
