@@ -2,12 +2,16 @@ import React from 'react';
 import { Router, Redirect } from '@reach/router';
 import SigninIdentifier from './SigninIdentifier';
 import SigninPassword from './SigninPassword';
-import { useData } from 'context/DataContext';
 import SigninAccounts from './SigninAccounts';
 import { appendSearchParamsToUrl } from 'utils/utils';
+import { useStore } from 'store/store';
  
 const Signin = (props) => {
-  const {accounts} = useData();
+  const { state: { account } } = useStore();
+  const { fetched, accounts } = account;
+
+  if (!fetched) return null;
+
   const isDefault = !props['*'];
   if (isDefault) {
     const baseUri = [

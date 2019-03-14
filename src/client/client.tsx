@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Router from './Router';
 import { StoreProvider } from 'store/store';
+import App from 'pages/App';
 
 const render = () => {
   ReactDOM.render(
     <StoreProvider>
-      <Router />
+      <App />
     </StoreProvider>,
     document.getElementById('app'),
   )
@@ -14,9 +14,9 @@ const render = () => {
 
 if (module['hot']) {
   module['hot'].accept(
-    './Router',
+    './pages/App',
     render,
   );
 }
 
-render()
+render();

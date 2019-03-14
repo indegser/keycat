@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { appendSearchParamsToUrl } from 'utils/utils';
 import { media } from 'design/utils';
 import { breakpoints } from 'design/constants';
+import { useStore } from 'store/store';
 
 const Container = styled.div`
   padding: 10px 24px 12px 24px;
@@ -49,15 +50,17 @@ const Identicon = styled.div`
 `;
 
 const Name = styled.div`
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   line-height: 1.25;
+  color: #111;
 `;
 
-const Address = styled.div`
-  color: #3c4043;
+const Network = styled.div`
   font-size: 13px;
-  word-break: break-all;
+  line-height: 1;
+  color: #596168;
+  font-family: menlo, monaco, consolas, 'Courier New', Courier, monospace;
 `;
 
 const getHashCode = (str) => {
@@ -76,6 +79,7 @@ const intToHSL = (int) => {
 }
 
 const Account = ({ identifier }) => {
+  const { state: { config: { network } } } = useStore();
   const initial = identifier.slice(0, 1);
 
   const handleClick = () => {
@@ -86,6 +90,8 @@ const Account = ({ identifier }) => {
   }
 
   const bg = intToHSL(getHashCode(identifier));
+
+  const { name } = network;
 
   return (
     <Container onClick={handleClick}>
@@ -100,9 +106,9 @@ const Account = ({ identifier }) => {
         <Name>
           {identifier}
         </Name>
-        <Address>
-          indegser@gmail.com
-        </Address>
+        <Network>
+          {name}
+        </Network>
       </div>
     </Container>
   )

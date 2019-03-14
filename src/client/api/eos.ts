@@ -3,21 +3,19 @@ import {
   JsonRpc,
 } from 'eosjs';
 
-import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'; 
+import JsSignatureProvider from 'eosjs/dist/eosjs-jssig'; 
 
 import ecc from 'eosjs-ecc'
 
 // const rpc = new JsonRpc('https://api.jungle.alohaeos.com')
 const rpc = new JsonRpc('http://172.16.100.15:18888');
 
-export const getAccounts = async (pk) => {
+export const getAccounts = async (pk, nodes) => {
+  const rpc = new JsonRpc(nodes[0]);
   const pub = await ecc.privateToPublic(pk)
 
   try {
     const { account_names: accounts } = await rpc.history_get_key_accounts(pub)
-    // const sig = signPin(pin)
-    // const verified = ecc.verify(sig, pin, pub)
-
     return accounts
   } catch (err) {
     console.error(err)
@@ -52,9 +50,4 @@ export const buyram = async (payload, pk) => {
     blocksBehind: 3,
     expireSeconds: 30,
   });
-}
-
-export const signPin = (pin, pk) => {
-  const sig = ecc.sign(pin, pk)
-  return sig
 }

@@ -10,13 +10,18 @@ import { useMessageChannel } from 'hook/appHook';
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Noto Sans CJK KR', 'Noto Sans KR', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, source-sans-pro, sans-serif;
     font-size: 14px;
   }
 
   body {
     margin: 0;
     padding: 0;
+    font-synthesis: none;
+    font-feature-settings: 'kern';
+    -moz-font-feature-settings: 'kern';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   a {

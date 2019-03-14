@@ -4,19 +4,21 @@ import { getAccounts } from 'api/eos';
 import { saveAccountToIDB } from 'actions/accountActions';
 import { useData } from 'context/DataContext';
 import { postMessage } from 'api/popup';
+import { saveAccount } from 'api/idb';
+import { useStore } from 'store/store';
 
 const Status = ({ path, location }) => {
-  const { accounts } = useData();
+  const { state: { config: { network }}} = useStore();
 
   const runTask = async (type, values) => {
     const { username, password } = values;
-    const [account] = await getAccounts(password);
+    const [account] = await getAccounts(password, network.nodes);
     if (account !== username) {
       alert('Different account name found');
       return;
     }
   
-    await saveAccountToIDB(accounts, account);
+    await saveAccount(network, username);
     postMessage({ type: 'signin', payload: username });
   }
 

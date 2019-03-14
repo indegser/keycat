@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useData } from 'context/DataContext';
 import Account from 'design/moles/Account';
 import AddAccount from './signin-accounts/AddAccount';
+import { useStore } from 'store/store';
 
 const Container = styled.div`
 
@@ -14,7 +15,9 @@ interface AccountsProps {
 }
 
 const SigninAccounts = (props: AccountsProps) => {
-  const { accounts } = useData();
+  const { state: { account } } = useStore();
+  const { accounts } = account;
+
   return (
     <Container>
       {accounts.map(identifier => (
