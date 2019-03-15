@@ -1,5 +1,5 @@
 import React from 'react';
-import { withFormik, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { transact } from 'api/eos';
 import Identifier from 'design/moles/fields/Identifier';
 import Password from 'design/moles/fields/Password';

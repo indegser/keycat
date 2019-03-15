@@ -20,7 +20,7 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const Submit = ({ children }) => {
+const Submit: React.SFC<{}> = ({ children }) => {
   return (
     <Container>
       <Flex>
