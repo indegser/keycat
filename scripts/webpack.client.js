@@ -2,15 +2,18 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin');
 
-const ROOT = path.resolve(__dirname, '..')
+const ROOT = path.resolve(__dirname, '..');
+const PROD = process.env.NODE_ENV = 'production';
+
+const PUBLIC_PATH = PROD ? '/' : '/';
 
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
-  mode: 'development',
-  devtool: 'cheap-source-map',
+  mode: PROD ? 'production' : 'development',
+  devtool: PROD ? 'source-map' : 'cheap-source-map',
   output: {
-    path: path.resolve(ROOT, 'dist'),
-    publicPath: '/',
+    path: path.resolve(ROOT, PROD ? 'bundle' : 'dist'),
+    publicPath: PUBLIC_PATH,
     filename: 'pkb.js',
   },
   resolve: {
@@ -32,15 +35,13 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    !PROD && new webpack.HotModuleReplacementPlugin(),
     new HtmlPlugin({
       template: path.resolve(ROOT, 'src', 'client', 'client.html'),
+      production: PROD,
     }),
-    // new MonacoWebpackPlugin({
-    //   languages: ['json'],
-    // }),
-  ],
-  externals: {
+  ].filter(Boolean),
+  externals: PROD ? {} : {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
