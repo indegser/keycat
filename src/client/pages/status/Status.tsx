@@ -9,8 +9,9 @@ const Status = ({ path, location }) => {
 
   const runTask = async (type, values) => {
     const { username, password } = values;
-    const [account] = await getAccounts(password, network.nodes);
-    if (account !== username) {
+    alert(username + password);
+    const accounts = await getAccounts(password, network.nodes);
+    if (accounts.includes(username)) {
       alert('Different account name found');
       return;
     }
