@@ -16,7 +16,7 @@ const Status = ({ path, location }) => {
     }
   
     await saveAccount(network, username);
-    port.postMessage({ type: 'signin', payload: username });
+    port.postMessage({ type: 'signin', payload: { data: username, error: null } });
   }
 
   useEffect(() => {

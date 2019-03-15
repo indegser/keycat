@@ -29,8 +29,16 @@ export const transact = async ({ payload, password }, nodes) => {
     textEncoder: new TextEncoder(),
   });
 
-  return api.transact(JSON.parse(payload), {
-    blocksBehind: 3,
-    expireSeconds: 30,
-  });
+  let response = { data: null, error: null };
+  try {
+    response.data = await api.transact(JSON.parse(payload), {
+      blocksBehind: 3,
+      expireSeconds: 30,
+    });
+
+  } catch (err) {
+    response.error = err.json;
+  }
+  
+  return response;
 }
