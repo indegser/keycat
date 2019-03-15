@@ -26,11 +26,6 @@ export const useMessageChannel = () => {
       if (type === 'config') {
         const [port] = e.ports;
         setConfig(payload, port);
-        window.addEventListener('unload', (e) => {
-          port.postMessage({
-            type: 'closed',
-          });
-        }, false);
       }
     })
   }, []);
