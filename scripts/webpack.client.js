@@ -5,7 +5,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const ROOT = path.resolve(__dirname, '..');
 const PROD = process.env.NODE_ENV = 'production';
 
-const PUBLIC_PATH = PROD ? '/' : '/';
+const PUBLIC_PATH = PROD ? 'https://peekaboo.eosdaq.com/' : '/';
 
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
