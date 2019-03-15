@@ -5,16 +5,14 @@ const HtmlPlugin = require('html-webpack-plugin');
 const ROOT = path.resolve(__dirname, '..');
 const PROD = process.env.NODE_ENV = 'production';
 
-const PUBLIC_PATH = PROD ? 'https://peekaboo.eosdaq.com/' : '/';
-
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
   mode: PROD ? 'production' : 'development',
   devtool: PROD ? 'source-map' : 'cheap-source-map',
   output: {
     path: path.resolve(ROOT, PROD ? 'bundle' : 'dist'),
-    publicPath: PUBLIC_PATH,
-    filename: 'pkb.js',
+    publicPath: '/',
+    filename: 'peekaboo.js',
   },
   resolve: {
     modules: ['node_modules', path.resolve(ROOT, 'src', 'client')],
