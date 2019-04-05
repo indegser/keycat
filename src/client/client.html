@@ -11,7 +11,7 @@
 <body>
   <div id="app"></div>
   <script>
-    window.GIT_HASH = <%= options.gitHash %>
+    window.GIT_HASH = '<%= options.gitHash %>';
   </script>
   <% if(!options.production) { %>
     <script crossorigin src="https://unpkg.com/react@16.8/umd/react.development.js"></script>
