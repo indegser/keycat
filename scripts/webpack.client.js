@@ -1,9 +1,13 @@
 const path = require('path')
+const childProcess = require('child_process');
+
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin');
 
 const ROOT = path.resolve(__dirname, '..');
-const PROD = process.env.NODE_ENV = 'production';
+const PROD = process.env.NODE_ENV == 'production';
+
+const GIT_HASH = childProcess.execSync('git rev-parse HEAD').slice(0, 7);
 
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
@@ -12,7 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(ROOT, PROD ? 'bundle' : 'dist'),
     publicPath: '/',
-    filename: 'peekaboo.js',
+    filename: 'peekaboo.[hash].js',
   },
   resolve: {
     modules: ['node_modules', path.resolve(ROOT, 'src', 'client')],
@@ -37,6 +41,8 @@ module.exports = {
     new HtmlPlugin({
       template: path.resolve(ROOT, 'src', 'client', 'client.html'),
       production: PROD,
+      filename: `${GIT_HASH}.html`,
+      gitHash: GIT_HASH,
     }),
   ].filter(Boolean),
   externals: PROD ? {} : {

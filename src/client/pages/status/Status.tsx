@@ -9,8 +9,12 @@ const Status = ({ path, location }) => {
 
   const runTask = async (type, values) => {
     const { username, password } = values;
-    alert(username + password);
     const accounts = await getAccounts(password, network.nodes);
+    if (!accounts) {
+      alert('Cannot find eos account');
+      return;
+    }
+
     if (accounts.includes(username)) {
       alert('Different account name found');
       return;
