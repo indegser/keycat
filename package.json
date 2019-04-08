@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "server": "nodemon -w src/server/server.js src/server/server.js",
+    "server:dev": "nodemon -w src/server/server.js src/server/server.js",
+    "server": "cross-env NODE_ENV=production node src/server/server.js",
     "client": "webpack-dev-server --config scripts/webpack.client.js",
-    "build": "set NODE_ENV=production & webpack --config scripts/webpack.client.js -p",
+    "build": "cross-env NODE_ENV=production & webpack --config scripts/webpack.client.js -p",
     "exchange": "parcel src/exchange/index.html"
   },
   "dependencies": {

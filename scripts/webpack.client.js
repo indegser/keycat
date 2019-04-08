@@ -7,16 +7,16 @@ const HtmlPlugin = require('html-webpack-plugin');
 const ROOT = path.resolve(__dirname, '..');
 const PROD = process.env.NODE_ENV == 'production';
 
-const GIT_HASH = childProcess.execSync('git rev-parse HEAD').slice(0, 7);
+const GIT_HASH = childProcess.execSync('git rev-parse HEAD').slice(0, 7).toString();
 
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
   mode: PROD ? 'production' : 'development',
   devtool: PROD ? 'source-map' : 'cheap-source-map',
   output: {
-    path: path.resolve(ROOT, PROD ? 'bundle' : 'dist'),
-    publicPath: '/',
-    filename: 'peekaboo.[hash].js',
+    path: path.resolve('dist', GIT_HASH),
+    publicPath: `/js/`,
+    filename: '[hash].js',
   },
   resolve: {
     modules: ['node_modules', path.resolve(ROOT, 'src', 'client')],
