@@ -41,7 +41,6 @@ module.exports = {
     new HtmlPlugin({
       template: path.resolve(ROOT, 'src', 'client', 'client.html'),
       production: PROD,
-      filename: `${GIT_HASH}.html`,
       gitHash: GIT_HASH,
     }),
   ].filter(Boolean),
@@ -52,6 +51,7 @@ module.exports = {
   devServer: {
     hot: true,
     host: '0.0.0.0',
+    port: 3002,
     historyApiFallback: true,
     contentBase: path.resolve(ROOT, 'dist'),
   }

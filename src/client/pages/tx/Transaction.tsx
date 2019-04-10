@@ -28,7 +28,6 @@ const Transaction: React.SFC<OwnProps> = (props) => {
       }}
       onSubmit={async (values) => {
         const result = await transact(values, network.nodes);
-        console.log(result);
         port.postMessage({
           type: 'transaction',
           payload: result,

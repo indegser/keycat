@@ -15,6 +15,8 @@ export const useMessageChannel = () => {
   }
 
   useEffect(() => {
+    if (!window.opener) return;
+
     window.opener.postMessage({
       type: 'ready',
     }, '*');

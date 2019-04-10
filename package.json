@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "server": "nodemon -w src/server/server.js src/server/server.js",
     "client": "webpack-dev-server --config scripts/webpack.client.js",
     "build": "set NODE_ENV=production & webpack --config scripts/webpack.client.js -p",
     "exchange": "parcel src/exchange/index.html"
@@ -9,6 +10,8 @@
     "eosjs": "^20.0.0-beta3",
     "eosjs-ecc": "^4.0.4",
     "eventemitter3": "^3.1.0",
+    "express": "^4.16.4",
+    "express-http-proxy": "^1.5.1",
     "formik": "^1.5.1",
     "idb-keyval": "^3.1.0",
     "react": "^16.7.0-alpha.2",
