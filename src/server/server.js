@@ -17,7 +17,6 @@ if (env === 'devel') {
   app.use(proxy('http://localhost:3002'));
 }
 
-
 const staticMid = express.static(
   path.resolve(
     ROOT_DIR,
