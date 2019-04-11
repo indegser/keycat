@@ -9,14 +9,13 @@ phases:
      - REPOSITORY_URI=350365505669.dkr.ecr.ap-northeast-2.amazonaws.com/eosdaq/peekaboo
      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
      - IMAGE_TAG=${COMMIT_HASH:=latest}
-     - echo ${COMMIT_HASH} > gitHash.txt
      - echo Exit the pre_build phase...
  build:
    commands:
      - echo Entered the build phase...
      - echo Build started on `date` for $REPOSITORY_URI:$IMAGE_TAG:$COMMIT_HASH
      - docker pull $REPOSITORY_URI:latest || true
-     - docker build --cache-from $REPOSITORY_URI:latest -t ${REPOSITORY_URI}:latest .
+     - docker build --cache-from $REPOSITORY_URI:latest --build-arg=COMMIT_HASH=${COMMIT_HASH} -t ${REPOSITORY_URI}:latest .
      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
  post_build:
    commands:

@@ -4,8 +4,9 @@
     "server": "cross-env NODE_ENV=production node src/server/server.js",
     "server:dev": "nodemon -w src/server/server.js src/server/server.js",
     "client": "webpack-dev-server --config scripts/webpack.client.js",
-    "build": "webpack --config scripts/webpack.client.js -p",
-    "build:server": "ncc build src/server/server.js -m"
+    "build": "cross-env NODE_ENV=production webpack --config scripts/webpack.client.js -p",
+    "build:server": "ncc build src/server/server.js -m",
+    "docker": "node scripts/docker.build.js"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
@@ -29,6 +30,7 @@
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
     "@types/redux-actions": "^2.3.2",
+    "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "fork-ts-checker-webpack-plugin": "^0.5.0",
     "html-webpack-plugin": "^4.0.0-beta.4",

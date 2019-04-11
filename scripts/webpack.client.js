@@ -1,20 +1,19 @@
-const path = require('path')
-const childProcess = require('child_process');
-
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 
 const ROOT = path.resolve(__dirname, '..');
 const PROD = process.env.NODE_ENV == 'production';
 
-const GIT_HASH = childProcess.execSync('git rev-parse HEAD').slice(0, 7).toString();
+const { COMMIT_HASH = '' } = process.env;
+console.log(COMMIT_HASH, '@#@#@#@');
 
 module.exports = {
   entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
   mode: PROD ? 'production' : 'development',
   devtool: PROD ? 'source-map' : 'cheap-source-map',
   output: {
-    path: path.resolve('dist', GIT_HASH),
+    path: path.resolve('dist', COMMIT_HASH),
     publicPath: `/js/`,
     filename: '[hash].js',
   },
@@ -41,7 +40,7 @@ module.exports = {
     new HtmlPlugin({
       template: path.resolve(ROOT, 'src', 'client', 'client.html'),
       production: PROD,
-      gitHash: GIT_HASH,
+      gitHash: COMMIT_HASH,
     }),
   ].filter(Boolean),
   externals: PROD ? {} : {

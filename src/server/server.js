@@ -1,16 +1,11 @@
 const express = require('express');
 const path = require('path');
 const proxy = require('express-http-proxy');
-const childProcess = require('child_process');
 
-const { ROOT_DIR } = require('./config');
+const { env, ROOT_DIR } = require('./config');
 
-const GIT_HASH = childProcess
-  .execSync('git rev-parse HEAD')
-  .slice(0, 7)
-  .toString();
+const { COMMIT_HASH = '' } = process.env;
 
-const env = process.env.NODE_ENV === 'production' ? 'prod' : 'devel';
 const app = express();
 
 if (env === 'devel') {
@@ -21,14 +16,14 @@ const staticMid = express.static(
   path.resolve(
     ROOT_DIR,
     'dist',
-    GIT_HASH,
+    COMMIT_HASH,
   ),
 );
 
 app.use('/js', staticMid);
 app.use('*', staticMid);
 
-app.listen(3001, (err) => {
+app.listen(3000, (err) => {
   err && console.error(err);
-  !err && console.log('Running');
+  !err && console.log(`[Peekaboo]:3001 ${env}@${COMMIT_HASH}`);
 });
