@@ -12,6 +12,10 @@ if (env === 'devel') {
   app.use(proxy('http://localhost:3002'));
 }
 
+app.get('/health-check', (req, res) => {
+  res.send(200);
+});
+
 const staticMid = express.static(
   path.resolve(
     ROOT_DIR,
