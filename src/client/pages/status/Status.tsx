@@ -15,7 +15,7 @@ const Status = ({ path, location }) => {
       return;
     }
 
-    if (accounts.includes(username)) {
+    if (!accounts.includes(username)) {
       alert('Different account name found');
       return;
     }
