@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "start": "npm run develop",
-    "develop": "gatsby develop",
+    "start": "webpack-dev-server --config ./scripts/webpack.client.js",
     "build": "webpack --mode production --config ./scripts/webpack.client.js"
   },
   "dependencies": {
