@@ -6,13 +6,33 @@ import {
 import JsSignatureProvider from 'eosjs/dist/eosjs-jssig'; 
 
 import ecc from 'eosjs-ecc'
+import { networkPreset } from 'consts/consts';
+
+const { nodes } = networkPreset['eos@junglenet']
+const nodeos = {
+  get: (api: (arg0: JsonRpc) => any) => (
+    nodes.reduce(async (promise, cand, i) => {
+      try {
+        const res = await promise;
+        return res;
+      } catch (err) {
+        if (i === (nodes.length)) {
+          throw err
+        } else {
+          const rpc = new JsonRpc(cand)
+          return api(rpc)
+        }
+      }
+    }, Promise.reject())
+  ),
+}
 
 export const getAccounts = async (pk, nodes) => {
   const rpc = new JsonRpc(nodes[0]);
   const pub = await ecc.privateToPublic(pk)
 
   try {
-    const { account_names: accounts } = await rpc.history_get_key_accounts(pub)
+    const { account_names: accounts } = await nodeos.get(rpc => rpc.history_get_key_accounts(pub))
     return accounts
   } catch (err) {
     console.error(err)

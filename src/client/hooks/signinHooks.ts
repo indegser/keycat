@@ -21,6 +21,8 @@ export const useSignin = () => {
     } else {
       try {
         await isValidAccount({ account, password}, nodes)
+        dispatch(appActions.setAccount({ account }))
+        await navigate(`/me`)
       } catch (err) {
         alert('It is not valid account')
       }
