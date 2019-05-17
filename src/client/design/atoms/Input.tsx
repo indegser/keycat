@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Input = styled('input')`
+export const Input = styled.input`
   padding: 0px;
   margin: 0px;
   width: 100%;
@@ -17,6 +17,10 @@ export const Input = styled('input')`
 
   &[aria-hidden] {
     display: none;
+  }
+
+  &[name="account"] {
+    font-family: var(--monospace);
   }
 
   &:focus {

@@ -5,6 +5,7 @@ import { getSearchParams } from 'utils/utils';
 import AccountField from 'design/moles/fields/AccountField';
 import PasswordField from 'design/moles/fields/PasswordField';
 import Submit from 'design/moles/fields/Submit';
+import CardLayout from 'design/layouts/CardLayout';
 
 interface Props {
   path: string
@@ -19,21 +20,23 @@ const Register: React.SFC<Props> = () => {
   }
 
   return (
-    <Formik
-      initialValues={{
-        account,
-        password: '',
-      }}
-      onSubmit={handleSubmit}
-    >
-      {() => (
-        <Form method="post" noValidate>
-          <AccountField hidden />
-          <PasswordField />
-          <Submit />
-        </Form>
-      )}
-    </Formik>
+    <CardLayout title="Sign in with Peekaboo">
+      <Formik
+        initialValues={{
+          account,
+          password: '',
+        }}
+        onSubmit={handleSubmit}
+      >
+        {() => (
+          <Form method="post" noValidate>
+            <AccountField hidden />
+            <PasswordField />
+            <Submit />
+          </Form>
+        )}
+      </Formik>
+    </CardLayout>
   )
 }
 

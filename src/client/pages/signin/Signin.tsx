@@ -4,6 +4,7 @@ import Submit from 'design/moles/fields/Submit'
 import AccountField from 'design/moles/fields/AccountField'
 import PasswordField from 'design/moles/fields/PasswordField'
 import { useSignin } from 'hooks/signinHooks';
+import CardLayout from 'design/layouts/CardLayout';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
@@ -13,23 +14,25 @@ const SigninAccount = (props) => {
   }
 
   return (
-    <Formik
-      initialValues={{
-        account: '',
-        password: '',
-      }}
-      onSubmit={handleSubmit}
-    >
-      {() => {
-        return (
-          <Form method="post" noValidate>
-            <AccountField />
-            <PasswordField hidden />
-            <Submit />
-          </Form>
-        );
-      }}
-    </Formik>
+    <CardLayout title="Sign in with Peekaboo">
+      <Formik
+        initialValues={{
+          account: '',
+          password: '',
+        }}
+        onSubmit={handleSubmit}
+      >
+        {() => {
+          return (
+            <Form method="post" noValidate>
+              <AccountField />
+              <PasswordField hidden />
+              <Submit />
+            </Form>
+          );
+        }}
+      </Formik>
+    </CardLayout>
   );
 }
 
