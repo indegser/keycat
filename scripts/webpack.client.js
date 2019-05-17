@@ -27,7 +27,7 @@ module.exports = (_, { mode = 'development' }) => {
         template: path.resolve(ROOT, 'src', 'client', 'client.html'),
         PRODUCTION,
         COMMIT_REF,
-        ORIGIN: PRODUCTION ? 'http://localhost:3000' : 'https://eos-peekaboo.netlify.com',
+        ORIGIN: PRODUCTION ? 'https://eos-peekaboo.netlify.com' : 'http://localhost:3000',
       }),
       new CopyPlugin([
         { from: path.resolve(ROOT, 'static'), to: path.resolve(ROOT, 'public')}
