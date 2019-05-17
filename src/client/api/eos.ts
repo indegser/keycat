@@ -19,6 +19,16 @@ export const getAccounts = async (pk, nodes) => {
   }
 }
 
+export const isValidAccount = async ({ account, password }, nodes) => {
+  try {
+    const accounts = await getAccounts(password, nodes)
+    return accounts.includes(account)
+  } catch (err) {
+    console.error(err)
+    return false
+  }
+}
+
 export const transact = async ({ payload, password }, nodes) => {
   const rpc = new JsonRpc(nodes[0]);
   const sig = new JsSignatureProvider([password]);

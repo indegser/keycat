@@ -17,9 +17,14 @@ const StoreContext = createContext({
 });
 
 export const useStore = () => {
-  const { state, dispatch } = useContext(StoreContext);
-  return { state, dispatch };
+  const { state } = useContext(StoreContext);
+  return state
 };
+
+export const useDispatch = () => {
+  const { dispatch } = useContext(StoreContext)
+  return dispatch
+}
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -27,3 +27,6 @@ export const networkPreset = {
     ],
   },
 };
+
+export const isBrowser = (typeof window !== 'undefined')
+export const isEmbed = isBrowser && (window.location !== window.parent.location)

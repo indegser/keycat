@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { media } from 'design/utils';
 import { Router } from '@reach/router';
-import Transaction from './tx/Transaction';
 import Signin from './signin/Signin';
 import AppTitle from 'design/organs/app-title/AppTitle';
-import Status from './status/Status';
-import { useMessageChannel } from 'hook/appHook';
+import Register from './register/Register';
+import Keychain from './register/Keychain';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -103,8 +102,6 @@ const ActionContent = styled.div`
 `;
 
 const App = () => {
-  useMessageChannel();
-
   return (
     <>
       <GlobalStyle />
@@ -117,9 +114,9 @@ const App = () => {
             <AppTitle />
             <ActionContent>
               <Router>
-                <Transaction path="/transaction" />
-                <Signin path="/signin/*" />
-                <Status path="/status/*" />
+                <Signin path="/" />
+                <Register path="/register" />
+                <Keychain path="/register/success" />
               </Router>
             </ActionContent>
           </AppAction>
