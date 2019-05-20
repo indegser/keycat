@@ -15,7 +15,7 @@ interface Props {
 const Transact: React.SFC<Props> = (props) => {
   const params = getSearchParams()
   const account = params.get('account')
-  const payload = decodeURIComponent(atob(params.get('p')))
+  const payload = atob(decodeURIComponent(params.get('p')))
   const { transact } = useTransact()
 
   return (

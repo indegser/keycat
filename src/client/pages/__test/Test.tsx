@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import Peekaboo from 'pkbjs'
+import { useTest } from 'hooks/testHooks';
 
 const Container = styled.div`
   padding: 20px;
@@ -20,26 +20,29 @@ const Account = styled.div`
   font-weight: bold;
 `
 
+const Receipt = styled.div`
+  font-size: 12px;
+  word-break: break-all;
+  font-family: var(--monospace);
+`
+
 interface Props {
   path: string,
 }
 
 const Test: React.SFC<Props> = () => {
   const [network, setNetwork] = useState('jungle')
-  const [account, setAccount] = useState(null)
+  const {
+    account,
+    transact,
+    receipts,
+  } = useTest(network)
+
  
   const handleNetworkChange = (e) => {
     const { value } = e.target
     setNetwork(value)
   }
-  
-  useEffect(() => {
-    const peekaboo = new Peekaboo({ network })
-    peekaboo.signin()
-      .then(({ account }) => {
-        setAccount(account)
-      })
-  }, [network])
 
   return (
     <Container>
@@ -54,6 +57,24 @@ const Test: React.SFC<Props> = () => {
         <div>Account</div>
         {account && <Account>{account}</Account>}
       </div>
+      {account && (
+        <div>
+          <div>Transact</div>
+          <button onClick={transact}>
+            Transact
+          </button>
+        </div>
+      )}
+      {receipts.length > 0 && (
+        <div>
+          <div>Receipts</div>
+          <div>
+            {receipts.map(id => (
+              <Receipt key={id}>{id}</Receipt>
+            ))}
+          </div>
+        </div>
+      )}
     </Container>
   )
 }

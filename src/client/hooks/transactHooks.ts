@@ -13,7 +13,7 @@ export const useTransact = () => {
     const result = await eos.transact(values)
     dispatch(appActions.setWorking({ working: false }))
 
-    sendMessage('transact', result, client)
+    sendMessage('transact', { data: result }, client)
   }, [])
 
   return {
