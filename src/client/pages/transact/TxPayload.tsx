@@ -7,10 +7,11 @@ const Container = styled.div`
 `;
 
 const TxPayload = ({ payload }) => {
-  const [tx] = useState(JSON.parse(payload));
+  const [transaction] = useState(JSON.parse(payload));
+
   return (
     <Container>
-      {tx.actions.map(action => (
+      {transaction.actions.map(action => (
         <TxAction key={action.name + action.account} action={action} />
       ))}
     </Container>

@@ -13,7 +13,7 @@ const ActionCard = styled.div`
 const ActionName = styled.div`
   font-size: 15px;
   font-family: consolas, menlo;
-  color: #08f;
+  color: #2b2b2b;
   background: #eef6fd;
   display: inline-flex;
   padding: 2px 4px;
@@ -39,7 +39,7 @@ const TxAction = ({ action }) => {
   return (
     <ActionCard>
       <ActionName>
-        {action.name.slice(0, 1).toUpperCase() + action.name.slice(1)}
+        {`${action.account} - ${action.name}`}
       </ActionName>
       <ActionPayload>
         {keys.map(key => (

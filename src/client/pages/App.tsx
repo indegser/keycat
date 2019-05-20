@@ -7,6 +7,7 @@ import Register from './register/Register';
 import Keychain from './register/Keychain';
 import GlobalStyle from 'design/GlobalStyle';
 import { isEmbed } from 'consts/consts';
+import Transact from './transact/Transact';
 
 const AppContainer = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ const App = () => {
         <AppBox>
           <Router>
             <Signin path="/" />
+            <Transact path="/transact" />
             <Register path="/register" />
             <Keychain path="/register/success" />
           </Router>
