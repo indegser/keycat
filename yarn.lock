@@ -3635,10 +3635,10 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pkbjs@^1:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pkbjs/-/pkbjs-1.0.0.tgz#ee4e9a6fae2938664ded19aa3101c4b91a3caa56"
-  integrity sha512-nlNLBgmxkZZ1w1MUphfcGKRwrDbTI9QEL0P3sQoGhKfMEHt61NC9e/6Bay76si8CjcevbjhYN5SWVD1tK7je8g==
+pkbjs@^1.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pkbjs/-/pkbjs-1.1.0.tgz#24554d496eb36c8a94981fc4000f7ef9328ee822"
+  integrity sha512-+9p7b1e/hN8znfvkq3qcmoHNS35GSMZb/dex+hZWB2E3uajIZIfaevRW6dAwzBHz2B1E1WfnWn02aBljGE2bmg==
   dependencies:
     query-string "^6.5.0"
 
