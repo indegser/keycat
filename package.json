@@ -1,4 +1,6 @@
 {
+  "name": "peekaboo",
+  "version": "0.1.0",
   "scripts": {
     "start": "webpack-dev-server --config ./scripts/webpack.client.js",
     "build": "webpack --mode production --config ./scripts/webpack.client.js"

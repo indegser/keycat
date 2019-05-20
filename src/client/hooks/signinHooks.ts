@@ -25,7 +25,7 @@ export const useSignin = () => {
         await isValidAccount({ account, password}, nodes)
 
         if (isEmbed) {
-          sendMessage('signin', { account }, client)
+          sendMessage('signin', { data: { account } }, client)
         } else {
           dispatch(appActions.setAccount({ account }))
           await navigate(`/me`)

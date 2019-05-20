@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import qs from 'query-string'
+import Peekaboo from 'pkbjs'
 
-const Iframe = styled.iframe`
-  z-index: 9999;
-  top: 0;
-  right: 0;
-  width: 400px;
-  height: 267px;
-  position: fixed;
-  border: none;
+const Container = styled.div`
+  padding: 20px;
+
+  & > div {
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px 0;
+    &:first-child {
+      border-top: 0;
+    }
+  }
+`
+
+const Account = styled.div`
+  font-size: 24px;
+  font-weight: bold;
 `
 
 interface Props {
   path: string,
 }
 
-const buildSrc = (path, params = {}) => {
-  const client = location.origin
-  const search = qs.stringify({ ...params, client })
-  return `${client}${path}?${search}`
-}
-
 const Test: React.SFC<Props> = () => {
   const [network, setNetwork] = useState('jungle')
-  const [iframe, setIframe] = useState(buildSrc('/', { network }))
+  const [account, setAccount] = useState(null)
  
   const handleNetworkChange = (e) => {
     const { value } = e.target
@@ -32,11 +34,15 @@ const Test: React.SFC<Props> = () => {
   }
   
   useEffect(() => {
-    setIframe(buildSrc('/', { network }))
+    const peekaboo = new Peekaboo({ network })
+    peekaboo.signin()
+      .then(({ account }) => {
+        setAccount(account)
+      })
   }, [network])
 
   return (
-    <>
+    <Container>
       <div>
         <label>Network</label> 
         <select value={network} onChange={handleNetworkChange}>
@@ -45,9 +51,10 @@ const Test: React.SFC<Props> = () => {
         </select>
       </div>
       <div>
-        <Iframe key={iframe} src={iframe} />
+        <div>Account</div>
+        {account && <Account>{account}</Account>}
       </div>
-    </>
+    </Container>
   )
 }
 
