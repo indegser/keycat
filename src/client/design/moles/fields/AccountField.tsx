@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Field } from 'formik'
 import { Input } from 'design/atoms/Input'
 
@@ -7,7 +7,14 @@ interface Props {
 }
 
 const AccountField = (props: Props) => {
+  // const [cap, setCap] = useState(null)
   const { hidden } = props;
+
+  // const handleChange = (e, field) => {
+  //   const { target } = e
+  //   console.log(target)
+  //   field.onChange(e)
+  // }
 
   return (
     <Field
@@ -16,6 +23,7 @@ const AccountField = (props: Props) => {
         <Input
           {...field}
           type="text"
+          // onChange={(e) => handleChange(e, field)}
           autoComplete="account"
           aria-hidden={hidden}
           tabIndex={hidden ? -1 : 0}

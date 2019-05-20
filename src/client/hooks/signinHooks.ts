@@ -1,13 +1,15 @@
 import { navigate } from '@reach/router'
-import { networkPreset } from 'consts/consts';
+import { networkPreset, isEmbed } from 'consts/consts';
 import { useCallback } from 'react';
-import { useDispatch } from 'store/store';
+import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
 import { isValidAccount } from 'api/eos';
+import { sendMessage } from 'api/message';
 
 export const useSignin = () => {
   const { nodes } = networkPreset['eos@junglenet']
   const dispatch = useDispatch()
+  const { config: { client } } = useStore()
 
   const setWorking = (working) => {
     dispatch(appActions.setWorking({ working }))
@@ -21,9 +23,15 @@ export const useSignin = () => {
     } else {
       try {
         await isValidAccount({ account, password}, nodes)
-        dispatch(appActions.setAccount({ account }))
-        await navigate(`/me`)
+
+        if (isEmbed) {
+          sendMessage('signin', { account }, client)
+        } else {
+          dispatch(appActions.setAccount({ account }))
+          await navigate(`/me`)
+        }
       } catch (err) {
+        console.log(err)
         alert('It is not valid account')
       }
     }
