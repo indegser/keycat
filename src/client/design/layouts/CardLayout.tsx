@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import StatusBar from 'design/organs/status-bar/StatusBar'
 import { useStore } from 'store/store';
 import ProgressBar from 'design/organs/status-bar/ProgressBar';
+import Scrollbar from 'react-custom-scrollbars';
 
 const Working = styled.div`
   position: absolute;
@@ -16,15 +17,17 @@ const Working = styled.div`
 `
 
 const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  main {
+    padding: 0 20px;
+    position: relative;
+  }
 `
 
 const Container = styled.div`
   position: relative;
-
-  main {
-    padding: 0 40px;
-    position: relative;
-  }
 
   &[data-working="true"] {
     pointer-events: none;
@@ -55,9 +58,11 @@ const CardLayout: React.SFC<Props> = ({ title, children }) => {
       <Working />
       <Contents>
         <StatusBar title={title} />
-        <main>
-          {children}
-        </main>
+        <Scrollbar autoHeight autoHeightMin={170} autoHeightMax={200}>
+          <main>
+            {children}
+          </main>
+        </Scrollbar>
       </Contents>
     </Container>
   )

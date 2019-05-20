@@ -7,8 +7,13 @@ export const useTest = (network) => {
 
   const signin = useCallback(async () => {
     const pkb = new Peekaboo({ network })
-    const { account } = await pkb.signin()
-    setAccount(account)
+
+    try {
+      const { account } = await pkb.signin()
+      setAccount(account)
+    } catch (err) {
+      console.log(err)
+    }
   }, [network])
 
   const transact = useCallback(async () => {
@@ -26,8 +31,12 @@ export const useTest = (network) => {
       }]
     }
 
-    const { transaction_id: id } = await pkb.transact(account, payload)
-    setTxs([...txs, id])
+    try {
+      const { transaction_id: id } = await pkb.transact(account, payload)
+      setTxs([...txs, id])
+    } catch (err) {
+      console.log(err)
+    }
   }, [account, txs])
 
   useEffect(() => {

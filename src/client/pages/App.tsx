@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { media } from 'design/utils';
 import { Router } from '@reach/router';
 import Signin from './signin/Signin';
@@ -14,6 +14,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  max-height: 100vh;
   overflow: hidden;
 
   ${media.greaterThan('601px')`
@@ -30,6 +31,18 @@ const AppContainer = styled.div`
   `}
 `
 
+const appear = keyframes`
+  from {
+    transform: translateY(-10px);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`
+
 const AppBox = styled.div`
   margin: 0 auto;
   background: #fff;
@@ -44,6 +57,10 @@ const AppBox = styled.div`
   ${isEmbed && css`
     width: 100% !important;
     box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.09);
+  `}
+
+  ${isEmbed && css`
+    animation: ${appear} .4s forwards;
   `}
 `;
 
