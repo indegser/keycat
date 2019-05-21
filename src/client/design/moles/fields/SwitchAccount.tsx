@@ -24,7 +24,7 @@ const IdenticonStyled = styled.div`
   pointer-events: none;
   line-height: var(--sw-height);
   text-align: center;
-  background: black;
+  background: rgb(8, 58, 222) !important;
   color: white;
   font-size: 20px;
   flex: 0 0 auto;

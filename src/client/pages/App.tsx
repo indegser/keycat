@@ -46,6 +46,7 @@ const appear = keyframes`
 const AppBox = styled.div`
   margin: 0 auto;
   background: #fff;
+  width: 100vw;
 
   ${media.greaterThan('601px')`
     width: 450px;
