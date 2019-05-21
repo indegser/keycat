@@ -20,6 +20,7 @@ export const useSignin = () => {
     try {
       await isValidAccount({ account, password }, nodes)
       sendMessage('signin', { data: { account } }, client)
+      sessionStorage.setItem('account', account)
       dispatch(appActions.setAccount({ account }))
       await navigate(`/me`)
     } catch (err) {

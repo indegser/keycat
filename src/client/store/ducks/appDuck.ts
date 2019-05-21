@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   working: false,
-  account: null,
+  account: sessionStorage.getItem('account'),
 }
 
 export type IAppState = typeof initialState

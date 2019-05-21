@@ -9,6 +9,7 @@ import GlobalStyle from 'design/GlobalStyle';
 import { isEmbed } from 'consts/consts';
 import Transact from './transact/Transact';
 import Test from './__test/Test';
+import Me from './me/Me';
 
 const AppContainer = styled.div`
   display: flex;
@@ -77,6 +78,7 @@ const App = () => {
         <AppBox>
           <Router>
             <Signin path="/" />
+            <Me path="/me" />
             <Test path="/__test" />
             <Transact path="/transact" />
             <Register path="/register" />
