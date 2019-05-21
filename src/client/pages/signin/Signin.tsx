@@ -4,13 +4,13 @@ import Submit from 'design/moles/fields/Submit'
 import PasswordField from 'design/moles/fields/PasswordField'
 import { useSignin } from 'hooks/signinHooks';
 import CardLayout from 'design/layouts/CardLayout';
-import SwitchAccount from 'design/moles/fields/SwitchAccount';
+import AccountField from 'design/moles/fields/AccountField';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
 
-  const handleSubmit = async ({ account }) => {
-    await signin({ account })
+  const handleSubmit = async ({ account, password }) => {
+    await signin({ account, password })
   }
 
   return (
@@ -18,14 +18,15 @@ const SigninAccount = (props) => {
       <Formik
         initialValues={{
           account: '',
+          password: '',
         }}
         onSubmit={handleSubmit}
       >
         {() => {
           return (
             <Form method="post" noValidate>
-              <SwitchAccount />
-              <PasswordField hidden />
+              <AccountField />
+              <PasswordField />
               <Submit />
             </Form>
           );

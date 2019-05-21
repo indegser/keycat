@@ -2,9 +2,9 @@ export const networkPreset = {
   'eos@junglenet': {
     blockchain: 'eos',
     nodes: [
+      'https://api.jungle.alohaeos.com:443',
       'https://jungle2.cryptolions.io:443',
       'https://jungle.eosio.cr:443',
-      'https://api.jungle.alohaeos.com:443',
     ],
   },
   'eos@mainnet': {

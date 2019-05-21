@@ -11,7 +11,10 @@ export const Input = styled.input`
   margin: 12px 0;
   border-radius: 4px;
   padding: 0 16px;
-  border: 1px solid #ddd;
+  border: 0 !important;
+  outline: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.14) !important;
   box-sizing: border-box;
   font-size: 17px;
 
@@ -24,7 +27,7 @@ export const Input = styled.input`
   }
 
   &:focus {
-    border: 1px solid #08f;
+    border: 1px solid #08f !important;
     box-shadow: 0px 0px 1px 3px #0088ff3b
   }
 `;

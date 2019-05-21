@@ -17,7 +17,6 @@
     "pkbjs": "1.2.1",
     "query-string": "^6.5.0",
     "react": "^16.8",
-    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8",
     "react-svg-loader": "^3.0.1",
     "redux": "^4.0.1",

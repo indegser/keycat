@@ -17,11 +17,6 @@ const AccountField = (props: Props) => {
           {...field}
           type="text"
           id="account"
-          style={{
-            borderTop: '56px solid white',
-          }}
-          onKeyDown={e => e.preventDefault()}
-          onKeyUp={e => e.preventDefault()}
           autoComplete="account"
           aria-hidden={hidden}
           tabIndex={hidden ? -1 : 0}

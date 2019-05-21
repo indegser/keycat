@@ -7,10 +7,11 @@ import { useStore } from 'store/store';
 
 const Container = styled.div`
   position: relative;
-  border-bottom: 1px solid var(--main-border-color);
   color: #666;
-  padding: 0px 17px;
+  padding: 0px 20px;
+  padding-top: 10px;
   font-size: 14px;
+  height: 36px;
   align-items: center;
   display: flex;
 `
@@ -54,11 +55,11 @@ const StatusBar: React.SFC<Props> = ({ title }) => {
       <Title>
         {title}
       </Title>
-      <CloseBtn onClick={handleClose}>
-        <Close width={20} />
-      </CloseBtn>
     </Container>
   )
 }
+      // <CloseBtn onClick={handleClose}>
+      //   <Close width={20} />
+      // </CloseBtn>
 
 export default StatusBar

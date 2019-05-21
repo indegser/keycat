@@ -39,10 +39,6 @@ export const useTest = (network) => {
     }
   }, [account, txs])
 
-  useEffect(() => {
-    signin()
-  }, [network])
-
   return {
     signin,
     account,

@@ -36,6 +36,7 @@ const Test: React.SFC<Props> = () => {
     account,
     transact,
     receipts,
+    signin,
   } = useTest(network)
 
  
@@ -52,6 +53,9 @@ const Test: React.SFC<Props> = () => {
           <option value="jungle">Jungle</option>
           <option value="main">Main</option>
         </select>
+        <button onClick={signin}>
+          Signin
+        </button>
       </div>
       <div>
         <div>Account</div>
