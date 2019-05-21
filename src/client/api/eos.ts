@@ -66,13 +66,13 @@ export const getAccounts = async (pk, nodes) => {
 }
 
 export const isValidAccount = async ({ account, password }, nodes) => {
-  try {
-    const accounts = await getAccounts(password, nodes)
-    return accounts.includes(account)
-  } catch (err) {
-    console.error(err)
-    return false
+  const accounts = await getAccounts(password, nodes)
+
+  if (!accounts.includes(account)) {
+    throw new Error('Account is not valid')
   }
+
+  return true
 }
 
 export const transact = async ({ account, payload, password }) => {

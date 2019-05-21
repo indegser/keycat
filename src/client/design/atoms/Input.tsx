@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Fields = styled.div`
+  padding: var(--padding-x);
+`
+
 export const Input = styled.input`
   padding: 0px;
   margin: 0px;
@@ -13,6 +17,7 @@ export const Input = styled.input`
   border: 0 !important;
   outline: none;
   -webkit-appearance: none;
+  letter-spacing: .3px;
   border: 1px solid rgba(0, 0, 0, 0.14) !important;
   box-sizing: border-box;
   font-size: 17px;
@@ -23,10 +28,6 @@ export const Input = styled.input`
 
   &[aria-hidden] {
     display: none;
-  }
-
-  &[name="account"] {
-    font-family: var(--monospace);
   }
 
   &:focus {

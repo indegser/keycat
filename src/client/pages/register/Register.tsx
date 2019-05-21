@@ -6,6 +6,7 @@ import AccountField from 'design/moles/fields/AccountField';
 import PasswordField from 'design/moles/fields/PasswordField';
 import Submit from 'design/moles/fields/Submit';
 import CardLayout from 'design/layouts/CardLayout';
+import { Fields } from 'design/atoms/Input';
 
 interface Props {
   path: string
@@ -13,25 +14,24 @@ interface Props {
 
 const Register: React.SFC<Props> = () => {
   const { register } = useSignin()
-  const account = getSearchParams().get('account')
-
-  const handleSubmit = async (values) => {
-    await register(values)
-  }
+  const params = getSearchParams()
+  const account = params.get('account')
 
   return (
-    <CardLayout title="Sign in with Peekaboo">
+    <CardLayout title="Register Account to Browser">
       <Formik
         initialValues={{
-          account,
+          account: account || '',
           password: '',
         }}
-        onSubmit={handleSubmit}
+        onSubmit={register}
       >
         {() => (
-          <Form method="post" noValidate>
-            <AccountField hidden />
-            <PasswordField />
+          <Form method="post" noValidate autoComplete="off">
+            <Fields>
+              <AccountField />
+              <PasswordField />
+            </Fields>
             <Submit />
           </Form>
         )}

@@ -27,10 +27,13 @@ const GlobalStyle = createGlobalStyle`
     --footer-link-hover-color: #403d3d;
     --monospace: menlo, monaco, consolas, hack, monospace;
     --card-border-radius: 4px;
+    --hover-background: rgba(8, 58, 222, 0.04);
   }
 
   a {
     font-weight: 500;
+    text-decoration: none;
+    color: var(--primary-color);
   }
 
   input, textarea {

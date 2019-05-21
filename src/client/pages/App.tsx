@@ -86,7 +86,7 @@ const App = () => {
             <Test path="/__test" />
             <Transact path="/transact" />
             <Register path="/register" />
-            <Keychain path="/register/success" />
+            <Keychain path="/register/keychain" />
           </Router>
         </AppBox>
       </AppContainer>
