@@ -6,23 +6,27 @@ import { getColorFromString } from 'utils/utils';
 
 const Container = styled.div`
   position: relative;
+  --sw-height: 40px;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 12px;
 `
 
 const InputContainer = styled.div`
 `
 
 const IdenticonStyled = styled.div`
-  width: 28px;
-  height: 28px;
+  width: var(--sw-height);
+  height: var(--sw-height);
   position: absolute;
   left: 0;
   top: 0;
-  border-radius: 999rem;
-  line-height: 28px;
+  pointer-events: none;
+  line-height: var(--sw-height);
   text-align: center;
   background: black;
   color: white;
-  font-size: 14px;
+  font-size: 20px;
   flex: 0 0 auto;
   font-family: var(--monospace);
 `

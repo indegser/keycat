@@ -31,21 +31,20 @@ export const Input = styled.input`
 
 export const HackInput = styled.input`
   font-size: 17px;
-  height: 28px;
-  line-height: 28px;
+  height: var(--sw-height);
+  line-height: var(--sw-height);
   font-family: var(--monospace);
   border: 0 !important;
   cursor: pointer !important;
   box-shadow: none !important;
   outline: 0 !important;
   overflow: hidden !important;
-  color: transparent !important;
   background: transparent !important;
   padding: 0 !important;
   caret-color: transparent !important;
   user-select: none !important;
   width: 100% !important;
-  padding-left: 40px !important;
+  padding-left: calc(var(--sw-height) + 10px) !important;
   box-sizing: border-box;
 
   &:-webkit-autofill,
