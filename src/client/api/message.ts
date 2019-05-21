@@ -1,7 +1,7 @@
 export const sendMessage = (type, payload, client) => {
-  if (!window.parent) return
+  if (!window.opener) return
 
-  window.parent.postMessage(
+  window.opener.postMessage(
     { type, payload, __peekaboo: true },
     client,
   )

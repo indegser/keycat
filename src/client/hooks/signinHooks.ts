@@ -17,6 +17,7 @@ export const useSignin = () => {
 
   const signin = useCallback(async ({ account }) => {
     setWorking(true)
+    console.log('hello')
     sendMessage('signin', { data: { account } }, client)
     // if (password.length === 0) {
     //   // Password가 Auto-fill 되지 않음
