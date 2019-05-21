@@ -18,7 +18,9 @@ const AccountField = (props: Props) => {
           type="text"
           id="account"
           autoComplete="account"
-          aria-hidden={hidden}
+          style={{
+            opacity: hidden ? 0 : 1,
+          }}
           tabIndex={hidden ? -1 : 0}
           autoCorrect="false"
           placeholder="Account name"
