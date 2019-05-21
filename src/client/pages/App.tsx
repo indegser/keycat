@@ -28,6 +28,10 @@ const AppContainer = styled.div`
   ${isEmbed && css`
     padding: 20px 20px 4px 4px;
     box-sizing: border-box;
+
+    ${media.lessThan('601px')`
+      padding: 0px;
+    `}
   `}
 `
 
@@ -57,10 +61,10 @@ const AppBox = styled.div`
 
   ${isEmbed && css`
     width: 100% !important;
+    border: 1px solid rgba(0, 0, 0, 0.19);
+    border-top: 0;
+    border-right: 0; 
     box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.09);
-  `}
-
-  ${isEmbed && css`
     animation: ${appear} .4s forwards;
   `}
 `;
