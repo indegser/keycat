@@ -20,6 +20,7 @@ const AccountField = (props: Props) => {
           autoComplete="account"
           style={{
             opacity: hidden ? 0 : 1,
+            cursor: hidden ? 'pointer' : 'auto',
           }}
           tabIndex={hidden ? -1 : 0}
           autoCorrect="false"

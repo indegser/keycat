@@ -1,25 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import Favicon from 'design/icons/favicon.svg'
-import Close from 'design/icons/close.svg'
 import { sendMessage } from 'api/message';
 import { useStore } from 'store/store';
 
 const Container = styled.div`
   position: relative;
-  color: #666;
-  padding: 0px 20px;
-  padding-top: 10px;
+  color: #222;
+  padding: var(--padding-x);
   font-size: 14px;
-  height: 36px;
-  align-items: center;
-  display: flex;
+  text-align: center;
 `
 
 const Title = styled.div`
-  margin-left: 12px;
-  flex: 1 1;
-  line-height: 14px;
+  font-size: 20px;
 `
 
 const CloseBtn = styled.div`
@@ -51,7 +45,7 @@ const StatusBar: React.SFC<Props> = ({ title }) => {
 
   return (
     <Container>
-      <Favicon width={18} />
+      <Favicon width={20} />
       <Title>
         {title}
       </Title>

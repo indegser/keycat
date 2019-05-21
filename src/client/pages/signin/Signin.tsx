@@ -4,7 +4,7 @@ import Submit from 'design/moles/fields/Submit'
 import PasswordField from 'design/moles/fields/PasswordField'
 import { useSignin } from 'hooks/signinHooks';
 import CardLayout from 'design/layouts/CardLayout';
-import AccountField from 'design/moles/fields/AccountField';
+import SwitchAccount from 'design/moles/fields/SwitchAccount';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
@@ -22,11 +22,11 @@ const SigninAccount = (props) => {
         }}
         onSubmit={handleSubmit}
       >
-        {() => {
+        {({ values }) => {
           return (
             <Form method="post" noValidate>
-              <AccountField />
-              <PasswordField />
+              <SwitchAccount account={values.account} />
+              <PasswordField hidden />
               <Submit />
             </Form>
           );

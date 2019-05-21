@@ -18,6 +18,9 @@ const AppContainer = styled.div`
   max-height: 100vh;
   overflow: hidden;
 
+  --padding-x: 20px;
+  --primary-color: #083ADE;
+
   ${media.greaterThan('601px')`
     &:before, &:after {
       content: '';
@@ -54,8 +57,9 @@ const AppBox = styled.div`
   width: 100vw;
 
   ${media.greaterThan('601px')`
-    width: 450px;
+    width: 400px;
     border: 1px solid var(--main-border-color);
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.09);
     border-radius: 4px;
     flex: 0 0 auto;
   `}

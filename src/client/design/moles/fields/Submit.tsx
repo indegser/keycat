@@ -3,34 +3,30 @@ import styled from 'styled-components';
 import { Button } from 'design/atoms/Button';
 
 const Container = styled.div`
-  padding-bottom: 20px;
-  margin-top: 32px;
-`;
-
-const Flex = styled.div`
+  margin-bottom: var(--padding-x);
+  padding: 0 var(--padding-x);
+  flex: 1 1;
   display: flex;
-
-  & > * {
-    flex: 1 1;
-  }
+  justify-content: normal;
+  align-items: flex-end;
 `;
 
 const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  width: 100%;
+
+  button {
+    width: 100%;
+  }
 `;
 
 const Submit: React.SFC<{}> = ({ children }) => {
   return (
     <Container>
-      <Flex>
-        {children}
-        <ButtonWrapper>
-          <Button type="submit">
-            Next
-          </Button>
-        </ButtonWrapper>
-      </Flex>
+      <ButtonWrapper>
+        <Button type="submit">
+          Next
+        </Button>
+      </ButtonWrapper>
     </Container>
   );
 }

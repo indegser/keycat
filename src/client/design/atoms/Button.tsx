@@ -6,8 +6,8 @@ export const Button = styled('button')`
   border: 0;
   color: white;
   border: 1px solid transparent;
-  background: #1a73e8;
-  letter-spacing: .25px;
+  background: var(--primary-color);
+  letter-spacing: .55px;
   min-width: 88px;
   line-height: 36px;
   font-size: 15px;

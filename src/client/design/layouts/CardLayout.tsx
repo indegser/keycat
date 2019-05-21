@@ -20,8 +20,15 @@ const Contents = styled.div`
   flex-direction: column;
 
   main {
-    padding: 0 20px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+
+    > form {
+      flex: 1 1;
+      display: flex;
+      flex-direction: column;
+    }
   }
 `
 
