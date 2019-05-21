@@ -9,6 +9,7 @@ export const useTransact = () => {
   const { config: { client } } = useStore()
 
   const transact = useCallback(async (values) => {
+    alert(JSON.stringify(values))
     dispatch(appActions.setWorking({ working: true }))
     const result = await eos.transact(values)
     dispatch(appActions.setWorking({ working: false }))

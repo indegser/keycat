@@ -29,7 +29,7 @@ const Transact: React.SFC<Props> = (props) => {
         onSubmit={transact}
       >
         {() => (
-          <Form method="POST" noValidate>
+          <Form method="post" noValidate>
             <TxPayload payload={payload} />
             <AccountField hidden />
             <PasswordField hidden />
