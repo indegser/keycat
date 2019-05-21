@@ -86,19 +86,17 @@ const Identicon = ({ account }) => {
 const SwitchAccount = ({ account }) => {
   return (
     <Container>
-      {account && (
-        <AccountContainer>
-          <Identicon account={account} />
-          <div>
-            <Account>
-              {account}
-            </Account>
-            <CurrentAccount>
-              Click to switch account
-            </CurrentAccount>
-          </div>
-        </AccountContainer>
-      )}
+      <AccountContainer>
+        <Identicon account={account} />
+        <div>
+          <Account>
+            {account}
+          </Account>
+          <CurrentAccount>
+            {account ? 'Click to switch Account' : 'Select Account'}
+          </CurrentAccount>
+        </div>
+      </AccountContainer>
       <InputContainer>
         <Field name="account" />
       </InputContainer>

@@ -7,6 +7,7 @@ import AccountField from 'design/moles/fields/AccountField';
 import PasswordField from 'design/moles/fields/PasswordField';
 import CardLayout from 'design/layouts/CardLayout';
 import { useTransact } from 'hooks/transactHooks';
+import { Fields } from 'design/atoms/Input';
 
 interface Props {
   path: string,
@@ -30,9 +31,11 @@ const Transact: React.SFC<Props> = (props) => {
       >
         {() => (
           <Form method="post" noValidate>
-            <TxPayload payload={payload} />
-            <AccountField hidden />
-            <PasswordField hidden />
+            <Fields>
+              <TxPayload payload={payload} />
+              <AccountField hidden />
+              <PasswordField hidden />
+            </Fields>
             <Submit />
           </Form>
         )}

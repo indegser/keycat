@@ -19,7 +19,7 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const Submit: React.SFC<{ onClick: any }> = ({ children, onClick }) => {
+const Submit: React.SFC<{ onClick?: any }> = ({ children, onClick }) => {
   return (
     <Container>
       <ButtonWrapper>
