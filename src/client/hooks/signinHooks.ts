@@ -15,26 +15,26 @@ export const useSignin = () => {
     dispatch(appActions.setWorking({ working }))
   }
 
-  const signin = useCallback(async ({ account, password }) => {
+  const signin = useCallback(async ({ account }) => {
     setWorking(true)
-    if (password.length === 0) {
-      // Password가 Auto-fill 되지 않음
-      await navigate(`/register?account=${account}`)
-    } else {
-      try {
-        await isValidAccount({ account, password}, nodes)
+    sendMessage('signin', { data: { account } }, client)
+    // if (password.length === 0) {
+    //   // Password가 Auto-fill 되지 않음
+    //   await navigate(`/register?account=${account}`)
+    // } else {
+    //   try {
+    //     await isValidAccount({ account, password}, nodes)
 
-        if (isEmbed) {
-          sendMessage('signin', { data: { account } }, client)
-        } else {
-          dispatch(appActions.setAccount({ account }))
-          await navigate(`/me`)
-        }
-      } catch (err) {
-        console.log(err)
-        alert('It is not valid account')
-      }
-    }
+    //     if (isEmbed) {
+    //     } else {
+    //       dispatch(appActions.setAccount({ account }))
+    //       await navigate(`/me`)
+    //     }
+    //   } catch (err) {
+    //     console.log(err)
+    //     alert('It is not valid account')
+    //   }
+    // }
     setWorking(false)
   }, [])
 

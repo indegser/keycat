@@ -1,10 +1,7 @@
 import React from 'react';
-import { navigate } from '@reach/router';
 import styled from 'styled-components';
-import { appendSearchParamsToUrl } from 'utils/utils';
 import { media } from 'design/utils';
 import { breakpoints } from 'design/constants';
-import { useStore } from 'store/store';
 
 const Container = styled.div`
   padding: 10px 24px 12px 24px;
@@ -78,39 +75,34 @@ const intToHSL = (int) => {
   return "hsl(" + shortened + ",100%,30%)";
 }
 
-const Account = ({ identifier }) => {
-  const { state: { config: { network } } } = useStore();
-  const initial = identifier.slice(0, 1);
+interface Props {
+  account?: string,
+}
 
-  const handleClick = () => {
-    const to = appendSearchParamsToUrl('/signin/password');
-    navigate(to, {
-      state: { username: identifier },
-    });
-  }
-
-  const bg = intToHSL(getHashCode(identifier));
-
-  const { name } = network;
+const Account: React.SFC<Props> = ({ account = '', children }) => {
+  const bg = intToHSL(getHashCode(account));
+  const initial = account.slice(0, 1).toUpperCase()
 
   return (
-    <Container onClick={handleClick}>
-      <Identicon
-        style={{
-          backgroundColor: bg,
-        }}
-      >
-        {initial}
-      </Identicon>
-      <div>
-        <Name>
-          {identifier}
-        </Name>
-        <Network>
-          {name}
-        </Network>
-      </div>
-    </Container>
+    <label
+      htmlFor="account"
+    >
+      <Container>
+        <Identicon
+          style={{
+            backgroundColor: bg,
+          }}
+        >
+          {initial}
+        </Identicon>
+        <div>
+          <Name>
+            {account}
+          </Name>
+        </div>
+      </Container>
+      {children}
+    </label>
   )
 }
 

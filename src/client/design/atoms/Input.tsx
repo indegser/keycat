@@ -28,3 +28,35 @@ export const Input = styled.input`
     box-shadow: 0px 0px 1px 3px #0088ff3b
   }
 `;
+
+export const HackInput = styled.input`
+  font-size: 17px;
+  height: 28px;
+  line-height: 28px;
+  font-family: var(--monospace);
+  border: 0 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  background: transparent !important;
+  padding: 0 !important;
+  caret-color: transparent !important;
+  user-select: none !important;
+  width: 100% !important;
+  padding-left: 40px !important;
+  box-sizing: border-box;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    background: transparent;
+  }
+
+  &:focus {
+    border: 0 !important;
+    box-shadow: 0 !important;
+    outline: 0 !important;
+  }
+`

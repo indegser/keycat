@@ -7,14 +7,7 @@ interface Props {
 }
 
 const AccountField = (props: Props) => {
-  // const [cap, setCap] = useState(null)
   const { hidden } = props;
-
-  // const handleChange = (e, field) => {
-  //   const { target } = e
-  //   console.log(target)
-  //   field.onChange(e)
-  // }
 
   return (
     <Field
@@ -23,7 +16,12 @@ const AccountField = (props: Props) => {
         <Input
           {...field}
           type="text"
-          // onChange={(e) => handleChange(e, field)}
+          id="account"
+          style={{
+            borderTop: '56px solid white',
+          }}
+          onKeyDown={e => e.preventDefault()}
+          onKeyUp={e => e.preventDefault()}
           autoComplete="account"
           aria-hidden={hidden}
           tabIndex={hidden ? -1 : 0}

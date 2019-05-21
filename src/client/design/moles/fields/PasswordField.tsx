@@ -13,9 +13,11 @@ const PasswordField: React.SFC<Props> = ({ hidden }) => {
       render={({ field }) => (
         <Input
           {...field}
+          onChange={hidden ? () => null : field.onChange}
+          name={hidden ? 'hiddenPassword' : 'password'}
           type="password"
           placeholder="Private Key"
-          autoComplete="current-password"
+          autoComplete={hidden ? '' : 'current-password'}
           aria-hidden={hidden}
           tabIndex={hidden ? -1 : 0}
           spellCheck="false"
