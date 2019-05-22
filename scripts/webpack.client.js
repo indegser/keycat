@@ -4,7 +4,7 @@ const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 const ROOT = path.resolve(__dirname, '..')
-const { COMMIT_REF } = process.env
+const { COMMIT_REF = '9f29791327d93538a1ab67be02efcc3e33e173c5' } = process.env
 
 module.exports = (_, { mode = 'development' }) => {
   const PRODUCTION = mode !== 'development'
