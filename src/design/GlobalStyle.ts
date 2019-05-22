@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: -apple-system, BlinkMacSystemFont, Roboto, Mukta, Segoe UI, Oxygen,
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 16px;
     -ms-text-size-adjust: 100%;

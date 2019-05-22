@@ -10,6 +10,7 @@ import { isEmbed } from 'consts/consts';
 import Transact from './transact/Transact';
 import Test from './__test/Test';
 import Me from './me/Me';
+import Support from './support/Support';
 
 const AppContainer = styled.div`
   display: flex;
@@ -56,6 +57,10 @@ const AppBox = styled.div`
   background: #fff;
   width: 100vw;
 
+  &:empty {
+    display: none;
+  }
+
   ${media.greaterThan('601px')`
     width: 400px;
     border: 1px solid var(--main-border-color);
@@ -78,6 +83,9 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
+      <Router>
+        <Support path="/support" />
+      </Router>
       <AppContainer>
         <AppBox>
           <Router>

@@ -10,3 +10,7 @@ Web Wallet using browser's cloud keychain.
 | mj2323232323 | 5JvWA51DjM5qEESRavfAp7RTtytXzMAMmgatJva1BhA8nTkYbPS |
 | xafe11111111 | 5JbhPaE6GWs2XqFsjTvvdcjLb5CdVDSSrgypudog54e1muKQbjn |
 | abcdefghijk1 | 5KV78xxPvL7jYStndAxY4W8b9C91HUpTos7FMyAXAHrhYaHRTc8 |
+
+1. 패스워드 지우는 방법 -> Link 설명
+2. 에러 문구
+3. Active - Owner

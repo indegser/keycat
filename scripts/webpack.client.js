@@ -18,13 +18,13 @@ module.exports = (_, { mode = 'development' }) => {
       filename: `[hash].js`,
     }, 
     resolve: {
-      modules: ['node_modules', path.resolve(ROOT, 'src', 'client')],
+      modules: ['node_modules', path.resolve(ROOT, 'src')],
       extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
       !PRODUCTION && new webpack.HotModuleReplacementPlugin(),
       new HtmlPlugin({
-        template: path.resolve(ROOT, 'src', 'client', 'client.html'),
+        template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
         COMMIT_REF,
         ORIGIN: PRODUCTION ? 'https://eos-peekaboo.netlify.com' : 'http://localhost:3000',
@@ -46,7 +46,7 @@ module.exports = (_, { mode = 'development' }) => {
           loader: 'react-svg-loader',
         },
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.(png|jpg|gif|md)$/,
           loader: 'file-loader',
         },
       ],
