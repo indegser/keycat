@@ -4,7 +4,6 @@ import Github from 'design/icons/github.svg'
 
 const Container = styled.footer`
   display: flex;
-  align-items: center;
   font-size: 13px;
   line-height: 18px;
   margin-top: 16px;
@@ -33,6 +32,8 @@ const GitHash = styled.div`
 
 const Right = styled.div`
   display: flex;
+  flex: 1 1;
+  justify-content: flex-end;
 
   a {
     color: var(--footer-link-color);
@@ -51,6 +52,14 @@ const Right = styled.div`
 const LinkContent = styled.div`
   padding: 4px 8px;
 `
+
+const links = [{
+  name: 'How-to-use',
+  link: 'https://youtube.com',
+}, {
+  name: 'Concept',
+  link: '/support',
+}]
 
 const Footer = () => {
   return (
@@ -73,7 +82,16 @@ const Footer = () => {
         </GitHubLink>
       </div>
       <Right>
-
+        {links.map(({ name, link }) => (
+          <LinkContent key={link}>
+            <a
+              href={link} 
+              target="_blank"
+            >
+              {name}
+            </a>
+          </LinkContent>
+        ))}
       </Right>
     </Container>
   )
