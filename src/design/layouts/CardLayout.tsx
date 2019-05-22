@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import StatusBar from 'design/organs/status-bar/StatusBar'
 import { useStore } from 'store/store';
 import ProgressBar from 'design/organs/status-bar/ProgressBar';
+import { media } from 'design/utils';
 
 const Working = styled.div`
   position: absolute;
@@ -50,6 +51,23 @@ const Container = styled.div`
   }
 `
 
+const AppBox = styled.div`
+  margin: 0 auto;
+  background: #fff;
+  width: 100vw;
+
+  &:empty {
+    display: none;
+  }
+
+  ${media.greaterThan('601px')`
+    width: 400px;
+    border: 1px solid var(--main-border-color);
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.09);
+    border-radius: 4px;
+    flex: 0 0 auto;
+  `}
+`;
 
 interface Props {
   title: string,
@@ -59,16 +77,18 @@ const CardLayout: React.SFC<Props> = ({ title, children }) => {
   const { app: { working } } = useStore()
 
   return (
-    <Container data-working={working}>
-      <ProgressBar />
-      <Working />
-      <Contents>
-        <StatusBar title={title} />
-        <main>
-          {children}
-        </main>
-      </Contents>
-    </Container>
+    <AppBox>
+      <Container data-working={working}>
+        <ProgressBar />
+        <Working />
+        <Contents>
+          <StatusBar title={title} />
+          <main>
+            {children}
+          </main>
+        </Contents>
+      </Container>
+    </AppBox>
   )
 }
 
