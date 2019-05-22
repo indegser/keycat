@@ -1,5 +1,5 @@
 import { navigate } from '@reach/router'
-import { networkPreset, isEmbed } from 'consts/consts';
+import { networkPreset } from 'consts/consts';
 import { useCallback } from 'react';
 import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';

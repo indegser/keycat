@@ -3,6 +3,16 @@ import styled from 'styled-components'
 import { getColorFromString } from 'utils/utils';
 import { inputHeight } from 'consts/consts';
 import { Field } from 'formik';
+import Down from 'design/icons/down.svg'
+
+const DownButton = styled.div`
+  flex: 0 0 auto;
+  color: #aaa;
+
+  svg {
+    display: block;
+  }
+`
 
 const Container = styled.div`
   position: relative;
@@ -10,6 +20,10 @@ const Container = styled.div`
   height: ${inputHeight}px;
   &:hover {
     background: var(--hover-background);
+
+    ${DownButton} {
+      color: var(--primary-color);
+    }
   }
 `
 
@@ -18,7 +32,6 @@ const AccountContainer = styled.div`
   align-items: center;
   cursor: pointer;
   pointer-events: none;
-  height: ${inputHeight}px;
   padding: 0 var(--padding-x);
   position: absolute;
   top: 0;
@@ -31,26 +44,31 @@ const AccountContainer = styled.div`
 const InputContainer = styled.div`
   height: 56px;
   opacity: 0;
+  padding: 0 var(--padding-x);
 
   input {
     height: 56px;
     width: 100%;
     display: block;
     cursor: pointer;
+    border: 0;
+    margin: 0;
   }
 `
 
 const CurrentAccount = styled.div`
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 13px;
+  line-height: 13px;
   color: #606365;
 `
 
 const Account = styled.div`
   flex: 1 1;
-  line-height: 18px;
-  font-size: 18px;
-  letter-spacing: .3px;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  letter-spacing: .1px;
 `
 
 const IdenticonStyled = styled.div`
@@ -88,7 +106,7 @@ const SwitchAccount = ({ account }) => {
     <Container>
       <AccountContainer>
         <Identicon account={account} />
-        <div>
+        <div style={{ flex: '1 1' }}>
           <Account>
             {account}
           </Account>
@@ -96,6 +114,9 @@ const SwitchAccount = ({ account }) => {
             {account ? 'Click to switch Account' : 'Select Account'}
           </CurrentAccount>
         </div>
+        <DownButton tabIndex={-1}>
+          <Down />
+        </DownButton>
       </AccountContainer>
       <InputContainer>
         <Field name="account" />
