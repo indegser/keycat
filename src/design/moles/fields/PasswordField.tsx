@@ -4,7 +4,8 @@ import { Field } from 'formik'
 import { Input } from 'design/atoms/Input'
 
 interface Props {
-  hidden?: boolean
+  hidden?: boolean,
+  plain?: boolean,
 }
 
 const Container = styled.div`
@@ -16,7 +17,7 @@ const Container = styled.div`
   margin-top: 12px;
 `
 
-const PasswordField: React.SFC<Props> = ({ hidden }) => {
+const PasswordField: React.SFC<Props> = ({ hidden, plain }) => {
   return (
     <Container data-hidden={hidden}>
       <Field
@@ -27,7 +28,7 @@ const PasswordField: React.SFC<Props> = ({ hidden }) => {
             name="password"
             type="password"
             placeholder="Private Key"
-            autoComplete="current-password'"
+            autoComplete={plain ? "off" : "current-password"}
             tabIndex={hidden ? -1 : 0}
             spellCheck="false"
           />

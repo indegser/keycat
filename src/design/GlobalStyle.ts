@@ -34,6 +34,10 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 500;
     text-decoration: none;
     color: var(--primary-color);
+    
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   input, textarea {

@@ -29,8 +29,8 @@ const Register: React.SFC<Props> = () => {
         {() => (
           <Form method="post" noValidate autoComplete="off">
             <Fields>
-              <AccountField />
-              <PasswordField />
+              <AccountField plain />
+              <PasswordField plain />
             </Fields>
             <Submit />
           </Form>

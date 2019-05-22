@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'design/atoms/Button';
+import Help from '../Help';
 
 const Container = styled.div`
   margin-bottom: var(--padding-x);
@@ -19,14 +20,23 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const Submit: React.SFC<{ onClick?: any }> = ({ children, onClick }) => {
+interface Props {
+  help?: string,
+  onClick?: () => any,
+}
+
+const Submit: React.SFC<Props> = (props) => {
+  const { onClick, help } = props
   return (
     <Container>
-      <ButtonWrapper>
-        <Button type="submit" onClick={onClick}>
-          Next
-        </Button>
-      </ButtonWrapper>
+      <div style={{ width: '100%' }}>
+        {help && <Help type={help} />}
+        <ButtonWrapper>
+          <Button type="submit" onClick={onClick}>
+            Next
+          </Button>
+        </ButtonWrapper>
+      </div>
     </Container>
   );
 }

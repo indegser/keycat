@@ -35,17 +35,8 @@ const Right = styled.div`
   flex: 1 1;
   justify-content: flex-end;
 
-  a {
-    color: var(--footer-link-color);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--footer-link-hover-color);
-    }
-
-    &:last-child {
-      margin-right: -8px;
-    }
+  &:last-child {
+    margin-right: -8px;
   }
 `
 

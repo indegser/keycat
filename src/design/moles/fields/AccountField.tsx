@@ -5,6 +5,7 @@ import { Input } from 'design/atoms/Input'
 
 interface Props {
   hidden?: boolean,
+  plain?: boolean,
 }
 
 const Container = styled.div`
@@ -15,7 +16,7 @@ const Container = styled.div`
 `
 
 const AccountField = (props: Props) => {
-  const { hidden } = props;
+  const { hidden, plain } = props;
 
   return (
     <Container data-hidden={hidden}>
@@ -26,7 +27,7 @@ const AccountField = (props: Props) => {
             {...field}
             type="text"
             id="account"
-            autoComplete="account"
+            autoComplete={plain ? "off" : "account"}
             tabIndex={hidden ? -1 : 0}
             autoCorrect="false"
             placeholder="Account Name"

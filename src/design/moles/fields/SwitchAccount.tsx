@@ -18,11 +18,14 @@ const Container = styled.div`
   position: relative;
   margin: 0 calc(var(--padding-x) * -1);
   height: ${inputHeight}px;
-  &:hover {
-    background: var(--hover-background);
 
-    ${DownButton} {
-      color: var(--primary-color);
+  &[data-with-account="true"] {
+    &:hover {
+      background: var(--hover-background);
+  
+      ${DownButton} {
+        color: var(--primary-color);
+      }
     }
   }
 `
@@ -38,6 +41,11 @@ const AccountContainer = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
+
+  &[data-with-account="false"] {
+    pointer-events: auto;
+    cursor: default;
+  }
 
 `
 
@@ -60,6 +68,13 @@ const CurrentAccount = styled.div`
   font-size: 13px;
   line-height: 13px;
   color: #606365;
+
+  &[data-with-account="false"] {
+    width: 200px;
+    color: transparent;
+    pointer-events: none;
+    background: #eee;
+  }
 `
 
 const Account = styled.div`
@@ -103,24 +118,26 @@ const Identicon = ({ account }) => {
 
 const SwitchAccount = ({ account }) => {
   return (
-    <Container>
-      <AccountContainer>
+    <Container data-with-account={!!account}>
+      <InputContainer>
+        <Field name="account" />
+      </InputContainer>
+      <AccountContainer data-with-account={!!account}>
         <Identicon account={account} />
         <div style={{ flex: '1 1' }}>
           <Account>
             {account}
           </Account>
-          <CurrentAccount>
-            {account ? 'Click to switch Account' : 'Select Account'}
+          <CurrentAccount data-with-account={!!account}>
+            {account ? 'Click to switch Account' : 'a'}
           </CurrentAccount>
         </div>
-        <DownButton tabIndex={-1}>
-          <Down />
-        </DownButton>
+        {account && (
+          <DownButton tabIndex={-1}>
+            <Down />
+          </DownButton>
+        )}
       </AccountContainer>
-      <InputContainer>
-        <Field name="account" />
-      </InputContainer>
     </Container>
   )
 }

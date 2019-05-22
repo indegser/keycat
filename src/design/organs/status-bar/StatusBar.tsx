@@ -6,12 +6,14 @@ const Container = styled.div`
   position: relative;
   color: #222;
   padding: var(--padding-x);
+  padding-top: calc(var(--padding-x) * 2);
   font-size: 14px;
   text-align: center;
 `
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: bold;
   margin-top: 10px;
 `
 
