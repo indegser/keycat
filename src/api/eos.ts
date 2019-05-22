@@ -7,6 +7,7 @@ import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 
 import ecc from 'eosjs-ecc'
 import { networkPreset } from 'consts/consts';
+import { AppError, errors } from 'consts/errors';
 
 const { nodes } = networkPreset['eos@junglenet']
 const nodeos = {
@@ -28,8 +29,12 @@ const nodeos = {
 }
 
 export const getPublicKey = async (password) => {
-  const publicKey = await ecc.privateToPublic(password)
-  return publicKey
+  try {
+    const publicKey = await ecc.privateToPublic(password)
+    return publicKey
+  } catch (err) {
+    throw errors.invalidPassword
+  }
 }
 
 export const getAuthorization = async ({ account, password }) => {
@@ -54,8 +59,7 @@ export const getAuthorization = async ({ account, password }) => {
 }
 
 export const getAccounts = async (pk, nodes) => {
-  const rpc = new JsonRpc(nodes[0]);
-  const pub = await ecc.privateToPublic(pk)
+  const pub = await getPublicKey(pk)
 
   try {
     const { account_names: accounts } = await nodeos.get(rpc => rpc.history_get_key_accounts(pub))
@@ -69,7 +73,7 @@ export const isValidAccount = async ({ account, password }, nodes) => {
   const accounts = await getAccounts(password, nodes)
 
   if (!accounts.includes(account)) {
-    throw new Error('Account is not valid')
+    throw errors.UsernameConflict
   }
 
   return true
@@ -101,16 +105,4 @@ export const transact = async ({ account, payload, password }) => {
   } catch (err) {
     console.error(err)
   }
-
-  // try {
-  //   response.data = await api.transact(JSON.parse(payload), {
-  //     blocksBehind: 3,
-  //     expireSeconds: 30,
-  //   });
-
-  // } catch (err) {
-  //   response.error = err.json;
-  // }
-  
-  // return response;
 }

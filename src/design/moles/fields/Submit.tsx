@@ -22,17 +22,22 @@ const ButtonWrapper = styled.div`
 
 interface Props {
   help?: string,
+  disabled?: boolean,
   onClick?: () => any,
 }
 
 const Submit: React.SFC<Props> = (props) => {
-  const { onClick, help } = props
+  const { onClick, help, disabled } = props
   return (
     <Container>
       <div style={{ width: '100%' }}>
         {help && <Help type={help} />}
         <ButtonWrapper>
-          <Button type="submit" onClick={onClick}>
+          <Button
+            type="submit"
+            onClick={onClick}
+            disabled={disabled}
+          >
             Next
           </Button>
         </ButtonWrapper>

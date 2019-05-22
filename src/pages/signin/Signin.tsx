@@ -11,10 +11,6 @@ import FieldLink from 'design/moles/FieldLink';
 const SigninAccount = (props) => {
   const { signin } = useSignin()
 
-  const handleSubmit = async ({ account, password }) => {
-    await signin({ account, password })
-  }
-
   return (
     <CardLayout title="Sign in with Peekaboo">
       <Formik
@@ -22,7 +18,7 @@ const SigninAccount = (props) => {
           account: '',
           password: '',
         }}
-        onSubmit={handleSubmit}
+        onSubmit={signin}
       >
         {({ values }) => {
           return (
@@ -32,7 +28,7 @@ const SigninAccount = (props) => {
                 <FieldLink to="/register" title="Register Account" />
                 <PasswordField hidden />
               </Fields>
-              <Submit help="signin" />
+              <Submit help="signin" disabled={!values.account} />
             </Form>
           );
         }}

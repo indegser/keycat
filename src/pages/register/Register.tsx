@@ -17,6 +17,10 @@ const Register: React.SFC<Props> = () => {
   const params = getSearchParams()
   const account = params.get('account')
 
+  const getDisabled = ({ account, password }) => (
+    !account || !password
+  )
+
   return (
     <CardLayout title="Register your EOS Account">
       <Formik
@@ -26,13 +30,13 @@ const Register: React.SFC<Props> = () => {
         }}
         onSubmit={register}
       >
-        {() => (
+        {({ values }) => (
           <Form method="post" noValidate autoComplete="off">
             <Fields>
               <AccountField plain />
               <PasswordField plain />
             </Fields>
-            <Submit help="register" />
+            <Submit help="register" disabled={getDisabled(values)} />
           </Form>
         )}
       </Formik>

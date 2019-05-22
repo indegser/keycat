@@ -5,7 +5,12 @@ import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
 import { isValidAccount } from 'api/eos';
 import { sendMessage } from 'api/message';
-import { getSearchParams } from 'utils/utils';
+import { FormikActions } from 'formik';
+
+type SigninValues = {
+  account: string,
+  password: string,
+}
 
 export const useSignin = () => {
   const { nodes } = networkPreset['eos@junglenet']
@@ -16,7 +21,7 @@ export const useSignin = () => {
     dispatch(appActions.setWorking({ working }))
   }
 
-  const signin = useCallback(async ({ account, password }) => {
+  const signin = useCallback(async ({ account, password }, form: FormikActions<SigninValues>) => {
     setWorking(true)
     try {
       await isValidAccount({ account, password }, nodes)
@@ -25,7 +30,8 @@ export const useSignin = () => {
       dispatch(appActions.setAccount({ account }))
       await navigate(`/me`)
     } catch (err) {
-      alert('It is not valid account')
+      const { message: code, field = 'account' } = err
+      form.setFieldError(field, code)
     }
     setWorking(false)
   }, [])

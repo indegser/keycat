@@ -24,10 +24,10 @@ export const Button = styled('button')`
   }
 
   &[disabled] {
-    background: #eee;
-    color: #ccc;
+    background: #ddd;
+    color: #111;
     cursor: default;
     pointer-events: none;
-    opacity: .3;
+    opacity: .5;
   }
 `;
