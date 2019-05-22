@@ -9,7 +9,7 @@ const { COMMIT_REF } = process.env
 module.exports = (_, { mode = 'development' }) => {
   const PRODUCTION = mode !== 'development'
   const config = {
-    entry: path.resolve(ROOT, 'src', 'client', 'client.tsx'),
+    entry: path.resolve(ROOT, 'src', 'client.tsx'),
     mode,
     devtool: PRODUCTION ? 'source-map' : 'cheap-source-map',
     output: {
