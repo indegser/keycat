@@ -19,6 +19,7 @@ const HelpText = styled.div`
   line-height: 1.3;
   flex: 1 1;
   margin-left: 10px;
+  word-break: break-all;
 
   & * {
     margin: 0;
@@ -26,7 +27,8 @@ const HelpText = styled.div`
 `
 
 const helps = {
-  'signin': `Peekaboo will display Keychain-synced account. If nothing happens click **Register Account** to start using Peekaboo.`
+  'signin': `Peekaboo will display Keychain-synced account. If nothing happens click **Register Account** to start using Peekaboo.`,
+  'register': `Try with account **peekabootest**. Private key is **5J7Kfdje1zFvG2t3f32Jz7U5mBoHbNQMXZWuXh36SPf8TTEDrht**`,
 }
 
 const Help = ({ type }) => {

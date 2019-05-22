@@ -18,7 +18,7 @@ const Register: React.SFC<Props> = () => {
   const account = params.get('account')
 
   return (
-    <CardLayout title="Register Account to Browser">
+    <CardLayout title="Register your EOS Account">
       <Formik
         initialValues={{
           account: account || '',
@@ -32,7 +32,7 @@ const Register: React.SFC<Props> = () => {
               <AccountField plain />
               <PasswordField plain />
             </Fields>
-            <Submit />
+            <Submit help="register" />
           </Form>
         )}
       </Formik>

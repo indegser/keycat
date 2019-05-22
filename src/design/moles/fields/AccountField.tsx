@@ -27,6 +27,7 @@ const AccountField = (props: Props) => {
             {...field}
             type="text"
             id="account"
+            spellCheck="false"
             autoComplete={plain ? "off" : "account"}
             tabIndex={hidden ? -1 : 0}
             autoCorrect="false"
