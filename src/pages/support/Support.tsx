@@ -54,6 +54,7 @@ const Support: React.SFC<Props> = () => {
     <Container>
       <Markdown
         source={markdown}
+        linkTarget="_blank"
       />
     </Container>
   )
