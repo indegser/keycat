@@ -6,7 +6,6 @@ import Info from 'design/icons/info.svg'
 
 const Container = styled.div`
   padding-top: 8px;
-  min-height: 16px;
   color: #d93025;
   font-size: 13px;
   line-height: 16px;

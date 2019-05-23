@@ -13,6 +13,7 @@ const Container = styled.div`
   &[data-hidden="true"] {
     height: 0px;
     overflow: hidden;
+    margin-top: 0px;
   }
 
   margin-top: 12px;

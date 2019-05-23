@@ -8,6 +8,7 @@ import PasswordField from 'design/moles/fields/PasswordField';
 import CardLayout from 'design/layouts/CardLayout';
 import { useTransact } from 'hooks/transactHooks';
 import { Fields } from 'design/atoms/Input';
+import FieldError from 'design/moles/fields/FieldError';
 
 interface Props {
   path: string,
@@ -35,6 +36,8 @@ const Transact: React.SFC<Props> = (props) => {
               <TxPayload payload={payload} />
               <AccountField hidden />
               <PasswordField hidden />
+              <FieldError name="account" />
+              <FieldError name="password" />
             </Fields>
             <Submit />
           </Form>

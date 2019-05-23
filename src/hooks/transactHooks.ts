@@ -8,12 +8,17 @@ export const useTransact = () => {
   const dispatch = useDispatch()
   const { config: { client } } = useStore()
 
-  const transact = useCallback(async (values) => {
+  const transact = useCallback(async (values, form) => {
     dispatch(appActions.setWorking({ working: true }))
-    const result = await eos.transact(values)
+    try {
+      const result = await eos.transact(values)
+      sendMessage('transact', { data: result }, client)
+    } catch (err) {
+      const { message, field } = err
+      form.setFieldError(field, message)
+    }
     dispatch(appActions.setWorking({ working: false }))
 
-    sendMessage('transact', { data: result }, client)
   }, [])
 
   return {

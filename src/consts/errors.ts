@@ -13,15 +13,18 @@ class FormError extends Error {
 
 export const errors = {
   invalidPassword: new FormError(412, 'password'),
-  invalidUsername: new FormError(412, 'account'),
-  UsernameConflict: new FormError(409, 'account'),
+  accountDoesNotExist: new FormError(409, 'account'),
+  usernameConflict: new FormError(412, 'account'),
+  transactionFailed: new FormError(400, 'password'),
 }
 
 export const errorMessages = {
   password: {
     412: `Invalid private key. Try again.`,
+    400: `Transaction failed. Check payload and try again.`,
   },
   account: {
-    409: `Account does not match with private key.`,
+    409: `Cannot find account from EOS network.`,
+    412: `Account does not match with private key.`,
   }
 }
