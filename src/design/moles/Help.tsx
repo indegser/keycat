@@ -12,14 +12,15 @@ const Container = styled.div`
 
 const HelpIconContainer = styled.div`
   color: #313131;
+  margin-top: 1px;
 `
 
 const HelpText = styled.div`
   font-size: 13px;
-  line-height: 1.3;
+  line-height: 1.4;
   flex: 1 1;
   margin-left: 10px;
-  word-break: break-all;
+  word-break: break-word;
 
   & * {
     margin: 0;
@@ -29,6 +30,7 @@ const HelpText = styled.div`
 const helps = {
   'signin': `Peekaboo will display Keychain-synced account. If nothing happens click **Register Account** to start using Peekaboo.`,
   'register': `Try with account **peekabootest**. Private key is **5J7Kfdje1zFvG2t3f32Jz7U5mBoHbNQMXZWuXh36SPf8TTEDrht**`,
+  'keychain': `Whenever Dapp asks you to sign transaction, Peekaboo use a form for Keychain to auto-fill private key and sign transaction with it.`,
 }
 
 const Help = ({ type }) => {
