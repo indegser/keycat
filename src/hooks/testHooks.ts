@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import Peekaboo from 'pkbjs'
 
 export const useTest = (network) => {

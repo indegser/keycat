@@ -13,7 +13,6 @@ type SigninValues = {
 }
 
 export const useSignin = () => {
-  const { nodes } = networkPreset['eos@junglenet']
   const dispatch = useDispatch()
   const { config: { client } } = useStore()
 
@@ -24,7 +23,7 @@ export const useSignin = () => {
   const signin = useCallback(async ({ account, password }, form: FormikActions<SigninValues>) => {
     setWorking(true)
     try {
-      await isValidAccount({ account, password }, nodes)
+      await isValidAccount({ account, password })
       sendMessage('signin', { data: { account } }, client)
       sessionStorage.setItem('account', account)
       dispatch(appActions.setAccount({ account }))
@@ -39,7 +38,7 @@ export const useSignin = () => {
   const register = useCallback(async ({ account, password }, form) => {
     setWorking(true)
     try {
-      await isValidAccount({ account, password }, nodes)
+      await isValidAccount({ account, password })
       await navigate(`/register/keychain?account=${account}`)
     } catch (err) {
       const { message: code, field = 'account' } = err

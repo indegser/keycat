@@ -1,5 +1,5 @@
 export const networkPreset = {
-  'eos@junglenet': {
+  'jungle': {
     blockchain: 'eos',
     nodes: [
       'https://api.jungle.alohaeos.com:443',
@@ -7,7 +7,7 @@ export const networkPreset = {
       'https://jungle.eosio.cr:443',
     ],
   },
-  'eos@mainnet': {
+  'main': {
     blockchain: 'eos',
     nodes: [
       "https://eos.greymass.com",

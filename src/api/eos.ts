@@ -9,7 +9,8 @@ import ecc from 'eosjs-ecc'
 import { networkPreset } from 'consts/consts';
 import { errors } from 'consts/errors';
 
-const { nodes } = networkPreset['eos@junglenet']
+const { nodes } = networkPreset.jungle
+
 const nodeos = {
   get: (api: (arg0: JsonRpc) => any) => (
     nodes.reduce(async (promise, cand, i) => {
@@ -71,7 +72,7 @@ export const getAccounts = async (pk) => {
   }
 }
 
-export const isValidAccount = async ({ account, password }, nodes) => {
+export const isValidAccount = async ({ account, password }) => {
   const accounts = await getAccounts(password)
 
   if (!accounts.includes(account)) {

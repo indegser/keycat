@@ -4,17 +4,20 @@ import Favicon from 'design/icons/favicon.svg'
 
 const Container = styled.div`
   position: relative;
-  color: #222;
   padding: var(--padding-x);
   padding-top: calc(var(--padding-x) * 2);
   font-size: 14px;
   text-align: center;
+  svg {
+    fill: var(--primary-color);
+  }
 `
-
+  
 const Title = styled.div`
-  font-size: 22px;
-  font-weight: bold;
+  color: #222;
+  font-size: 16px;
   margin-top: 10px;
+  letter-spacing: .5px;
 `
 
 interface Props {
@@ -25,7 +28,7 @@ const StatusBar: React.SFC<Props> = ({ title }) => {
 
   return (
     <Container>
-      <Favicon width={20} />
+      <Favicon width={100} />
       <Title>
         {title}
       </Title>

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Markdown from 'react-markdown'
 import HelpIcon from 'design/icons/help.svg'
+import { useStore } from 'store/store';
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -28,13 +29,14 @@ const HelpText = styled.div`
 `
 
 const helps = {
-  'signin': `Peekaboo will display Keychain-synced account. If nothing happens click **Register Account** to start using Peekaboo.`,
-  'register': `Try with account **peekabootest**. Private key is **5J7Kfdje1zFvG2t3f32Jz7U5mBoHbNQMXZWuXh36SPf8TTEDrht**`,
-  'keychain': `Whenever Dapp asks you to sign transaction, Peekaboo use a form for Keychain to auto-fill private key and sign transaction with it.`,
+  'signin': `{{APP}} will display Keychain-synced account. If nothing happens click **Register Account** to start using {{APP}}.`,
+  'register': `Try with account **kitketkitket**. Private key is **5JMyAG53UMb9Nz1becupF5so9M3RtUQKtpLFN84U4qitUfsaZ6M**`,
+  'keychain': `Whenever Dapp asks you to sign transaction, {{APP}} use a form for Keychain to auto-fill private key and sign transaction with it.`,
 }
 
 const Help = ({ type }) => {
   const text = helps[type]
+  const { app: { name } } = useStore()
 
   return (
     <Container>
@@ -42,7 +44,7 @@ const Help = ({ type }) => {
         <HelpIcon />
       </HelpIconContainer>
       <HelpText>
-        <Markdown source={text} />
+        <Markdown source={text.replace(/{{APP}}/g, name)} />
       </HelpText>
     </Container>
   )

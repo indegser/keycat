@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Markdown from 'react-markdown'
 import { useSupport } from 'hooks/supportHooks';
+import { useStore } from 'store/store';
 
 const Container = styled.div`
   max-width: 540px;
@@ -10,7 +11,6 @@ const Container = styled.div`
   font-size: 16px;
   line-height: 1.7;
   font-weight: 400;
-  letter-spacing: -0.021em;
   color: #333;
 
   h1, h2 {
@@ -43,6 +43,7 @@ interface Props {
 }
 
 const Support: React.SFC<Props> = () => {
+  const { app: { name } } = useStore()
   const { markdown, fetchMarkdown } = useSupport()
   useEffect(() => {
     fetchMarkdown()
@@ -53,7 +54,7 @@ const Support: React.SFC<Props> = () => {
   return (
     <Container>
       <Markdown
-        source={markdown}
+        source={markdown.replace(/{{APP}}/g, name)}
         linkTarget="_blank"
       />
     </Container>

@@ -2,7 +2,6 @@ import {
   handleActions,
   createAction,
 } from 'redux-actions';
-import { networkPreset } from 'consts/consts';
 import { getSearchParams } from 'utils/utils';
 
 export const configActions = {
@@ -12,26 +11,10 @@ export const configActions = {
 const params = getSearchParams()
 const initialState = {
   client: params.get('client'),
+  network: params.get('network') || 'jungle',
 }
 
-
-export type IConfigState = {
-  client: string,
-}
+export type IConfigState = typeof initialState
 
 export const configReducer = handleActions<IConfigState>({
-  // [configActions.set.toString()]: (state, { payload }) => {
-  //   const { network, port } = payload;
-  //   const { name, nodes } = network;
-  //   const preset = networkPreset[name];
-  //   return {
-  //     ...state,
-  //     port,
-  //     network: preset ? { ...preset, name } : {
-  //       blockchain: name.split('@')[0],
-  //       name,
-  //       nodes,
-  //     }
-  //   }
-  // },
 }, initialState);

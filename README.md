@@ -11,3 +11,4 @@ Web Wallet using browser's cloud keychain.
 | xafe11111111 | 5JbhPaE6GWs2XqFsjTvvdcjLb5CdVDSSrgypudog54e1muKQbjn |
 | abcdefghijk1 | 5KV78xxPvL7jYStndAxY4W8b9C91HUpTos7FMyAXAHrhYaHRTc8 |
 | peekabootest | 5J7Kfdje1zFvG2t3f32Jz7U5mBoHbNQMXZWuXh36SPf8TTEDrht |
+| kitketkitket | 5JMyAG53UMb9Nz1becupF5so9M3RtUQKtpLFN84U4qitUfsaZ6M |

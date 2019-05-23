@@ -12,7 +12,7 @@ const SigninAccount = (props) => {
   const { signin } = useSignin()
 
   return (
-    <CardLayout title="Sign in with Peekaboo">
+    <CardLayout title={`Sign in`}>
       <Formik
         initialValues={{
           account: '',

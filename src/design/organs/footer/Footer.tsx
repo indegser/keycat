@@ -8,10 +8,9 @@ const Container = styled.footer`
   line-height: 18px;
   margin-top: 16px;
   max-width: var(--max-width);
-  margin: 0 auto;
   color: #666;
   padding: 0 var(--padding-x);
-  margin-top: 16px;
+  margin: 16px auto;
   box-sizing: border-box;
 `
 const GitHubLink = styled.a`
