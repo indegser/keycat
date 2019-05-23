@@ -16,3 +16,12 @@ export const errors = {
   invalidUsername: new FormError(412, 'account'),
   UsernameConflict: new FormError(409, 'account'),
 }
+
+export const errorMessages = {
+  password: {
+    412: `Invalid private key. Try again.`,
+  },
+  account: {
+    409: `Account does not match with private key.`,
+  }
+}

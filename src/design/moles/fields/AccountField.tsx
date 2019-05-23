@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Field } from 'formik'
+import { Field, ErrorMessage } from 'formik'
 import { Input } from 'design/atoms/Input'
+import FieldError from './FieldError';
 
 interface Props {
   hidden?: boolean,
@@ -35,6 +36,9 @@ const AccountField = (props: Props) => {
           />
         )}
       />
+      {!hidden && (
+        <FieldError name="account" />
+      )}
     </Container>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Field } from 'formik'
 import { Input } from 'design/atoms/Input'
+import FieldError from './FieldError';
 
 interface Props {
   hidden?: boolean,
@@ -34,6 +35,9 @@ const PasswordField: React.SFC<Props> = ({ hidden, plain }) => {
           />
         )}
       />
+      {!hidden && (
+        <FieldError name="password" />
+      )}
     </Container>
   )
 }
