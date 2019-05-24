@@ -1,12 +1,12 @@
-import { useCallback, useState } from 'react';
-import Peekaboo from 'pkbjs'
+import { useCallback, useState } from 'react'
+import Keycat from 'keycatjs'
 
 export const useTest = (network) => {
   const [account, setAccount] = useState(null)
   const [txs, setTxs] = useState([])
 
   const signin = useCallback(async () => {
-    const pkb = new Peekaboo({ network })
+    const pkb = new Keycat({ network })
 
     try {
       const { account } = await pkb.signin()
@@ -17,7 +17,7 @@ export const useTest = (network) => {
   }, [network])
 
   const transact = useCallback(async () => {
-    const pkb = new Peekaboo({ network })
+    const pkb = new Keycat({ network })
     const payload = {
       actions: [{
         account: 'eosio.token',

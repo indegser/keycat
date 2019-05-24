@@ -30,7 +30,7 @@ const HelpText = styled.div`
 
 const helps = {
   'signin': `{{APP}} will display Keychain-synced account. If nothing happens click **Register Account** to start using {{APP}}.`,
-  'register': `Try with account **kitketkitket**. Private key is **5JMyAG53UMb9Nz1becupF5so9M3RtUQKtpLFN84U4qitUfsaZ6M**`,
+  'register': `Try with account **junglekeycat**. Private key is **5KRv8aLAHDjdFwNG8gYa2n2Esax7nZ2dDGC8wYgEVtDjMXXXH45**`,
   'keychain': `Whenever Dapp asks you to sign transaction, {{APP}} use a form for Keychain to auto-fill private key and sign transaction with it.`,
 }
 
