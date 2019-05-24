@@ -1,4 +1,4 @@
-# peekaboo
+# Keycat
 Web Wallet using browser's cloud keychain.
 
 # Test accounts
