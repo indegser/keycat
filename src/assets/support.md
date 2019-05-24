@@ -1,4 +1,4 @@
-# {{APP}} [](#peekaboo)
+# {{APP}} [](#keycat)
 {{APP}}는 브라우저 또는 운영체제의 Keychain 기술로 사용자의 Private key를 저장하지 않고도 EOS Dapp을 사용할 수 있게 해주는 서비스입니다.
 
 # Concept [](#concept)

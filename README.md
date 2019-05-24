@@ -1,6 +1,8 @@
 # Keycat
 Web Wallet using browser's cloud keychain.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/73d9e1e5-9086-47df-aaba-8ac7053d4eb8/deploy-status)](https://app.netlify.com/sites/keycat/deploys)
+
 # Test accounts
 
 | Identifier   | Password                                            |
