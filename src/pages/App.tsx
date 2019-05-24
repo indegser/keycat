@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { media } from 'design/utils';
-import { Router } from '@reach/router';
+import { Router, Location } from '@reach/router';
 import Signin from './signin/Signin';
 import Register from './register/Register';
 import Keychain from './register/Keychain';
@@ -10,6 +10,7 @@ import Transact from './transact/Transact';
 import Test from './__test/Test';
 import Me from './me/Me';
 import Support from './support/Support';
+import { updatePageView } from 'utils/ga';
 
 const AppContainer = styled.div`
   display: flex;
@@ -43,6 +44,11 @@ const App = () => {
           <Register path="/register" />
           <Keychain path="/register/keychain" />
         </Router>
+        <Location>
+          {({ location }) => {
+            updatePageView(location.pathname)
+          }}
+        </Location>
       </AppContainer>
     </>
   )

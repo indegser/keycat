@@ -21,5 +21,18 @@
     <script crossorigin src="https://unpkg.com/react@16.8/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16.8/umd/react-dom.development.js"></script>
   <% } %>
+  <% if(options.PRODUCTION) { %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+      window.GA_MEASUREMENT_ID = 'UA-121560623-3'
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121560623-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-121560623-3');
+    </script>
+  <% } %>
 </body>
 </html>
