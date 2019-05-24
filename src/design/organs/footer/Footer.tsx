@@ -59,7 +59,7 @@ const Footer = () => {
           Open source project
         </div>
         <GitHubLink
-          href="https://github.com/indegser/peekaboo"
+          href="https://github.com/EOSDAQ/keycat"
           target="_blank"
           rel="noreferrer noopener"
         >
