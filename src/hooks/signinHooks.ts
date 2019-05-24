@@ -1,11 +1,10 @@
 import { navigate } from '@reach/router'
-import { networkPreset } from 'consts/consts';
 import { useCallback } from 'react';
 import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
-import { isValidAccount } from 'api/eos';
 import { sendMessage } from 'api/message';
 import { FormikActions } from 'formik';
+import { useEos } from './eosHooks';
 
 type SigninValues = {
   account: string,
@@ -15,6 +14,7 @@ type SigninValues = {
 export const useSignin = () => {
   const dispatch = useDispatch()
   const { config: { client } } = useStore()
+  const { isValidAccount } = useEos()
 
   const setWorking = (working) => {
     dispatch(appActions.setWorking({ working }))

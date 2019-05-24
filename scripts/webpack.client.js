@@ -27,7 +27,7 @@ module.exports = (_, { mode = 'development' }) => {
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
         COMMIT_REF,
-        ORIGIN: PRODUCTION ? 'https://eos-peekaboo.netlify.com' : 'http://localhost:3000',
+        ORIGIN: PRODUCTION ? 'https://eos-peekaboo.netlify.com' : 'http://localhost:3030',
       }),
       new CopyPlugin([
         { from: path.resolve(ROOT, 'static'), to: path.resolve(ROOT, 'public')}
@@ -61,7 +61,7 @@ module.exports = (_, { mode = 'development' }) => {
     config.devServer = {
       hot: true,
       host: '0.0.0.0',
-      port: 3000,
+      port: 3030,
       historyApiFallback: true,
       contentBase: path.resolve(ROOT, 'public'),
     }
