@@ -10,11 +10,12 @@ export const configActions = {
 }
 
 const { nodes, network = 'main', client } = getSearchParams()
+const nodeList = nodes || networkPreset[network as string]
 
 const initialState = {
   client,
   network: nodes ? 'custom' : network,
-  nodes: nodes || networkPreset[network as string],
+  nodes: Array.isArray(nodeList) ? nodeList : [nodeList],
 }
 
 export type IConfigState = typeof initialState
