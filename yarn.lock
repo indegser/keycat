@@ -2849,10 +2849,10 @@ just-curry-it@^3.1.0:
   resolved "https://registry.yarnpkg.com/just-curry-it/-/just-curry-it-3.1.0.tgz#ab59daed308a58b847ada166edd0a2d40766fbc5"
   integrity sha512-mjzgSOFzlrurlURaHVjnQodyPNvrHrf1TbQP2XU9NSqBtHQPuHZ+Eb6TAJP7ASeJN9h9K0KXoRTs8u6ouHBKvg==
 
-keycatjs@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/keycatjs/-/keycatjs-0.1.0.tgz#087d0b9968acd36b7bd9b24d65f157c5194ced4b"
-  integrity sha512-Ccfbot+JMBNyscYN70etjsaloVO7ruDI5OG2UnBnHku1yfbeHKQx5rrUY9SgBCwD7ZKu4EMLkTa+p3XuhF5PIQ==
+keycatjs@0.2:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/keycatjs/-/keycatjs-0.2.0.tgz#1e7b6920afc93cfb740e90dc521c0f97672a9ca9"
+  integrity sha512-/V7hW9dP+gXanxcZgGL4aFZyL5j8Vfj7A8Iybz58Cuhivw6E8K+ujjZL2WwgxPgxteB1/4FKbVzenV+GlIF07g==
   dependencies:
     query-string "^6.5.0"
 
