@@ -5,7 +5,7 @@ const keycat = new Keycat({
   keycatOrigin: 'http://localhost:3030'
 })
 
-export const useTest = (network) => {
+export const useTest = () => {
   const [account, setAccount] = useState(null)
   const [txs, setTxs] = useState([])
 
@@ -16,7 +16,7 @@ export const useTest = (network) => {
     } catch (err) {
       console.log(err)
     }
-  }, [network])
+  }, [])
 
   const transact = useCallback(async () => {
     const payload = {

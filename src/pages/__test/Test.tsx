@@ -31,28 +31,16 @@ interface Props {
 }
 
 const Test: React.SFC<Props> = () => {
-  const [network, setNetwork] = useState('jungle')
   const {
     account,
     transact,
     receipts,
     signin,
-  } = useTest(network)
-
- 
-  const handleNetworkChange = (e) => {
-    const { value } = e.target
-    setNetwork(value)
-  }
+  } = useTest()
 
   return (
     <Container>
       <div>
-        <label>Network</label> 
-        <select value={network} onChange={handleNetworkChange}>
-          <option value="jungle">Jungle</option>
-          <option value="main">Main</option>
-        </select>
         <button onClick={signin}>
           Signin
         </button>
