@@ -1,1 +1,5 @@
+# These rules will change if you change your site’s custom domains or HTTPS settings
 /* /index.html 200
+
+# Redirect default Netlify subdomain to primary domain
+https://keycat.netlify.com/* https://www.keycat.co/:splat 301!

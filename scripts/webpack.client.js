@@ -4,7 +4,10 @@ const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 const ROOT = path.resolve(__dirname, '..')
-const { COMMIT_REF = '9f29791327d93538a1ab67be02efcc3e33e173c5' } = process.env
+const {
+  ORIGIN = 'http://localhost:3030',
+  COMMIT_REF = '9f29791327d93538a1ab67be02efcc3e33e173c5',
+} = process.env
 
 module.exports = (_, { mode = 'development' }) => {
   const PRODUCTION = mode !== 'development'
@@ -27,7 +30,7 @@ module.exports = (_, { mode = 'development' }) => {
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
         COMMIT_REF,
-        ORIGIN: PRODUCTION ? 'https://eos-peekaboo.netlify.com' : 'http://localhost:3030',
+        ORIGIN,
       }),
       new CopyPlugin([
         { from: path.resolve(ROOT, 'static'), to: path.resolve(ROOT, 'public')}
