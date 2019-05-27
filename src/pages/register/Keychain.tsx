@@ -26,7 +26,7 @@ const Desc = styled.div`
 `
 
 const Keychain: React.SFC<Props> = () => {
-  const account = getSearchParams().get('account')
+  const { account } = getSearchParams()
   const { config: { client } } = useStore()
 
   const handleClick = () => {

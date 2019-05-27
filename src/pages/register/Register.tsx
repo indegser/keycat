@@ -14,8 +14,7 @@ interface Props {
 
 const Register: React.SFC<Props> = () => {
   const { register } = useSignin()
-  const params = getSearchParams()
-  const account = params.get('account')
+  const { account } = getSearchParams()
 
   const getDisabled = ({ account, password }) => (
     !account || !password

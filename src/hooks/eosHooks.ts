@@ -61,9 +61,8 @@ export const useEos = () => {
   }
   
   const getAccounts = async (pk) => {
-    const pub = await getPublicKey(pk)
-  
     try {
+      const pub = await getPublicKey(pk)
       const { account_names: accounts } = await nodeos.get(rpc => rpc.history_get_key_accounts(pub))
       if (accounts.length === 0) throw ''
   
@@ -75,7 +74,6 @@ export const useEos = () => {
   
   const isValidAccount = async ({ account, password }) => {
     const accounts = await getAccounts(password)
-  
     if (!accounts.includes(account)) {
       throw errors.usernameConflict
     }
