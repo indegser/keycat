@@ -2,7 +2,8 @@ import { useCallback, useState } from 'react'
 import Keycat from 'keycatjs'
 
 const keycat = new Keycat({
-  keycatOrigin: 'http://localhost:3030'
+  network: 'jungle',
+  // keycatOrigin: 'http://localhost:3030'
 })
 
 export const useTest = () => {
