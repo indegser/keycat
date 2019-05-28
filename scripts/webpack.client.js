@@ -38,6 +38,7 @@ module.exports = (_, { mode = 'development' }) => {
         'object-src': `'none'`,
         'script-src': [
           `'self'`,
+          `'strict-dynamic'`,
           `https://fonts.googleapis.com`,
           `https://www.googletagmanager.com`,
         ],

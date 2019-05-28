@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Favicon from 'design/icons/favicon.svg'
+import NetworkStat from './NetworkStat';
 
 const Container = styled.div`
   position: relative;
@@ -25,9 +26,9 @@ interface Props {
 }
 
 const StatusBar: React.SFC<Props> = ({ title }) => {
-
   return (
     <Container>
+      <NetworkStat />
       <Favicon width={100} />
       <Title>
         {title}
