@@ -3,8 +3,19 @@ Web Wallet using browser's cloud keychain.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/73d9e1e5-9086-47df-aaba-8ac7053d4eb8/deploy-status)](https://app.netlify.com/sites/keycat/deploys)
 
-# Test accounts
+# Development
+In case you are using your own EOS nodeos (running on localhost).
+Clone this repository and try below.
 
+```
+  yarn install
+  yarn start
+```
+
+Currently there's no option for keycat dev server. e.g) port, host
+We will provide it as soon as possible.
+
+# Test accounts (EOS Jungle)
 | Identifier   | Password                                            |
 | ------------ | --------------------------------------------------- |
 | lebronjames2 | 5JFJ5irexsvkmLW892DN3LcZmUYoCHm4ES7XD4zGGL3Y4mvLVU2 |
