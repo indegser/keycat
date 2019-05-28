@@ -19,5 +19,14 @@ export const networkPreset = {
   ],
 };
 
+export const getDefaultNetwork = () => {
+  switch (BRANCH) {
+    case 'eos-jungle':
+      return 'jungle'
+    default:
+      return 'main' 
+  }
+}
+
 export const isBrowser = (typeof window !== 'undefined')
 export const inputHeight = 56

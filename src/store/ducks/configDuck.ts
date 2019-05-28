@@ -3,13 +3,13 @@ import {
   createAction,
 } from 'redux-actions';
 import { getSearchParams } from 'utils/utils';
-import { networkPreset } from 'consts/consts';
+import { networkPreset, getDefaultNetwork } from 'consts/consts';
 
 export const configActions = {
   set: createAction('config@set'),
 }
 
-const { nodes, network = 'main', client } = getSearchParams()
+const { nodes, network = getDefaultNetwork(), client } = getSearchParams()
 const nodeList = nodes || networkPreset[network as string]
 const initialState = {
   client,
