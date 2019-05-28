@@ -11,7 +11,7 @@ _*Keychain: Major browsers (Chrome, Safari, Firefox) and OS providers (Apple, Go
     2. Import EOS account to Scatter
     3. Activate Scatter
     4. Visit DApp's website
-    5. Log-in
+    5. Login
   
   However, with Keycat, you can log in with minimized steps:
     1. Import EOS account at DApp's website
