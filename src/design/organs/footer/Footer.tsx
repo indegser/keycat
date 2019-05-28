@@ -63,7 +63,7 @@ const Footer = () => {
           <GitHubContainer>
             <Github />
             <GitHash>
-              {`@${window.COMMIT_REF.slice(0, 7)}`}
+              {`@${COMMIT_REF.slice(0, 7)}`}
             </GitHash>
           </GitHubContainer>
         </GitHubLink>

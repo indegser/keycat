@@ -3,14 +3,17 @@ const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const CspPlugin = require('csp-html-webpack-plugin')
+const git = require('./git')
 
 const ROOT = path.resolve(__dirname, '..')
 const {
   ORIGIN = 'http://localhost:3030',
-  COMMIT_REF = '9f29791327d93538a1ab67be02efcc3e33e173c5',
 } = process.env
 
-module.exports = (_, { mode = 'development' }) => {
+module.exports = async (_, { mode = 'development' }) => {
+  const COMMIT_REF = process.env.COMMIT_REF || await git('rev-parse', 'HEAD')
+  const BRANCH = process.env.BRANCH || await git('rev-parse', '--abbrev-ref', 'HEAD')
+
   const PRODUCTION = mode !== 'development'
   const config = {
     entry: path.resolve(ROOT, 'src', 'client.tsx'),
@@ -30,8 +33,11 @@ module.exports = (_, { mode = 'development' }) => {
       new HtmlPlugin({
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
-        COMMIT_REF,
         ORIGIN,
+      }),
+      new webpack.DefinePlugin({
+        COMMIT_REF: JSON.stringify(COMMIT_REF),
+        BRANCH: JSON.stringify(BRANCH),
       }),
       new CspPlugin({
         'base-uri': `'self'`,
