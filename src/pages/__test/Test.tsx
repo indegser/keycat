@@ -65,10 +65,6 @@ const Test: React.SFC<Props> = () => {
     to: 'transfer-token',
     onClick: transfer,
   }, {
-    title: 'Buy RAM',
-    to: 'buy-ram',
-    onClick: buyram,
-  }, {
     title: 'Vote proxy',
     to: 'vote-proxy',
     onClick: vote,

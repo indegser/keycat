@@ -28,6 +28,7 @@ export const useTest = () => {
         const { transaction_id: id, processed } = await keycat.transact(account, payload)
         const { block_time: blockTime } = processed
         setTxs([{ id, type: 'transfer', blockTime }, ...txs])
+        alert('Great! Transaction success')
       } catch (err) {
         console.log(err)
       }
@@ -50,11 +51,13 @@ export const useTest = () => {
   const buyram = transact({
     actions: [{
       account: 'eosio',
-      name: 'buyrambytes',
+      name: 'delegatebw',
       data: {
-        payer: account,
-        bytes: '10',
+        from: account,
         receiver: account,
+        stake_cpu_quantity: '1.0000 EOS',
+        stake_net_quantity: '1.0000 EOS',
+        transfer: 0,
       },
     }]
   })
