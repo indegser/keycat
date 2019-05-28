@@ -38,7 +38,7 @@ const App = () => {
         <Router>
           <Signin path="/" />
           <Me path="/me" />
-          <Test path="/__test" />
+          <Test path="/playground" />
           <Support path="/support" />
           <Transact path="/transact" />
           <Register path="/register" />
