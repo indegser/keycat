@@ -21,9 +21,15 @@ const LinkTitle = styled.div`
   font-weight: 800;
 `
 
-const FieldLink = ({ title, to }) => {
+interface Props {
+  title: string,
+  to: string,
+  onClick?: (e: any) => any,
+}
+
+const FieldLink: React.SFC<Props> = ({ title, to, onClick }) => {
   return (
-    <Link to={to}>
+    <Link to={to} onClick={onClick}>
       <LinkStyled>
         <LinkTitle>
           {title}

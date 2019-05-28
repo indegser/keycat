@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTest } from 'hooks/testHooks';
+import CardLayout from 'design/layouts/CardLayout';
+import { Fields } from 'design/atoms/Input';
+import FieldLink from 'design/moles/FieldLink';
 
 const Container = styled.div`
   padding: 20px;
@@ -16,14 +19,31 @@ const Container = styled.div`
 `
 
 const Account = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
+  height: 56px;
+  line-height: 56px;
+`
+
+const History = styled.div`
+  font-size: 12px;
+  word-break: break-all;
+  margin-top: 30px;
+  font-family: var(--monospace);
+
+  h2 {
+    font-size: 14px;
+  }
 `
 
 const Receipt = styled.div`
-  font-size: 12px;
-  word-break: break-all;
-  font-family: var(--monospace);
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e6e6e6;
+
+  a {
+    margin-left: 4px;
+  }
 `
 
 interface Props {
@@ -33,41 +53,55 @@ interface Props {
 const Test: React.SFC<Props> = () => {
   const {
     account,
-    transact,
+    transfer,
+    vote,
+    buyram,
     receipts,
     signin,
   } = useTest()
 
+  const links = account ? [{
+    title: 'Transfer token',
+    to: 'transfer-token',
+    onClick: transfer,
+  }, {
+    title: 'Buy RAM',
+    to: 'buy-ram',
+    onClick: buyram,
+  }, {
+    title: 'Vote proxy',
+    to: 'vote-proxy',
+    onClick: vote,
+  }] : []
+
   return (
-    <Container>
-      <div>
-        <button onClick={signin}>
-          Signin
-        </button>
-      </div>
-      <div>
-        <div>Account</div>
-        {account && <Account>{account}</Account>}
-      </div>
-      {account && (
-        <div>
-          <div>Transact</div>
-          <button onClick={transact}>
-            Transact
-          </button>
-        </div>
-      )}
-      {receipts.length > 0 && (
-        <div>
-          <div>Receipts</div>
-          <div>
-            {receipts.map(id => (
-              <Receipt key={id}>{id}</Receipt>
-            ))}
-          </div>
-        </div>
-      )}
-    </Container>
+    <CardLayout title="Let's play with Keycat">
+      <Fields>
+        {account
+          ? <Account>Hi {account}</Account>
+          : <FieldLink to="/signin" title="Sign in to Jungle net" onClick={signin} />
+        }
+        {links.map((link) => {
+          return (
+            <FieldLink
+              key={link.to}
+              {...link}
+            />
+          )
+        })}
+        <History>
+          <h2>History</h2>
+          {receipts.map(({ id, type, blockTime }) => (
+            <Receipt key={id}>
+              {id}
+              <a href={`https://jungle.bloks.io/transaction/${id}`} target="_blank" rel="noopener noreferrer">
+                Detail
+              </a>
+            </Receipt>
+          ))}
+        </History>
+      </Fields>
+    </CardLayout>
   )
 }
 
