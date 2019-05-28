@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const CspPlugin = require('csp-html-webpack-plugin')
 
 const ROOT = path.resolve(__dirname, '..')
 const {
@@ -31,6 +32,24 @@ module.exports = (_, { mode = 'development' }) => {
         PRODUCTION,
         COMMIT_REF,
         ORIGIN,
+      }),
+      new CspPlugin({
+        'base-uri': `'self'`,
+        'object-src': `'none'`,
+        'script-src': [
+          `'self'`,
+          `https://fonts.googleapis.com`,
+          `https://www.googletagmanager.com`,
+        ],
+        'style-src': [
+          `'self'`,
+          `https://fonts.googleapis.com`,
+          `'unsafe-inline'`,
+        ],
+      }, {
+        nonceEnabled: {
+          'style-src': false,
+        }
       }),
       new CopyPlugin([
         { from: path.resolve(ROOT, 'static'), to: path.resolve(ROOT, 'public')}
