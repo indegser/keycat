@@ -44,10 +44,7 @@ const LinkContent = styled.div`
 `
 
 const links = [{
-  name: 'How-to-use',
-  link: 'https://youtube.com',
-}, {
-  name: 'Concept',
+  name: 'About Keycat',
   link: '/support',
 }]
 

@@ -1,25 +1,29 @@
-# {{APP}} [](#keycat)
-{{APP}}는 브라우저 또는 운영체제의 Keychain 기술로 사용자의 Private key를 저장하지 않고도 EOS Dapp을 사용할 수 있게 해주는 서비스입니다.
+# What is Keycat? [](#keycat)
+Keycat is a browser-based wallet, supported by the *Keychain technology. Once inserted in the very beginning, private key is encrypted and stored in the browser. Therefore, Scatter is no longer needed.
 
-# Concept [](#concept)
-Scatter, Hardware and Mobile wallets that you use to connect with Dapp are safe but a little bit inconvenient. It has to be installed or carried-on. 
-{{APP}} started as a solution to solve those inconviences that EOS holders are experiencing but used to it.
+_*Keychain: Major browsers (Chrome, Safari, Firefox) and OS providers (Apple, Google) offer a security technology called Keychain. When you try to access a website or email account, you may have seen an pop-up option to save your password in the browser (usually, the pop-up shows up on the top right corner of the browser.) Here, the Keychain technology is used for storing your password (private key) in the browser._
 
-We believe the only place those problems don't surface is Web.
-Wallet-as-Webpage solve every problem existing wallets have. But it is unsafe.
-Webpage does not own private storage unlike mobile or desktop apps. Does it cannot protect user's private key.
+# Why Keycat? [](#concept)
+1. **Minimized login process (without Scatter)**
 
-Long story short, {{APP}} is a web(page) wallet. So, how does {{APP}} save user's private key?
+  To access an EOS-based DApp through Scatter on web, you need to go through the following steps:
+    1. Download Scatter
+    2. Import EOS account to Scatter
+    3. Activate Scatter
+    4. Visit DApp's website
+    5. Log-in
+  
+  However, with Keycat, you can log in with minimized steps:
+    1. Import EOS account at DApp's website
+    2. Login
+  
+2. **Top security level**
 
-Major browsers(Chrome, Safari, Firefox) and OS providers(Apple, Google) has a security technology called **Keychain**.
-Keychain stores your passwords and account information and reduces the number of passwords you have to remember and manage.
-When you access a website, email account, network server, or other password-protected item, you may be given the option to remember or save the password. If you choose to save the password, it’s saved in your keychain so you don’t have to remember or type your password every time.
+  Your data (EOS account and private key) is securely encrypted and stored in the browser. No one else can access or read this data, either in transit or storage. Thus, the security level is equivalent to major browser providers like Google (for Chrome) or Apple (for Safari).
 
-{{APP}} has a specific sign in page which handles EOS account as email and private key as password. After signing in, Keychain will ask user to save account information.
-Once user choose to save it, data is encrypted and synced across all devices your Google account is logged-in or your iCloud account is logged-in.
-Thus, If you signed in and choose to save in Desktop Safari, you can access it in your iPhone Safari.
+3. **Sync across multiple devices**
 
-Whenever Dapp asks you to sign transaction, {{APP}} use a form for Keychain to auto-fill private key and sign transaction with it.
+  Once saved in the browser, your date is encrypted and synced across all devices through your Google account or iCloud account. For example, after you save data in your web browser on desktop, you will also be able to access through the same browser on your mobile.
 
 # Frequently asked questions [](#ask)
 
