@@ -11,7 +11,6 @@ export const configActions = {
 
 const { nodes, network = 'main', client } = getSearchParams()
 const nodeList = nodes || networkPreset[network as string]
-
 const initialState = {
   client,
   network: nodes ? 'custom' : network,
