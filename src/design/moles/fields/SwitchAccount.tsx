@@ -120,7 +120,9 @@ const SwitchAccount = ({ account }) => {
   return (
     <Container data-with-account={!!account}>
       <InputContainer>
-        <Field name="account" />
+        <Field name="account" render={({ field }) => (
+          <input {...field} autoComplete="account" />
+        )} />
       </InputContainer>
       <AccountContainer data-with-account={!!account}>
         <Identicon account={account} />
