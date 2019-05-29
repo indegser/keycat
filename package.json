@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "caver-js": "^0.8.5-3",
     "copy-webpack-plugin": "^5.0.3",
     "csp-html-webpack-plugin": "^3.0.1",
     "eosjs": "^20.0.0-beta3",
