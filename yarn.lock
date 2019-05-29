@@ -1051,6 +1051,11 @@ camelize@^1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
+canvas-renderer@~2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/canvas-renderer/-/canvas-renderer-2.1.1.tgz#d91fe9511ab48056ff9fa8a04514bede76535f55"
+  integrity sha512-/V0XetN7s1Mk3NO7x2wxPZYv0pLMQtGAhecuOuKR88beiYCUle1AbCcFZNLu+4NVzi9RVHS0rXtIgzPEaKidLw==
+
 caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
@@ -3247,6 +3252,13 @@ it-each@^0.4.0:
   integrity sha512-fbOxSUiOByQnkgoFUEKPfzAuoUZ0mQRAXdWWsfI53gMJZ2oyhPcJBOCFx8yuMM36yP6OUUL3LgilYEqBiSACmQ==
   dependencies:
     dot-notes "3.1.1"
+
+jdenticon@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jdenticon/-/jdenticon-2.1.1.tgz#f9288e87b3466e2c5f05948c68db58e1c9e1b800"
+  integrity sha512-bFD210JMaK2RMHGSkdDXqdQzasMrVIGDfxUMXD/Uwq2t7g9Njb4T6kms5TrocsLU0CDmQCoB0laGJ6JETiprsg==
+  dependencies:
+    canvas-renderer "~2.1.1"
 
 js-sha3@0.5.7:
   version "0.5.7"

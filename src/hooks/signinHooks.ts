@@ -5,6 +5,7 @@ import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { FormikActions } from 'formik';
 import { useEos } from './eosHooks';
+import { useKlaytn } from './klaytnHooks';
 
 type SigninValues = {
   account: string,
@@ -13,8 +14,8 @@ type SigninValues = {
 
 export const useSignin = () => {
   const dispatch = useDispatch()
-  const { config: { client } } = useStore()
-  const { isValidAccount } = useEos()
+  const { config: { client, blockchain } } = useStore()
+  const { isValidAccount } = blockchain === 'eos' ? useEos() : useKlaytn()
 
   const setWorking = (working) => {
     dispatch(appActions.setWorking({ working }))

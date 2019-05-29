@@ -10,11 +10,11 @@ export const configActions = {
 }
 
 const { nodes, network = getDefaultNetwork(), client } = getSearchParams()
-const nodeList = nodes || networkPreset[network as string]
+
 const initialState = {
   client,
-  network: nodes ? 'custom' : network,
-  nodes: Array.isArray(nodeList) ? nodeList : [nodeList],
+  blockchain: localStorage.getItem('blockchain') || 'eos',
+  network,
 }
 
 export type IConfigState = typeof initialState
