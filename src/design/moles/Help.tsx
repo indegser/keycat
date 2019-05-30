@@ -21,7 +21,7 @@ const HelpText = styled.div`
   line-height: 1.4;
   flex: 1 1;
   margin-left: 10px;
-  word-break: break-word;
+  word-break: break-all;
 
   & * {
     margin: 0;
@@ -29,14 +29,30 @@ const HelpText = styled.div`
 `
 
 const helps = {
-  'signin': `{{APP}} will display Keychain-synced account. If nothing happens click **Register Account** to start using {{APP}}.`,
-  'register': `Try with account **junglekeycat**. Private key is **5KRv8aLAHDjdFwNG8gYa2n2Esax7nZ2dDGC8wYgEVtDjMXXXH45**`,
-  'keychain': `Whenever Dapp asks you to sign transaction, {{APP}} use a form for Keychain to auto-fill private key and sign transaction with it.`,
+  'signin': `Keycat will display Keychain-synced account. If nothing happens click **Register Account** to start using Keycat.`,
+  'register': `Try with account **{{ACCOUNT}}**. Private key is **{{PRIVATEKEY}}**`,
+  'keychain': `Whenever Dapp asks you to sign transaction, Keycat use a form for Keychain to auto-fill private key and sign transaction with it.`,
+}
+
+const sampleAccount = {
+  eos: {
+    account: `junglekeycat`,
+    privateKey: `5KRv8aLAHDjdFwNG8gYa2n2Esax7nZ2dDGC8wYgEVtDjMXXXH45`,
+  },
+  klaytn: {
+    account: `0xe89c7bd3297f1c5faa45a1060ee3ecae0765cccc`,
+    privateKey: `0xa334ca143e822c38d57a730d90cfc7f861e9aac1581907f569a9333f7a0a5f07`
+  }
 }
 
 const Help = ({ type }) => {
   const text = helps[type]
-  const { app: { name } } = useStore()
+  const { app: { name }, config: { blockchain } } = useStore()
+  const acc = sampleAccount[blockchain.name]
+
+  const source = text
+    .replace(/{{ACCOUNT}}/g, acc.account)
+    .replace(/{{PRIVATEKEY}}/g, acc.privateKey)
 
   return (
     <Container>
@@ -44,7 +60,7 @@ const Help = ({ type }) => {
         <HelpIcon />
       </HelpIconContainer>
       <HelpText>
-        <Markdown source={text.replace(/{{APP}}/g, name)} />
+        <Markdown source={source} />
       </HelpText>
     </Container>
   )

@@ -17,6 +17,7 @@ const Container = styled.div`
 const Logo = styled.div`
   font-weight: bold;
   font-size: 18px;
+  flex: 0 0 auto;
 `
 
 const Signin = styled.div`
@@ -25,13 +26,25 @@ const Signin = styled.div`
   cursor: pointer;
   font-size: 14px;
   border-radius: 4px;
+  flex: 1 1;
+  overflow: hidden;
+  margin-right: -20px;
+  margin-left: 60px;
+  justify-content: flex-end;
   
   &[data-with-account="false"] {
     padding: 8px;
+    margin-right: 0;
     fill: white;
+    flex: 0 0 auto;
     color: white;
     background: var(--primary-color);
   }
+`
+
+const SigninButton = styled.div`
+  display: flex;
+  align-items: center;
 
   svg {
     margin-left: 4px;
@@ -55,10 +68,10 @@ const PlaygroundHeader = ({ blockchain }) => {
         {account ? (
           <Account account={account} size="sm" />
         ) : (
-          <>
+          <SigninButton>
             Sign in with
             <Favicon />
-          </>
+          </SigninButton>
         )}
       </Signin>
     </Container>

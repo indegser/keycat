@@ -7,6 +7,7 @@ import PasswordField from 'design/moles/fields/PasswordField';
 import Submit from 'design/moles/fields/Submit';
 import CardLayout from 'design/layouts/CardLayout';
 import { Fields } from 'design/atoms/Input';
+import { useStore } from 'store/store';
 
 interface Props {
   path: string
@@ -14,6 +15,7 @@ interface Props {
 
 const Register: React.SFC<Props> = () => {
   const { register } = useSignin()
+  const { config: { blockchain } } = useStore()
   const { account } = getSearchParams()
 
   const getDisabled = ({ account, password }) => (
@@ -21,7 +23,7 @@ const Register: React.SFC<Props> = () => {
   )
 
   return (
-    <CardLayout title="Register your EOS Account">
+    <CardLayout title={`Register your ${blockchain.name.toUpperCase()} Account`}>
       <Formik
         initialValues={{
           account: account || '',

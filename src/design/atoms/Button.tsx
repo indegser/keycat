@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { media } from 'design/utils';
 
 export const Button = styled.button`
   border-radius: 0px;
@@ -13,6 +14,8 @@ export const Button = styled.button`
   font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
+  padding: 0 12px;
+  box-sizing: border-box;
 
   &:focus {
     border: 1px solid #08f;
@@ -30,4 +33,12 @@ export const Button = styled.button`
     pointer-events: none;
     opacity: .5;
   }
+
+  ${({ size }) => size === 'lg' && css`
+    line-height: 56px;
+
+    ${media.lessThan('small')`
+      line-height: 44px;
+    `}
+  `}
 `;

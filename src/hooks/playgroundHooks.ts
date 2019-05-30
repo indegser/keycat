@@ -1,14 +1,60 @@
 import Keycat from 'keycatjs';
-import { useState, useMemo, useCallback } from 'react';
+import Big from 'big.js'
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { KEYCAT_ORIGIN } from 'consts/consts';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
+import { firestore } from 'services/Firebase';
 
 const caver = new Caver()
 
+export const useDonations = () => {
+  const [data, set] = useState({
+    isFetching: false,
+    donations: [],
+  })
+
+  const mapSnapshotsToDonations = (snapshots) => {
+    set({
+      isFetching: false,
+      donations: snapshots.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) => {
+          return b.createdAt.seconds - a.createdAt.seconds
+        })
+    })
+  }
+
+  const fetchDonations = useCallback(async () => {
+    set({ isFetching: true, donations: [] })
+    const col = firestore.collection('donations')
+    const snapshots = await col.orderBy('createdAt', 'desc').get()
+
+    mapSnapshotsToDonations(snapshots)
+  }, [])
+
+  useEffect(() => {
+    const col = firestore.collection('donations')
+    const detach = col.onSnapshot((snapshots) => {
+      mapSnapshotsToDonations(snapshots)
+    })
+    return () => {
+      detach()
+    }
+  }, [])
+
+  return {
+    ...data,
+    fetchDonations,
+  }
+}
+
 export const usePlayground = ({ blockchain }) => {
-  const { play: { account } } = useStore()
+  const { play: { account, rate } } = useStore()
   const dispatch = useDispatch()
 
   const keycat = useMemo(() => (
@@ -29,10 +75,16 @@ export const usePlayground = ({ blockchain }) => {
     }
   }, [])
 
-  const donate = useCallback(async ({ amount }) => {
+  const setRate = useCallback((rate) => {
+    dispatch(playActions.setRate({ rate: rate + 1 }))
+  }, [])
+
+  const donate = useCallback(async () => {
+    const amount = Big('0.000001').times(rate).toString()
+
     const payload = {
       from: account,
-      to: `0xf90675a56a03f836204d66c0f923e00500ddc90a`,
+      to: `0x57fdcc985f26ccc767aa4a748cd3e30bd4a77d54`,
       gasLimit: 9900000,
       gasPrice: caver.utils.toPeb('25', 'Ston'),
       value: caver.utils.toHex(caver.utils.toPeb(amount, 'KLAY'))
@@ -40,15 +92,25 @@ export const usePlayground = ({ blockchain }) => {
 
     try {
       const data = await keycat.transact(account, payload)
-      console.log(data)
-    } catch (err) {
+      const col = firestore.collection('donations')
 
+      const ref =  await col.add({
+        blockchain: 'klaytn',
+        rate,
+        account,
+        hash: data.transactionHash,
+        amount,
+        createdAt: new Date(),
+      })
+    } catch (err) {
+      console.log(err)
     }
-  }, [account])
+  }, [account, rate])
 
   return {
     account,
     donate,
+    setRate,
     signin,
   }
 }

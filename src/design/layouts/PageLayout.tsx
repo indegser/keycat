@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
+import { Scrollbar } from 'design/atoms/Scrollbar';
 
 const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -19,17 +20,21 @@ interface Props {
 
 const PageLayout: React.SFC<Props> = ({ header, footer, main }) => {
   return (
-    <Container>
-      <header>
-        {header}
-      </header>
-      <main>
-        {main}
-      </main>
-      <footer>
-        {footer}
-      </footer>
-    </Container>
+    <div style={{ height: '100vh' }}>
+      <Scrollbar>
+        <Container>
+          <header>
+            {header}
+          </header>
+          <main>
+            {main}
+          </main>
+          <footer>
+            {footer}
+          </footer>
+        </Container>
+      </Scrollbar>
+    </div>
   )
 }
 

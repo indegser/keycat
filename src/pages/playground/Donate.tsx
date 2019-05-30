@@ -3,13 +3,18 @@ import styled from 'styled-components'
 import StarIcon from 'design/icons/star.svg'
 import DonateForm from './DonateForm';
 import { usePlayground } from 'hooks/playgroundHooks';
+import Donations from './Donations';
+import { media } from 'design/utils';
 
 const Container = styled.div`
-  width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 16px;
+  padding-top: 80px;
+  ${media.lessThan('medium')`
+    padding-top: 40px;
+  `}
 `
 
 const Stars = styled.div`
@@ -19,7 +24,7 @@ const Stars = styled.div`
 `
 
 const Star = styled.div`
-  width: 32px;
+  width: 100%;
   color: #ddd;
   cursor: pointer;
   transition: .2s color ease;
@@ -34,7 +39,7 @@ const Star = styled.div`
 `
 
 const Donate = ({ blockchain }) => {
-  const { donate } = usePlayground({ blockchain })
+  const { donate, account, setRate: _setRate } = usePlayground({ blockchain })
   const [rate, setRate] = useState([-1, 0])
 
   const stars = new Array(10).fill(true)
@@ -42,6 +47,7 @@ const Donate = ({ blockchain }) => {
   const handleStarClick = (e, i) => {
     e.preventDefault()
     setRate([i, 0])
+    _setRate(i)
   }
 
   const handleStarMouseOver = (e, i) => {
@@ -69,7 +75,8 @@ const Donate = ({ blockchain }) => {
             </Star>
           ))}
         </Stars>
-        <DonateForm donate={donate} />
+        <DonateForm donate={donate} account={account} />
+        <Donations />
       </div>
     </Container>
   )
