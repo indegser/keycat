@@ -34,6 +34,7 @@ export const useKlaytnTest = () => {
   }, [account, history.length])
 
   const signin = useCallback(async (e) => {
+    console.log('called')
     e.preventDefault()
     try {
       const { account } = await keycat.signin()
