@@ -3391,10 +3391,10 @@ keccak@^1.0.2:
     nan "^2.2.1"
     safe-buffer "^5.1.0"
 
-keycatjs@0.2:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/keycatjs/-/keycatjs-0.2.0.tgz#1e7b6920afc93cfb740e90dc521c0f97672a9ca9"
-  integrity sha512-/V7hW9dP+gXanxcZgGL4aFZyL5j8Vfj7A8Iybz58Cuhivw6E8K+ujjZL2WwgxPgxteB1/4FKbVzenV+GlIF07g==
+keycatjs@^0.3:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/keycatjs/-/keycatjs-0.3.0.tgz#46578972a5e63f8bf6eeead378432e8dcc34deba"
+  integrity sha512-0ZErwHfntWDE4fLwNXZc/XDsn0Cyz3h+cGmBDFqnIM1ejA+jrp0kQZZtwg9KqvWZ66RAErdzi25ZvcJkS06GZQ==
   dependencies:
     query-string "^6.5.0"
 
