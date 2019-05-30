@@ -8,7 +8,7 @@ import { useKlaytn } from './klaytnHooks';
 export const useTransact = () => {
   const dispatch = useDispatch()
   const { config: { client, blockchain } } = useStore()
-  const { transact: _transact } = blockchain === 'klaytn' ? useKlaytn() : useEos()
+  const { transact: _transact } = blockchain.name === 'klaytn' ? useKlaytn() : useEos()
 
   const transact = useCallback(async (values, form) => {
     dispatch(appActions.setWorking({ working: true }))
