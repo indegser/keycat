@@ -8,11 +8,9 @@ import SwitchAccount from 'design/moles/fields/SwitchAccount';
 import { Fields } from 'design/atoms/Input';
 import FieldLink from 'design/moles/FieldLink';
 import FieldError from 'design/moles/fields/FieldError';
-import { useKlaytn } from 'hooks/klaytnHooks';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
-  useKlaytn()
 
   return (
     <CardLayout title={`Sign in`}>

@@ -21,30 +21,56 @@ export const eosNetworkPreset = {
   ],
 };
 
+export const KEYCAT_ORIGIN = MODE === 'development'
+  ? `http://localhost:3030`
+  : null
+
 export const getDefaultNetwork = () => {
-  switch (BRANCH) {
-    case 'eos-jungle':
-      return 'jungle'
-    default:
-      return 'main' 
-  }
+  return 'main'
 }
 
 const blockchainPresets = {
-  'klaytn': {
-    name: 'klaytn:baobab',
+  'klaytn:baobab': {
+    name: `klaytn`,
+    displayName: `BAOBAB`,
     rpcURL: 'https://api.baobab.klaytn.net:8651',
+  },
+  'eos:jungle': {
+    name: `eos`,
+    displayName: `EOS JUNGLE`,
+    nodes: eosNetworkPreset.jungle,
   },
   'eos': {
     name: 'eos',
     nodes: eosNetworkPreset.main,
-  },
+  }
 }
 
-export const getBlockchain = () => {
-  const { blockchain } = getSearchParams()
+interface CommonConfig {
+  name: string,
+  displayName?: string,
+}
+
+interface KlaytnConfig extends CommonConfig {
+  rpcURL: string,
+}
+
+interface EosConfig {
+  nodes: string[],
+}
+
+type BlockchainConfig = KlaytnConfig | EosConfig
+
+enum BlockchainName {
+  'eos',
+  'eos:jungle',
+  'klaytn',
+  'klaytn:baobob',
+}
+
+export const getBlockchain = (blockchain: BlockchainName|BlockchainConfig) => {
   if (typeof blockchain === 'string') {
-    return blockchainPresets[blockchain]
+    return blockchainPresets[blockchain] as BlockchainConfig
   }
   return blockchain
 }

@@ -9,7 +9,7 @@ const TestActions = ({ account, signin, actions }) => {
       <TestSignin account={account} signin={signin} />
       {account && actions.map((link) => {
         return (
-          <FieldLink key={link} to="/" {...link} />
+          <FieldLink key={link.title} to="/" {...link} />
         )
       })}
     </>

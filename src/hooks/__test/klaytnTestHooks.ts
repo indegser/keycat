@@ -1,12 +1,13 @@
 import { useState, useCallback } from 'react';
 import Keycat from 'keycatjs';
 import Caver from 'caver-js';
+import { KEYCAT_ORIGIN } from 'consts/consts';
 
 const caver = new Caver()
 
 const keycat = new Keycat({
-  blockchain: 'keycat',
-  keycatOrigin: `http://localhost:3030`,
+  blockchain: 'klaytn:baobab',
+  keycatOrigin: KEYCAT_ORIGIN,
 })
 
 export const useKlaytnTest = () => {

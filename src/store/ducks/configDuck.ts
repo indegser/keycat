@@ -3,18 +3,17 @@ import {
   createAction,
 } from 'redux-actions';
 import { getSearchParams } from 'utils/utils';
-import { eosNetworkPreset, getDefaultNetwork } from 'consts/consts';
+import { getBlockchain } from 'consts/consts';
 
 export const configActions = {
   set: createAction('config@set'),
 }
 
-const { nodes, network = getDefaultNetwork(), client } = getSearchParams()
+const { blockchain, client } = getSearchParams()
 
 const initialState = {
   client,
-  blockchain: localStorage.getItem('blockchain') || 'eos',
-  network,
+  blockchain: getBlockchain(blockchain),
 }
 
 export type IConfigState = typeof initialState

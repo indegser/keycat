@@ -2,13 +2,13 @@ import React from 'react'
 import { useStore } from 'store/store';
 import JsonViewer from 'design/moles/JsonViewer';
 
-const KlaytnPayload = ({ payload }) => {
+const EosPayload = ({ payload }) => {
   const { config: { blockchain } } = useStore()
-  if (blockchain.name !== 'klaytn') return null
+  if (blockchain.name !== 'eos') return null
   
   return (
     <JsonViewer src={payload} />
   )
 }
 
-export default KlaytnPayload
+export default EosPayload
