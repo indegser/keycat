@@ -18,7 +18,6 @@ const TestSignin = ({ account, signin }) => {
     )
   }
 
-  console.log(signin)
   return <FieldLink to="/" title="Sign in" onClick={signin} />
 }
 

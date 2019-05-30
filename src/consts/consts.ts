@@ -30,12 +30,12 @@ export const getDefaultNetwork = () => {
 }
 
 const blockchainPresets = {
-  'klaytn:baobab': {
+  'klaytn-baobab': {
     name: `klaytn`,
-    displayName: `BAOBAB`,
+    displayName: `KLAYTN BAOBAB`,
     rpcURL: 'https://api.baobab.klaytn.net:8651',
   },
-  'eos:jungle': {
+  'eos-jungle': {
     name: `eos`,
     displayName: `EOS JUNGLE`,
     nodes: eosNetworkPreset.jungle,
@@ -63,9 +63,9 @@ type BlockchainConfig = KlaytnConfig | EosConfig
 
 enum BlockchainName {
   'eos',
-  'eos:jungle',
+  'eos-jungle',
   'klaytn',
-  'klaytn:baobob',
+  'klaytn-baobob',
 }
 
 export const getBlockchain = (blockchain: BlockchainName|BlockchainConfig) => {
