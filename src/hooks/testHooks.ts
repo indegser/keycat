@@ -1,14 +1,25 @@
 import { useCallback, useState } from 'react'
 import Keycat from 'keycatjs'
+import { useStore } from 'store/store';
 
 const keycat = new Keycat({
-  network: 'jungle',
-  // keycatOrigin: 'http://localhost:3030'
+  blockchain: 'klaytn',
+  keycatOrigin: 'http://localhost:3030'
 })
 
+const actionPresets = {
+  klaytn: [{
+    title: `Transfer Token`,
+    to: `/`,
+  }],
+}
+
 export const useTest = () => {
+  const { config: { blockchain } } = useStore()
+  const actions = actionPresets[blockchain]
+
   const [account, setAccount] = useState(null)
-  const [txs, setTxs] = useState([])
+  const [history, setHistory] = useState([])
 
   const signin = useCallback(async (e) => {
     e.preventDefault()
@@ -27,13 +38,13 @@ export const useTest = () => {
       try {
         const { transaction_id: id, processed } = await keycat.transact(account, payload)
         const { block_time: blockTime } = processed
-        setTxs([{ id, type: 'transfer', blockTime }, ...txs])
+        setHistory([id, ...history])
         alert('Great! Transaction success')
       } catch (err) {
         console.log(err)
       }
     }
-  }, [account, txs])
+  }, [account, history.length])
 
   const transfer = transact({
     actions: [{
@@ -75,11 +86,9 @@ export const useTest = () => {
   })
 
   return {
-    signin,
     account,
-    transfer,
-    buyram,
-    vote,
-    receipts: txs,
+    signin,
+    actions: account ? actions : [],
+    history,
   }
 }

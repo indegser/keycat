@@ -16,13 +16,13 @@ const Container = styled.div`
 `
 
 const NetworkStat: React.SFC<Props> = () => {
-  const { config: { network, nodes } } = useStore()
+  const { config: { blockchain, network, nodes = [] } } = useStore()
 
   return (
     <Container>
       <div>
         <span>
-          EOS
+          {blockchain.toUpperCase()}
         </span>
         <span style={{ marginLeft: 4 }}>
           {network === 'custom' ? nodes[0] : network}

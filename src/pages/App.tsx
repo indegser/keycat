@@ -11,6 +11,7 @@ import Test from './__test/Test';
 import Me from './me/Me';
 import Support from './support/Support';
 import { updatePageView } from 'utils/ga';
+import KlaytnPlayground from './__test/KlaytnPlayground';
 
 const AppContainer = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ const App = () => {
           <Signin path="/" />
           <Me path="/me" />
           <Test path="/playground" />
+          <KlaytnPlayground path="/playground/klaytn" />
           <Support path="/support" />
           <Transact path="/transact" />
           <Register path="/register" />

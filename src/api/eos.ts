@@ -6,10 +6,10 @@ import {
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'; 
 
 import ecc from 'eosjs-ecc'
-import { networkPreset } from 'consts/consts';
+import { eosNetworkPreset } from 'consts/consts';
 import { errors } from 'consts/errors';
 
-const { nodes } = networkPreset.jungle
+const { nodes } = eosNetworkPreset.jungle
 
 const nodeos = {
   get: (api: (arg0: JsonRpc) => any) => (

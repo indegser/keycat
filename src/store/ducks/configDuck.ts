@@ -3,7 +3,7 @@ import {
   createAction,
 } from 'redux-actions';
 import { getSearchParams } from 'utils/utils';
-import { networkPreset, getDefaultNetwork } from 'consts/consts';
+import { eosNetworkPreset, getDefaultNetwork } from 'consts/consts';
 
 export const configActions = {
   set: createAction('config@set'),

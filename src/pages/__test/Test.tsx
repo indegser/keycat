@@ -53,31 +53,29 @@ interface Props {
 const Test: React.SFC<Props> = () => {
   const {
     account,
-    transfer,
-    vote,
-    buyram,
-    receipts,
     signin,
+    actions,
+    history,
   } = useTest()
 
-  const links = account ? [{
-    title: 'Transfer token',
-    to: 'transfer-token',
-    onClick: transfer,
-  }, {
-    title: 'Vote proxy',
-    to: 'vote-proxy',
-    onClick: vote,
-  }] : []
+  // const links = account ? [{
+  //   title: 'Transfer token',
+  //   to: 'transfer-token',
+  //   onClick: transfer,
+  // }, {
+  //   title: 'Vote proxy',
+  //   to: 'vote-proxy',
+  //   onClick: vote,
+  // }] : []
 
   return (
     <CardLayout title="Let's play with Keycat">
       <Fields>
         {account
           ? <Account>Hi {account}</Account>
-          : <FieldLink to="/signin" title="Sign in to Jungle net" onClick={signin} />
+          : <FieldLink to="/signin" title="Sign in" onClick={signin} />
         }
-        {links.map((link) => {
+        {actions.map((link) => {
           return (
             <FieldLink
               key={link.to}
@@ -87,7 +85,7 @@ const Test: React.SFC<Props> = () => {
         })}
         <History>
           <h2>History</h2>
-          {receipts.map(({ id, type, blockTime }) => (
+          {history.map((id) => (
             <Receipt key={id}>
               {id}
               <a href={`https://jungle.bloks.io/transaction/${id}`} target="_blank" rel="noopener noreferrer">
