@@ -19,6 +19,7 @@
     "keycatjs": "0.2",
     "query-string": "^6.5.0",
     "react": "^16.8",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8",
     "react-json-view": "^1.19.1",
     "react-markdown": "^4.0.8",

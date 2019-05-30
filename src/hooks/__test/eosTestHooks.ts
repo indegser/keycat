@@ -52,20 +52,6 @@ export const useEosTest = () => {
     }]
   })
 
-  const buyram = transact({
-    actions: [{
-      account: 'eosio',
-      name: 'delegatebw',
-      data: {
-        from: account,
-        receiver: account,
-        stake_cpu_quantity: '1.0000 EOS',
-        stake_net_quantity: '1.0000 EOS',
-        transfer: 0,
-      },
-    }]
-  })
-
   const vote = transact({
     actions: [{
       account: 'eosio',
@@ -84,9 +70,6 @@ export const useEosTest = () => {
   }, {
     title: `Vote Proxy`,
     onClick: vote,
-  }, {
-    title: `Buy RAM`,
-    onClick: buyram,
   }]
 
   return {
