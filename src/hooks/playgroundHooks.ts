@@ -22,6 +22,7 @@ export const usePlayground = ({ blockchain }) => {
       const { account } = await keycat.signin()
       setAccount(account)
     } catch (err) {
+      if (err === 'CLOSED') return;
       alert(`Failed to signin with keycat! Message: ${err.message}`)
     }
   }, [])

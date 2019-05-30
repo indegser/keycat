@@ -23,10 +23,19 @@ const Signin = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  
+  &[data-with-account="false"] {
+    padding: 8px;
+    fill: white;
+    color: white;
+    background: var(--primary-color);
+  }
 
   svg {
     margin-left: 4px;
-    height: 20px;
+    height: 16px;
     margin-top: 4px;
   }
 `
@@ -39,14 +48,19 @@ const PlaygroundHeader = ({ blockchain }) => {
       <Logo>
         Rate and Donate
       </Logo>
-      {account ? (
-        <Account account={account} size="sm" />
-      ) : (
-        <Signin onClick={signin}>
-          Sign in with
-          <Favicon />
-        </Signin>
-      )}
+      <Signin
+        data-with-account={!!account}
+        onClick={signin}
+      >
+        {account ? (
+          <Account account={account} size="sm" />
+        ) : (
+          <>
+            Sign in with
+            <Favicon />
+          </>
+        )}
+      </Signin>
     </Container>
   )
 }
