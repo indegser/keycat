@@ -7,3 +7,4 @@ https://keycat.netlify.com/* https://www.keycat.co/:splat 301!
 # Blockchain rewrites
 https://klaytn.keycat.co/* https://www.keycat.co/:splat 200
 https://eos.keycat.co/* https://www.keycat.co/:splat 200
+https://eos-jungle.keycat.co/* https://www.keycat.co/:splat 200
