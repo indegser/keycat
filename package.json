@@ -26,6 +26,7 @@
     "react-svg-loader": "^3.0.1",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
+    "scrypt": "^6.0.3",
     "styled-components": "^4.1.1",
     "styled-media-query": "^2.1.1",
     "ts-loader": "^6.0.0",

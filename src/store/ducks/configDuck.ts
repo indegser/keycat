@@ -10,7 +10,6 @@ export const configActions = {
 }
 
 const { blockchain, client } = getSearchParams()
-
 const initialState = {
   client,
   blockchain: blockchain && getBlockchain(JSON.parse(blockchain as string)),

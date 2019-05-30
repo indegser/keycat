@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import StarIcon from 'design/icons/star.svg'
+import DonateForm from './DonateForm';
+import { usePlayground } from 'hooks/playgroundHooks';
 
 const Container = styled.div`
   width: 100%;
@@ -32,6 +34,7 @@ const Star = styled.div`
 `
 
 const Donate = ({ blockchain }) => {
+  const { donate } = usePlayground({ blockchain })
   const [rate, setRate] = useState([-1, 0])
 
   const stars = new Array(10).fill(true)
@@ -42,7 +45,7 @@ const Donate = ({ blockchain }) => {
   }
 
   const handleStarMouseOver = (e, i) => {
-    setRate([rate[0], i + 1])
+    setRate([rate[0], i - rate[0]])
   }
 
   const handleStarMouseLeave = (e, i) => {
@@ -51,20 +54,23 @@ const Donate = ({ blockchain }) => {
 
   return (
     <Container>
-      <Stars>
-        {stars.map((_, i) => (
-          <Star
-            key={i}
-            data-starred={i <= rate[0]}
-            data-hoverred={i <= (rate[0] + rate[1])}
-            onClick={(e) => handleStarClick(e, i)}
-            onMouseOver={(e) => handleStarMouseOver(e, i)}
-            onMouseLeave={(e) => handleStarMouseLeave(e, i)}
-          >
-            <StarIcon />
-          </Star>
-        ))}
-      </Stars>
+      <div>
+        <Stars>
+          {stars.map((_, i) => (
+            <Star
+              key={i}
+              data-starred={i <= rate[0]}
+              data-hoverred={i <= (rate[0] + rate[1])}
+              onClick={(e) => handleStarClick(e, i)}
+              onMouseOver={(e) => handleStarMouseOver(e, i)}
+              onMouseLeave={(e) => handleStarMouseLeave(e, i)}
+            >
+              <StarIcon />
+            </Star>
+          ))}
+        </Stars>
+        <DonateForm donate={donate} />
+      </div>
     </Container>
   )
 }
