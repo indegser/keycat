@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -12,9 +12,9 @@ const Container = styled.div`
 `
 
 interface Props {
-  header?: Element,
-  footer?: Element,
-  main?: Element,
+  header?: ReactNode,
+  footer?: ReactNode,
+  main?: ReactNode,
 }
 
 const PageLayout: React.SFC<Props> = ({ header, footer, main }) => {

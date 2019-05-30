@@ -1,6 +1,7 @@
 import React from 'react'
 import PageLayout from 'design/layouts/PageLayout';
 import PlaygroundHeader from './PlaygroundHeader';
+import Donate from './Donate';
 
 interface Props {
   path: string,
@@ -12,6 +13,7 @@ const Playground: React.SFC<Props> = ({ blockchain }) => {
   return (
     <PageLayout
       header={<PlaygroundHeader blockchain={blockchain} />}
+      main={<Donate blockchain={blockchain} />}
     />
   )
 }
