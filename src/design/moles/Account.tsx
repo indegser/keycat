@@ -2,12 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Identicon from 'design/atoms/Identicon';
 
-const Container = styled.div`
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-`
-
 const AccountName = styled.div`
   line-height: 16px;
   font-size: 16px;
@@ -19,12 +13,36 @@ const AccountName = styled.div`
   padding-right: 20px;
 `
 
-const Account = ({ account }) => {
+const Container = styled.div`
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  &[data-size = "sm"] {
+    ${AccountName} {
+      font-size: 15px;
+    }
+
+    svg {
+      width: 30px !important;
+      height: 30px !important;
+    }
+  }
+`
+
+type AccountSize = "sm"|"md"|"lg"
+
+interface Props {
+  account: string,
+  size?: AccountSize,
+}
+
+const Account: React.SFC<Props> = ({ account = '', size="md" }) => {
   return (
-    <Container>
+    <Container data-size={size}>
       <Identicon account={account} />
       <AccountName>
-        {account || ''}
+        {account}
       </AccountName>
     </Container>
   )

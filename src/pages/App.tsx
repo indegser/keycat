@@ -12,6 +12,7 @@ import Support from './support/Support';
 import { updatePageView } from 'utils/ga';
 import KlaytnPlayground from './__test/KlaytnPlayground';
 import EosPlayground from './__test/EosPlayground';
+import Playground from './playground/Playground';
 
 const AppContainer = styled.div`
   display: flex;
@@ -39,8 +40,7 @@ const App = () => {
         <Router>
           <Signin path="/" />
           <Me path="/me" />
-          <EosPlayground path="/playground/eos" />
-          <KlaytnPlayground path="/playground/klaytn" />
+          <Playground path="/playground/:blockchain" />
           <Support path="/support" />
           <Transact path="/transact" />
           <Register path="/register" />
