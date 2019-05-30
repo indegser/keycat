@@ -3,7 +3,7 @@ import Keycat from 'keycatjs'
 import { KEYCAT_ORIGIN } from 'consts/consts';
 
 const keycat = new Keycat({
-  blockchain: 'eos:jungle',
+  blockchain: 'eos-jungle',
   keycatOrigin: KEYCAT_ORIGIN,
 })
 

@@ -6,7 +6,7 @@ import { KEYCAT_ORIGIN } from 'consts/consts';
 const caver = new Caver()
 
 const keycat = new Keycat({
-  blockchain: 'klaytn:baobab',
+  blockchain: 'klaytn-baobab',
   keycatOrigin: KEYCAT_ORIGIN,
 })
 
