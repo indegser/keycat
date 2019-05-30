@@ -13,7 +13,7 @@ const { blockchain, client } = getSearchParams()
 
 const initialState = {
   client,
-  blockchain: getBlockchain(blockchain),
+  blockchain: blockchain && getBlockchain(JSON.parse(blockchain as string)),
 }
 
 export type IConfigState = typeof initialState
