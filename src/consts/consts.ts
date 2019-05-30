@@ -1,4 +1,6 @@
-export const networkPreset = {
+import { getSearchParams } from 'utils/utils';
+
+export const eosNetworkPreset = {
   'jungle': [
     'https://jungle2.cryptolions.io:443',
     'https://api.jungle.alohaeos.com:443',
@@ -19,13 +21,58 @@ export const networkPreset = {
   ],
 };
 
+export const KEYCAT_ORIGIN = MODE === 'development'
+  ? `http://localhost:3030`
+  : null
+
 export const getDefaultNetwork = () => {
-  switch (BRANCH) {
-    case 'eos-jungle':
-      return 'jungle'
-    default:
-      return 'main' 
+  return 'main'
+}
+
+const blockchainPresets = {
+  'klaytn:baobab': {
+    name: `klaytn`,
+    displayName: `BAOBAB`,
+    rpcURL: 'https://api.baobab.klaytn.net:8651',
+  },
+  'eos:jungle': {
+    name: `eos`,
+    displayName: `EOS JUNGLE`,
+    nodes: eosNetworkPreset.jungle,
+  },
+  'eos': {
+    name: 'eos',
+    nodes: eosNetworkPreset.main,
   }
+}
+
+interface CommonConfig {
+  name: string,
+  displayName?: string,
+}
+
+interface KlaytnConfig extends CommonConfig {
+  rpcURL: string,
+}
+
+interface EosConfig {
+  nodes: string[],
+}
+
+type BlockchainConfig = KlaytnConfig | EosConfig
+
+enum BlockchainName {
+  'eos',
+  'eos:jungle',
+  'klaytn',
+  'klaytn:baobob',
+}
+
+export const getBlockchain = (blockchain: BlockchainName|BlockchainConfig) => {
+  if (typeof blockchain === 'string') {
+    return blockchainPresets[blockchain] as BlockchainConfig
+  }
+  return blockchain
 }
 
 export const isBrowser = (typeof window !== 'undefined')

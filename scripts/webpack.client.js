@@ -12,7 +12,6 @@ const {
 
 module.exports = async (_, { mode = 'development' }) => {
   const COMMIT_REF = process.env.COMMIT_REF || await git('rev-parse', 'HEAD')
-  const BRANCH = process.env.BRANCH || await git('rev-parse', '--abbrev-ref', 'HEAD')
 
   const PRODUCTION = mode !== 'development'
   const config = {
@@ -37,7 +36,7 @@ module.exports = async (_, { mode = 'development' }) => {
       }),
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
-        BRANCH: JSON.stringify(BRANCH),
+        MODE: JSON.stringify(mode),
       }),
       new CspPlugin({
         'base-uri': `'self'`,

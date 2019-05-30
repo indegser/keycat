@@ -7,10 +7,11 @@ import Register from './register/Register';
 import Keychain from './register/Keychain';
 import GlobalStyle from 'design/GlobalStyle';
 import Transact from './transact/Transact';
-import Test from './__test/Test';
 import Me from './me/Me';
 import Support from './support/Support';
 import { updatePageView } from 'utils/ga';
+import KlaytnPlayground from './__test/KlaytnPlayground';
+import EosPlayground from './__test/EosPlayground';
 
 const AppContainer = styled.div`
   display: flex;
@@ -38,7 +39,8 @@ const App = () => {
         <Router>
           <Signin path="/" />
           <Me path="/me" />
-          <Test path="/playground" />
+          <EosPlayground path="/playground/eos" />
+          <KlaytnPlayground path="/playground/klaytn" />
           <Support path="/support" />
           <Transact path="/transact" />
           <Register path="/register" />

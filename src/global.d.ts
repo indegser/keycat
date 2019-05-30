@@ -9,3 +9,4 @@ interface Window {
 
 declare var COMMIT_REF: string;
 declare var BRANCH: string;
+declare var MODE: string;

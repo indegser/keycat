@@ -1,23 +1,13 @@
 import { useCallback, useState } from 'react'
 import Keycat from 'keycatjs'
-import { useStore } from 'store/store';
+import { KEYCAT_ORIGIN } from 'consts/consts';
 
 const keycat = new Keycat({
-  blockchain: 'klaytn',
-  keycatOrigin: 'http://localhost:3030'
+  blockchain: 'eos:jungle',
+  keycatOrigin: KEYCAT_ORIGIN,
 })
 
-const actionPresets = {
-  klaytn: [{
-    title: `Transfer Token`,
-    to: `/`,
-  }],
-}
-
-export const useTest = () => {
-  const { config: { blockchain } } = useStore()
-  const actions = actionPresets[blockchain]
-
+export const useEosTest = () => {
   const [account, setAccount] = useState(null)
   const [history, setHistory] = useState([])
 
@@ -27,18 +17,21 @@ export const useTest = () => {
     try {
       const { account } = await keycat.signin()
       setAccount(account)
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) {}
   }, [])
 
   const transact = useCallback((payload) => {
     return async (e) => {
       e.preventDefault()
       try {
-        const { transaction_id: id, processed } = await keycat.transact(account, payload)
-        const { block_time: blockTime } = processed
-        setHistory([id, ...history])
+        const { transaction_id: id } = await keycat.transact(account, payload)
+        setHistory([
+          {
+            id,
+            href: `https://jungle.bloks.io/transaction/${id}`,
+          },
+          ...history
+        ])
         alert('Great! Transaction success')
       } catch (err) {
         console.log(err)
@@ -59,20 +52,6 @@ export const useTest = () => {
     }]
   })
 
-  const buyram = transact({
-    actions: [{
-      account: 'eosio',
-      name: 'delegatebw',
-      data: {
-        from: account,
-        receiver: account,
-        stake_cpu_quantity: '1.0000 EOS',
-        stake_net_quantity: '1.0000 EOS',
-        transfer: 0,
-      },
-    }]
-  })
-
   const vote = transact({
     actions: [{
       account: 'eosio',
@@ -85,10 +64,18 @@ export const useTest = () => {
     }]
   })
 
+  const actions = [{
+    title: `Transfer Token`,
+    onClick: transfer,
+  }, {
+    title: `Vote Proxy`,
+    onClick: vote,
+  }]
+
   return {
     account,
     signin,
-    actions: account ? actions : [],
+    actions,
     history,
   }
 }

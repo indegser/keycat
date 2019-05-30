@@ -11,7 +11,8 @@ import { useStore } from 'store/store';
 import { useCallback } from 'react';
 
 export const useEos = () => {
-  const { config: { nodes } } = useStore()
+  const { config: { blockchain: { nodes } } } = useStore()
+
   const nodeos = {
     get: (api: (arg0: JsonRpc) => any) => (
       nodes.reduce(async (promise, cand, i) => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import jdenticon from 'jdenticon'
 import styled from 'styled-components'
 import { getColorFromString } from 'utils/utils';
 import { inputHeight } from 'consts/consts';
@@ -84,6 +85,9 @@ const Account = styled.div`
   font-weight: 600;
   margin-bottom: 2px;
   letter-spacing: .1px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-right: 20px;
 `
 
 const IdenticonStyled = styled.div`
@@ -93,6 +97,7 @@ const IdenticonStyled = styled.div`
   border-radius: 999rem;
   text-align: center;
   color: white;
+  background: #eee;
   font-size: 16px;
   margin-right: 12px;
   flex: 0 0 auto;
@@ -100,18 +105,14 @@ const IdenticonStyled = styled.div`
 `
 
 const Identicon = ({ account }) => {
-  let bg, initial;
-  if (!account) {
-    initial = ''
-    bg = '#eee'
-  } else {
-    initial = account.slice(0, 1).toUpperCase()
-    bg = getColorFromString(account)
+  let svg;
+  if (account) {
+    svg = jdenticon.toSvg(account, 36)
   }
 
   return (
-    <IdenticonStyled style={{ backgroundColor: bg }}>
-      {initial}
+    <IdenticonStyled>
+      <span dangerouslySetInnerHTML={{ __html: svg }} />
     </IdenticonStyled>
   )
 }
@@ -126,7 +127,7 @@ const SwitchAccount = ({ account }) => {
       </InputContainer>
       <AccountContainer data-with-account={!!account}>
         <Identicon account={account} />
-        <div style={{ flex: '1 1' }}>
+        <div style={{ flex: '1 1', overflow: 'hidden' }}>
           <Account>
             {account}
           </Account>

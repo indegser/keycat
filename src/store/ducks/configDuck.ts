@@ -3,18 +3,17 @@ import {
   createAction,
 } from 'redux-actions';
 import { getSearchParams } from 'utils/utils';
-import { networkPreset, getDefaultNetwork } from 'consts/consts';
+import { getBlockchain } from 'consts/consts';
 
 export const configActions = {
   set: createAction('config@set'),
 }
 
-const { nodes, network = getDefaultNetwork(), client } = getSearchParams()
-const nodeList = nodes || networkPreset[network as string]
+const { blockchain, client } = getSearchParams()
+
 const initialState = {
   client,
-  network: nodes ? 'custom' : network,
-  nodes: Array.isArray(nodeList) ? nodeList : [nodeList],
+  blockchain: blockchain && getBlockchain(JSON.parse(blockchain as string)),
 }
 
 export type IConfigState = typeof initialState
