@@ -53,8 +53,8 @@ const SigninButton = styled.div`
   }
 `
 
-const PlaygroundHeader = ({ blockchain }) => {
-  const { account, signin } = usePlayground({ blockchain })
+const PlaygroundHeader = () => {
+  const { account, signin } = usePlayground()
 
   return (
     <Container>

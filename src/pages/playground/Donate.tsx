@@ -16,8 +16,8 @@ const Container = styled.div`
   `}
 `
 
-const Donate = ({ blockchain }) => {
-  const { donate, account } = usePlayground({ blockchain })
+const Donate = () => {
+  const { donate, account } = usePlayground()
 
   return (
     <Container>

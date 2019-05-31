@@ -40,7 +40,8 @@ const App = () => {
         <Router>
           <Signin path="/" />
           <Me path="/me" />
-          <Playground path="/playground/:blockchain" />
+          <Playground path="/playground" />
+          <EosPlayground path="/playground/eos" />
           <Support path="/support" />
           <Transact path="/transact" />
           <Register path="/register" />

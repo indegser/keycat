@@ -52,13 +52,13 @@ export const useDonations = () => {
   }
 }
 
-export const usePlayground = ({ blockchain }) => {
+export const usePlayground = () => {
   const { play: { account } } = useStore()
   const dispatch = useDispatch()
 
   const keycat = useMemo(() => (
     new Keycat({
-      blockchain,
+      blockchain: `klaytn-baobab`,
       keycatOrigin: KEYCAT_ORIGIN,
     })
   ), [])

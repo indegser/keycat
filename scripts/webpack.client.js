@@ -25,25 +25,13 @@ module.exports = async (_, { mode = 'development' }) => {
       path: path.resolve('public'),
       publicPath: `/`,
       filename: `[hash].js`,
-    }, 
+    },
     resolve: {
       modules: ['node_modules', path.resolve(ROOT, 'src')],
       extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
       !PRODUCTION && new webpack.HotModuleReplacementPlugin(),
-      ...(PRODUCTION ? [
-        new webpack.optimize.CommonsChunkPlugin({
-          name: 'vendor',
-          minChunks: function(module){
-            return module.context && module.context.includes('node_modules');
-          }
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-          name: 'manifest',
-          minChunks: Infinity
-        }),
-      ] : []),
       new HtmlPlugin({
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
@@ -108,6 +96,22 @@ module.exports = async (_, { mode = 'development' }) => {
       port: 3030,
       historyApiFallback: true,
       contentBase: path.resolve(ROOT, 'public'),
+    }
+  }
+
+  if (PRODUCTION) {
+    config.optimization = {
+      splitChunks: {
+        cacheGroups: {
+          default: false,
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor_app',
+            chunks: 'all',
+            minChunks: 2
+          }
+        }
+      }
     }
   }
 

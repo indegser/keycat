@@ -5,15 +5,13 @@ import Donate from './Donate';
 
 interface Props {
   path: string,
-  blockchain?: string,
 }
 
-const Playground: React.SFC<Props> = ({ blockchain }) => {
-  if (!blockchain) return null
+const Playground: React.SFC<Props> = () => {
   return (
     <PageLayout
-      header={<PlaygroundHeader blockchain={blockchain} />}
-      main={<Donate blockchain={blockchain} />}
+      header={<PlaygroundHeader />}
+      main={<Donate />}
     />
   )
 }
