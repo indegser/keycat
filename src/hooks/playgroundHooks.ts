@@ -1,5 +1,4 @@
 import Keycat from 'keycatjs';
-import Big from 'big.js'
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { KEYCAT_ORIGIN } from 'consts/consts';
 import Caver from 'caver-js'
@@ -54,7 +53,7 @@ export const useDonations = () => {
 }
 
 export const usePlayground = ({ blockchain }) => {
-  const { play: { account, rate } } = useStore()
+  const { play: { account } } = useStore()
   const dispatch = useDispatch()
 
   const keycat = useMemo(() => (
@@ -75,13 +74,7 @@ export const usePlayground = ({ blockchain }) => {
     }
   }, [])
 
-  const setRate = useCallback((rate) => {
-    dispatch(playActions.setRate({ rate: rate + 1 }))
-  }, [])
-
-  const donate = useCallback(async () => {
-    const amount = Big('0.000001').times(rate).toString()
-
+  const donate = useCallback(async ({ rate, amount }, formik) => {
     const payload = {
       from: account,
       to: `0x57fdcc985f26ccc767aa4a748cd3e30bd4a77d54`,
@@ -102,15 +95,18 @@ export const usePlayground = ({ blockchain }) => {
         amount,
         createdAt: new Date(),
       })
+
+      console.log(ref)
+
+      formik.resetForm()
     } catch (err) {
       console.log(err)
     }
-  }, [account, rate])
+  }, [account])
 
   return {
     account,
     donate,
-    setRate,
     signin,
   }
 }

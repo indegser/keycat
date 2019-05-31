@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
@@ -8,6 +10,7 @@ const git = require('./git')
 const ROOT = path.resolve(__dirname, '..')
 const {
   ORIGIN = 'http://localhost:3030',
+  FIREBASE_API_KEY,
 } = process.env
 
 module.exports = async (_, { mode = 'development' }) => {
@@ -29,6 +32,18 @@ module.exports = async (_, { mode = 'development' }) => {
     },
     plugins: [
       !PRODUCTION && new webpack.HotModuleReplacementPlugin(),
+      ...(PRODUCTION ? [
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor',
+          minChunks: function(module){
+            return module.context && module.context.includes('node_modules');
+          }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'manifest',
+          minChunks: Infinity
+        }),
+      ] : []),
       new HtmlPlugin({
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
@@ -37,6 +52,7 @@ module.exports = async (_, { mode = 'development' }) => {
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
         MODE: JSON.stringify(mode),
+        FIREBASE_API_KEY: JSON.stringify(FIREBASE_API_KEY),
       }),
       new CspPlugin({
         'base-uri': `'self'`,

@@ -54,7 +54,6 @@ const Meta = styled.div`
 const Donation = ({ donation }) => {
   const { account, hash, amount, createdAt, rate } = donation
   const href = `https://baobab.klaytnscope.com/tx/${hash}`
-
   return (
     <Container>
       <Identicon account={account} />

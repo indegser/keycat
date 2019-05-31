@@ -10,3 +10,4 @@ interface Window {
 declare var COMMIT_REF: string;
 declare var BRANCH: string;
 declare var MODE: string;
+declare var FIREBASE_API_KEY: string;

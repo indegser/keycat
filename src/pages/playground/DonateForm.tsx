@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button } from 'design/atoms/Button';
 import { Formik, Form } from 'formik';
-import AmountField from 'design/moles/fields/AmountField';
 import { media } from 'design/utils';
+import StarField from './StarField';
 
 const Container = styled.div`
   margin-top: 20px;
@@ -33,23 +33,42 @@ const Submit = styled.div`
   `}
 `
 
-const DonateForm = ({ donate, account }) => {
-  const handleSubmit = (values) => {
-    donate(values)
-  }
+const CurrentAmount = styled.div`
+  flex: 1 1;
+  font-size: 56px;
+  text-align: right;
+  font-weight: bold;
 
+  code {
+    font-size: 20px;
+    color: #999;
+    margin-left: 12px;
+    font-weight: 400;
+  }
+`
+
+const DonateForm = ({ donate, account }) => {
   return (
     <Container>
       <Formik
         initialValues={{
-          amount: `0.000001`,
+          rate: 1,
+          amount: '0.000001',
         }}
-        onSubmit={handleSubmit}
+        onSubmit={donate}
       >
-        {() => (
+        {({ values }) => (
           <Form>
+            <StarField />
             <InlineSubmit>
-              <AmountField unit="KLAY" />
+              <CurrentAmount>
+                <span>
+                  {values.amount}
+                </span>
+                <code>
+                  KLAY
+                </code>
+              </CurrentAmount>
               <Submit>
                 <Button
                   type="submit"

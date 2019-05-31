@@ -1,7 +1,8 @@
-import * as firebase from 'firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/firestore'
 
 const config = {
-  apiKey: "AIzaSyCm5mk4xKyr-K4Z2Xr6eo7fw4jeuYIK1Vs",
+  apiKey: FIREBASE_API_KEY,
   authDomain: "keycat-ad325.firebaseapp.com",
   databaseURL: "https://keycat-ad325.firebaseio.com",
   projectId: "keycat-ad325",

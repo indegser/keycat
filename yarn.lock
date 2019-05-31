@@ -2141,6 +2141,11 @@ dot-notes@3.1.1:
   resolved "https://registry.yarnpkg.com/dot-notes/-/dot-notes-3.1.1.tgz#7ae7e1a948134529f3768b2fb13f4c8fa92a57cf"
   integrity sha1-eufhqUgTRSnzdosvsT9Mj6kqV88=
 
+dotenv@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.0.0.tgz#ed310c165b4e8a97bb745b0a9d99c31bda566440"
+  integrity sha512-30xVGqjLjiUOArT4+M5q9sYdvuR4riM6yK9wMcas9Vbp6zZa+ocC9dp6QoftuhTPhFAiLK/0C5Ni2nou/Bk8lg==
+
 drbg.js@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/drbg.js/-/drbg.js-1.0.1.tgz#3e36b6c42b37043823cdbc332d58f31e2445480b"
