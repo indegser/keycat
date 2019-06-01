@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const CspPlugin = require('csp-html-webpack-plugin')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const git = require('./git')
 
 const ROOT = path.resolve(__dirname, '..')
@@ -37,6 +38,8 @@ module.exports = async (_, { mode = 'development' }) => {
         PRODUCTION,
         ORIGIN,
       }),
+      // PRODUCTION && new BundleAnalyzerPlugin(),
+      PRODUCTION && new webpack.HashedModuleIdsPlugin(),
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
         MODE: JSON.stringify(mode),
@@ -101,17 +104,20 @@ module.exports = async (_, { mode = 'development' }) => {
 
   if (PRODUCTION) {
     config.optimization = {
+      runtimeChunk: 'single',
       splitChunks: {
+        // chunks: 'all',
+        // maxInitialRequests: Infinity,
+        // minSize: 0,
         cacheGroups: {
-          default: false,
-          commons: {
+          vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendor_app',
             chunks: 'all',
-            minChunks: 2
-          }
-        }
-      }
+            priority: 1,
+            maxSize: 120 * 1024,
+          },
+        },
+      },
     }
   }
 

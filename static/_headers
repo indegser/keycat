@@ -4,3 +4,7 @@
 
   # Prevent browsers from incorrectly detecting non-scripts as scripts
   X-Content-Type-Options: nosniff
+
+/
+  Link: </css/font.css>; rel=preload; as=style
+  Link: </js/scripts.js>; rel=preload; as=script

@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import { media } from 'design/utils';
 import { Router, Location } from '@reach/router';
-import Signin from './signin/Signin';
-import Register from './register/Register';
-import Keychain from './register/Keychain';
 import GlobalStyle from 'design/GlobalStyle';
-import Transact from './transact/Transact';
-import Me from './me/Me';
-import Support from './support/Support';
 import { updatePageView } from 'utils/ga';
-import KlaytnPlayground from './__test/KlaytnPlayground';
 import EosPlayground from './__test/EosPlayground';
-import Playground from './playground/Playground';
+
+const Signin = React.lazy(() => import(/* webpackPrefetch: true */ './signin/Signin'))
+const Register = React.lazy(() => import(/* webpackPrefetch: true */ './register/Register'))
+const Keychain = React.lazy(() => import(/* webpackPrefetch: true */ './register/Keychain'))
+const Transact = React.lazy(() => import(/* webpackPrefetch: true */ './transact/Transact'))
+const Support = React.lazy(() => import(/* webpackPrefetch: true */ './support/Support'))
+const Playground = React.lazy(() => import(/* webpackPrefetch: true */ './playground/Playground'))
 
 const AppContainer = styled.div`
   display: flex;
@@ -37,16 +36,17 @@ const App = () => {
     <>
       <GlobalStyle />
       <AppContainer>
-        <Router>
-          <Signin path="/" />
-          <Me path="/me" />
-          <Playground path="/playground" />
-          <EosPlayground path="/playground/eos" />
-          <Support path="/support" />
-          <Transact path="/transact" />
-          <Register path="/register" />
-          <Keychain path="/register/keychain" />
-        </Router>
+        <Suspense fallback={<div />}>
+          <Router>
+            <Signin path="/" />
+            <Playground path="/playground" />
+            <EosPlayground path="/playground/eos" />
+            <Support path="/support" />
+            <Transact path="/transact" />
+            <Register path="/register" />
+            <Keychain path="/register/keychain" />
+          </Router>
+        </Suspense>
         <Location>
           {({ location }) => {
             updatePageView(location.pathname)
