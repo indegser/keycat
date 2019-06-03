@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "webpack-dev-server --config ./scripts/webpack.client.js",
-    "build": "rm -rf public; webpack --mode production --config ./scripts/webpack.client.js",
+    "build": "rm -rf public&&webpack --mode production --config ./scripts/webpack.client.js",
     "deploy": "sh ./scripts/deploy.sh"
   },
   "dependencies": {

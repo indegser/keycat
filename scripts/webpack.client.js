@@ -38,7 +38,10 @@ module.exports = async (_, { mode = 'development' }) => {
         PRODUCTION,
         ORIGIN,
       }),
-      // PRODUCTION && new BundleAnalyzerPlugin(),
+      PRODUCTION && new webpack.optimize.AggressiveSplittingPlugin({
+        minSize: 30000,
+        maxSize: 50000
+      }),
       PRODUCTION && new webpack.HashedModuleIdsPlugin(),
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
@@ -114,7 +117,7 @@ module.exports = async (_, { mode = 'development' }) => {
             test: /[\\/]node_modules[\\/]/,
             chunks: 'all',
             priority: 1,
-            maxSize: 120 * 1024,
+            maxSize: 200 * 1024,
           },
         },
       },
