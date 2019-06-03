@@ -25,7 +25,7 @@ module.exports = async (_, { mode = 'development' }) => {
     devtool: PRODUCTION ? 'source-map' : 'cheap-source-map',
     output: {
       path: path.resolve('public'),
-      publicPath: `/${COMMIT_REF.slice(0, 7)}/`,
+      publicPath: mode === 'production' ? `/${COMMIT_REF.slice(0, 7)}/` : '/',
       filename: `[hash].js`,
     },
     resolve: {

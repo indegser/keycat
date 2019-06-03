@@ -47,7 +47,7 @@ const sampleAccount = {
 
 const Help = ({ type }) => {
   const text = helps[type]
-  const { app: { name }, config: { blockchain } } = useStore()
+  const { app: { name }, config: { blockchain = {} } } = useStore()
   const acc = sampleAccount[blockchain.name]
 
   const source = text

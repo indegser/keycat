@@ -5,6 +5,7 @@ import Submit from 'design/moles/fields/Submit';
 import { sendMessage } from 'api/message';
 import { useStore } from 'store/store';
 import { getSearchParams } from 'utils/utils';
+import keychainSrc from 'assets/images/keychain.png';
 
 interface Props {
   path: string
@@ -36,7 +37,7 @@ const Keychain: React.SFC<Props> = () => {
   return (
     <CardLayout title="Save your Account to Keychain">
       <ImgContainer>
-        <img src="/images/keychain.png" />
+        <img src={keychainSrc} />
       </ImgContainer>
       <Submit
         help="keychain"
