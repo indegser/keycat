@@ -4,7 +4,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./scripts/webpack.client.js",
     "build": "webpack --mode production --config ./scripts/webpack.client.js",
-    "deploy": "./scripts/deploy.sh"
+    "deploy": "sh ./scripts/deploy.sh"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
