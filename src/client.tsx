@@ -19,4 +19,6 @@ if (module['hot']) {
   );
 }
 
+console.log(`Welcome ${COMMIT_REF}`)
+
 render();
