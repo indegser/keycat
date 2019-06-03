@@ -1,21 +1,22 @@
-require('dotenv').config()
-
 const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const CspPlugin = require('csp-html-webpack-plugin')
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const git = require('./git')
 
 const ROOT = path.resolve(__dirname, '..')
-const {
-  ORIGIN = 'http://localhost:3030',
-  FIREBASE_API_KEY,
-} = process.env
 
 module.exports = async (_, { mode = 'development' }) => {
-  const COMMIT_REF = process.env.COMMIT_REF || await git('rev-parse', 'HEAD')
+  const env = ['.env', mode].join('.').replace('.production', '')
+  require('dotenv').config(path.resolve(process.cwd(), env))
+
+  const {
+    ORIGIN = 'http://localhost:3030',
+    FIREBASE_API_KEY,
+  } = process.env
+
+  const COMMIT_REF = await git('rev-parse', 'HEAD')
 
   const PRODUCTION = mode !== 'development'
   const config = {
