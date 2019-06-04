@@ -18,7 +18,7 @@ const LinkStyled = styled.div`
   
 const LinkTitle = styled.div`
   border-top: 1px solid #e0e0e0;
-  font-weight: 800;
+  font-weight: 500;
 `
 
 interface Props {

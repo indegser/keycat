@@ -82,7 +82,7 @@ const Account = styled.div`
   flex: 1 1;
   line-height: 16px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 2px;
   letter-spacing: .1px;
   text-overflow: ellipsis;
