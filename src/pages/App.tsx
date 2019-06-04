@@ -33,6 +33,7 @@ const AppContainer = styled.div`
 `
 
 const App = () => {
+  const { origin } = location
   return (
     <>
       <GlobalStyle />

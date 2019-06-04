@@ -19,6 +19,25 @@ const Container = styled.div`
   ${media.lessThan('small')`
     margin-top: 48px;
   `}
+
+  section {
+    margin-top: 160px;
+
+    h2 {
+      text-align: center;
+      font-size: 48px;
+      font-weight: 600;
+      margin: 0 auto;
+
+      ${media.lessThan('medium')`
+        font-size: 40px;
+      `}
+
+      ${media.lessThan('small')`
+        font-size: 32px;
+      `}
+    }
+  }
 `
 
 const Headline = styled.h1`
@@ -118,7 +137,7 @@ const About: React.SFC<Props> = () => {
             With Keycat, interacting with decentralized apps can be done inside your browser.
           </Secondary>
           <GotoPlayground>
-            <a href="/playground">
+            <a href="/playground/eos">
               Visit Playground
               <GotoArrow>
                 →
