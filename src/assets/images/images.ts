@@ -3,3 +3,7 @@ export const images = {
   // browsers: require('./browsers.png'),
   // blockchains: require('./blockchains.png'),
 }
+
+export const svg = {
+  check: require('./check.svg').default,
+}

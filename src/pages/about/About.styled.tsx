@@ -1,7 +1,12 @@
 import styled from 'styled-components'
+import { media } from 'design/utils';
 
 export const AboutSection = styled.section`
   padding: 80px 0;
+
+  ${media.lessThan('small')`
+    padding: 48px 0;
+  `}
 `
 
 export const AboutH5 = styled.h5`

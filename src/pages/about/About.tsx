@@ -15,11 +15,11 @@ const Container = styled.div`
   box-sizing: border-box;
 
   ${media.lessThan('medium')`
-    margin-top: 56px;
+    margin-top: 0px;
   `}
 
   ${media.lessThan('small')`
-    margin-top: 48px;
+    margin-top: -20px;
   `}
 `
 

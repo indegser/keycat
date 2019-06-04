@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { AboutSection, AboutH5, AboutP, AboutImg } from './About.styled';
 import { images } from 'assets/images/images';
 import { media } from 'design/utils';
+import EasyToUse from './EasyToUse';
 
 const Container = styled.div`
   display: grid;
@@ -25,13 +26,13 @@ const Features = () => {
   const features = [
     {
       id: `switch-account`,
-      title: `Keycat is powered by brower’s security technology.`,
+      title: `Just like signing in to website`,
       desc: `Manage your blockchain identity just like you manage your email and password in other sites like Twitter or Facebook.`,
     },
     {
-      id: `switch-account`,
+      id: `second`,
       title: `Too Simple. Too Fast. Too Secure.`,
-      desc: `Manage your blockchain identity just like you manage your email and password in other sites like Twitter or Facebook.`,
+      desc: `Keycat offers never-seen wallet experience. After registering your account to Keycat, next time all you have to do is Click.`,
     }
   ]
 
@@ -46,7 +47,9 @@ const Features = () => {
             <AboutP>
               {desc}
             </AboutP>
-            <AboutImg src={images[id]} />
+            {id === 'second' ? (
+              <EasyToUse />
+            ) : <AboutImg src={images[id]} />}
           </Feature>
         ))}
       </Container>
