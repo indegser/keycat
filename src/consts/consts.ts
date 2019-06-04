@@ -76,4 +76,5 @@ export const getBlockchain = (blockchain: BlockchainName|BlockchainConfig) => {
 }
 
 export const isBrowser = (typeof window !== 'undefined')
+export const isPopup = !!window.opener
 export const inputHeight = 56

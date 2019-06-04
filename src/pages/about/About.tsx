@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import textBalancer from 'text-balancer'
 import PageLayout from 'design/layouts/PageLayout';
 import { media } from 'design/utils';
+import Features from './Features';
+import { AboutSection } from './About.styled';
 
 const Container = styled.div`
   max-width: 960px;
@@ -19,25 +21,6 @@ const Container = styled.div`
   ${media.lessThan('small')`
     margin-top: 48px;
   `}
-
-  section {
-    margin-top: 160px;
-
-    h2 {
-      text-align: center;
-      font-size: 48px;
-      font-weight: 600;
-      margin: 0 auto;
-
-      ${media.lessThan('medium')`
-        font-size: 40px;
-      `}
-
-      ${media.lessThan('small')`
-        font-size: 32px;
-      `}
-    }
-  }
 `
 
 const Headline = styled.h1`
@@ -46,6 +29,7 @@ const Headline = styled.h1`
   text-align: center;
   margin: 0 auto;
   margin-bottom: .2em;
+  font-family: var(--font-heading);
 
   ${media.lessThan('medium')`
     font-size: 56px;
@@ -87,18 +71,6 @@ const GotoPlayground = styled.div`
   text-align: center;
   margin-top: 30px;
 
-  &:hover {
-    a {
-      border-color: #1074e7;
-      text-decoration: none;
-      color: #0366d6;
-    }
-
-    ${GotoArrow} {
-      transform: translateX(4px);
-    }
-  }
-
   a {
     padding: 20px 40px;
     margin: 0 auto;
@@ -113,6 +85,16 @@ const GotoPlayground = styled.div`
     display: inline-block;
     cursor: pointer;
     border-radius: 3px;
+
+    &:hover {
+      border-color: #1074e7;
+      text-decoration: none;
+      color: #0366d6;
+      
+      ${GotoArrow} {
+        transform: translateX(4px);
+      }
+    }
   }
 
 `
@@ -130,23 +112,26 @@ const About: React.SFC<Props> = () => {
     <PageLayout
       main={(
         <Container>
-          <Headline className="balance-text">
-            Browser is your wallet
-          </Headline>
-          <Secondary className="balance-text">
-            With Keycat, interacting with decentralized apps can be done inside your browser.
-          </Secondary>
-          <GotoPlayground>
-            <a href="/playground/eos">
-              Visit Playground
-              <GotoArrow>
-                →
-              </GotoArrow>
-            </a>
-            <BrowserSupport className="balance-text">
-              Keycat runs on Safari, Chrome, Firefox regardless of mobile or desktop.
-            </BrowserSupport>
-          </GotoPlayground>
+          <AboutSection>
+            <Headline className="balance-text">
+              Browser is your wallet
+            </Headline>
+            <Secondary className="balance-text">
+              With Keycat, interacting with decentralized apps can be done inside your browser.
+            </Secondary>
+            <GotoPlayground>
+              <a href="/playground/eos">
+                Visit Playground
+                <GotoArrow>
+                  →
+                </GotoArrow>
+              </a>
+              <BrowserSupport className="balance-text">
+                Keycat runs on Safari, Chrome, Firefox regardless of mobile or desktop.
+              </BrowserSupport>
+            </GotoPlayground>
+          </AboutSection>
+          <Features />
         </Container>
       )}
     />
