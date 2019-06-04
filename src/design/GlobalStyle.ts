@@ -40,6 +40,11 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: -apple-system, BlinkMacSystemFont, Assistant, Roboto, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+
   input, textarea {
     font: inherit;
   }

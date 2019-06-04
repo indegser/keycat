@@ -5972,6 +5972,11 @@ terser@^3.17.0:
     source-map "~0.6.1"
     source-map-support "~0.5.10"
 
+text-balancer@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/text-balancer/-/text-balancer-1.0.5.tgz#606b5a8cb941565df0cd841353cba520b856e884"
+  integrity sha1-YGtajLlBVl3wzYQTU8ulILhW6IQ=
+
 text-encoding@0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.7.0.tgz#f895e836e45990624086601798ea98e8f36ee643"

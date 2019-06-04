@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { Scrollbar } from 'design/atoms/Scrollbar';
+import PageHeader from './page/PageHeader';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -24,7 +25,7 @@ const PageLayout: React.SFC<Props> = ({ header, footer, main }) => {
       <Scrollbar>
         <Container>
           <header>
-            {header}
+            {header || <PageHeader />}
           </header>
           <main>
             {main}

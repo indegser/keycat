@@ -34,6 +34,7 @@
     "scrypt": "^6.0.3",
     "styled-components": "^4.1.1",
     "styled-media-query": "^2.1.1",
+    "text-balancer": "^1.0.5",
     "ts-loader": "^6.0.0",
     "typescript": "^3.4.5",
     "webpack": "^4.31.0",
