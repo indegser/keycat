@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { AboutSection } from './About.styled';
+import { blockchains } from 'consts/consts';
 
 const Headline = styled.h2`
   font-size: 36px;
@@ -29,21 +30,7 @@ const Site = styled.div`
   }
 `
 
-const list = [
-  {
-    name: `eos`,
-    types: [
-      `main`,
-      `jungle`,
-    ],
-  },
-  {
-    name: `klaytn`,
-    types: [
-      `baobab`,
-    ],
-  },
-]
+const list = blockchains
 
 const Blockchains = () => {
   return (
@@ -55,11 +42,7 @@ const Blockchains = () => {
       </Headline>
       <Listing>
         {list.map(({ name, types }) => {
-          const items = types.map(type => (
-            type === 'main'
-              ? `${name}.keycat.co`
-              : `${name}-${type}.keycat.co`
-          ))
+          const items = types.map(type => `${type}.keycat.co`)
 
           return (
             <div key={name}>

@@ -7,6 +7,7 @@
     "deploy": "sh ./scripts/deploy.sh"
   },
   "dependencies": {
+    "@reach/menu-button": "^0.1.17",
     "@reach/router": "^1.2.1",
     "big.js": "^5.2.2",
     "caver-js": "^0.8.5-3",

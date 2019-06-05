@@ -5,7 +5,7 @@ import Identicon from 'design/atoms/Identicon';
 const AccountName = styled.div`
   line-height: 16px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: .1px;
   overflow: hidden;
   text-overflow: ellipsis;

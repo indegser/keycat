@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Favicon from 'design/icons/favicon.svg'
 import { usePlayground } from 'hooks/playgroundHooks';
 import Account from 'design/moles/Account';
+import SelectBlockchain from './SelectBlockchain';
 
 const Container = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ const Logo = styled.div`
   font-weight: bold;
   font-size: 18px;
   flex: 0 0 auto;
+  border: 1px solid #ddd;
 `
 
 const Signin = styled.div`
@@ -59,7 +61,10 @@ const PlaygroundHeader = () => {
   return (
     <Container>
       <Logo>
-        Rate and Donate
+        <div>
+          Rate and Donate
+        </div>
+        <SelectBlockchain />
       </Logo>
       <Signin
         data-with-account={!!account}

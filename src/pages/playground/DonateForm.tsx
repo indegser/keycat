@@ -1,9 +1,12 @@
 import React from 'react'
+import Big from 'big.js'
 import styled from 'styled-components'
 import { Button } from 'design/atoms/Button';
 import { Formik, Form } from 'formik';
 import { media } from 'design/utils';
 import StarField from './StarField';
+import { useStore } from 'store/store';
+import { getBlockchainByName } from 'utils/utils';
 
 const Container = styled.div`
   margin-top: 20px;
@@ -48,25 +51,28 @@ const CurrentAmount = styled.div`
 `
 
 const DonateForm = ({ donate, account }) => {
+  const { play: { blockchain } } = useStore()
+  const { symbol, precision } = getBlockchainByName(blockchain)
   return (
     <Container>
       <Formik
         initialValues={{
           rate: 1,
-          amount: '0.000001',
+          amount: Big(1 / 10**precision).toFixed(precision),
         }}
+        enableReinitialize
         onSubmit={donate}
       >
         {({ values }) => (
           <Form>
-            <StarField />
+            <StarField precision={precision} />
             <InlineSubmit>
               <CurrentAmount>
                 <span>
                   {values.amount}
                 </span>
                 <code>
-                  KLAY
+                  {symbol}
                 </code>
               </CurrentAmount>
               <Submit>
@@ -75,7 +81,7 @@ const DonateForm = ({ donate, account }) => {
                   disabled={!account}
                   size="lg"
                 >
-                  Donate with Test_KLAY
+                  Donate with {symbol}
                 </Button>
               </Submit>
             </InlineSubmit>

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import format from 'date-fns/format'
 import styled from 'styled-components'
 import Identicon from 'design/atoms/Identicon';
 import Stars from './Stars';
+import { getTransactionHref } from 'utils/blockchain';
+import { getBlockchainByName } from 'utils/utils';
 
 const Container = styled.div`
   display: flex;
@@ -52,8 +54,11 @@ const Meta = styled.div`
 `
 
 const Donation = ({ donation }) => {
-  const { account, hash, amount, createdAt, rate } = donation
-  const href = `https://baobab.klaytnscope.com/tx/${hash}`
+  const { blockchain, account, hash, amount, createdAt, rate } = donation
+  console.log(blockchain)
+  const { symbol } = getBlockchainByName(blockchain)
+  const href = useMemo(() => getTransactionHref(blockchain, hash), [])
+
   return (
     <Container>
       <Identicon account={account} />
@@ -70,11 +75,11 @@ const Donation = ({ donation }) => {
           </code>
           {` donated`}
           <code>
-            {`${amount} KLAY`}
+            {`${amount} ${symbol}`}
           </code>
         </Text>
         <Detail href={href} target="_blank" rel="noopener noreferrer">
-          Check Details on Klaytnscope 
+          Check Details
         </Detail>
       </div>
     </Container>

@@ -46,6 +46,26 @@ const blockchainPresets = {
   }
 }
 
+export const blockchains = [
+  {
+    name: `eos`,
+    types: [
+      `eos`,
+      `eos-jungle`,
+    ],
+    symbol: `EOS`,
+    precision: 4,
+  },
+  {
+    name: `klaytn`,
+    types: [
+      `klaytn-baobab`,
+    ],
+    symbol: `KLAY`,
+    precision: 6,
+  },
+]
+
 interface CommonConfig {
   name: string,
   displayName?: string,

@@ -29,7 +29,7 @@ const Star = styled.div`
   }
 `
 
-const StarField = () => {
+const StarField = ({ precision }) => {
   const stars = new Array(10).fill(true)
 
   return (
@@ -47,7 +47,7 @@ const StarField = () => {
                     const rate = i + 1
                     form.setValues({
                       rate,
-                      amount: Big('0.000001').times(rate).toFixed(6) 
+                      amount: Big(1 / 10**precision).times(rate).toFixed(precision) 
                     })
                   }}
                 >

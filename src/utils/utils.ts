@@ -1,4 +1,5 @@
 import qs from 'query-string'
+import { blockchains } from 'consts/consts';
 
 export const appendSearchParamsToUrl = (url) => {
   const { search } = new URL(location.href);
@@ -26,4 +27,8 @@ const intToHSL = (int) => {
 
 export const getColorFromString = (str) => {
   return intToHSL(getHashCode(str))
+}
+
+export const getBlockchainByName = (name) => {
+  return blockchains.filter(({ types }) => types.includes(name))[0]
 }

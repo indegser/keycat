@@ -121,7 +121,7 @@ const About: React.SFC<Props> = () => {
               With Keycat, interacting with decentralized apps can be done inside your browser.
             </Secondary>
             <GotoPlayground>
-              <a href="/playground/eos">
+              <a href="/playground">
                 Visit Playground
                 <GotoArrow>
                   →
