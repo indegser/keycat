@@ -9,10 +9,9 @@ const Container = styled.div`
   height: 100%;
   max-width: 560px;
   margin: 0 auto;
-  padding: 0 16px;
-  padding-top: 80px;
+  padding: 80px 16px;
   ${media.lessThan('medium')`
-    padding-top: 40px;
+    padding: 40px 16px;
   `}
 `
 

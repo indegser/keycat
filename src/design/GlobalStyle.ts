@@ -51,6 +51,19 @@ const GlobalStyle = createGlobalStyle`
   input, textarea {
     font: inherit;
   }
+
+  *[data-focused="true"] {
+    border: 1px solid #08f !important;
+    box-shadow: 0px 0px 1px 3px #0088ff3b;
+  }
+
+  option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+  }
 `
 
 export default GlobalStyle

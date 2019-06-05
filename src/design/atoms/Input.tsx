@@ -37,6 +37,6 @@ export const Input = styled.input`
 
   &:focus {
     border: 1px solid #08f !important;
-    box-shadow: 0px 0px 1px 3px #0088ff3b
+    box-shadow: 0px 0px 1px 3px #0088ff3b;
   }
 `

@@ -4,22 +4,56 @@ import Favicon from 'design/icons/favicon.svg'
 import { usePlayground } from 'hooks/playgroundHooks';
 import Account from 'design/moles/Account';
 import SelectBlockchain from './SelectBlockchain';
+import { media } from 'design/utils';
+import { images } from 'assets/images/images';
 
 const Container = styled.div`
-  display: flex;
   width: 100%;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "logo select signin";
+  grid-template-columns: max-content max-content auto;
+  grid-gap: 0 20px;
   align-items: center;
-  padding: 16px 20px;
+  padding: 0 8px;
+  overflow: hidden;
   box-sizing: border-box;
   border-bottom: 1px solid gainsboro;
+
+  ${media.lessThan('medium')`
+    grid-template-areas:
+      "logo logo"
+      "select signin";
+
+    grid-gap: 0 8px;
+    grid-template-columns: auto max-content;
+  `}
 `
 
 const Logo = styled.div`
   font-weight: bold;
   font-size: 18px;
   flex: 0 0 auto;
-  border: 1px solid #ddd;
+  margin-left: 8px;
+  grid-area: logo;
+  display: flex;
+  justify-content: center;
+
+  ${media.lessThan('medium')`
+    padding: 12px 0;
+    margin: 0 -8px;
+    background: #fefefe;
+    border-bottom: 1px solid #aaa;
+  `}
+
+  img {
+    display: block;
+    height: 24px;
+  }
+`
+
+const SigninContainer = styled.div`
+  justify-self: flex-end;
+  grid-area: signin;
 `
 
 const Signin = styled.div`
@@ -30,9 +64,8 @@ const Signin = styled.div`
   border-radius: 4px;
   flex: 1 1;
   overflow: hidden;
-  margin-right: -20px;
-  margin-left: 60px;
   justify-content: flex-end;
+  margin: 8px 0;
   
   &[data-with-account="false"] {
     padding: 8px;
@@ -61,24 +94,24 @@ const PlaygroundHeader = () => {
   return (
     <Container>
       <Logo>
-        <div>
-          Rate and Donate
-        </div>
-        <SelectBlockchain />
+        <img src={images['rate-donate']} />
       </Logo>
-      <Signin
-        data-with-account={!!account}
-        onClick={signin}
-      >
-        {account ? (
-          <Account account={account} size="sm" />
-        ) : (
-          <SigninButton>
-            Sign in with
-            <Favicon />
-          </SigninButton>
-        )}
-      </Signin>
+      <SelectBlockchain />
+      <SigninContainer>
+        <Signin
+          data-with-account={!!account}
+          onClick={signin}
+        >
+          {account ? (
+            <Account account={account} size="sm" />
+          ) : (
+            <SigninButton>
+              Sign in with
+              <Favicon />
+            </SigninButton>
+          )}
+        </Signin>
+      </SigninContainer>
     </Container>
   )
 }

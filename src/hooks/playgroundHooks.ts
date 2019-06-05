@@ -117,8 +117,6 @@ export const usePlayground = () => {
         createdAt: new Date(),
       })
 
-      console.log(ref)
-
       formik.resetForm()
     } catch (err) {
       console.log(err)

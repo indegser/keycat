@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import format from 'date-fns/format'
 import styled from 'styled-components'
 import Identicon from 'design/atoms/Identicon';
@@ -55,7 +55,6 @@ const Meta = styled.div`
 
 const Donation = ({ donation }) => {
   const { blockchain, account, hash, amount, createdAt, rate } = donation
-  console.log(blockchain)
   const { symbol } = getBlockchainByName(blockchain)
   const href = useMemo(() => getTransactionHref(blockchain, hash), [])
 
