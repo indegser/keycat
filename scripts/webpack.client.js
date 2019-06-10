@@ -17,16 +17,18 @@ module.exports = async (_, { mode = 'development' }) => {
     FIREBASE_API_KEY,
   } = process.env
 
-  const COMMIT_REF = process.env.COMMIT_REF || await git('rev-parse', 'HEAD')
+  const COMMIT_REF = (process.env.COMMIT_REF || await git('rev-parse', 'HEAD'))
+    .slice(0, 7)
 
+  console.log(path.resolve('public', COMMIT_REF))
   const PRODUCTION = mode !== 'development'
   const config = {
     entry: path.resolve(ROOT, 'src', 'client.tsx'),
     mode,
     devtool: PRODUCTION ? 'source-map' : 'cheap-source-map',
     output: {
-      path: path.resolve('public', COMMIT_REF),
-      publicPath: `/${COMMIT_REF.slice(0, 7)}/`,
+      path: path.resolve('public'),
+      publicPath: PRODUCTION ? `/${COMMIT_REF}/` : '/',
       filename: `[hash].js`,
       crossOriginLoading: 'anonymous',
     },
