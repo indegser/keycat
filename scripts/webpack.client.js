@@ -17,8 +17,6 @@ module.exports = async (_, { mode = 'development' }) => {
     FIREBASE_API_KEY,
   } = process.env
 
-  console.log(FIREBASE_API_KEY)
-
   const COMMIT_REF = process.env.COMMIT_REF || await git('rev-parse', 'HEAD')
 
   const PRODUCTION = mode !== 'development'
@@ -27,8 +25,8 @@ module.exports = async (_, { mode = 'development' }) => {
     mode,
     devtool: PRODUCTION ? 'source-map' : 'cheap-source-map',
     output: {
-      path: path.resolve('public'),
-      publicPath: mode === 'production' ? `/${COMMIT_REF.slice(0, 7)}/` : '/',
+      path: path.resolve('public', COMMIT_REF),
+      publicPath: `/${COMMIT_REF.slice(0, 7)}/`,
       filename: `[hash].js`,
       crossOriginLoading: 'anonymous',
     },
