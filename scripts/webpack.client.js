@@ -42,7 +42,7 @@ module.exports = async (_, { mode = 'development' }) => {
         COMMIT_REF: COMMIT_REF.slice(0, 7),
         ORIGIN,
       }),
-      new SriPlugin({
+      PRODUCTION && new SriPlugin({
         hashFuncNames: ['sha256', 'sha384'],
         enabled: true,
       }),
