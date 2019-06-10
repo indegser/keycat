@@ -1,4 +1,4 @@
-import Keycat from 'keycatjs';
+import { Keycat } from 'keycatjs';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { KEYCAT_ORIGIN } from 'consts/consts';
 import Caver from 'caver-js'
@@ -57,12 +57,16 @@ export const usePlayground = () => {
   const { play: { account, blockchain } } = useStore()
   const dispatch = useDispatch()
 
-  const keycat = useMemo(() => (
-    new Keycat({
-      blockchain,
-      keycatOrigin: KEYCAT_ORIGIN,
+  const keycat = useMemo(() => {
+    const [name, network] = blockchain.split('-')
+    return new Keycat({
+      blockchain: {
+        name,
+        network,
+      },
+      __keycatOrigin: KEYCAT_ORIGIN
     })
-  ), [blockchain])
+  }, [blockchain])
 
   const signin = useCallback(async (e) => {
     e.preventDefault()

@@ -4,7 +4,6 @@ import { media } from 'design/utils';
 import { Router, Location } from '@reach/router';
 import GlobalStyle from 'design/GlobalStyle';
 import { updatePageView } from 'utils/ga';
-import EosPlayground from './__test/EosPlayground';
 import About from './about/About';
 
 const Signin = React.lazy(() => import(/* webpackPrefetch: true */ './signin/Signin'))
@@ -33,7 +32,6 @@ const AppContainer = styled.div`
 `
 
 const App = () => {
-  const { origin } = location
   return (
     <>
       <GlobalStyle />
@@ -43,7 +41,6 @@ const App = () => {
             <About path="/" />
             <Signin path="/signin" />
             <Playground path="/playground" />
-            <EosPlayground path="/playground/eos" />
             <Support path="/support" />
             <Transact path="/transact" />
             <Register path="/register" />

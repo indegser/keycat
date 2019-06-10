@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const CspPlugin = require('csp-html-webpack-plugin')
+const SriPlugin = require('webpack-subresource-integrity')
 const git = require('./git')
 
 const ROOT = path.resolve(__dirname, '..')
@@ -27,6 +28,7 @@ module.exports = async (_, { mode = 'development' }) => {
       path: path.resolve('public'),
       publicPath: mode === 'production' ? `/${COMMIT_REF.slice(0, 7)}/` : '/',
       filename: `[hash].js`,
+      crossOriginLoading: 'anonymous',
     },
     resolve: {
       modules: ['node_modules', path.resolve(ROOT, 'src')],
@@ -40,10 +42,10 @@ module.exports = async (_, { mode = 'development' }) => {
         COMMIT_REF: COMMIT_REF.slice(0, 7),
         ORIGIN,
       }),
-      // PRODUCTION && new webpack.optimize.AggressiveSplittingPlugin({
-      //   minSize: 30000,
-      //   maxSize: 50000
-      // }),
+      new SriPlugin({
+        hashFuncNames: ['sha256', 'sha384'],
+        enabled: true,
+      }),
       PRODUCTION && new webpack.HashedModuleIdsPlugin(),
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
@@ -53,6 +55,7 @@ module.exports = async (_, { mode = 'development' }) => {
       new CspPlugin({
         'base-uri': `'self'`,
         'object-src': `'none'`,
+        'font-src': `https://fonts.gstatic.com`,
         'script-src': [
           `'self'`,
           `'strict-dynamic'`,

@@ -68,31 +68,25 @@ export const blockchains = [
 
 interface CommonConfig {
   name: string,
-  displayName?: string,
+  network?: string,
 }
 
 interface KlaytnConfig extends CommonConfig {
   rpcURL: string,
 }
 
-interface EosConfig {
+interface EosConfig extends CommonConfig {
   nodes: string[],
 }
 
-type BlockchainConfig = KlaytnConfig | EosConfig
-
-enum BlockchainName {
-  'eos',
-  'eos-jungle',
-  'klaytn',
-  'klaytn-baobob',
-}
-
-export const getBlockchain = (blockchain: BlockchainName|BlockchainConfig) => {
-  if (typeof blockchain === 'string') {
-    return blockchainPresets[blockchain] as BlockchainConfig
+export const getBlockchain = (blockchain: KlaytnConfig|EosConfig) => {
+  const { name, network, ...config } = blockchain
+  const id = [name, network].filter(Boolean).join('-')
+  const preset = blockchainPresets[id]
+  return {
+    ...preset,
+    ...config,
   }
-  return blockchain
 }
 
 export const isBrowser = (typeof window !== 'undefined')
