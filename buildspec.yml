@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  build:
+    commands:
+      - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - echo build with commit ${COMMIT_REF}...
+      - curl -o- -L https://yarnpkg.com/install.sh | bash
+      - yarn install
+      - yarn build
+  post_build:
+    commands:
+      - aws s3 sync public s3://keycat.co/${COMMIT_REF}
+      - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object ${COMMIT_REF}/index.html
+
+cache:
+  paths:
+  - 'node_modules/**/*'

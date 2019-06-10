@@ -17,7 +17,7 @@ module.exports = async (_, { mode = 'development' }) => {
     FIREBASE_API_KEY,
   } = process.env
 
-  const COMMIT_REF = await git('rev-parse', 'HEAD')
+  const COMMIT_REF = process.env.COMMIT_REF || await git('rev-parse', 'HEAD')
 
   const PRODUCTION = mode !== 'development'
   const config = {
