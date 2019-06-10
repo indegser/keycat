@@ -10,15 +10,15 @@ phases:
       - curl -o- -L https://yarnpkg.com/install.sh | bash
       - yarn install
       - yarn build
-  # post_build:
-    # commands:
-      # - aws s3 sync public s3://keycat.co/${COMMIT_REF}
-      # - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object ${COMMIT_REF}/index.html
+  post_build:
+    commands:
+      - aws s3 sync public s3://keycat.co/${COMMIT_REF}
+      - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object ${COMMIT_REF}/index.html
 
 cache:
   paths:
   - 'node_modules/**/*'
 
-artifacts:
-  files:
-    - 'public/**/*'
+# artifacts:
+#   files:
+#     - 'public/**/*'
