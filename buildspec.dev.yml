@@ -12,7 +12,7 @@ phases:
       - yarn build
   post_build:
     commands:
-      - aws s3 sync public s3://keycat.co/master/${COMMIT_REF}
+      - aws s3 sync public s3://keycat.co/develop/${COMMIT_REF}
       # - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object master/${COMMIT_REF}/index.html
 
 cache:
