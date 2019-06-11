@@ -21,7 +21,7 @@ export const useSignin = () => {
     dispatch(appActions.setWorking({ working }))
   }
 
-  const signin = useCallback(async ({ account, password }, form: FormikActions<SigninValues>) => {
+  const signin = useCallback(async ({ account, hiddenPassword: password }, form: FormikActions<SigninValues>) => {
     setWorking(true)
     try {
       await isValidAccount({ account, password })

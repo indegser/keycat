@@ -1,4 +1,5 @@
 import qs from 'query-string'
+import UAParser from 'ua-parser-js'
 import { blockchains } from 'consts/consts';
 
 export const appendSearchParamsToUrl = (url) => {
@@ -9,6 +10,15 @@ export const appendSearchParamsToUrl = (url) => {
 export const getSearchParams = () => {
   return qs.parse(location.search)
 }
+
+
+interface UserAgent {
+  browser: { name: string, version: string };
+  device: { model: string, type: string };
+  os: { name: string, version: string };
+}
+
+export const userAgent: UserAgent = new UAParser().getResult()
 
 const getHashCode = (str) => {
   var hash = 0;

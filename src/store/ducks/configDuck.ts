@@ -2,7 +2,7 @@ import {
   handleActions,
   createAction,
 } from 'redux-actions';
-import { getSearchParams } from 'utils/utils';
+import { getSearchParams, userAgent } from 'utils/utils';
 import { getBlockchain } from 'consts/consts';
 
 export const configActions = {
@@ -13,6 +13,7 @@ const { blockchain, client } = getSearchParams()
 
 const initialState = {
   client,
+  userAgent,
   blockchain: blockchain && getBlockchain(JSON.parse(blockchain as string)),
 }
 

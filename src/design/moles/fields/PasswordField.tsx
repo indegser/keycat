@@ -20,17 +20,17 @@ const Container = styled.div`
   margin-top: 12px;
 `
 
-const PasswordField: React.SFC<Props> = ({ hidden, name, plain }) => {
-  console.log(name)
+const PasswordField: React.SFC<Props> = ({ hidden, name = 'password', plain }) => {
+  const fieldName = 'password'
   return (
     <Container data-hidden={hidden}>
       <Field
-        name="password"
+        name={fieldName}
         render={({ field }) => (
           <Input
-            onChange={field.onChange}
+            {...field}
             name={name}
-            value=""
+            value={fieldName !== name ? "" : field.value}
             type="password"
             placeholder="Private Key"
             autoComplete={plain ? "off" : "current-password"}
