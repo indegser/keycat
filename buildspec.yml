@@ -5,15 +5,18 @@ phases:
       nodejs: 10
   build:
     commands:
+      - echo ${CODEBUILD_WEBHOOK_HEAD_REF}
+      - echo ${CODEBUILD_WEBHOOK_BASE_REF}
+      - echo ${CODEBUILD_SOURCE_VERSION}
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - echo build with commit ${COMMIT_REF}...
-      - curl -o- -L https://yarnpkg.com/install.sh | bash
-      - yarn install
-      - yarn build
-  post_build:
-    commands:
-      - aws s3 sync public s3://keycat.co/${COMMIT_REF}
-      - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object ${COMMIT_REF}/index.html
+      # - echo build with commit ${COMMIT_REF}...
+      # - curl -o- -L https://yarnpkg.com/install.sh | bash
+      # - yarn install
+      # - yarn build
+  # post_build:
+  #   commands:
+  #     - aws s3 sync public s3://keycat.co/${COMMIT_REF}
+  #     - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object ${COMMIT_REF}/index.html
 
 cache:
   paths:
