@@ -1,4 +1,5 @@
 # Keycat
+![](https://codebuild.ap-northeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoieWZCYXVpQTIzTzF4YkVjMTNiKzk0ZC9FTnl1ek9FZEhubDlzRXZIRk5ZbWtpZnR2ZllvNEVuL3BUa2JjS1NCSkZvMkQ2ay95bERVNUJmSTdYNmhyMG9zPSIsIml2UGFyYW1ldGVyU3BlYyI6IjFjU0VxQ1hRMTd2RE9HNk4iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 Web Wallet using browser's cloud keychain.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/73d9e1e5-9086-47df-aaba-8ac7053d4eb8/deploy-status)](https://app.netlify.com/sites/keycat/deploys)
