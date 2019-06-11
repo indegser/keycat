@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import Submit from 'design/moles/fields/Submit'
 import PasswordField from 'design/moles/fields/PasswordField'
@@ -11,6 +11,8 @@ import FieldError from 'design/moles/fields/FieldError';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
+  const [name, setName] = useState('hiddenPassword')
+  console.log(name)
 
   return (
     <CardLayout title={`Sign in`}>
@@ -19,7 +21,14 @@ const SigninAccount = (props) => {
           account: '',
           password: '',
         }}
-        onSubmit={signin}
+        onSubmit={(values, formik) => {
+          alert(values.hiddenPassword)
+          // alert(values.hiddenPassword)
+          // setName('password')
+          // setTimeout(() => {
+          //   console.log(values)
+          // }, 0)
+        }}
       >
         {({ values }) => {
           return (
@@ -27,7 +36,7 @@ const SigninAccount = (props) => {
               <Fields>
                 <SwitchAccount account={values.account} />
                 <FieldLink to="/register" title="Register Account" />
-                <PasswordField hidden />
+                <PasswordField hidden name="hiddenPassword" />
                 <FieldError name="account" />
               </Fields>
               <Submit help="signin" disabled={!values.account} />

@@ -7,6 +7,7 @@ import FieldError from './FieldError';
 interface Props {
   hidden?: boolean,
   plain?: boolean,
+  name?: string,
 }
 
 const Container = styled.div`
@@ -19,15 +20,17 @@ const Container = styled.div`
   margin-top: 12px;
 `
 
-const PasswordField: React.SFC<Props> = ({ hidden, plain }) => {
+const PasswordField: React.SFC<Props> = ({ hidden, name, plain }) => {
+  console.log(name)
   return (
     <Container data-hidden={hidden}>
       <Field
         name="password"
         render={({ field }) => (
           <Input
-            {...field}
-            name="password"
+            onChange={field.onChange}
+            name={name}
+            value=""
             type="password"
             placeholder="Private Key"
             autoComplete={plain ? "off" : "current-password"}

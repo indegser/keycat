@@ -22,7 +22,7 @@ export const eosNetworkPreset = {
 };
 
 export const KEYCAT_ORIGIN = MODE === 'development'
-  ? `http://localhost:3030`
+  ? location.origin 
   : null
 
 export const getDefaultNetwork = () => {
