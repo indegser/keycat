@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { HTMLProps } from 'react'
 import styled from 'styled-components'
-import { Field, ErrorMessage } from 'formik'
+import { Field } from 'formik'
 import { Input } from 'design/atoms/Input'
 import FieldError from './FieldError';
 
-interface Props {
+interface Props extends HTMLProps<HTMLInputElement> {
   hidden?: boolean,
   plain?: boolean,
 }
@@ -17,7 +17,7 @@ const Container = styled.div`
 `
 
 const AccountField = (props: Props) => {
-  const { hidden, plain } = props;
+  const { hidden, plain, ...inputProps } = props;
 
   return (
     <Container data-hidden={hidden}>
@@ -26,6 +26,7 @@ const AccountField = (props: Props) => {
         render={({ field }) => (
           <Input
             {...field}
+            {...inputProps}
             type="text"
             id="account"
             spellCheck="false"

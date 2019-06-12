@@ -27,7 +27,7 @@ const SigninAccount = (props) => {
           return (
             <Form method="post" noValidate>
               <Fields>
-                <AccountField />
+                <AccountField autoFocus />
                 <FieldLink to="/register" title="Register Account" />
                 <PasswordField hidden name="hiddenPassword" />
                 <FieldError name="account" />
