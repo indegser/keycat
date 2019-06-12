@@ -4,6 +4,7 @@ import Github from 'design/icons/github.svg'
 
 const Container = styled.footer`
   display: flex;
+  align-items: center;
   font-size: 13px;
   line-height: 18px;
   margin-top: 16px;
@@ -11,10 +12,11 @@ const Container = styled.footer`
   width: 100%;
   color: #666;
   padding: 0 var(--padding-x);
-  margin: 16px auto;
+  margin: 8px auto;
   box-sizing: border-box;
 `
 const GitHubLink = styled.a`
+  color: #666;
   &:hover {
     text-decoration: underline;
   }
@@ -44,6 +46,10 @@ const LinkContent = styled.div`
   padding: 4px 8px;
 `
 
+const FooterLink = styled.a`
+  color: #666;
+`
+
 const links = [{
   name: 'About',
   link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/about',
@@ -55,32 +61,27 @@ const links = [{
 const Footer = () => {
   return (
     <Container>
-      <div>
-        <div>
-          Open source project
-        </div>
-        <GitHubLink
-          href="https://github.com/EOSDAQ/keycat"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <GitHubContainer>
-            <Github />
-            <GitHash>
-              {`@${COMMIT_REF.slice(0, 7)}`}
-            </GitHash>
-          </GitHubContainer>
-        </GitHubLink>
-      </div>
+      <GitHubLink
+        href="https://github.com/EOSDAQ/keycat"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <GitHubContainer>
+          <Github />
+          <GitHash>
+            {`@${COMMIT_REF.slice(0, 7)}`}
+          </GitHash>
+        </GitHubContainer>
+      </GitHubLink>
       <Right>
         {links.map(({ name, link }) => (
           <LinkContent key={link}>
-            <a
+            <FooterLink
               href={link} 
               target="_blank"
             >
               {name}
-            </a>
+            </FooterLink>
           </LinkContent>
         ))}
       </Right>
