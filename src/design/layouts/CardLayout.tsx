@@ -69,6 +69,7 @@ const AppBox = styled.div`
 const Card = styled.div`
   margin: 0 auto;
   background: #fff;
+  width: 100%;
   max-width: var(--max-width);
   flex: 1 1;
 

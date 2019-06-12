@@ -28,11 +28,10 @@ const SigninAccount = (props) => {
             <Form method="post" noValidate>
               <Fields>
                 <AccountField autoFocus />
-                <FieldLink to="/register" title="Register Account" />
                 <PasswordField hidden name="hiddenPassword" />
                 <FieldError name="account" />
               </Fields>
-              <Submit help="signin" disabled={!values.account} />
+              <Submit disabled={!values.account} />
             </Form>
           );
         }}

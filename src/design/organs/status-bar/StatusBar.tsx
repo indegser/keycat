@@ -9,9 +9,6 @@ const Container = styled.div`
   padding-top: calc(var(--padding-x) * 2);
   font-size: 14px;
   text-align: center;
-  svg {
-    fill: var(--primary-color);
-  }
 `
   
 const Title = styled.div`
@@ -29,7 +26,7 @@ const StatusBar: React.SFC<Props> = ({ title }) => {
   return (
     <Container>
       <NetworkStat />
-      <Favicon width={100} />
+      <Favicon fill="#222" width={76} />
       <Title>
         {title}
       </Title>

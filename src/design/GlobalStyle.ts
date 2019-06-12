@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
+    --primary-color: #083ADE;
     --main-border-color: #d4d4d4;
     --main-background: #fff;
     --footer-link-color: #757575;
@@ -32,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     --card-border-radius: 4px;
 
-    --focused-border-color: #08f;
+    --focused-border-color: #1148fd;
     --hover-background: rgba(8, 58, 222, 0.04);
   }
 

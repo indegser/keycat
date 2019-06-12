@@ -19,7 +19,6 @@ const AppContainer = styled.div`
   overflow: hidden;
 
   --padding-x: 20px;
-  --primary-color: #083ADE;
 
   ${media.greaterThan('601px')`
     &:before, &:after {

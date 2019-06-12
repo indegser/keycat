@@ -33,7 +33,7 @@ const AccountField = (props: Props) => {
             autoComplete={plain ? "off" : "account"}
             tabIndex={hidden ? -1 : 0}
             autoCorrect="false"
-            placeholder="Account Name"
+            placeholder="Account"
           />
         )}
       />
