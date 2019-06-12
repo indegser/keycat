@@ -55,9 +55,14 @@ const Container = styled.div`
 const AppBox = styled.div`
   --max-width: 100vw;
   --padding-x: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   
   ${media.greaterThan('601px')`
     --max-width: 400px;
+    display: block;
+    min-height: auto;
   `}
 `;
 
@@ -65,6 +70,7 @@ const Card = styled.div`
   margin: 0 auto;
   background: #fff;
   max-width: var(--max-width);
+  flex: 1 1;
 
   &:empty {
     display: none;

@@ -8,6 +8,7 @@ const Container = styled.footer`
   line-height: 18px;
   margin-top: 16px;
   max-width: var(--max-width);
+  width: 100%;
   color: #666;
   padding: 0 var(--padding-x);
   margin: 16px auto;
