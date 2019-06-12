@@ -4,7 +4,7 @@ import JsonViewer from 'design/moles/JsonViewer';
 
 const KlaytnPayload = ({ payload }) => {
   const { config: { blockchain } } = useStore()
-  if (blockchain.name !== 'klaytn') return null
+  if (!blockchain.name.includes('klaytn')) return null
   
   return (
     <JsonViewer src={payload} />
