@@ -15,7 +15,7 @@ type SigninValues = {
 export const useSignin = () => {
   const dispatch = useDispatch()
   const { config: { client, blockchain } } = useStore()
-  const { isValidAccount } = blockchain.name === 'eos' ? useEos() : useKlaytn()
+  const { isValidAccount } = blockchain.name.includes('eos') ? useEos() : useKlaytn()
 
   const setWorking = (working) => {
     dispatch(appActions.setWorking({ working }))
