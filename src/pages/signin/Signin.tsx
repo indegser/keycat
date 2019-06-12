@@ -15,7 +15,7 @@ const SigninAccount = (props) => {
   const { signin } = useSignin()
 
   return (
-    <CardLayout title={`Sign in`}>
+    <CardLayout title={`Sign-in`}>
       <Formik
         initialValues={{
           account: '',

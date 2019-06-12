@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@reach/router'
 import { useSignin } from 'hooks/signinHooks';
 import { Formik, Form } from 'formik';
 import { getSearchParams } from 'utils/utils';
@@ -8,6 +9,7 @@ import Submit from 'design/moles/fields/Submit';
 import CardLayout from 'design/layouts/CardLayout';
 import { Fields } from 'design/atoms/Input';
 import { useStore } from 'store/store';
+import SampleAccounts from './SampleAccounts';
 
 interface Props {
   path: string
@@ -15,7 +17,6 @@ interface Props {
 
 const Register: React.SFC<Props> = () => {
   const { register } = useSignin()
-  const { config: { blockchain } } = useStore()
   const { account } = getSearchParams()
 
   const getDisabled = ({ account, password }) => (
@@ -23,7 +24,7 @@ const Register: React.SFC<Props> = () => {
   )
 
   return (
-    <CardLayout title={`Register your ${blockchain.name.toUpperCase()} Account`}>
+    <CardLayout title={`Import account`}>
       <Formik
         initialValues={{
           account: account || '',
@@ -36,8 +37,16 @@ const Register: React.SFC<Props> = () => {
             <Fields>
               <AccountField plain />
               <PasswordField plain />
+              <SampleAccounts />
             </Fields>
-            <Submit help="register" disabled={getDisabled(values)} />
+            <Submit
+              sibling={() => (
+                <Link to="/signin">
+                  Sign-in instead
+                </Link>
+              )}
+              disabled={getDisabled(values)}
+            />
           </Form>
         )}
       </Formik>
