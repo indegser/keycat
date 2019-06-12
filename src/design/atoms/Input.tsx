@@ -33,7 +33,7 @@ export const Input2 = styled.input`
   }
 
   &:focus {
-    border: 0 !important;
+    border: 1px solid transparent !important;
   }
 `
 
@@ -65,7 +65,7 @@ const Container = styled.div`
   &[data-empty=false] {
     ${Label} {
       background: #fff;
-      transform: scale(.75) translateY(-41px);
+      transform: scale(.75) translateY(-42px);
     }
   }
 
