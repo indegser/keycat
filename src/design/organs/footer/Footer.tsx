@@ -45,8 +45,11 @@ const LinkContent = styled.div`
 `
 
 const links = [{
-  name: 'About Keycat',
-  link: '/support',
+  name: 'About',
+  link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/about',
+}, {
+  name: 'How-to-use',
+  link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/how-to-use',
 }]
 
 const Footer = () => {

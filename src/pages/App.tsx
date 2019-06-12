@@ -10,7 +10,6 @@ const Signin = React.lazy(() => import(/* webpackPrefetch: true */ './signin/Sig
 const Register = React.lazy(() => import(/* webpackPrefetch: true */ './register/Register'))
 const Keychain = React.lazy(() => import(/* webpackPrefetch: true */ './register/Keychain'))
 const Transact = React.lazy(() => import(/* webpackPrefetch: true */ './transact/Transact'))
-const Support = React.lazy(() => import(/* webpackPrefetch: true */ './support/Support'))
 const Playground = React.lazy(() => import(/* webpackPrefetch: true */ './playground/Playground'))
 
 const AppContainer = styled.div`
@@ -41,7 +40,6 @@ const App = () => {
             <About path="/" />
             <Signin path="/signin" />
             <Playground path="/playground" />
-            <Support path="/support" />
             <Transact path="/transact" />
             <Register path="/register" />
             <Keychain path="/register/keychain" />
