@@ -17,13 +17,11 @@ export const useKlaytn = () => {
       caver.klay.accounts.wallet.add(wallet)
       return wallet
     } catch (err) {
-      console.log(err)
       throw errors.invalidPassword
     }
   }, [])
 
   const transact = async ({ payload, password }) => {
-    const wallet = isValidAccount({ password })
     const { rawTransaction } = await caver.klay.accounts.signTransaction(JSON.parse(payload), password)
     const data = await caver.klay.sendSignedTransaction(rawTransaction)
     return data

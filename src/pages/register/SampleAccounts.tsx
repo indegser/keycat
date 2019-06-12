@@ -26,10 +26,11 @@ const Text = styled.span`
   margin-left: 8px;
 `
 
-const SampleAccounts = ({ formik }) => {
+const SampleAccounts = ({ formik = {} }) => {
   const { config: { blockchain } } = useStore()
   const [index, setIndex] = useState(0)
   const accounts = sampleAccounts[blockchain.name]
+  if (!accounts) return null
 
   const handleClick = useCallback(() => {
     const nextIndex = (index + 1) % accounts.length

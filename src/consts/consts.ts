@@ -36,23 +36,24 @@ export const getDefaultNetwork = () => {
 
 const blockchainPresets = {
   'klaytn-baobab': {
-    name: `klaytn`,
+    name: `klaytn-baobab`,
     displayName: `KLAYTN BAOBAB`,
     rpcURL: 'https://api.baobab.klaytn.net:8651',
   },
   'eos-jungle': {
-    name: `eos`,
+    name: `eos-jungle`,
     displayName: `EOS JUNGLE`,
     nodes: eosNetworkPreset.jungle,
   },
   'eos': {
     name: 'eos',
+    displayName: `EOS`,
     nodes: eosNetworkPreset.main,
   }
 }
 
 export const sampleAccounts = {
-  eos: [{
+  'eos-jungle': [{
     account: `junglekeycat`,
     password: `5KRv8aLAHDjdFwNG8gYa2n2Esax7nZ2dDGC8wYgEVtDjMXXXH45`,
   }, {
@@ -65,7 +66,7 @@ export const sampleAccounts = {
     account: `peekabootest`,
     password: `5J7Kfdje1zFvG2t3f32Jz7U5mBoHbNQMXZWuXh36SPf8TTEDrht`,
   }],
-  klaytn: [{
+  'klaytn-baobab': [{
     account: `0xe89c7bd3297f1c5faa45a1060ee3ecae0765cccc`,
     password: `0xa334ca143e822c38d57a730d90cfc7f861e9aac1581907f569a9333f7a0a5f07`
   }]
