@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@reach/router'
 import { Formik, Form } from 'formik'
 import Submit from 'design/moles/fields/Submit'
 import PasswordField from 'design/moles/fields/PasswordField'
@@ -29,9 +30,16 @@ const SigninAccount = (props) => {
               <Fields>
                 <AccountField autoFocus />
                 <PasswordField hidden name="hiddenPassword" />
-                <FieldError name="account" />
               </Fields>
-              <Submit disabled={!values.account} />
+              <Submit
+                help="signin"
+                sibling={() => (
+                  <Link to="/register">
+                    Import account
+                  </Link>
+                )}
+                disabled={!values.account}
+              />
             </Form>
           );
         }}

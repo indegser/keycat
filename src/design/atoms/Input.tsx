@@ -14,6 +14,7 @@ export const Input2 = styled.input`
   border: 0;
   outline: 0;
   border-radius: 4px;
+  color: #333;
   padding: 0 16px;
   border: 0 !important;
   outline: none;
@@ -22,7 +23,7 @@ export const Input2 = styled.input`
   border: 1px solid rgba(0, 0, 0, 0.14) !important;
   box-sizing: border-box;
   font-size: 17px;
-  background-color: transparent;
+  // background-color: transparent;
 
   & + & {
     margin-top: 12px;

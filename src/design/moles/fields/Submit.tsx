@@ -14,6 +14,11 @@ const Container = styled.div`
 
 const ButtonWrapper = styled.div`
   width: 100%;
+  display: grid;
+  grid-gap: 20px;
+  grid-auto-flow: column;
+  align-items: center;
+  font-size: 15px;
 
   button {
     width: 100%;
@@ -22,17 +27,19 @@ const ButtonWrapper = styled.div`
 
 interface Props {
   help?: string,
+  sibling?: React.SFC<any>,
   disabled?: boolean,
   onClick?: () => any,
 }
 
 const Submit: React.SFC<Props> = (props) => {
-  const { onClick, help, disabled } = props
+  const { onClick, help, disabled, sibling: Sibling } = props
   return (
     <Container>
       <div style={{ width: '100%' }}>
         {help && <Help type={help} />}
         <ButtonWrapper>
+          {Sibling && <Sibling />}
           <Button
             type="submit"
             onClick={onClick}

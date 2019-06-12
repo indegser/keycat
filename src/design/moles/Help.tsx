@@ -7,34 +7,33 @@ import { useStore } from 'store/store';
 const Container = styled.div`
   margin-bottom: 20px;
   display: flex;
-  color: #555;
+  color: #86878a;
   font-size: 14px;
 `
 
 const HelpIconContainer = styled.div`
-  color: #313131;
-  margin-top: 1px;
+  // color: #313131;
+  margin-top: 3px;
 `
 
 const HelpText = styled.div`
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
   flex: 1 1;
   margin-left: 10px;
-  word-break: break-all;
+  word-break: break-word;
 
   & * {
     margin: 0;
   }
 
   strong {
-    font-family: var(--monospace);
-    font-weight: 800;
+    font-weight: 500;
   }
 `
 
 const helps = {
-  'signin': `Keycat will display Keychain-synced account. If nothing happens click **Register Account** to start using Keycat.`,
+  'signin': `Browser will auto-fill your saved account. If not, start your Keycat from **Import account**.`,
   'register': `Try with account **{{ACCOUNT}}**. Private key is **{{PRIVATEKEY}}**`,
   'keychain': `Whenever Dapp asks you to sign transaction, Keycat use a form for Keychain to auto-fill private key and sign transaction with it.`,
 }
@@ -52,7 +51,7 @@ const sampleAccount = {
 
 const Help = ({ type }) => {
   const text = helps[type]
-  const { app: { name }, config: { blockchain = {} } } = useStore()
+  const { config: { blockchain = {} } } = useStore()
   const acc = sampleAccount[blockchain.name]
 
   const source = text
