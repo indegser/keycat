@@ -31,6 +31,8 @@ const GlobalStyle = createGlobalStyle`
     --font-sans: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     --card-border-radius: 4px;
+
+    --focused-border-color: #08f;
     --hover-background: rgba(8, 58, 222, 0.04);
   }
 
@@ -52,9 +54,12 @@ const GlobalStyle = createGlobalStyle`
     font: inherit;
   }
 
-  *[data-focused="true"] {
-    border: 1px solid #08f !important;
-    box-shadow: 0px 0px 1px 3px #0088ff3b;
+  *[data-focused=true] {
+    border: 2px solid var(--focused-border-color) !important;
+  }
+
+  *[data-focused=false] {
+    border: 2px solid transparent;
   }
 
   option {

@@ -26,6 +26,11 @@ const HelpText = styled.div`
   & * {
     margin: 0;
   }
+
+  strong {
+    font-family: var(--monospace);
+    font-weight: 800;
+  }
 `
 
 const helps = {

@@ -25,7 +25,8 @@ const Transact: React.SFC<Props> = (props) => {
         initialValues={{
           account,
           payload,
-          password: '',
+          password: ``,
+          hiddenPassword: ``,
         }}
         onSubmit={transact}
       >
@@ -34,7 +35,7 @@ const Transact: React.SFC<Props> = (props) => {
             <Fields>
               <TxPayload payload={payload} />
               <AccountField hidden />
-              <PasswordField hidden />
+              <PasswordField hidden name="hiddenPassword" />
               <FieldError name="account" />
               <FieldError name="password" />
             </Fields>
