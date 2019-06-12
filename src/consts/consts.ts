@@ -1,5 +1,3 @@
-import { getSearchParams } from 'utils/utils';
-
 export const eosNetworkPreset = {
   'jungle': [
     'https://jungle2.cryptolions.io:443',
@@ -21,9 +19,16 @@ export const eosNetworkPreset = {
   ],
 };
 
-export const KEYCAT_ORIGIN = MODE === 'development'
-  ? location.origin 
-  : null
+export const KEYCAT_ORIGIN = (() => {
+  switch (BRANCH) {
+    case 'master':
+      return null
+    case 'develop':
+      return 'https://dev.keycat.co'
+    default:
+      return location.origin
+  }
+})()
 
 export const getDefaultNetwork = () => {
   return 'main'

@@ -14,6 +14,7 @@ module.exports = async (_, { mode = 'development' }) => {
 
   const {
     ORIGIN = 'http://localhost:3030',
+    BRANCH,
     FIREBASE_API_KEY,
   } = process.env
 
@@ -52,6 +53,7 @@ module.exports = async (_, { mode = 'development' }) => {
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
         MODE: JSON.stringify(mode),
+        BRANCH: JSON.stringify(BRANCH),
         FIREBASE_API_KEY: JSON.stringify(FIREBASE_API_KEY),
       }),
       new CspPlugin({

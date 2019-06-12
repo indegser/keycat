@@ -64,6 +64,10 @@ const GlobalStyle = createGlobalStyle`
     min-height: 1.2em;
     padding: 0px 2px 1px;
   }
+
+  code {
+    font-family: var(--monospace);
+  }
 `
 
 export default GlobalStyle
