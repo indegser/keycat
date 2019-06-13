@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useStore } from 'store/store';
 
@@ -11,7 +11,7 @@ export const Input2 = styled.input`
   margin: 0px;
   width: 100%;
   height: 56px;
-  line-height: 42px;
+  line-height: 24px;
   border: 0;
   outline: 0;
   border-radius: 4px;
@@ -60,11 +60,8 @@ const Label = styled.div`
   white-space: nowrap;
   width: auto;
   transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-
-  &[data-shrink=true] {
-    background: #fff;
-    transform: scale(.75) translateY(-42px);
-  }
+  background: #fff;
+  transform: scale(.75) translateY(-42px);
 `
 
 const Container = styled.div`
@@ -86,8 +83,6 @@ const InputBorder = styled.div`
 
 export const Input = ({ placeholder: label, ...props }) => {
   const [focused, setFocused] = useState(false)
-  const [show, setShow] = useState(false)
-  const { config: { userAgent: { browser } } } = useStore()
 
   const handleFocus = useCallback(() => {
     setFocused(true)
@@ -97,25 +92,16 @@ export const Input = ({ placeholder: label, ...props }) => {
     setFocused(false)
   }, [])
 
-  const empty = (browser.name !== 'Chrome') && !(props.value && (props.value.length > 0))
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShow(true)
-    }, 100)
-  }, [])
-
   return (
     <Container>
-      {show && <Input2
+      <Input2
         {...props}
         onFocus={handleFocus}
         onBlur={handleBlur}
-      />}
+      />
       <InputBorder data-focused={focused} />
       <Label
         aria-hidden={true}
-        data-shrink={!empty}
         style={{
           color: focused ? 'var(--focused-border-color)' : '',
         }}

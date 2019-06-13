@@ -30,7 +30,7 @@ const PasswordField: React.SFC<Props> = ({ hidden, name = 'password', plain }) =
           <Input
             {...field}
             name={name}
-            value={fieldName !== name ? "" : field.value}
+            // value={fieldName !== name ? "" : field.value}
             type="password"
             placeholder="Private Key"
             autoComplete={plain ? "off" : "current-password"}

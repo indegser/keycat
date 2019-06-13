@@ -28,9 +28,10 @@ const AccountField = (props: Props) => {
             {...field}
             {...inputProps}
             required
+            autoFocus
             type="text"
             spellCheck="false"
-            autoComplete="off"
+            autoComplete="username"
             tabIndex={hidden ? -1 : 0}
             autoCorrect="false"
             placeholder="Account"

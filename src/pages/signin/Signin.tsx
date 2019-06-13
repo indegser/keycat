@@ -18,7 +18,6 @@ const SigninAccount = (props) => {
         initialValues={{
           account: '',
           password: '',
-          hiddenPassword: '',
         }}
         onSubmit={signin}
       >
@@ -26,8 +25,8 @@ const SigninAccount = (props) => {
           return (
             <Form method="post" noValidate>
               <Fields>
-                <AccountField autoFocus />
-                <PasswordField hidden name="hiddenPassword" />
+                <AccountField />
+                <PasswordField hidden />
                 <FieldError name="password" />
               </Fields>
               <Submit
