@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import { useSignin } from 'hooks/signinHooks';
-import { getSearchParams } from 'utils/utils';
 import AccountField from 'design/moles/fields/AccountField';
 import PasswordField from 'design/moles/fields/PasswordField';
 import Submit from 'design/moles/fields/Submit';
@@ -25,8 +24,8 @@ const Register: React.SFC<Props> = () => {
     <CardLayout title={`Import account`}>
       <form method="post" noValidate onSubmit={handleSubmit}>
         <Fields>
-          <AccountField name="A" autoComplete="off" />
-          <PasswordField autoComplete="new-password" />
+          <AccountField autoComplete="off" />
+          <PasswordField autoComplete="off" />
         </Fields>
         <Submit
           sibling={() => (
