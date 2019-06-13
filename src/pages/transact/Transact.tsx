@@ -19,30 +19,21 @@ const Transact: React.SFC<Props> = (props) => {
   const payload = atob(decodeURIComponent(p as string))
   const { transact } = useTransact()
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // const formData = FormData(e.target)
+  }
+
   return (
     <CardLayout title="Sign Transaction">
-      <Formik
-        initialValues={{
-          account,
-          payload,
-          password: ``,
-          hiddenPassword: ``,
-        }}
-        onSubmit={transact}
-      >
-        {() => (
-          <Form method="post" noValidate>
-            <Fields>
-              <TxPayload payload={payload} />
-              <AccountField hidden />
-              <PasswordField hidden name="hiddenPassword" />
-              <FieldError name="account" />
-              <FieldError name="password" />
-            </Fields>
-            <Submit />
-          </Form>
-        )}
-      </Formik>
+      <form method="post" noValidate onSubmit={handleSubmit}>
+        <Fields>
+          <TxPayload payload={payload} />
+          <AccountField readOnly defaultValue={account as string} />
+          <PasswordField />
+        </Fields>
+        <Submit />
+      </form>
     </CardLayout>
   );
 }

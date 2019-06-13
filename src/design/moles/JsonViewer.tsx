@@ -18,6 +18,7 @@ const JsonViewer = ({ src }) => {
         style={{
           padding: `8px`,
           fontSize: 13,
+          fontFamily: 'var(--monospace)',
           wordBreak: "break-all"
         }}
       />
