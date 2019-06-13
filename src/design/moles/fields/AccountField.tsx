@@ -28,7 +28,6 @@ const AccountField = (props: Props) => {
             {...field}
             {...inputProps}
             type="text"
-            id="account"
             spellCheck="false"
             autoComplete={plain ? "off" : "account"}
             tabIndex={hidden ? -1 : 0}

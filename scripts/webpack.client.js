@@ -21,7 +21,6 @@ module.exports = async (_, { mode = 'development' }) => {
   const COMMIT_REF = (process.env.COMMIT_REF || await git('rev-parse', 'HEAD'))
     .slice(0, 7)
 
-  console.log(path.resolve('public', COMMIT_REF))
   const PRODUCTION = mode !== 'development'
   const config = {
     entry: path.resolve(ROOT, 'src', 'client.tsx'),

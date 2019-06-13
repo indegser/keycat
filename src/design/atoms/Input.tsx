@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 export const Fields = styled.div`
@@ -36,6 +36,14 @@ export const Input2 = styled.input`
   &:focus {
     border: 1px solid transparent !important;
   }
+
+  &:-webkit-autofill {
+    animation-name: onAutoFillStart;
+  }
+  
+  &:not(:-webkit-autofill) {
+    animation-name: onAutoFillCancel;
+  }
 `
 
 const Label = styled.div`
@@ -44,6 +52,7 @@ const Label = styled.div`
   max-width: calc(100% - (2*8px));
   left: 8px;
   bottom: 17px;
+  pointer-events: none;
   position: absolute;
   transform-origin: bottom left;
   color: #80868b;
@@ -79,6 +88,7 @@ const Container = styled.div`
 
 export const Input = ({ placeholder: label, ...props }) => {
   const [focused, setFocused] = useState(false)
+  const ref = useRef(null)
 
   const handleFocus = useCallback(() => {
     setFocused(true)
@@ -88,6 +98,13 @@ export const Input = ({ placeholder: label, ...props }) => {
     setFocused(false)
   }, [])
 
+  const handleAutoFill = useCallback((e) => {
+    console.log(e.animationName)
+    if (e.animationName === 'onAutoFillStart') {
+      console.log(e.target.value, 'AUTOFILL')
+    }
+  }, [])
+
   return (
     <Container
       data-focused={focused}
@@ -95,6 +112,9 @@ export const Input = ({ placeholder: label, ...props }) => {
     >
       <Input2
         {...props}
+        value={undefined}
+        ref={ref}
+        // onAnimationStart={handleAutoFill}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
