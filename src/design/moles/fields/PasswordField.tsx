@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { HTMLProps } from 'react'
 import styled from 'styled-components'
-import { Field } from 'formik'
 import { Input } from 'design/atoms/Input'
 import FieldError from './FieldError';
 
-interface Props {
+interface Props extends HTMLProps<HTMLInputElement> {
   hidden?: boolean,
   plain?: boolean,
   name?: string,
@@ -20,16 +19,17 @@ const Container = styled.div`
   margin-top: 12px;
 `
 
-const PasswordField: React.SFC<Props> = ({ hidden, name = 'password', plain }) => {
+const PasswordField: React.SFC<Props> = ({ hidden, ...inputProps }) => {
   return (
     <Container data-hidden={hidden}>
       <Input
-        name={name}
+        name="password"
         type="password"
         placeholder="Private Key"
-        autoComplete={plain ? "off" : "current-password"}
+        autoComplete="current-password"
         tabIndex={hidden ? -1 : 0}
         spellCheck="false"
+        {...inputProps}
       />
       {!hidden && (
         <FieldError name="password" />

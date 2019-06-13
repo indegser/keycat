@@ -15,7 +15,7 @@ const Container = styled.div`
   }
 `
 
-const AccountField = ({ hidden }: Props) => {
+const AccountField = ({ hidden, ...inputProps }: Props) => {
   return (
     <Container data-hidden={hidden}>
       <Input
@@ -26,6 +26,7 @@ const AccountField = ({ hidden }: Props) => {
         tabIndex={hidden ? -1 : 0}
         autoCorrect="false"
         placeholder="Account"
+        {...inputProps}
       />
       {!hidden && (
         <FieldError name="account" />
