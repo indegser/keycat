@@ -12,35 +12,19 @@ import AccountField from 'design/moles/fields/AccountField';
 const SigninAccount = (props) => {
   const { signin } = useSignin()
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { account, password } = e.target.elements
+    alert(account.value + password.value)
+  }
+
   return (
     <CardLayout title={`Sign-in`}>
-      <Formik
-        initialValues={{
-          account: '',
-          password: '',
-        }}
-        onSubmit={signin}
-      >
-        {({ values }) => {
-          return (
-            <Form method="post" noValidate>
-              <Fields>
-                <AccountField />
-                <PasswordField hidden />
-                <FieldError name="password" />
-              </Fields>
-              <Submit
-                help="signin"
-                sibling={() => (
-                  <Link to="/register">
-                    Import account
-                  </Link>
-                )}
-              />
-            </Form>
-          );
-        }}
-      </Formik>
+      <form action="post" noValidate onSubmit={handleSubmit}>
+        <input name="account"></input>
+        <input name="password" type="password"></input>
+        <button type="submit">Submit</button>
+      </form>
     </CardLayout>
   );
 }
