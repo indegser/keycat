@@ -3706,10 +3706,10 @@ keccak@^1.0.2:
     nan "^2.2.1"
     safe-buffer "^5.1.0"
 
-keycatjs@^0.5:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/keycatjs/-/keycatjs-0.5.0.tgz#200805887bf00d3090d42ac836bca0f75f2e8125"
-  integrity sha512-wX9+Fej+WDpmWVD8aRpdTH+MA+8xXSeoH1V1G79uiXTmtNXGiNdEQGJUD74FTIPUoWMyjCx4RA2l0xdkp7CVBA==
+keycatjs@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/keycatjs/-/keycatjs-0.5.1.tgz#8a32f1dee1beceb83c5a6313f61a1a401e8c80f9"
+  integrity sha512-9aPTB+G42FcEO0sQJ5bj4TtDaM7ZSVpiQXb4Yt0qxWwdPtA3mSQXO00AIKcuFqz24x+vekux8qwhoKChmp9m+g==
   dependencies:
     query-string "^6.5.0"
 
@@ -6207,12 +6207,7 @@ typescript@^3.4.5:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.1.tgz#ba72a6a600b2158139c5dd8850f700e231464202"
   integrity sha512-64HkdiRv1yYZsSe4xC1WVgamNigVYjlssIoaH2HcZF0+ijsk5YK2g0G34w9wJkze8+5ow4STd22AynfO6ZYYLw==
 
-ua-parser-js@^0.7.18:
-  version "0.7.20"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.20.tgz#7527178b82f6a62a0f243d1f94fd30e3e3c21098"
-  integrity sha512-8OaIKfzL5cpx8eCMAhhvTlft8GYF8b2eQr6JkCyVdrgjcytyOmPCXrqXFcUnhonRpLlh5yxEZVohm6mzaowUOw==
-
-ua-parser-js@^0.7.20:
+ua-parser-js@^0.7.18, ua-parser-js@^0.7.20:
   version "0.7.20"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.20.tgz#7527178b82f6a62a0f243d1f94fd30e3e3c21098"
   integrity sha512-8OaIKfzL5cpx8eCMAhhvTlft8GYF8b2eQr6JkCyVdrgjcytyOmPCXrqXFcUnhonRpLlh5yxEZVohm6mzaowUOw==
