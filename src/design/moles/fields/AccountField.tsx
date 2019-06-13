@@ -27,6 +27,7 @@ const AccountField = (props: Props) => {
           <Input
             {...field}
             {...inputProps}
+            required
             type="text"
             spellCheck="false"
             autoComplete={plain ? "off" : "account"}

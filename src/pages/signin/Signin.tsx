@@ -37,7 +37,6 @@ const SigninAccount = (props) => {
                     Import account
                   </Link>
                 )}
-                disabled={!values.account}
               />
             </Form>
           );

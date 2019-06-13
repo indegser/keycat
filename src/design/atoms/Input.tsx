@@ -1,5 +1,6 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useStore } from 'store/store';
 
 export const Fields = styled.div`
   padding: var(--padding-x);
@@ -88,7 +89,7 @@ const Container = styled.div`
 
 export const Input = ({ placeholder: label, ...props }) => {
   const [focused, setFocused] = useState(false)
-  const ref = useRef(null)
+  const { config: { userAgent: { browser } } } = useStore()
 
   const handleFocus = useCallback(() => {
     setFocused(true)
@@ -98,23 +99,15 @@ export const Input = ({ placeholder: label, ...props }) => {
     setFocused(false)
   }, [])
 
-  const handleAutoFill = useCallback((e) => {
-    console.log(e.animationName)
-    if (e.animationName === 'onAutoFillStart') {
-      console.log(e.target.value, 'AUTOFILL')
-    }
-  }, [])
+  const empty = (browser.name !== 'Chrome') && (props.value && props.value.length > 0)
 
   return (
     <Container
       data-focused={focused}
-      data-empty={!(props.value && props.value.length > 0)}
+      data-empty={empty}
     >
       <Input2
         {...props}
-        value={undefined}
-        ref={ref}
-        // onAnimationStart={handleAutoFill}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
