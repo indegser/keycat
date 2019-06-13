@@ -59,7 +59,7 @@ const Label = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: auto;
-  transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+  transition: transform 150ms cubic-bezier(0.4,0,0.2,1),color 450ms cubic-bezier(0.4,0,0.2,1);
   background: #fff;
   transform: scale(.75) translateY(-42px);
 `
@@ -79,6 +79,8 @@ const InputBorder = styled.div`
   border-radius: 4px;
   pointer-events: none;
   border: 1px solid rgba(0, 0, 0, .14);
+
+  transition: .3s border-color ease;
 `
 
 export const Input = ({ placeholder: label, ...props }) => {

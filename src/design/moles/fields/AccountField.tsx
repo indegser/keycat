@@ -1,6 +1,5 @@
 import React, { HTMLProps } from 'react'
 import styled from 'styled-components'
-import { Field } from 'formik'
 import { Input } from 'design/atoms/Input'
 import FieldError from './FieldError';
 
@@ -16,25 +15,17 @@ const Container = styled.div`
   }
 `
 
-const AccountField = (props: Props) => {
-  const { hidden, plain, ...inputProps } = props;
-
+const AccountField = ({ hidden }: Props) => {
   return (
     <Container data-hidden={hidden}>
-      <Field
+      <Input
         name="account"
-        render={({ field }) => (
-          <Input
-            {...field}
-            {...inputProps}
-            autoFocus="autofocus"
-            type="text"
-            spellCheck="false"
-            tabIndex={hidden ? -1 : 0}
-            autoCorrect="false"
-            placeholder="Account"
-          />
-        )}
+        type="text"
+        autoFocus="autofocus"
+        spellCheck="false"
+        tabIndex={hidden ? -1 : 0}
+        autoCorrect="false"
+        placeholder="Account"
       />
       {!hidden && (
         <FieldError name="account" />

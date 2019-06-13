@@ -14,16 +14,25 @@ const SigninAccount = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const { account, password } = e.target.elements
-    alert(account.value + password.value)
+    const formData = new FormData(e.target)
+    signin(formData)
   }
 
   return (
     <CardLayout title={`Sign-in`}>
       <form action="post" noValidate onSubmit={handleSubmit}>
-        <input name="account"></input>
-        <input name="password" type="password"></input>
-        <button type="submit">Submit</button>
+        <Fields>
+          <AccountField />
+          <PasswordField />
+        </Fields>
+        <Submit
+          help="signin"
+          sibling={() => (
+            <Link to="/register">
+              Import Account
+            </Link>
+          )}
+        />
       </form>
     </CardLayout>
   );

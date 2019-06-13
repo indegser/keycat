@@ -21,23 +21,15 @@ const Container = styled.div`
 `
 
 const PasswordField: React.SFC<Props> = ({ hidden, name = 'password', plain }) => {
-  const fieldName = 'password'
   return (
     <Container data-hidden={hidden}>
-      <Field
-        name={fieldName}
-        render={({ field }) => (
-          <Input
-            {...field}
-            name={name}
-            // value={fieldName !== name ? "" : field.value}
-            type="password"
-            placeholder="Private Key"
-            autoComplete={plain ? "off" : "current-password"}
-            tabIndex={hidden ? -1 : 0}
-            spellCheck="false"
-          />
-        )}
+      <Input
+        name={name}
+        type="password"
+        placeholder="Private Key"
+        autoComplete={plain ? "off" : "current-password"}
+        tabIndex={hidden ? -1 : 0}
+        spellCheck="false"
       />
       {!hidden && (
         <FieldError name="password" />

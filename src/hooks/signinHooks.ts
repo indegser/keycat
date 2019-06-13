@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
-import { FormikActions } from 'formik';
 import { useEos } from './eosHooks';
 import { useKlaytn } from './klaytnHooks';
 
@@ -21,8 +20,11 @@ export const useSignin = () => {
     dispatch(appActions.setWorking({ working }))
   }
 
-  const signin = useCallback(async ({ account, password }, form: FormikActions<SigninValues>) => {
+  const signin = useCallback(async (formData: FormData) => {
     setWorking(true)
+    const account = formData.get('account') as string
+    const password = formData.get('password') as string
+
     try {
       await isValidAccount({ account, password })
       sendMessage('signin', { data: { account } }, client)
@@ -31,7 +33,7 @@ export const useSignin = () => {
       await navigate(`/me`)
     } catch (err) {
       const { message: code, field = 'account' } = err
-      form.setFieldError(field, code)
+      // form.setFieldError(field, code)
     }
     setWorking(false)
   }, [])
