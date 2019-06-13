@@ -13,6 +13,7 @@ class FormError extends Error {
 
 export const errors = {
   invalidPassword: new FormError(412, 'password'),
+  notFoundOnKeychain: new FormError(413, 'password'),
   accountDoesNotExist: new FormError(409, 'account'),
   usernameConflict: new FormError(412, 'account'),
   transactionFailed: new FormError(400, 'password'),
@@ -21,6 +22,7 @@ export const errors = {
 export const errorMessages = {
   password: {
     412: `Invalid private key. Try again.`,
+    413: `Cannot find account in keychain. Try import first.`,
     400: `Transaction failed. Check payload and try again.`,
   },
   account: {

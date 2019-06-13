@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useStore } from 'store/store';
 
@@ -21,7 +21,6 @@ export const Input2 = styled.input`
   outline: none;
   -webkit-appearance: none;
   letter-spacing: .3px;
-  border: 1px solid rgba(0, 0, 0, 0.14) !important;
   box-sizing: border-box;
   font-size: 17px;
   // background-color: transparent;
@@ -35,7 +34,7 @@ export const Input2 = styled.input`
   }
 
   &:focus {
-    border: 1px solid transparent !important;
+    border: 0 !important;
   }
 
   &:-webkit-autofill {
@@ -61,34 +60,33 @@ const Label = styled.div`
   white-space: nowrap;
   width: auto;
   transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+
+  &[data-shrink=true] {
+    background: #fff;
+    transform: scale(.75) translateY(-42px);
+  }
 `
 
 const Container = styled.div`
   position: relative;
   border-radius: 4px;
+  height: 56px;
+`
 
-  &[data-focused=true] {
-    ${Label} {
-      color: var(--focused-border-color);
-    }
-  }
-  
-  &[data-empty=false] {
-    ${Label} {
-      background: #fff;
-      transform: scale(.75) translateY(-42px);
-    }
-  }
-
-  &[data-empty=true] {
-    ${Label} {
-      color: #80868b !important;
-    }
-  }
+const InputBorder = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, .14);
 `
 
 export const Input = ({ placeholder: label, ...props }) => {
   const [focused, setFocused] = useState(false)
+  const [show, setShow] = useState(false)
   const { config: { userAgent: { browser } } } = useStore()
 
   const handleFocus = useCallback(() => {
@@ -99,19 +97,29 @@ export const Input = ({ placeholder: label, ...props }) => {
     setFocused(false)
   }, [])
 
-  const empty = (browser.name !== 'Chrome') && (props.value && props.value.length > 0)
+  const empty = (browser.name !== 'Chrome') && !(props.value && (props.value.length > 0))
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true)
+    }, 100)
+  }, [])
 
   return (
-    <Container
-      data-focused={focused}
-      data-empty={empty}
-    >
-      <Input2
+    <Container>
+      {show && <Input2
         {...props}
         onFocus={handleFocus}
         onBlur={handleBlur}
-      />
-      <Label aria-hidden={true}>
+      />}
+      <InputBorder data-focused={focused} />
+      <Label
+        aria-hidden={true}
+        data-shrink={!empty}
+        style={{
+          color: focused ? 'var(--focused-border-color)' : '',
+        }}
+      >
         {label}
       </Label>
     </Container>

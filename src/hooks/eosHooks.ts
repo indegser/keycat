@@ -74,6 +74,10 @@ export const useEos = () => {
   }
   
   const isValidAccount = async ({ account, password }) => {
+    if (password.length === 0) {
+      throw errors.notFoundOnKeychain
+    }
+
     const accounts = await getAccounts(password)
     if (!accounts.includes(account)) {
       throw errors.usernameConflict

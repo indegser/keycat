@@ -30,7 +30,7 @@ const AccountField = (props: Props) => {
             required
             type="text"
             spellCheck="false"
-            autoComplete={plain ? "off" : "account"}
+            autoComplete="off"
             tabIndex={hidden ? -1 : 0}
             autoCorrect="false"
             placeholder="Account"
