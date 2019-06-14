@@ -19,15 +19,9 @@ const Transact: React.SFC<Props> = (props) => {
   const payload = atob(decodeURIComponent(p as string))
   const { transact } = useTransact()
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    transact(formData)
-  }
-
   return (
     <CardLayout title="Sign Transaction">
-      <Form method="post" noValidate onSubmit={handleSubmit}>
+      <Form method="post" noValidate onSubmit={transact}>
         <Fields>
           <TxPayload payload={payload} />
           <input name="payload" readOnly defaultValue={payload} style={{ display: 'none' }} />
