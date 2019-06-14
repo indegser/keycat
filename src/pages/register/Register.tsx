@@ -6,6 +6,7 @@ import PasswordField from 'design/moles/fields/PasswordField';
 import Submit from 'design/moles/fields/Submit';
 import CardLayout from 'design/layouts/CardLayout';
 import { Fields } from 'design/atoms/Input';
+import { Form } from 'design/moles/form/Form';
 
 interface Props {
   path: string
@@ -14,15 +15,9 @@ interface Props {
 const Register: React.SFC<Props> = () => {
   const { register } = useSignin()
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    register(formData)
-  }
-
   return (
     <CardLayout title={`Import account`}>
-      <form method="post" noValidate onSubmit={handleSubmit}>
+      <Form method="post" noValidate onSubmit={register}>
         <Fields>
           <AccountField autoComplete="off" />
           <PasswordField autoComplete="off" />
@@ -34,7 +29,7 @@ const Register: React.SFC<Props> = () => {
             </Link>
           )}
         />
-      </form>
+      </Form>
     </CardLayout>
   )
 }

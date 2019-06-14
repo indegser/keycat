@@ -33,18 +33,16 @@ export const useSignin = () => {
     setWorking(false)
   }, [])
 
-  const register = useCallback(async (formData: FormData) => {
-    const account = formData.get('account') as string
-    const password = formData.get('password') as string
-    
+  const register = useCallback(async ({ values, setErrors }) => {
+    const { account, password } = values
+
     setWorking(true)
     try {
       await isValidAccount({ account, password })
       await navigate(`/register/keychain?account=${account}`)
     } catch (err) {
-      console.log(err)
-      const { message: code, field = 'account' } = err
-      // form.setFieldError(field, code)
+      const { message, field = 'account' } = err
+      setErrors({ [field]: message })
     }
 
     setWorking(false)
