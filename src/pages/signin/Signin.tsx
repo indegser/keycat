@@ -17,7 +17,7 @@ const SigninAccount = (props) => {
       <Form action="post" noValidate onSubmit={signin}>
         <Fields>
           <AccountField />
-          <PasswordField />
+          <PasswordField hidden />
         </Fields>
         <Submit
           help="signin"

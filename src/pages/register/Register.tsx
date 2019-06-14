@@ -20,7 +20,7 @@ const Register: React.SFC<Props> = () => {
       <Form method="post" noValidate onSubmit={register}>
         <Fields>
           <AccountField autoComplete="off" />
-          <PasswordField autoComplete="off" />
+          <PasswordField autoComplete="new-password" />
         </Fields>
         <Submit
           sibling={() => (

@@ -21,11 +21,11 @@ const AccountField = ({ hidden, ...inputProps }: Props) => {
       <Input
         name="account"
         type="text"
-        autoFocus="autofocus"
         spellCheck="false"
         tabIndex={hidden ? -1 : 0}
         autoCorrect="false"
         placeholder="Account"
+        autoComplete="username"
         {...inputProps}
       />
       {!hidden && (
