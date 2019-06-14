@@ -1,5 +1,5 @@
 import Caver from 'caver-js'
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { errors } from 'consts/errors';
 
 const config = {
