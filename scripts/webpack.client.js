@@ -22,13 +22,15 @@ module.exports = async (_, { mode = 'development' }) => {
     .slice(0, 7)
 
   const PRODUCTION = mode !== 'development'
+  const publicPath = PRODUCTION ? `/${BRANCH}/${COMMIT_REF}/` : '/'
+
   const config = {
     entry: path.resolve(ROOT, 'src', 'client.tsx'),
     mode,
     devtool: PRODUCTION ? 'source-map' : 'cheap-source-map',
     output: {
       path: path.resolve('public'),
-      publicPath: PRODUCTION ? `/${COMMIT_REF}/` : '/',
+      publicPath,
       filename: `[hash].js`,
       crossOriginLoading: 'anonymous',
     },
@@ -41,6 +43,7 @@ module.exports = async (_, { mode = 'development' }) => {
       new HtmlPlugin({
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
+        PUBLIC_PATH: publicPath,
         COMMIT_REF: COMMIT_REF.slice(0, 7),
         ORIGIN,
       }),
