@@ -21,7 +21,7 @@ export const useKlaytn = () => {
     }
   }, [])
 
-  const transact = async ({ payload, password }) => {
+  const transact = async ({ account, payload, password }) => {
     const { rawTransaction } = await caver.klay.accounts.signTransaction(JSON.parse(payload), password)
     const data = await caver.klay.sendSignedTransaction(rawTransaction)
     return data

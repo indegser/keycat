@@ -21,7 +21,8 @@ const Transact: React.SFC<Props> = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // const formData = FormData(e.target)
+    const formData = new FormData(e.target)
+    transact(formData)
   }
 
   return (
@@ -29,6 +30,7 @@ const Transact: React.SFC<Props> = (props) => {
       <form method="post" noValidate onSubmit={handleSubmit}>
         <Fields>
           <TxPayload payload={payload} />
+          <input name="payload" readOnly defaultValue={payload} style={{ display: 'none' }} />
           <AccountField readOnly defaultValue={account as string} />
           <PasswordField />
         </Fields>

@@ -10,19 +10,18 @@ export const useTransact = () => {
   const { config: { client, blockchain } } = useStore()
   const { transact: _transact } = blockchain.name.includes('klaytn') ? useKlaytn() : useEos()
 
-  const transact = useCallback(async (values, form) => {
-    const realValues = {
-      ...values,
-      password: values.hiddenPassword,
-    }
+  const transact = useCallback(async (formData: FormData) => {
+    const account = formData.get('account') as string
+    const password = formData.get('password') as string
+    const payload = formData.get('payload') as string
 
     dispatch(appActions.setWorking({ working: true }))
     try {
-      const result = await _transact(realValues)
+      const result = await _transact({ account, password, payload })
       sendMessage('transact', { data: result }, client)
     } catch (err) {
       const { message, field } = err
-      form.setFieldError(field, message)
+      // form.setFieldError(field, message)
     }
     dispatch(appActions.setWorking({ working: false }))
 
