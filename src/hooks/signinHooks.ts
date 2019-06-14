@@ -25,7 +25,6 @@ export const useSignin = () => {
       sendMessage('signin', { data: { account } }, client)
       sessionStorage.setItem('account', account)
       dispatch(appActions.setAccount({ account }))
-      await navigate(`/me`)
     } catch (err) {
       const { message: code, field = 'account' } = err
       setErrors({ [field]: code })
@@ -39,7 +38,8 @@ export const useSignin = () => {
     setWorking(true)
     try {
       await isValidAccount({ account, password })
-      await navigate(`/register/keychain?account=${account}`)
+      location.href = `/register/keychain?account=${account}`
+      // await navigate(`/register/keychain?account=${account}`)
     } catch (err) {
       const { message, field = 'account' } = err
       setErrors({ [field]: message })

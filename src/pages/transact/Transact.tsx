@@ -25,8 +25,10 @@ const Transact: React.SFC<Props> = (props) => {
         <Fields>
           <TxPayload payload={payload} />
           <input name="payload" readOnly defaultValue={payload} style={{ display: 'none' }} />
-          <AccountField readOnly defaultValue={account as string} />
-          <PasswordField />
+          <AccountField defaultValue={account as string} hidden />
+          <PasswordField hidden />
+          <FieldError name="account" />
+          <FieldError name="password" />
         </Fields>
         <Submit />
       </Form>

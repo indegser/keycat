@@ -7,6 +7,7 @@ import Submit from 'design/moles/fields/Submit';
 import CardLayout from 'design/layouts/CardLayout';
 import { Fields } from 'design/atoms/Input';
 import { Form } from 'design/moles/form/Form';
+import { appendSearchParamsToUrl } from 'utils/utils';
 
 interface Props {
   path: string
@@ -19,12 +20,12 @@ const Register: React.SFC<Props> = () => {
     <CardLayout title={`Import account`}>
       <Form method="post" noValidate onSubmit={register}>
         <Fields>
-          <AccountField />
-          <PasswordField />
+          <AccountField autoComplete="off" />
+          <PasswordField autoComplete="off" />
         </Fields>
         <Submit
           sibling={() => (
-            <Link to="/signin">
+            <Link to={appendSearchParamsToUrl('/signin')}>
               Sign-in instead
             </Link>
           )}

@@ -8,6 +8,7 @@ import { Fields } from 'design/atoms/Input';
 import FieldError from 'design/moles/fields/FieldError';
 import AccountField from 'design/moles/fields/AccountField';
 import { Form } from 'design/moles/form/Form';
+import { appendSearchParamsToUrl } from 'utils/utils';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
@@ -22,7 +23,7 @@ const SigninAccount = (props) => {
         <Submit
           help="signin"
           sibling={() => (
-            <Link to="/register">
+            <Link to={appendSearchParamsToUrl('/register')}>
               Import Account
             </Link>
           )}
