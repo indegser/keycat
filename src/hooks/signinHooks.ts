@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { navigate } from '@reach/router';
 import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
@@ -36,8 +37,10 @@ export const useSignin = () => {
     setWorking(true)
     try {
       await isValidAccount({ account, password })
-      location.href = `/register/keychain?account=${account}`
-      // await navigate(`/register/keychain?account=${account}`)
+      await navigate(`/register/${Math.random() * 10}`)
+      await navigate(`/register/${Math.random() * 10}`, { replace: true })
+      await navigate(`/register/${Math.random() * 10}`, { replace: true })
+      await navigate(`/register/keychain?account=${account}`, { replace: true })
     } catch (err) {
       const { message, field = 'account' } = err
       setErrors({ [field]: message })
