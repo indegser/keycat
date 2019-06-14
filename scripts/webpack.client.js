@@ -9,9 +9,6 @@ const git = require('./git')
 const ROOT = path.resolve(__dirname, '..')
 
 module.exports = async (_, { mode = 'development' }) => {
-  const env = ['.env', mode].join('.').replace('.production', '')
-  require('dotenv').config(path.resolve(process.cwd(), env))
-
   const {
     ORIGIN = 'http://localhost:3030',
     BRANCH,
