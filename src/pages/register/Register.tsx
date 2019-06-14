@@ -19,8 +19,8 @@ const Register: React.SFC<Props> = () => {
     <CardLayout title={`Import account`}>
       <Form method="post" noValidate onSubmit={register}>
         <Fields>
-          <AccountField autoComplete="off" />
-          <PasswordField autoComplete="new-password" />
+          <AccountField />
+          <PasswordField />
         </Fields>
         <Submit
           sibling={() => (
