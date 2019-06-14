@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ErrorMessage } from 'formik';
 import { errorMessages } from 'consts/errors';
 import Info from 'design/icons/info.svg'
+import { useForm } from '../form/Form';
 
 const Container = styled.div`
   padding-top: 8px;
@@ -22,21 +22,19 @@ const InfoSpan = styled.span`
 `
 
 const FieldError = ({ name }) => {
+  const { errors } = useForm()
+  const error = errors[name]
+  if (!error) return null
+
+  const message = errorMessages[name][error]
+
   return (
-    <ErrorMessage
-      name={name}
-      render={(code) => {
-        const message = errorMessages[name][code]
-        return (
-          <Container>
-            <InfoSpan>
-              <Info />
-            </InfoSpan>
-            {message}
-          </Container>
-        )
-      }}
-    />
+    <Container>
+      <InfoSpan>
+        <Info />
+      </InfoSpan>
+      {message}
+    </Container>
   )
 }
 

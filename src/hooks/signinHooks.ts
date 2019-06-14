@@ -5,6 +5,7 @@ import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { useEos } from './eosHooks';
 import { useKlaytn } from './klaytnHooks';
+import { useForm } from 'design/moles/form/Form';
 
 export const useSignin = () => {
   const dispatch = useDispatch()
@@ -15,10 +16,9 @@ export const useSignin = () => {
     dispatch(appActions.setWorking({ working }))
   }
 
-  const signin = useCallback(async (formData: FormData) => {
+  const signin = useCallback(async ({ values, setErrors }) => {
+    const { account, password } = values
     setWorking(true)
-    const account = formData.get('account') as string
-    const password = formData.get('password') as string
 
     try {
       await isValidAccount({ account, password })
@@ -28,7 +28,7 @@ export const useSignin = () => {
       await navigate(`/me`)
     } catch (err) {
       const { message: code, field = 'account' } = err
-      // form.setFieldError(field, code)
+      setErrors({ [field]: code })
     }
     setWorking(false)
   }, [])

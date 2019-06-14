@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { Formik, Form } from 'formik'
 import Submit from 'design/moles/fields/Submit'
 import PasswordField from 'design/moles/fields/PasswordField'
 import { useSignin } from 'hooks/signinHooks';
@@ -8,19 +7,14 @@ import CardLayout from 'design/layouts/CardLayout';
 import { Fields } from 'design/atoms/Input';
 import FieldError from 'design/moles/fields/FieldError';
 import AccountField from 'design/moles/fields/AccountField';
+import { Form } from 'design/moles/form/Form';
 
 const SigninAccount = (props) => {
   const { signin } = useSignin()
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    signin(formData)
-  }
-
   return (
     <CardLayout title={`Sign-in`}>
-      <form action="post" noValidate onSubmit={handleSubmit}>
+      <Form action="post" noValidate onSubmit={signin}>
         <Fields>
           <AccountField />
           <PasswordField />
@@ -33,7 +27,7 @@ const SigninAccount = (props) => {
             </Link>
           )}
         />
-      </form>
+      </Form>
     </CardLayout>
   );
 }
