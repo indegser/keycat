@@ -37,10 +37,7 @@ export const useSignin = () => {
     setWorking(true)
     try {
       await isValidAccount({ account, password })
-      await navigate(`/register/${Math.random() * 10}`)
-      await navigate(`/register/${Math.random() * 10}`, { replace: true })
-      await navigate(`/register/${Math.random() * 10}`, { replace: true })
-      await navigate(`/register/keychain?account=${account}`, { replace: true })
+      await navigate(`/register/keychain?account=${account}`)
     } catch (err) {
       const { message, field = 'account' } = err
       setErrors({ [field]: message })
