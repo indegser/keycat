@@ -5,6 +5,7 @@ import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { useEos } from './eosHooks';
 import { useKlaytn } from './klaytnHooks';
+import { appendSearchParamsToUrl } from 'utils/utils';
 
 export const useSignin = () => {
   const dispatch = useDispatch()
@@ -37,7 +38,7 @@ export const useSignin = () => {
     setWorking(true)
     try {
       await isValidAccount({ account, password })
-      await navigate(`/register/keychain?account=${account}`)
+      await navigate(appendSearchParamsToUrl(`/register/keychain`))
     } catch (err) {
       const { message, field = 'account' } = err
       setErrors({ [field]: message })
