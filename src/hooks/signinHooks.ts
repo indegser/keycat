@@ -38,7 +38,7 @@ export const useSignin = () => {
     setWorking(true)
     try {
       await isValidAccount({ account, password })
-      await navigate(appendSearchParamsToUrl(`/register/keychain`))
+      await navigate(appendSearchParamsToUrl(`/register/${account}`))
     } catch (err) {
       const { message, field = 'account' } = err
       setErrors({ [field]: message })

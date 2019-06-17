@@ -41,7 +41,7 @@ const App = () => {
             <Playground path="/playground" />
             <Transact path="/transact" />
             <Register path="/register" />
-            <Keychain path="/register/keychain" />
+            <Keychain path="/register/:account" />
           </Router>
         </Suspense>
         <Location>

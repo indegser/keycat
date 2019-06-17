@@ -8,7 +8,8 @@ import { getSearchParams } from 'utils/utils';
 import keychainSrc from 'assets/images/keychain.png';
 
 interface Props {
-  path: string
+  path: string;
+  account: string;
 }
 
 const ImgContainer = styled.div`
@@ -26,8 +27,7 @@ const Desc = styled.div`
   color: #777;
 `
 
-const Keychain: React.SFC<Props> = () => {
-  const { account } = getSearchParams()
+const Keychain: React.SFC<Props> = ({ account }) => {
   const { config: { client } } = useStore()
 
   const handleClick = () => {
