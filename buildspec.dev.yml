@@ -3,13 +3,15 @@ phases:
   install:
     runtime-versions:
       nodejs: 10
-  build:
     commands:
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - BRANCH=develop
       - echo build with commit ${COMMIT_REF}...
       - curl -o- -L https://yarnpkg.com/install.sh | bash
-      - yarn install
+      - ls
+      - yarn install --pure-lockfile
+  build:
+    commands:
       - yarn build
   post_build:
     commands:
