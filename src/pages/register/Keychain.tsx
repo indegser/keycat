@@ -9,7 +9,7 @@ import keychainSrc from 'assets/images/keychain.png';
 
 interface Props {
   path: string;
-  account: string;
+  account?: string;
 }
 
 const ImgContainer = styled.div`

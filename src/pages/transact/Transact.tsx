@@ -12,12 +12,13 @@ import { Form } from 'design/moles/form/Form';
 
 interface Props {
   path: string,
+  signOnly?: boolean,
 }
 
-const Transact: React.SFC<Props> = (props) => {
-  const { account, p } = getSearchParams()
-  const payload = atob(decodeURIComponent(p as string))
-  const { transact } = useTransact()
+const Transact: React.SFC<Props> = ({ signOnly }) => {
+  const { account, transaction } = getSearchParams()
+  const payload = atob(decodeURIComponent(transaction as string))
+  const { transact } = useTransact(signOnly)
 
   return (
     <CardLayout title="Sign Transaction">

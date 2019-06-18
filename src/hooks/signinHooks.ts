@@ -10,7 +10,7 @@ import { appendSearchParamsToUrl } from 'utils/utils';
 export const useSignin = () => {
   const dispatch = useDispatch()
   const { config: { client, blockchain } } = useStore()
-  const { isValidAccount } = blockchain.name.includes('eos') ? useEos() : useKlaytn()
+  const { getAuth } = blockchain.name.includes('eos') ? useEos() : useKlaytn()
 
   const setWorking = (working) => {
     dispatch(appActions.setWorking({ working }))
@@ -21,10 +21,8 @@ export const useSignin = () => {
     setWorking(true)
 
     try {
-      await isValidAccount({ account, password })
-      sendMessage('signin', { data: { account } }, client)
-      sessionStorage.setItem('account', account)
-      dispatch(appActions.setAccount({ account }))
+      const auth = await getAuth({ account, password })
+      sendMessage('signin', { data: auth }, client)
     } catch (err) {
       const { message: code, field = 'account' } = err
       setErrors({ [field]: code })

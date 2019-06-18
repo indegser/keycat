@@ -64,7 +64,7 @@ export const useEos = () => {
   const getAccounts = async (pk) => {
     try {
       const pub = await getPublicKey(pk)
-      const { account_names: accounts } = await nodeos.get(rpc => rpc.history_get_key_accounts(pub))
+      const { account_names: accounts, ...p } = await nodeos.get(rpc => rpc.history_get_key_accounts(pub))
       if (accounts.length === 0) throw ''
   
       return accounts
@@ -72,6 +72,41 @@ export const useEos = () => {
       throw errors.accountDoesNotExist
     }
   }
+
+  const getAuth = useCallback(async ({ account, password }) => {
+    try {
+      const publicKey = await getPublicKey(password)
+
+      const {
+        permissions,
+      } = await nodeos.get(rpc => rpc.get_account(account))
+
+
+      const auth = permissions.reduce((res, pm) => {
+        // skip searching permission if there's already active perm.
+        if (res.permission === 'active') return res
+
+        const { perm_name: permission, required_auth: auth } = pm
+        const { keys } = auth
+        const exist = keys.filter(({ key }) => key === publicKey).length > 0
+        if (exist) {
+          res.permission = permission
+        }
+
+        return res
+      }, {
+        permission: null,
+        publicKey,
+      })
+
+      return {
+        ...auth,
+        accountName: account,
+      }
+    } catch (err) {
+      throw errors.accountDoesNotExist
+    }
+  }, [])
   
   const isValidAccount = async ({ account, password }) => {
     if (password.length === 0) {
@@ -85,8 +120,8 @@ export const useEos = () => {
   
     return true
   }
-  
-  const transact = useCallback(async ({ account, payload, password }) => {
+
+  const transact = useCallback(async ({ account, payload, password }, signOnly) => {
     const authorization = await getAuthorization({ password, account })
     
     try {
@@ -95,6 +130,7 @@ export const useEos = () => {
         ...a,
         authorization: [authorization],
       }))
+      
       const response = await nodeos.get((rpc) => {
         const sig = new JsSignatureProvider([password]);
         const api = new Api({
@@ -105,17 +141,21 @@ export const useEos = () => {
         return api.transact({ actions }, {
           blocksBehind: 3,
           expireSeconds: 30,
+          sign: true,
+          broadcast: !signOnly,
         })
       })
   
       return response
     } catch (err) {
+      console.log(err)
       throw errors.transactionFailed
     }
   }, [])
 
   return {
     transact,
+    getAuth,
     isValidAccount,
   }
 }

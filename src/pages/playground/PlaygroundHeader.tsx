@@ -103,7 +103,7 @@ const PlaygroundHeader = () => {
           onClick={signin}
         >
           {account ? (
-            <Account account={account} size="sm" />
+            <Account account={account.accountName} size="sm" />
           ) : (
             <SigninButton>
               Sign in with

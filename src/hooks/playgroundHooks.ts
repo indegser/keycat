@@ -2,6 +2,10 @@ import { Keycat } from 'keycatjs';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { KEYCAT_ORIGIN } from 'consts/consts';
 import Caver from 'caver-js'
+import {
+  Api,
+  JsonRpc,
+} from 'eosjs';
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
 import { firestore } from 'services/Firebase';
@@ -71,8 +75,8 @@ export const usePlayground = () => {
   const signin = useCallback(async (e) => {
     e.preventDefault()
     try {
-      const { account } = await keycat.signin()
-      dispatch(playActions.setAccount({ account }))
+      const auth = await keycat.signin()
+      dispatch(playActions.setAccount({ account: auth }))
     } catch (err) {
       if (err === 'CLOSED') return;
       alert(`Failed to signin with keycat! Message: ${err.message}`)
@@ -95,27 +99,47 @@ export const usePlayground = () => {
             actions: [{
               account: `eosio.token`,
               name: `transfer`,
+              authorization: [{
+                actor: account.accountName,
+                permission: account.permission,
+              }],
               data: {
-                from: account,
+                from: account.accountName,
                 to: `donatekeycat`,
                 quantity: `${amount} EOS`,
                 memo: ``,
               }
-            }]
+            }],
           }
       }
     }
 
     try {
-      const data = await keycat.transact(account, getPayload())
-      const col = firestore.collection('donations')
+      const api = new Api({
+        rpc: new JsonRpc("https://jungle2.cryptolions.io:443"),
+        signatureProvider: {
+          getAvailableKeys: async () => [account.publicKey],
+          sign: async ({ serializedTransaction }) => {
 
+            const transaction = await api.deserializeTransactionWithActions(serializedTransaction)
+            return keycat.sign(account.accountName, transaction)
+          }
+        },
+      })
+
+      const data = await api.transact(getPayload(), {
+        blocksBehind: 3,
+        expireSeconds: 30,
+      })
+
+      // await keycat.transact(account, getPayload())
+      const col = firestore.collection('donations')
       const { id } = parseTransactionResult(data, blockchain)
   
       const ref =  await col.add({
         blockchain,
         rate,
-        account,
+        account: account.accountName,
         hash: id,
         amount,
         createdAt: new Date(),
@@ -126,6 +150,10 @@ export const usePlayground = () => {
       console.log(err)
     }
   }, [account, blockchain])
+
+  const sign = () => {
+    // await 
+  }
 
   return {
     account,

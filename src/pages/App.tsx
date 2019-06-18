@@ -40,6 +40,7 @@ const App = () => {
             <Signin path="/signin" />
             <Playground path="/playground" />
             <Transact path="/transact" />
+            <Transact path="/sign" signOnly />
             <Register path="/register" />
             <Keychain path="/register/:account" />
           </Router>
