@@ -30,6 +30,8 @@ const GitHubContainer = styled.div`
 const GitHash = styled.div`
   font-family: var(--monospace);
   margin-left: 4px;
+  font-size: 11px;
+  line-height: 13px;
 `
 
 const Right = styled.div`
@@ -62,6 +64,7 @@ const Footer = () => {
   return (
     <Container>
       <GitHubLink
+        title={`@${COMMIT_REF}`}
         href="https://github.com/EOSDAQ/keycat"
         target="_blank"
         rel="noreferrer noopener"
@@ -69,7 +72,7 @@ const Footer = () => {
         <GitHubContainer>
           <Github />
           <GitHash>
-            {`@${COMMIT_REF.slice(0, 7)}`}
+            Open-source
           </GitHash>
         </GitHubContainer>
       </GitHubLink>
