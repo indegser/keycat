@@ -3,7 +3,6 @@ import {
   createAction,
 } from 'redux-actions';
 import { getSearchParams, userAgent } from 'utils/utils';
-import { getBlockchain } from 'consts/consts';
 
 export const configActions = {
   set: createAction('config@set'),
@@ -15,7 +14,7 @@ const initialState = {
   client,
   userAgent,
   branch: BRANCH || 'local',
-  blockchain: JSON.parse(blockchain as string),
+  blockchain: !blockchain || JSON.parse(blockchain as string),
 }
 
 export type IConfigState = typeof initialState

@@ -76,7 +76,12 @@ export const usePlayground = () => {
     e.preventDefault()
     try {
       const auth = await keycat.signin()
-      dispatch(playActions.setAccount({ account: auth }))
+      let account = auth
+      if (blockchain.name === 'klaytn') {
+        account = { account: auth.address }
+      }
+
+      dispatch(playActions.setAccount({ account }))
     } catch (err) {
       if (err === 'CLOSED') return;
       alert(`Failed to signin with keycat! Message: ${err.message}`)

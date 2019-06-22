@@ -13,24 +13,6 @@ export const getDefaultNetwork = () => {
   return 'main'
 }
 
-const blockchainPresets = {
-  'klaytn-baobab': {
-    name: `klaytn-baobab`,
-    displayName: `KLAYTN BAOBAB`,
-    rpcURL: 'https://api.baobab.klaytn.net:8651',
-  },
-  'eos-jungle': {
-    name: `eos-jungle`,
-    displayName: `EOS JUNGLE`,
-    nodes: eosNetworkPreset.jungle,
-  },
-  'eos': {
-    name: 'eos',
-    displayName: `EOS`,
-    nodes: eosNetworkPreset.main,
-  }
-}
-
 export const sampleAccounts = {
   'eos-jungle': [{
     account: `junglekeycat`,
@@ -70,29 +52,6 @@ export const blockchains = [
     precision: 6,
   },
 ]
-
-interface CommonConfig {
-  name: string,
-  network?: string,
-}
-
-interface KlaytnConfig extends CommonConfig {
-  rpcURL: string,
-}
-
-interface EosConfig extends CommonConfig {
-  nodes: string[],
-}
-
-export const getBlockchain = (blockchain: KlaytnConfig|EosConfig) => {
-  const { name, network, ...config } = blockchain
-  const id = [name, network].filter(Boolean).join('-')
-  const preset = blockchainPresets[id]
-  return {
-    ...preset,
-    ...config,
-  }
-}
 
 export const isBrowser = (typeof window !== 'undefined')
 export const isPopup = !!window.opener
