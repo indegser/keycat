@@ -1,26 +1,3 @@
-export const eosNetworkPreset = {
-  'jungle': [
-    'https://jungle2.cryptolions.io:443',
-    'https://jungleapi.eossweden.se:443',
-    'https://jungle.eosn.io:443',
-    'https://eos-jungle.eosblocksmith.io:443',
-    'https://jungle.eosphere.io:443',
-  ],
-  'main': [
-    "https://eos.greymass.com",
-    ​​"https://user-api.eoseoul.io",
-    ​"https://node1.zbeos.com",
-    ​​"https://api.eoslaomao.com",
-    ​​"https://api.jeda.one",​​
-    "https://api.eosbeijing.one",
-    ​​"https://eosapi.nodepacific.com",
-    ​​"https://api-mainnet.eosgravity.com",
-    ​​"https://rpc.eosys.io",
-    ​​"https://api.eosn.io",
-    ​​"https://hapi.eosrio.io",
-  ],
-};
-
 export const KEYCAT_ORIGIN = (() => {
   switch (BRANCH) {
     case 'master':

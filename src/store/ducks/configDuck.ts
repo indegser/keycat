@@ -15,7 +15,7 @@ const initialState = {
   client,
   userAgent,
   branch: BRANCH || 'local',
-  blockchain: blockchain && getBlockchain(JSON.parse(blockchain as string)),
+  blockchain: JSON.parse(blockchain as string),
 }
 
 export type IConfigState = typeof initialState
