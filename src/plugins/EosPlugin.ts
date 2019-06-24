@@ -1,7 +1,8 @@
 import ecc from 'eosjs-ecc'
 import { errors } from 'consts/errors';
-import { JsonRpc } from 'eosjs';
+import { JsonRpc, Api } from 'eosjs';
 import { BlockchainPlugin, ISignin } from './Plugin.interface';
+import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 
 const eosNodesByNetwork = {
   'jungle': [
@@ -65,8 +66,26 @@ class EosPlugin extends BlockchainPlugin {
     }, Promise.reject())
   }
 
-  sign = () => {
+  sign = (a) => {
+    console.log(a)
+  }
 
+  transact = async ({ password }, transaction, parameters) => {
+    try {
+      return this.nodeos((rpc) => {
+        const sig = new JsSignatureProvider([password]);
+        const api = new Api({ rpc, signatureProvider: sig })
+        return api.transact(
+          transaction,
+          parameters || {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          },
+        )
+      })
+    } catch (err) {
+      throw errors.transactionFailed
+    }
   }
 
   signin = async (payload: ISignin): Promise<any> => {

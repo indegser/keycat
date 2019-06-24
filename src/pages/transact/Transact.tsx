@@ -16,16 +16,16 @@ interface Props {
 }
 
 const Transact: React.SFC<Props> = ({ signOnly }) => {
-  const { account, transaction } = getSearchParams()
-  const payload = atob(decodeURIComponent(transaction as string))
+  const { account, payload } = getSearchParams()
+  const args = atob(decodeURIComponent(payload as string))
+
   const { transact } = useTransact(signOnly)
 
   return (
     <CardLayout title="Sign Transaction">
       <Form method="post" noValidate onSubmit={transact}>
         <Fields>
-          <TxPayload payload={payload} />
-          <input name="payload" readOnly defaultValue={payload} style={{ display: 'none' }} />
+          <input name="args" readOnly defaultValue={args} style={{ display: 'none' }} />
           <AccountField defaultValue={account as string} hidden />
           <PasswordField hidden />
           <FieldError name="account" />

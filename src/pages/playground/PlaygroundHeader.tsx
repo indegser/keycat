@@ -6,7 +6,6 @@ import Account from 'design/moles/Account';
 import SelectBlockchain from './SelectBlockchain';
 import { media } from 'design/utils';
 import { images } from 'assets/images/images';
-import { useBlockchain } from 'hooks/blockchainHooks';
 
 const Container = styled.div`
   width: 100%;
@@ -91,8 +90,7 @@ const SigninButton = styled.div`
 
 const PlaygroundHeader = () => {
   const { account, signin } = usePlayground()
-  const blockchain = useBlockchain()
-  console.log(account, blockchain)
+
   return (
     <Container>
       <Logo>
@@ -105,7 +103,7 @@ const PlaygroundHeader = () => {
           onClick={signin}
         >
           {account ? (
-            <Account account={""} size="sm" />
+            <Account account={account.accountName || account.address} size="sm" />
           ) : (
             <SigninButton>
               Sign in with
