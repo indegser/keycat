@@ -25,8 +25,9 @@ class KlaytnPlugin extends BlockchainPlugin {
     return wallet
   }
 
-  sign = () => {
-
+  sign = async ({ account, password }, transaction) => {
+    return this.caver.klay.accounts
+      .signTransaction(transaction, password)
   }
 
   register = async ({ account, password }) => {
@@ -37,6 +38,13 @@ class KlaytnPlugin extends BlockchainPlugin {
   signin = async ({ account, password }: ISignin) => {
     const wallet = this.getWallet({ account, password })
     return { address: wallet.address, blockchain: 'klaytn' }
+  }
+
+  transact = async ({ password }, transaction) => {
+    const { rawTransaction } = await this.caver.klay.accounts
+      .signTransaction(transaction, password)
+    
+    return this.caver.klay.sendSignedTransaction(rawTransaction)
   }
 }
 

@@ -10,8 +10,8 @@ export interface ISign {
 }
 
 export abstract class BlockchainPlugin {
-  abstract sign: (p: ISign) => any
-  abstract signin: (p: ISignin) => Promise<any>
+  abstract sign: (p: ISign, ...any) => any
+  abstract signin: (p: ISignin, ...any) => Promise<any>
 
   abstract getIdentifier: (account: any) => string
 }
