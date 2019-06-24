@@ -13,3 +13,8 @@ export const useBlockchain = () => {
       return null;
   }
 }
+
+export const useIdentifier = () => {
+  const { play: { account } } = useStore()
+  
+}

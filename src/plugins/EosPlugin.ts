@@ -36,6 +36,10 @@ class EosPlugin extends BlockchainPlugin {
     this.nodes = eosNodesByNetwork[props.network] || props.nodes
   }
 
+  getIdentifier = (account) => {
+    return account.accountName
+  }
+
   private getPubKey = async (wif: string) => {
     try {
       return ecc.privateToPublic(wif)

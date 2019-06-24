@@ -10,6 +10,10 @@ class KlaytnPlugin extends BlockchainPlugin {
     super()
   }
 
+  getIdentifier = (account) => {
+    return account.address
+  }
+
   private getWallet = ({ account, password }) => {
     const wallet = this.caver.klay.accounts.privateKeyToAccount(password)
 
@@ -27,13 +31,12 @@ class KlaytnPlugin extends BlockchainPlugin {
 
   register = async ({ account, password }) => {
     const wallet = this.getWallet({ account, password })
-    return { address: wallet.address }
+    return { address: wallet.address, blockchain: 'klaytn' }
   }
 
   signin = async ({ account, password }: ISignin) => {
-    console.log('!!!')
     const wallet = this.getWallet({ account, password })
-    return { address: wallet.address }
+    return { address: wallet.address, blockchain: 'klaytn' }
   }
 }
 

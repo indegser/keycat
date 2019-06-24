@@ -6,4 +6,6 @@ export interface ISignin {
 export abstract class BlockchainPlugin {
   abstract sign: () => any
   abstract signin: (p: ISignin) => Promise<any>
+
+  abstract getIdentifier: (account: any) => string
 }
