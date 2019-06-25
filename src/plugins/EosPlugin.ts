@@ -81,20 +81,48 @@ class EosPlugin extends BlockchainPlugin {
     }
   }
 
-  transact = async ({ password }, transaction, parameters) => {
+  signTransaction = async ({ password, params }) => {
+    const [transaction, options] = params
+
+    const newParams = [
+      transaction,
+      {
+        ...options,
+        sign: true,
+        broadcast: false,
+      },
+    ]
+
+    try {
+      return this.transact({ password, params: newParams })
+    } catch (err) {
+      throw errors.signTransactionFailed
+    }
+  }
+
+  transact = async ({ password, params }) => {
+    const [transaction, options = {}] = params
     try {
       return this.nodeos((rpc) => {
         const sig = new JsSignatureProvider([password]);
         const api = new Api({ rpc, signatureProvider: sig })
+        const transactOptions = options
+
+        if (!transactOptions.blocksBehind) {
+          transactOptions.blocksBehind = 3
+        }
+
+        if (!transactOptions.expireSeconds) {
+          transactOptions.expireSeconds = 30
+        }
+
         return api.transact(
           transaction,
-          parameters || {
-            blocksBehind: 3,
-            expireSeconds: 30,
-          },
+          transactOptions,
         )
       })
     } catch (err) {
+      console.log(err)
       throw errors.transactionFailed
     }
   }

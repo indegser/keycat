@@ -17,6 +17,7 @@ export const errors = {
   accountDoesNotExist: new FormError(409, 'account'),
   usernameConflict: new FormError(412, 'account'),
   transactionFailed: new FormError(400, 'password'),
+  signTransactionFailed: new FormError('SIGN_TRANSACTION_FAILED', 'account'),
 }
 
 export const errorMessages = {
@@ -26,6 +27,7 @@ export const errorMessages = {
     400: `Transaction failed. Check payload and try again.`,
   },
   account: {
+    SIGN_TRANSACTION_FAILED: 'Cannot sign transaction',
     409: `Cannot find account from EOS network.`,
     412: `Account does not match with private key.`,
   }

@@ -88,7 +88,19 @@ export const usePlayground = () => {
     }
   }, [account, blockchain])
 
-  const signTransaction = useCallback(async (e, data) => {
+  const signTransaction = useCallback(async (e, transaction) => {
+    e.preventDefault()
+
+    try {
+      const result = await keycat
+        .user(account.accountName || account.address)
+        .signTransaction(transaction, { blocksBehind: 3 });
+      
+      console.log(result)
+      alert('success')
+    } catch (err) {
+      console.log(err);
+    }
 
   }, [account, blockchain])
 

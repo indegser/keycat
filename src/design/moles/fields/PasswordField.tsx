@@ -31,9 +31,7 @@ const PasswordField: React.SFC<Props> = ({ hidden, ...inputProps }) => {
         spellCheck="false"
         {...inputProps}
       />
-      {!hidden && (
-        <FieldError name="password" />
-      )}
+      <FieldError name="password" />
     </Container>
   )
 }

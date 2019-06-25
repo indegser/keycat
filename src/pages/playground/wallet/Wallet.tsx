@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Wallet = () => {
   const { play: { account } } = useStore()
-  const { sign } = usePlayground()
+  const { sign, signTransaction } = usePlayground()
 
   if (!account) return null;
 
@@ -46,7 +46,7 @@ const Wallet = () => {
       </section>
       <section>
         <JsonViewer src={tx} />
-        <button onClick={e => null}>
+        <button onClick={e => signTransaction(e, tx)}>
           Sign Transaction
         </button>
       </section>

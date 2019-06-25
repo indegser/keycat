@@ -25,9 +25,14 @@ class KlaytnPlugin extends BlockchainPlugin {
     return wallet
   }
 
-  sign = async ({ account, password }, transaction) => {
-    return this.caver.klay.accounts
-      .signTransaction(transaction, password)
+  signTransaction = async ({ password, params }) => {
+    try {
+      return this.caver.klay.accounts
+        .signTransaction(params[0], password)
+    } catch (err) {
+      console.log(err)
+      throw errors.signTransactionFailed
+    }
   }
 
   signArbitraryData = async ({ password, params }) => {
