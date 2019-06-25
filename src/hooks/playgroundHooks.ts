@@ -79,13 +79,17 @@ export const usePlayground = () => {
 
     try {
       const result = await keycat
-        .user(account.accountName)
+        .user(account.accountName || account.address)
         .signArbitraryData(data);
 
-      alert(result)
+      alert(blockchain === 'klaytn-baobab' ? result.signature : result)
     } catch (err) {
       console.log(err)
     }
+  }, [account, blockchain])
+
+  const signTransaction = useCallback(async (e, data) => {
+
   }, [account, blockchain])
 
   const signin = useCallback(async (e) => {
@@ -182,5 +186,6 @@ export const usePlayground = () => {
     donate,
     signin,
     sign,
+    signTransaction,
   }
 }

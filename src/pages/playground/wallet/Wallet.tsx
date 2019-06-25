@@ -1,18 +1,56 @@
 import React from 'react'
+import styled from 'styled-components'
 import JsonViewer from 'design/moles/JsonViewer';
 import { usePlayground } from 'hooks/playgroundHooks';
+import { useStore } from 'store/store';
+
+const Container = styled.div`
+  & section {
+    max-width: 500px;
+    margin: 80px auto;
+  }
+`
 
 const Wallet = () => {
-  const src = { hello: 'world' }
+  const { play: { account } } = useStore()
   const { sign } = usePlayground()
 
+  if (!account) return null;
+
+  const src = ['Hello', 'World']
+
+  const tx = {
+    actions: [{
+      account: `eosio.token`,
+      name: `transfer`,
+      authorization: [{
+        actor: account.accountName,
+        permission: account.permission,
+      }],
+      data: {
+        from: account.accountName,
+        to: `donatekeycat`,
+        quantity: `0.0001 EOS`,
+        memo: ``,
+      }
+    }],
+  }
+
   return (
-    <div>
-      <JsonViewer src={src} />
-      <button onClick={e => sign(e, src)}>
-        Request Arbitrary Signature
-      </button>
-    </div>
+    <Container>
+      <section>
+        <JsonViewer src={src} />
+        <button onClick={e => sign(e, src)}>
+          Request Arbitrary Signature
+        </button>
+      </section>
+      <section>
+        <JsonViewer src={tx} />
+        <button onClick={e => null}>
+          Sign Transaction
+        </button>
+      </section>
+    </Container>
   )
 }
 
