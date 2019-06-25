@@ -66,8 +66,19 @@ class EosPlugin extends BlockchainPlugin {
     }, Promise.reject())
   }
 
-  sign = (a) => {
-    console.log(a)
+  signArbitraryData = async ({ account, password, params }) => {
+    if (!password) {
+      throw errors.notFoundOnKeychain
+    }
+
+    // guard correct account and password
+    await this.signin({ account, password })
+
+    try {
+      return ecc.sign(JSON.stringify(params), password)
+    } catch (err) {
+      alert(err.message);
+    }
   }
 
   transact = async ({ password }, transaction, parameters) => {

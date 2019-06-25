@@ -38,9 +38,10 @@ const App = () => {
           <Router>
             <About path="/" />
             <Signin path="/signin" />
-            <Playground path="/playground" />
+            <Playground path="/playground/*" />
             <Transact path="/transact" />
-            <Transact path="/sign" signOnly />
+            <Transact path="/sign-transaction" />
+            <Transact path="/sign-arbitrary-data" />
             <Register path="/register" />
             <Keychain path="/register/:account" />
           </Router>

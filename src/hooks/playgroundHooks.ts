@@ -72,6 +72,22 @@ export const usePlayground = () => {
     })
   }, [blockchain])
 
+
+  const sign = useCallback(async (e, data) => {
+    e.preventDefault()
+    if (!account) return;
+
+    try {
+      const result = await keycat
+        .user(account.accountName)
+        .signArbitraryData(data);
+
+      alert(result)
+    } catch (err) {
+      console.log(err)
+    }
+  }, [account, blockchain])
+
   const signin = useCallback(async (e) => {
     e.preventDefault()
     try {
@@ -161,13 +177,10 @@ export const usePlayground = () => {
     }
   }, [account, blockchain])
 
-  const sign = () => {
-    // await 
-  }
-
   return {
     account,
     donate,
     signin,
+    sign,
   }
 }
