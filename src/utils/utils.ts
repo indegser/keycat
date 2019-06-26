@@ -7,6 +7,32 @@ export const appendSearchParamsToUrl = (url) => {
   return url + search;
 }
 
+export const mergeSearchParams = (newParams: object) => {
+  const params = getSearchParams()
+  return qs.stringify({
+    ...params,
+    ...newParams,
+  })
+}
+
+interface IBuildUrlProps {
+  pathname?: string,
+  search?: string,
+}
+
+export const buildUrl = ({ pathname, search }: IBuildUrlProps) => {
+  const url = new URL(location.href)
+  if (pathname) {
+    url.pathname = pathname
+  }
+  
+  if (search) {
+    url.search = `?${search}`
+  }
+
+  return url.href
+}
+
 export const getSearchParams = () => {
   return qs.parse(location.search)
 }

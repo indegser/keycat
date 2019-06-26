@@ -132,10 +132,20 @@ class EosPlugin extends BlockchainPlugin {
     }
   }
 
-  signin = async (payload: ISignin): Promise<any> => {
-    const { account, password } = payload
+  private guardValidAccount = async ({ account, password }) => {
     const publicKey = await this.getPubKey(password)
 
+    try {
+      const { account_names: accounts } = await this.nodeos(rpc => rpc.history_get_key_accounts(publicKey))
+      if (accounts.includes(account)) {
+        return publicKey
+      }
+    } catch (err) {
+      throw errors.signin(m => m.AccountNotFound)
+    }
+  }
+
+  private getAccountInfo = async ({ account, publicKey }) => {
     try {
       const {
         permissions,
@@ -165,7 +175,15 @@ class EosPlugin extends BlockchainPlugin {
     } catch (err) {
       throw errors.signin(m => m.AccountNotFound)
     }
+  } 
+  
+  signin = async (payload: ISignin): Promise<any> => {
+    const { account } = payload
+    const publicKey = await this.guardValidAccount(payload)
+    return this.getAccountInfo({ account, publicKey })
   }
+
+  register = this.signin
 }
 
 export default EosPlugin

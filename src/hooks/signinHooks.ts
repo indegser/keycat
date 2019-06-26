@@ -4,7 +4,7 @@ import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { useBlockchain } from './blockchainHooks';
-import { appendSearchParamsToUrl } from 'utils/utils';
+import { buildUrl, mergeSearchParams } from 'utils/utils';
 
 export const useSignin = () => {
   const dispatch = useDispatch()
@@ -37,11 +37,15 @@ export const useSignin = () => {
 
     setWorking(true)
     try {
-      await blockchain.register({ account, password })
-      await navigate(appendSearchParamsToUrl(`/register/${account}`))
+      const accountInfo = await blockchain.register({ account, password })
+      const url = buildUrl({
+        pathname: 'register/keychain',
+        search: mergeSearchParams({ data: JSON.stringify(accountInfo) }),
+      })
+
+      await navigate(url)
     } catch (err) {
-      const { message, field = 'account' } = err
-      setErrors({ [field]: message })
+      setErrors({ account: err })
     }
 
     setWorking(false)

@@ -4,8 +4,8 @@ import CardLayout from 'design/layouts/CardLayout';
 import Submit from 'design/moles/fields/Submit';
 import { sendMessage } from 'api/message';
 import { useStore } from 'store/store';
-import { getSearchParams } from 'utils/utils';
 import keychainSrc from 'assets/images/keychain.png';
+import { getSearchParams } from 'utils/utils';
 
 interface Props {
   path: string;
@@ -22,16 +22,11 @@ const ImgContainer = styled.div`
   }
 `
 
-const Desc = styled.div`
-  font-size: 12px;
-  color: #777;
-`
-
-const Keychain: React.SFC<Props> = ({ account }) => {
+const Keychain: React.SFC<Props> = () => {
   const { config: { client } } = useStore()
-
+  const { data } = getSearchParams()
   const handleClick = () => {
-    sendMessage('signin', { data: { account }}, client)
+    sendMessage('signin', { data: JSON.parse(data as string) }, client)
   }
 
   return (
