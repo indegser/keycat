@@ -8,6 +8,7 @@ import CardLayout from 'design/layouts/CardLayout';
 import { Fields } from 'design/atoms/Input';
 import { Form } from 'design/moles/form/Form';
 import { appendSearchParamsToUrl } from 'utils/utils';
+import FieldError from 'design/moles/fields/FieldError';
 
 interface Props {
   path: string
@@ -22,6 +23,7 @@ const Register: React.SFC<Props> = () => {
         <Fields>
           <AccountField autoComplete="off" />
           <PasswordField autoComplete="off" />
+          <FieldError name="register" />
         </Fields>
         <Submit
           sibling={() => (

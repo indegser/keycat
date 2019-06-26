@@ -45,7 +45,7 @@ export const useSignin = () => {
 
       await navigate(url)
     } catch (err) {
-      setErrors({ account: err })
+      setErrors({ register: err })
     }
 
     setWorking(false)
