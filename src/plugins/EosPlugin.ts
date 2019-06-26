@@ -19,7 +19,6 @@ const eosNodesByNetwork = {
     ​​"https://api.eoslaomao.com",
     ​​"https://api.jeda.one",​​
     "https://api.eosbeijing.one",
-    ​​"https://eosapi.nodepacific.com",
     ​​"https://api-mainnet.eosgravity.com",
     ​​"https://rpc.eosys.io",
     ​​"https://api.eosn.io",
@@ -34,7 +33,10 @@ class EosPlugin extends BlockchainPlugin {
   constructor(props) {
     super()
     this.config = props
-    this.nodes = eosNodesByNetwork[props.network] || props.nodes
+    
+    const { network = 'main', nodes } = props
+    const networks = Object.keys(eosNodesByNetwork)
+    this.nodes = nodes || eosNodesByNetwork[networks.includes(network) ? network : 'main']
   }
 
   getIdentifier = (account) => {
@@ -126,7 +128,6 @@ class EosPlugin extends BlockchainPlugin {
         )
       })
     } catch (err) {
-      console.log(err)
       throw errors.transactionFailed
     }
   }
@@ -139,6 +140,7 @@ class EosPlugin extends BlockchainPlugin {
       const {
         permissions,
       } = await this.nodeos(rpc => rpc.get_account(account))
+
       const auth = permissions.reduce((res, pm) => {
         // skip searching permission if there's already active perm.
         if (res.permission === 'active') return res
@@ -161,7 +163,7 @@ class EosPlugin extends BlockchainPlugin {
         accountName: account,
       }
     } catch (err) {
-      throw errors.signin(m => m.AccountNotFound, err)
+      throw errors.signin(m => m.AccountNotFound)
     }
   }
 }
