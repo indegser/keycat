@@ -24,13 +24,15 @@ interface Props {
 
 const StatusBar: React.SFC<Props> = ({ title }) => {
   return (
-    <Container>
+    <>
       <NetworkStat />
-      <Favicon fill="#222" width={76} />
-      <Title>
-        {title}
-      </Title>
-    </Container>
+      <Container>
+        <Favicon fill="#222" width={76} />
+        <Title>
+          {title}
+        </Title>
+      </Container>
+    </>
   )
 }
 
