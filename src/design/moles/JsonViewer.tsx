@@ -36,20 +36,24 @@ const JsonViewer = ({ src }) => {
       'quantity',
       'price',
     ]
-  
-    const rows = ref.current.querySelectorAll('.variable-row')
-    rows.forEach((node) => {
-      const keyNode = node.querySelector('.object-key')
-      const valueNode = node.querySelector('.variable-value')
-      const keyText = keyNode.textContent.slice(1, -1);
-  
-      const isImportant = keywords.includes(keyText)
-      if (!isImportant) return;
-  
-      valueNode.style.color = '#083ade';
-      valueNode.style.paddingRight = '0px';
-      valueNode.style.borderBottom = '1px dashed';
-    })
+    
+    try {
+      const rows = ref.current.querySelectorAll('.variable-row')
+      rows.forEach((node) => {
+        const keyNode = node.querySelector('.object-key')
+        const valueNode = node.querySelector('.variable-value')
+        const keyText = keyNode.textContent.slice(1, -1);
+    
+        const isImportant = keywords.includes(keyText)
+        if (!isImportant) return;
+    
+        valueNode.style.color = '#083ade';
+        valueNode.style.paddingRight = '0px';
+        valueNode.style.borderBottom = '1px dashed';
+      })
+    } catch (err) {
+      console.log('cannot highlight');
+    }
   }, [])
 
   useEffect(() => {
