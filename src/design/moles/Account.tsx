@@ -4,29 +4,26 @@ import Identicon from 'design/atoms/Identicon';
 
 const AccountName = styled.div`
   line-height: 16px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: .1px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-right: 20px;
 `
 
 const Container = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
+  margin: 0 16px;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 6px;
 
-  &[data-size = "sm"] {
-    ${AccountName} {
-      font-size: 15px;
-    }
-
-    svg {
-      width: 30px !important;
-      height: 30px !important;
-    }
+  svg {
+    width: 24px;
+    height: 24px;
   }
 `
 

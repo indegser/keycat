@@ -1,9 +1,9 @@
 import React from 'react'
 import RScrollbar from 'react-custom-scrollbars'
 
-export const Scrollbar = ({ children }) => {
+export const Scrollbar = ({ children, ...props }) => {
   return (
-    <RScrollbar>
+    <RScrollbar {...props}>
       {children}
     </RScrollbar>
   )

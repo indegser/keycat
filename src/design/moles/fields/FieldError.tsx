@@ -28,7 +28,6 @@ const FieldError = ({ name }) => {
   
   const {
     message,
-    rawError,
   } = error
 
   return (
@@ -36,7 +35,7 @@ const FieldError = ({ name }) => {
       <InfoSpan>
         <Info />
       </InfoSpan>
-      {message} {rawError && `(${rawError.message})`}
+      {message}
     </Container>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import TxPayload from './TxPayload';
 import Submit from 'design/moles/fields/Submit';
 import { getSearchParams } from 'utils/utils';
@@ -11,6 +11,8 @@ import FieldError from 'design/moles/fields/FieldError';
 import { Form } from 'design/moles/form/Form';
 import { useBlockchain } from 'hooks/blockchainHooks';
 import { dashCaseToCamelCase } from 'utils/stringUtils';
+import Account from 'design/moles/Account';
+import TransactMeta from './TransactMeta';
 
 interface Props {
   path: string,
@@ -19,21 +21,40 @@ interface Props {
 
 const Transact: React.SFC<Props> = ({ path }) => {
   const { account, payload } = getSearchParams()
-  const args = atob(decodeURIComponent(payload as string))
   const blockchain = useBlockchain()
-  const mode = dashCaseToCamelCase(path.slice(1))
-  const api = blockchain[mode]
-  const transact = useTransact(api)
+  
+  const {
+    api,
+    mode,
+    title,
+  } = useMemo(() => {
+    const mode = dashCaseToCamelCase(path.slice(1))
+    const api = blockchain[mode]
 
-  const handleSubmit = useCallback(({ values, ...formProps }) => {
-    if (!api) {
-      alert('잘못된 접근입니다!')
-      return;
+    const titles = {
+      'signTransaction': 'Sign Transaction',
+      'signArbitraryData': 'Sign arbitrary data',
+      'transact': 'Sign Transaction',
     }
 
+    return {
+      api,
+      mode,
+      title: titles[mode]
+    }
+  }, [])
+
+  const transact = useTransact(api)
+  
+  const params = useMemo(() => {
+    const args = atob(decodeURIComponent(payload as string))
+    return JSON.parse(args)
+  }, [])
+
+  const handleSubmit = useCallback(({ values, ...formProps }) => {
     transact.transact({
       values: {
-        params: JSON.parse(args),
+        params,
         ...values,
       },
       ...formProps,
@@ -41,7 +62,9 @@ const Transact: React.SFC<Props> = ({ path }) => {
   }, [])
 
   return (
-    <CardLayout title="Sign Transaction">
+    <CardLayout title={title}>
+      <TransactMeta account={account} />
+      <TxPayload name="Data" mode={mode} payload={params} />
       <Form method="post" noValidate onSubmit={handleSubmit}>
         <Fields>
           <AccountField defaultValue={account as string} hidden />

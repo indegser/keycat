@@ -1,30 +1,55 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import KlaytnPayload from './payload/KlaytnPayload';
-import EosPayload from './payload/EosPayload';
 import { Scrollbar } from 'design/atoms/Scrollbar';
+import JsonViewer from 'design/moles/JsonViewer';
 
 const Container = styled.div`
-  margin: 16px calc(var(--padding-x) * -1);
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  height: 240px;
+  margin: 16px;
+  border:1px solid #eee;
+  border-radius: 6px;
+  overflow: hidden;
 `;
 
 const Inner = styled.div`
+  border-radius: 4px;
 `
 
-const TxPayload = ({ payload }) => {
-  const [p] = useState(JSON.parse(payload));
+const Footnote = styled.div`
+  border-top: 1px solid #eee;
+  padding: 6px 8px;
+  font-size: 11px;
+  letter-spacing: .3px;
+  color: #565454;
+  background: #f7f7f7;
+`
+
+const Name = styled.div`
+  font-size: 13px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+  font-weight: 500;
+`
+
+const TxPayload = ({ mode, name, payload }) => {
+  const renderer = useMemo(() => {
+    switch (mode) {
+      case 'signArbitraryData':
+        return <JsonViewer src={payload} />
+      default:
+        return <JsonViewer src={payload[0]} />
+    }
+  }, [])
 
   return (
     <Container>
-      <Scrollbar>
+      <Scrollbar autoHeight autoHeightMax={240}>
         <Inner>
-          <KlaytnPayload payload={p} />
-          <EosPayload payload={p} />
+          {renderer}
         </Inner>
       </Scrollbar>
+      <Footnote>
+        Important fields and values are highlighted
+      </Footnote>
     </Container>
   );
 }
