@@ -14,8 +14,8 @@ export interface ITransact extends ISignin {
 }
 
 export abstract class BlockchainPlugin {
-  abstract sign: (p: ISign, ...any) => any
   abstract signin: (p: ISignin, ...any) => Promise<any>
+  abstract signTransaction: (p: ITransact) => Promise<any>
   abstract transact: (p: ITransact) => Promise<any>
   abstract getIdentifier: (account: any) => string
 }

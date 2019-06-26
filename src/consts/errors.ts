@@ -11,6 +11,10 @@ class FormError extends Error {
   }
 }
 
+const messagePick = () => {
+
+}
+
 export const errors = {
   invalidPassword: new FormError(412, 'password'),
   notFoundOnKeychain: new FormError(413, 'password'),
@@ -18,6 +22,26 @@ export const errors = {
   usernameConflict: new FormError(412, 'account'),
   transactionFailed: new FormError(400, 'password'),
   signTransactionFailed: new FormError('SIGN_TRANSACTION_FAILED', 'account'),
+  signin: (fn: (msgs: typeof SigninErrorMessage) => any, error?: Error) => {
+    const message = fn(SigninErrorMessage)
+    return new SigninError(message, error)
+  },
+}
+
+export enum SigninErrorMessage {
+  PasswordLengthIsZero = 'Could not retrieve account stored in Keychain.',
+  InvalidPassword = 'Invalid private key.',
+  AccountNotFound = 'Could not find your account from blockchain.',
+}
+
+export class SigninError extends Error {
+  rawError: Error
+
+  constructor(type: SigninErrorMessage, rawError: Error) {
+    super(type)
+    this.name = 'SigninError'
+    this.rawError = rawError
+  }
 }
 
 export const errorMessages = {

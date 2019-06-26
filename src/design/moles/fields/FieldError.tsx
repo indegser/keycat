@@ -25,15 +25,18 @@ const FieldError = ({ name }) => {
   const { errors } = useForm()
   const error = errors[name]
   if (!error) return null
-
-  const message = errorMessages[name][error]
+  
+  const {
+    message,
+    rawError,
+  } = error
 
   return (
     <Container>
       <InfoSpan>
         <Info />
       </InfoSpan>
-      {message}
+      {message} {rawError && `(${rawError.message})`}
     </Container>
   )
 }

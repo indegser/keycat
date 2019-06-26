@@ -27,8 +27,7 @@ export const useSignin = () => {
       })
       sendMessage('signin', { data: result }, client)
     } catch (err) {
-      const { message: code, field = 'account' } = err
-      setErrors({ [field]: code })
+      setErrors({ account: err })
     }
     setWorking(false)
   }, [])

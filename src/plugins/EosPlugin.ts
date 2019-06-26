@@ -42,10 +42,14 @@ class EosPlugin extends BlockchainPlugin {
   }
 
   private getPubKey = async (wif: string) => {
+    if (wif.length === 0) {
+      throw errors.signin(m => m.PasswordLengthIsZero)
+    }
+
     try {
       return ecc.privateToPublic(wif)
     } catch (err) {
-      throw errors.invalidPassword
+      throw errors.signin(m => m.InvalidPassword, err)
     }
   }
 
@@ -131,29 +135,33 @@ class EosPlugin extends BlockchainPlugin {
     const { account, password } = payload
     const publicKey = await this.getPubKey(password)
 
-    const {
-      permissions,
-    } = await this.nodeos(rpc => rpc.get_account(account))
-    const auth = permissions.reduce((res, pm) => {
-      // skip searching permission if there's already active perm.
-      if (res.permission === 'active') return res
-
-      const { perm_name: permission, required_auth: auth } = pm
-      const { keys } = auth
-      const exist = keys.filter(({ key }) => key === publicKey).length > 0
-      if (exist) {
-        res.permission = permission
+    try {
+      const {
+        permissions,
+      } = await this.nodeos(rpc => rpc.get_account(account))
+      const auth = permissions.reduce((res, pm) => {
+        // skip searching permission if there's already active perm.
+        if (res.permission === 'active') return res
+  
+        const { perm_name: permission, required_auth: auth } = pm
+        const { keys } = auth
+        const exist = keys.filter(({ key }) => key === publicKey).length > 0
+        if (exist) {
+          res.permission = permission
+        }
+  
+        return res
+      }, {
+        permission: null,
+        publicKey,
+      })
+  
+      return {
+        ...auth,
+        accountName: account,
       }
-
-      return res
-    }, {
-      permission: null,
-      publicKey,
-    })
-
-    return {
-      ...auth,
-      accountName: account,
+    } catch (err) {
+      throw errors.signin(m => m.AccountNotFound, err)
     }
   }
 }
