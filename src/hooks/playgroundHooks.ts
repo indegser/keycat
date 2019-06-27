@@ -2,10 +2,6 @@ import { Keycat } from 'keycatjs';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { KEYCAT_ORIGIN } from 'consts/consts';
 import Caver from 'caver-js'
-import {
-  Api,
-  JsonRpc,
-} from 'eosjs';
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
 import { firestore } from 'services/Firebase';
@@ -152,40 +148,24 @@ export const usePlayground = () => {
     }
 
     try {
-    //   const api = new Api({
-    //     rpc: new JsonRpc("https://jungle2.cryptolions.io:443"),
-    //     signatureProvider: {
-    //       getAvailableKeys: async () => [account.publicKey],
-    //       sign: async ({ serializedTransaction }) => {
-
-    //         const transaction = await api.deserializeTransactionWithActions(serializedTransaction)
-    //         return keycat.sign(account.accountName, transaction)
-    //       }
-    //     },
-    //   })
-
-    //   const data = await api.transact(getPayload(), {
-    //     blocksBehind: 3,
-    //     expireSeconds: 30,
-    //   })
-
       const data = await keycat
         .account(account.accountName)
         .transact(getPayload(), {
           blocksBehind: 3,
           expireSeconds: 30,
         })
-      // const col = firestore.collection('donations')
-      // const { id } = parseTransactionResult(data, blockchain)
+
+      const col = firestore.collection('donations')
+      const { id } = parseTransactionResult(data, blockchain)
   
-      // const ref =  await col.add({
-      //   blockchain,
-      //   rate,
-      //   account: account.accountName,
-      //   hash: id,
-      //   amount,
-      //   createdAt: new Date(),
-      // })
+      const ref =  await col.add({
+        blockchain,
+        rate,
+        account: account.accountName,
+        hash: id,
+        amount,
+        createdAt: new Date(),
+      })
 
       formik.resetForm()
     } catch (err) {
