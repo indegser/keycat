@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import ReactJsonView from 'react-json-view'
+import JsonParsedItem from './json-viewer/JsonParsedItem'
 
 const Container = styled.div`
 `
@@ -72,7 +73,8 @@ const JsonViewer = ({ src }) => {
 
   return (
     <Container ref={ref}>
-      <ReactJsonView
+      <JsonParsedItem src={src} />
+      {/* <ReactJsonView
         src={src}
         name={null}
         indentWidth={3}
@@ -96,7 +98,7 @@ const JsonViewer = ({ src }) => {
           fontFamily: 'var(--monospace)',
           wordBreak: "break-all"
         }}
-      />
+      /> */}
     </Container>
   )
 }
