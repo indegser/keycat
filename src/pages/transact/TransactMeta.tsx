@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { useStore } from 'store/store';
+import Identicon from 'design/atoms/Identicon';
+import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   border: 1px solid #eee;
@@ -8,11 +10,15 @@ const Container = styled.div`
   margin: 0 16px;
 
   & > div {
-    height: 30px;
     display: flex;
     align-items: center;
     font-size: 13px;
-    padding: 0 12px;
+    padding: 8px 12px;
+    color: #666;
+
+    code {
+      color: #222;
+    }
 
     &:first-child {
       border-bottom: 1px solid #eee;
@@ -29,7 +35,17 @@ const Account = styled.div`
 `
 
 const Request = styled.div`
+  code {
+    font-weight: bold;
+  }
+`
 
+const RequestIcon = styled.span`
+  margin-right: 12px;
+
+  svg {
+    display: block;
+  }
 `
 
 const TransactMeta = ({ account }) => {
@@ -45,21 +61,37 @@ const TransactMeta = ({ account }) => {
     }
   }, [])
 
+  const Icon = icons[isSafe ? 'lock' : 'danger']
+
   return (
     <Container>
       <Account>
-        <code>
-          {account}
-        </code>
-        's signature will be used.
+        <Identicon account={account} size={16} />
+        <span>
+          <code style={{ wordBreak: 'break-all' }}>
+            {account}
+          </code>
+          's signature will be used.
+        </span>
       </Account>
       <Request>
-        <code>
-          {origin}
-        </code>
-        <span style={{ marginLeft: 4 }}>
-          {'requested.'}
-        </span>
+        <RequestIcon
+          style={{
+            color: isSafe ? '#0bca58' : '#ff9c1e'
+          }}
+        >
+          <Icon width={isSafe ? 12 : 14} />
+        </RequestIcon>
+        <div>
+          <span>
+            <code>
+              {origin}
+            </code>
+            <span style={{ marginLeft: 4 }}>
+              {!isSafe ? `isn't using a secure connection.` : `is using secure and private connection.`}
+            </span>
+          </span>
+        </div>
       </Request>
     </Container>
   )

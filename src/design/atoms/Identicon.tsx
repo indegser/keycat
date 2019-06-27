@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import jdenticon from 'jdenticon'
 
@@ -15,10 +15,13 @@ const Container = styled.div`
 
 interface Props {
   account?: string,
+  size?: number
 }
 
-const Identicon: React.SFC<Props> = ({ account }) => {
-  const svg = account ? jdenticon.toSvg(account, 36) : ''
+const Identicon: React.SFC<Props> = ({ account, size = 36 }) => {
+  const svg = useMemo(() => {
+    return account ? jdenticon.toSvg(account, size) : ''
+  }, [account, size])
 
   return (
     <Container>

@@ -23,13 +23,6 @@ const Footnote = styled.div`
   background: #f7f7f7;
 `
 
-const Name = styled.div`
-  font-size: 13px;
-  padding-left: 16px;
-  padding-bottom: 8px;
-  font-weight: 500;
-`
-
 const TxPayload = ({ mode, name, payload }) => {
   const renderer = useMemo(() => {
     switch (mode) {
