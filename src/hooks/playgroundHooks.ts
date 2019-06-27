@@ -79,7 +79,7 @@ export const usePlayground = () => {
 
     try {
       const result = await keycat
-        .user(account.accountName || account.address)
+        .account(account.accountName || account.address)
         .signArbitraryData(data);
 
       alert(blockchain === 'klaytn-baobab' ? result.signature : result)
@@ -93,7 +93,7 @@ export const usePlayground = () => {
 
     try {
       const result = await keycat
-        .user(account.accountName || account.address)
+        .account(account.accountName || account.address)
         .signTransaction(transaction, { blocksBehind: 3 });
       
       console.log(result)
@@ -170,7 +170,7 @@ export const usePlayground = () => {
     //   })
 
       const data = await keycat
-        .user(account.accountName)
+        .account(account.accountName)
         .transact(getPayload(), {
           blocksBehind: 3,
           expireSeconds: 30,
