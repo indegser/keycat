@@ -40,7 +40,7 @@ export const useSignin = () => {
     try {
       const accountInfo = await blockchain.register({ account, password })
       const url = buildUrl({
-        pathname: 'register/keychain',
+        pathname: 'session',
         search: mergeSearchParams({ data: JSON.stringify(accountInfo) }),
       })
 
@@ -55,14 +55,14 @@ export const useSignin = () => {
   const verifyKeychain = useCallback(async ({ values, setErrors }) => {
     setWorking(true)
 
-    const verified = !!values.password;
-    if (!verified) {
-      setErrors({
-        keychain: errors.register(msgs => msgs.NotRegisteredInKeychain),
-      })
-    } else {
-      sendMessage('register', { data: JSON.parse(values.payload) }, client)
-    }
+    sendMessage('register', { data: JSON.parse(values.payload) }, client)
+    // const verified = !!values.password;
+    // if (!verified) {
+    //   setErrors({
+    //     keychain: errors.register(msgs => msgs.NotRegisteredInKeychain),
+    //   })
+    // } else {
+    // }
 
     setWorking(false)
   }, [])

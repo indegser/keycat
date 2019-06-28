@@ -43,7 +43,7 @@ const App = () => {
             <Transact path="/sign-transaction" />
             <Transact path="/sign-arbitrary-data" />
             <Register path="/register" />
-            <Keychain path="/register/:account" />
+            <Keychain path="/session" />
           </Router>
         </Suspense>
         <Location>
