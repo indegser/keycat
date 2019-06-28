@@ -24,8 +24,16 @@ export const errors = {
   signTransactionFailed: new FormError('SIGN_TRANSACTION_FAILED', 'account'),
   signin: (fn: (msgs: typeof SigninErrorMessage) => any, error?: Error) => {
     const message = fn(SigninErrorMessage)
-    return new SigninError(message, error)
+    return new KeycatError(message, error)
   },
+  register: (fn: (msgs: typeof RegisterMessage) => any) => {
+    const message = fn(RegisterMessage)
+    return new KeycatError(message)
+  }
+}
+
+enum RegisterMessage {
+  NotRegisteredInKeychain = 'It seems account is not stored in keychain. Did you \"Save Password\"?',
 }
 
 export enum SigninErrorMessage {
@@ -34,10 +42,10 @@ export enum SigninErrorMessage {
   AccountNotFound = 'Could not find your account from blockchain.',
 }
 
-export class SigninError extends Error {
+export class KeycatError extends Error {
   rawError: Error
 
-  constructor(type: SigninErrorMessage, rawError: Error) {
+  constructor(type: SigninErrorMessage, rawError?: Error) {
     super(type)
     this.name = 'SigninError'
     this.rawError = rawError

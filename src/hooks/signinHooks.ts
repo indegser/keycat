@@ -5,6 +5,7 @@ import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { useBlockchain } from './blockchainHooks';
 import { buildUrl, mergeSearchParams } from 'utils/utils';
+import { errors } from 'consts/errors';
 
 export const useSignin = () => {
   const dispatch = useDispatch()
@@ -51,8 +52,24 @@ export const useSignin = () => {
     setWorking(false)
   }, [])
 
+  const verifyKeychain = useCallback(async ({ values, setErrors }) => {
+    setWorking(true)
+
+    const verified = !!values.password;
+    if (!verified) {
+      setErrors({
+        keychain: errors.register(msgs => msgs.NotRegisteredInKeychain),
+      })
+    } else {
+      sendMessage('register', { data: JSON.parse(values.payload) }, client)
+    }
+
+    setWorking(false)
+  }, [])
+
   return {
     signin,
     register,
+    verifyKeychain,
   }
 }

@@ -33,7 +33,7 @@ export const buildUrl = ({ pathname, search }: IBuildUrlProps) => {
   return url.href
 }
 
-export const getSearchParams = () => {
+export const getSearchParams = (): any => {
   return qs.parse(location.search)
 }
 
