@@ -23,8 +23,8 @@ const Register: React.SFC<Props> = () => {
       <Breadcrumbs />
       <Form method="post" noValidate onSubmit={register}>
         <Fields>
-          <AccountField autoComplete="off" />
-          <PasswordField autoComplete="off" />
+          <AccountField />
+          <PasswordField />
           <FieldError name="register" />
         </Fields>
         <Submit

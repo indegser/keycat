@@ -6,7 +6,6 @@ import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 
 const eosNodesByNetwork = {
   'jungle': [
-    'https://jungle2.cryptolions.io:443',
     'https://jungleapi.eossweden.se:443',
     'https://jungle.eosn.io:443',
     'https://eos-jungle.eosblocksmith.io:443',

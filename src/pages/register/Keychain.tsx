@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from '@reach/router'
 import CardLayout from 'design/layouts/CardLayout';
 import Submit from 'design/moles/fields/Submit';
@@ -23,7 +23,7 @@ const Keychain: React.SFC<Props> = () => {
     <CardLayout title="Save your Account to Keychain">
       <Form onSubmit={verifyKeychain}>
         <Fields>
-          <input name="payload" value={data} aria-hidden={true} hidden />
+          <input name="payload" defaultValue={data} aria-hidden={true} hidden />
           <FieldError name="keychain" />
         </Fields>
         <Submit

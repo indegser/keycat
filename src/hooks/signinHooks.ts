@@ -44,7 +44,9 @@ export const useSignin = () => {
         search: mergeSearchParams({ data: JSON.stringify(accountInfo) }),
       })
 
-      await navigate(url)
+      await navigate(url, { state: accountInfo })
+      history.back()
+      history.forward()
     } catch (err) {
       setErrors({ register: err })
     }
