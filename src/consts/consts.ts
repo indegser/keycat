@@ -42,6 +42,7 @@ export const blockchains = [
       `eos-kylin`,
       `eos-worbli`,
       `eos-bos`,
+      `eos-telos`,
     ],
     symbol: `EOS`,
     precision: 4,

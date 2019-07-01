@@ -51,7 +51,15 @@ const eosNodesByNetwork = {
     'https://apibos.eosfengwo.com',
     'https://rpc.bos.nodepacific.com',
     'https://bos.eosphere.io',
-  ]
+  ],
+  'telos': [
+    'https://telos.eosphere.io',
+    'https://telosapi.eosmetal.io',
+    'https://api.telos.eosindex.io',
+    'https://api.telos.africa:4443',
+    'https://telos.caleos.io',
+    'https://api.telos-21zephyr.com',
+  ],
 };
 
 class EosPlugin extends BlockchainPlugin {
