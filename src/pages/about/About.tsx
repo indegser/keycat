@@ -115,10 +115,10 @@ const About: React.SFC<Props> = () => {
         <Container>
           <AboutSection>
             <Headline className="balance-text">
-              Browser is your wallet
+              Your Gateway to any Blockchain
             </Headline>
             <Secondary className="balance-text">
-              With Keycat, interacting with decentralized apps can be done inside your browser.
+              Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain.
             </Secondary>
             <GotoPlayground>
               <a href="/playground">

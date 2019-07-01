@@ -46,6 +46,11 @@ const eosNodesByNetwork = {
     // 'https://api.worbli.eosnewyork.io',
     // 'http://api.worbli.eostribe.io',
     // 'https://worbli.eosphere.io',
+  ],
+  'bos': [
+    'https://apibos.eosfengwo.com',
+    'https://rpc.bos.nodepacific.com',
+    'https://bos.eosphere.io',
   ]
 };
 
