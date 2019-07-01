@@ -48,7 +48,7 @@ const JsonParsedItem = ({ src }) => {
         {keys.map(key => {
           const value = src[key];
           return (
-            <Li>
+            <Li key={`json_data_${key}`}>
               <strong>{key}</strong>
               <JsonParsedItem src={value} />
             </Li>

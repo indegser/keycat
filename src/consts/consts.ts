@@ -60,3 +60,4 @@ export const blockchains = [
 export const isBrowser = (typeof window !== 'undefined')
 export const isPopup = !!window.opener
 export const inputHeight = 56
+export const payloadScrollHeight = 240

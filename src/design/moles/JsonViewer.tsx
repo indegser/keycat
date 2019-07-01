@@ -71,9 +71,17 @@ const JsonViewer = ({ src }) => {
     }
   }, [])
 
+  const { actions } = src;
+
   return (
+    <div>    
     <Container ref={ref}>
-      <JsonParsedItem src={src} />
+      {actions.map((action, i) => {
+        return (
+          <JsonParsedItem key={action.name + i} src={action.data} />
+        )
+      })}
+      
       {/* <ReactJsonView
         src={src}
         name={null}
@@ -100,6 +108,7 @@ const JsonViewer = ({ src }) => {
         }}
       /> */}
     </Container>
+    </div>
   )
 }
 
