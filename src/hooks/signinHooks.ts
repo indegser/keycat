@@ -4,7 +4,7 @@ import { useDispatch, useStore } from 'store/store';
 import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { useBlockchain } from './blockchainHooks';
-import { buildUrl, mergeSearchParams } from 'utils/utils';
+import { buildUrl, mergeSearchParams, userAgent } from 'utils/utils';
 import { errors } from 'consts/errors';
 
 export const useSignin = () => {
@@ -45,7 +45,10 @@ export const useSignin = () => {
       })
 
       await navigate(url, { state: accountInfo })
-      history.back()
+      if (userAgent.device.type === 'mobile') {
+        history.back()
+      }
+
       history.forward()
     } catch (err) {
       setErrors({ register: err })
