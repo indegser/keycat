@@ -17,12 +17,36 @@ const eosNodesByNetwork = {
     ​"https://node1.zbeos.com",
     ​​"https://api.eoslaomao.com",
     ​​"https://api.jeda.one",​​
-    "https://api.eosbeijing.one",
-    ​​"https://api-mainnet.eosgravity.com",
-    ​​"https://rpc.eosys.io",
-    ​​"https://api.eosn.io",
-    ​​"https://hapi.eosrio.io",
+    // "https://api.eosbeijing.one",
+    // ​​"https://api-mainnet.eosgravity.com",
+    // ​​"https://rpc.eosys.io",
+    // ​​"https://api.eosn.io",
+    // ​​"https://hapi.eosrio.io",
   ],
+  'kylin': [
+    'http://39.108.231.157:30065/v1/chain/get_info',
+    'https://api.kylin-testnet.eospacex.com/v1/chain/get_info',
+    'http://kylin.fn.eosbixin.com/v1/chain/get_info',
+    'http://api.kylin.eoseco.com/v1/chain/get_info',
+    'http://178.62.36.41:8888/v1/chain/get_info',
+    'https://api.kylin.alohaeos.com/v1/chain/get_info',
+    // 'http://api.kylin.helloeos.com.cn/v1/chain/get_info',
+    // 'https://kylin.eoscanada.com/v1/chain/get_info',
+    // 'http://api-kylin.starteos.io/v1/chain/get_info',
+    // 'http://api.kylin.eosbeijing.one:8880/v1/chain/get_info',
+    // 'http://kylin-testnet.jeda.one:8888/v1/chain/get_info',
+    // 'http://kylin.meet.one:8888/v1/chain/get_info',
+  ],
+  'worbli': [
+    'https://api.worbli.eosrio.io',
+    'https://api.worbli.eosdetroit.io',
+    'https://worbliapi.eosmetal.io',
+    'https://worbli-mainnet.eosblocksmith.io',
+    'https://worbli.eosio.sg',
+    // 'https://api.worbli.eosnewyork.io',
+    // 'http://api.worbli.eostribe.io',
+    // 'https://worbli.eosphere.io',
+  ]
 };
 
 class EosPlugin extends BlockchainPlugin {
