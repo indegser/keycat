@@ -22,7 +22,7 @@ const NetworkStat: React.SFC<Props> = () => {
   const { config: { blockchain } } = useStore()
   if (!blockchain) return null
 
-  const { name, network = 'main' } = blockchain
+  const { name, network } = blockchain
 
   return (
     <Container>
@@ -31,7 +31,7 @@ const NetworkStat: React.SFC<Props> = () => {
           {name.toUpperCase()}
         </span>
         <Network>
-          {network.slice(0, 1).toUpperCase() + network.slice(1)}
+          {network && network.slice(0, 1).toUpperCase() + network.slice(1)}
         </Network>
       </div>
     </Container>
