@@ -20,7 +20,12 @@ export const Form: React.SFC<Props> = (props) => {
     e.preventDefault()
     setErrors({})
     const formData = new FormData(e.target)
-    const values = Object.fromEntries(formData)
+    const values = {}
+    
+    formData.forEach((value, key) => {
+      values[key] = value
+    })
+
     props.onSubmit({ setErrors, values })
   }, [])
 
