@@ -1,43 +1,56 @@
 import React from 'react'
 import styled from 'styled-components'
+import { capitalize } from 'utils/stringUtils';
 
 const Ul = styled.ul`
   list-style-type: none;
-  font-size: 14px;
-  padding-left: 20px;
-  padding-bottom: 10px;
-`;
-
-const Ol = styled.ol`
-  padding-left: 10px;
-  ${({ list }) => list.length < 2 ? 'list-style-type: none;' : ''}
-  list-style-position: inside;
-  padding-bottom: 10px;
-
-  & > li > ul {
-    padding-left: 10px;
-    padding-bottom: 0px;
-  }
+  padding-left: 0px;
 `;
 
 const Li = styled.li`
-  line-height: 1.5;
+  letter-spacing: .3px;
+  margin-bottom: 8px;
 `;
 
-const Value = styled.span`
-  padding-left: 8px;
+const Key = styled.div`
+  font-size: 12px;
+  color: #888074;
+  margin-bottom: 4px;
 `;
 
-const JsonParsedItem = ({ src }) => {
+const Value = styled.div`
+  font-size: 13px;
+  font-weight: 500;
+  word-break: break-all;
+`;
+
+const ArrayItem = styled.div`
+  display: flex;
+  align-items: flex-start;
+
+  &:before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 999rem;
+    margin-right: 8px;
+    margin-top: calc((1em - 4px) / 2);
+  }
+`
+
+const JsonParsedItem = ({ src, nested = false }) => {
   if (Array.isArray(src)) {
+    if (src.length === 0) return null;
+
     return (
-      <Ol list={src}>
-        {src.map(each => (
-          <Li>
-            <JsonParsedItem src={each} />
-          </Li>
+      <div>
+        {src.map((each, i) => (
+          <ArrayItem key={i}>
+            <JsonParsedItem nested src={each} />
+          </ArrayItem>
         ))}
-      </Ol>
+      </div>
     );
   }
   
@@ -47,16 +60,27 @@ const JsonParsedItem = ({ src }) => {
       <Ul>
         {keys.map(key => {
           const value = src[key];
+          console.log(src)
+          const isStr = typeof value == 'string'
           return (
             <Li key={`json_data_${key}`}>
-              <strong>{key}</strong>
-              <JsonParsedItem src={value} />
+              <Key
+                style={{
+                  marginBottom: isStr ? 2 : 4,
+                }}
+              >
+                {capitalize(key)}
+              </Key>
+              {isStr
+                ? <Value>{src}</Value>
+                : null
+              }
             </Li>
           );
         })}
       </Ul>
     );
-  }  
+  }
   
   return (
     <Value>

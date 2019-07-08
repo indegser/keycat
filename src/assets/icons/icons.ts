@@ -5,4 +5,5 @@ export const icons = {
   setting: require('./setting.svg').default,
   danger: require('./danger.svg').default,
   lock: require('./lock.svg').default,
+  actions: require('./actions.svg').default,
 }

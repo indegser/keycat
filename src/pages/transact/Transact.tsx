@@ -13,6 +13,8 @@ import { useBlockchain } from 'hooks/blockchainHooks';
 import { dashCaseToCamelCase } from 'utils/stringUtils';
 import Account from 'design/moles/Account';
 import TransactMeta from './TransactMeta';
+import JsonViewer from 'design/moles/JsonViewer';
+import JsonParsedItem from 'design/moles/json-viewer/JsonParsedItem';
 
 interface Props {
   path: string,
@@ -51,6 +53,21 @@ const Transact: React.SFC<Props> = ({ path }) => {
     return JSON.parse(args)
   }, [])
 
+  const Payload = useMemo(() => {
+    const args = atob(decodeURIComponent(payload as string))
+    const data = JSON.parse(args)
+    
+    if (mode === 'signArbitraryData') {
+      return <JsonViewer src={data} />
+    }
+
+    if (mode === 'signTransaction') {
+      return <TxPayload payload={data[0]} />
+    }
+    
+    return <TxPayload payload={data} />
+  }, [])
+
   const handleSubmit = useCallback(({ values, ...formProps }) => {
     transact.transact({
       values: {
@@ -64,9 +81,9 @@ const Transact: React.SFC<Props> = ({ path }) => {
   return (
     <CardLayout title={title}>
       <TransactMeta account={account} />
-      <TxPayload name="Data" mode={mode} payload={params} />
       <Form method="post" noValidate onSubmit={handleSubmit}>
         <Fields>
+          {Payload}
           <AccountField defaultValue={account as string} hidden />
           <PasswordField hidden />
           <FieldError name="account" />

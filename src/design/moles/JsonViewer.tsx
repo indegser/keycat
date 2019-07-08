@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import ReactJsonView from 'react-json-view'
-import JsonParsedItem from './json-viewer/JsonParsedItem'
 
 const Container = styled.div`
 `
@@ -28,6 +27,12 @@ const theme = {
 const JsonViewer = ({ src }) => {
   const ref = useRef(null)
 
+  const stripQuotes = useCallback((nodes) => {
+    nodes.forEach((node) => {
+      node.textContent = node.textContent.replace(/"/g, "")
+    })
+  }, [])
+
   const highlightKeywords = useCallback(() => {
     const keywords = [
       'account', 
@@ -39,19 +44,11 @@ const JsonViewer = ({ src }) => {
     ]
     
     try {
-      const rows = ref.current.querySelectorAll('.variable-row')
-      rows.forEach((node) => {
-        const keyNode = node.querySelector('.object-key')
-        const valueNode = node.querySelector('.variable-value')
-        const keyText = keyNode.textContent.slice(1, -1);
-    
-        const isImportant = keywords.includes(keyText)
-        if (!isImportant) return;
-    
-        valueNode.style.color = '#083ade';
-        valueNode.style.paddingRight = '0px';
-        valueNode.style.borderBottom = '1px dashed';
-      })
+      const viewer = ref.current
+      const keyNodes = viewer.querySelectorAll('.object-key')
+      const valueNodes = viewer.querySelectorAll('.variable-value')
+      stripQuotes(keyNodes)
+      stripQuotes(valueNodes)
     } catch (err) {
       console.log('cannot highlight');
     }
@@ -71,24 +68,15 @@ const JsonViewer = ({ src }) => {
     }
   }, [])
 
-  const { actions } = src;
-
   return (
-    <div>    
     <Container ref={ref}>
-      {actions.map((action, i) => {
-        return (
-          <JsonParsedItem key={action.name + i} src={action.data} />
-        )
-      })}
-      
-      {/* <ReactJsonView
+      <ReactJsonView
         src={src}
         name={null}
-        indentWidth={3}
+        indentWidth={2}
         enableClipboard={false}
         displayDataTypes={false}
-        displayObjectSize={false}
+        // displayObjectSize={false}
         shouldCollapse={(field) => {
           const { name } = field
           switch (name) {
@@ -98,7 +86,7 @@ const JsonViewer = ({ src }) => {
               return false;
           }
         }}
-        theme={theme}
+        // theme={theme}
         style={{
           padding: `8px`,
           fontSize: 13,
@@ -106,9 +94,8 @@ const JsonViewer = ({ src }) => {
           fontFamily: 'var(--monospace)',
           wordBreak: "break-all"
         }}
-      /> */}
+      />
     </Container>
-    </div>
   )
 }
 
