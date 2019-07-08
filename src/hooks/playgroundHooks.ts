@@ -59,9 +59,66 @@ export const usePlayground = () => {
 
   const keycat = useMemo(() => {
     const [name, network] = blockchain.split('-')
-    const KeycatLib = network === 'jungle' ? Keycat.EosCustom : Keycat.Eos
+    
+    if (name === 'eos' && !network) {
+      return new Keycat.Eos([
+        'https://eos.greymass.com',
+        ​​'https://user-api.eoseoul.io',
+        ​'https://node1.zbeos.com',
+        ​​'https://api.eoslaomao.com',
+        ​​'https://api.jeda.one',​​
+      ])
+    }
 
-    return new KeycatLib([
+    if (network === 'jungle') {
+      return new Keycat.EosJungle([
+        'https://jungleapi.eossweden.se:443',
+        'https://jungle.eosn.io:443',
+        'https://eos-jungle.eosblocksmith.io:443',
+        'https://jungle.eosphere.io:443',
+      ])
+    }
+
+    if (network === 'kylin') {
+      return new Keycat.EosKylin([
+        'https://api.kylin.alohaeos.com',
+        'http://api.kylin.helloeos.com.cn',
+        'https://kylin.eoscanada.com',
+        'http://api-kylin.starteos.io',
+        'http://api.kylin.eosbeijing.one:8880',
+      ])
+    }
+
+    if (network === 'worbli') {
+      return new Keycat.Worbli([
+        'https://api.worbli.eosrio.io',
+        'https://api.worbli.eosdetroit.io',
+        'https://worbliapi.eosmetal.io',
+        'https://worbli-mainnet.eosblocksmith.io',
+        'https://worbli.eosio.sg',
+      ])
+    }
+
+    if (network === 'bos') {
+      return new Keycat.Bos([
+        'https://apibos.eosfengwo.com',
+        'https://rpc.bos.nodepacific.com',
+        'https://bos.eosphere.io',
+      ])
+    }
+
+    if (network === 'telos') {
+      return new Keycat.Telos([
+        'https://telos.eosphere.io',
+        'https://telosapi.eosmetal.io',
+        'https://api.telos.eosindex.io',
+        'https://api.telos.africa:4443',
+        'https://telos.caleos.io',
+        'https://api.telos-21zephyr.com',
+      ])
+    }
+
+    return new Keycat.EosCustom([
       'https://jungleapi.eossweden.se:443',
       'https://jungle.eosn.io:443',
       'https://eos-jungle.eosblocksmith.io:443',

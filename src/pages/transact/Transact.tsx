@@ -11,10 +11,8 @@ import FieldError from 'design/moles/fields/FieldError';
 import { Form } from 'design/moles/form/Form';
 import { useBlockchain } from 'hooks/blockchainHooks';
 import { dashCaseToCamelCase } from 'utils/stringUtils';
-import Account from 'design/moles/Account';
 import TransactMeta from './TransactMeta';
 import JsonViewer from 'design/moles/JsonViewer';
-import JsonParsedItem from 'design/moles/json-viewer/JsonParsedItem';
 
 interface Props {
   path: string,
