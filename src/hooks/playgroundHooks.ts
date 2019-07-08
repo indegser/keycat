@@ -59,13 +59,14 @@ export const usePlayground = () => {
 
   const keycat = useMemo(() => {
     const [name, network] = blockchain.split('-')
-    return new Keycat({
-      blockchain: {
-        name,
-        network,
-      },
-      __keycatOrigin: KEYCAT_ORIGIN
-    })
+    const KeycatLib = network === 'jungle' ? Keycat.EosCustom : Keycat.Eos
+
+    return new KeycatLib([
+      'https://jungleapi.eossweden.se:443',
+      'https://jungle.eosn.io:443',
+      'https://eos-jungle.eosblocksmith.io:443',
+      'https://jungle.eosphere.io:443',
+    ], 'http://localhost:3030')
   }, [blockchain])
 
 

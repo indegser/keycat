@@ -4,7 +4,7 @@ import KlaytnPlugin from "plugins/KlaytnPlugin";
 
 export const useBlockchain = () => {
   const { config: { blockchain } } = useStore()
-  switch (blockchain.name) {
+  switch (blockchain.plugin || blockchain.name) {
     case 'eos':
       return new EosPlugin(blockchain)
     case 'klaytn':

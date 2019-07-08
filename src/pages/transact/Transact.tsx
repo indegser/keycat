@@ -65,7 +65,7 @@ const Transact: React.SFC<Props> = ({ path }) => {
       return <TxPayload payload={data[0]} />
     }
     
-    return <TxPayload payload={data} />
+    return <TxPayload payload={data[0]} />
   }, [])
 
   const handleSubmit = useCallback(({ values, ...formProps }) => {

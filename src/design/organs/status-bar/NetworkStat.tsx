@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStore } from 'store/store';
+import { dashCaseToCamelCase, capitalize } from 'utils/stringUtils';
 
 interface Props {
 
@@ -23,16 +24,23 @@ const NetworkStat: React.SFC<Props> = () => {
   if (!blockchain) return null
 
   const { name, network } = blockchain
-
-  return (
-    <Container>
-      <div>
+  
+  
+  const displayName = network ? (
+      <>
         <span>
           {name.toUpperCase()}
         </span>
         <Network>
           {network && network.slice(0, 1).toUpperCase() + network.slice(1)}
         </Network>
+      </>
+    ) : capitalize(dashCaseToCamelCase(name))
+
+  return (
+    <Container>
+      <div>
+        {displayName}
       </div>
     </Container>
   )
