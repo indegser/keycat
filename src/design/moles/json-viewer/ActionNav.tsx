@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { capitalize } from 'utils/stringUtils';
 import { icons } from 'assets/icons/icons';
@@ -32,6 +32,7 @@ const NavItem = styled.div`
   margin-left: -1px;
   color: rgb(116, 129, 141);
   cursor: default;
+  user-select: none;
   transition: .3s color ease, .2s border-color ease;
 
   // &:hover {
@@ -39,6 +40,8 @@ const NavItem = styled.div`
   // }
 
   &[data-current=true] {
+    cursor: default;
+    pointer-events: none;
     color: var(--primary-color);
     border-color: var(--primary-color);
   }
@@ -51,10 +54,21 @@ const Item = styled.div`
   padding-left: 14px;
 `
 
-const ActionNav = ({ actions }) => {
+const ActionNav = ({ actions, navigation, setNavigation }) => {
   if (!actions) {
     return null
   }
+
+  const {
+    focusedIndex,
+  } = navigation
+
+  const handleClick = useCallback((i) => {
+    setNavigation({
+      ...navigation,
+      lastClicked: i,
+    })
+  }, [focusedIndex])
 
   return (
     <Container>
@@ -68,6 +82,7 @@ const ActionNav = ({ actions }) => {
         return (
           <NavItem
             key={action.name + i}
+            data-current={i === focusedIndex}
           >
             <Item>
               {capitalize(action.name)}

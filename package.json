@@ -27,6 +27,7 @@
     "react-dom": "^16.8",
     "react-markdown": "^4.0.8",
     "react-svg-loader": "^3.0.1",
+    "react-waypoint": "^9.0.2",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "scrypt": "^6.0.3",

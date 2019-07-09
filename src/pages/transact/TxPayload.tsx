@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Scrollbar } from 'design/atoms/Scrollbar'
-import JsonViewer from 'design/moles/JsonViewer'
 import ActionNav from 'design/moles/json-viewer/ActionNav'
 import { payloadScrollHeight } from 'consts/consts';
+import TransactCard from './TransactCard';
 
 const Wrap = styled.div``;
 
@@ -17,43 +17,46 @@ const Container = styled.div`
   flex: 1 1;
 `;
 
-const ActionCard = styled.div`
-  & + & {
-    border-top: 1px solid #eee;
-    padding-top: 12px;
-  }
-`
-
-const ActionTitle = styled.div`
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 16px;
-`
-
 const TxPayload = ({ payload }) => {
   const { actions } = payload
+  const [navigation, setNavigation] = useState({
+    focusedIndex: 0,
+    lastClicked: null,
+  })
+
+  const handleTransactCardEnter = useCallback((i) => {
+    setNavigation({
+      ...navigation,
+      focusedIndex: i,
+    })
+  }, [navigation.focusedIndex])
+
 
   return (
     <Wrap>
       <TxWrap>
-        <ActionNav actions={actions} />
+        <ActionNav
+          actions={actions}
+          navigation={navigation}
+          setNavigation={setNavigation}
+        />
         <Container>
           <Scrollbar
             autoHeight
             autoHeightMax={payloadScrollHeight}
           >
             {actions.map((action, i) => {
-              const { name, account } = action
+              const { name, account, data } = action
               const title = `${account}.${name}`
               return (
-                <ActionCard
+                <TransactCard
                   key={title}
-                >
-                  <ActionTitle>
-                    {title}
-                  </ActionTitle>
-                  <JsonViewer src={action.data} />
-                </ActionCard>
+                  title={title}
+                  data={data}
+                  index={i}
+                  lastClicked={navigation.lastClicked}
+                  onEnter={handleTransactCardEnter}
+                />
               )
             })}
           </Scrollbar>
