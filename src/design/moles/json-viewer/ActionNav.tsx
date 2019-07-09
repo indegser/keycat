@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { useDispatch, useStore } from 'store/store';
-import { scrollActions } from 'store/ducks/scrollDuck';
 import { capitalize } from 'utils/stringUtils';
 import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   flex: 0 0 auto;
   padding-right: 20px;
-  border-left: 1px solid rgb(230, 236, 241);
 `
 
 const LabelContainer = styled.div`
   font-size: 11px;
   color: #979cb9;
-  padding: 6px 0 6px 14px;
+  padding: 6px 0;
   display: flex;
   line-height: 15px;
   align-items: center;
@@ -31,15 +28,15 @@ const LabelContainer = styled.div`
 
 const NavItem = styled.div`
   padding: 8px 0;
-  border-left: 2px solid transparent;
+  border-left: 3px solid rgb(230, 236, 241);
   margin-left: -1px;
   color: rgb(116, 129, 141);
-  cursor: pointer;
+  cursor: default;
   transition: .3s color ease, .2s border-color ease;
 
-  &:hover {
-    color: var(--primary-color);
-  }
+  // &:hover {
+  //   color: var(--primary-color);
+  // }
 
   &[data-current=true] {
     color: var(--primary-color);
@@ -58,12 +55,7 @@ const ActionNav = ({ actions }) => {
   if (!actions) {
     return null
   }
-  const dispatch = useDispatch()
-  const { scroll: { current } } = useStore()
-  useEffect(() => {
-    dispatch(scrollActions.setActionCount(actions.length));
-  }, [actions])
-  
+
   return (
     <Container>
       <LabelContainer>
@@ -73,10 +65,11 @@ const ActionNav = ({ actions }) => {
         </span>
       </LabelContainer>
       {actions.map((action, i) => {
-        const isCurrent = i == current;
         return (
-          <NavItem data-current={isCurrent} key={action.name + i}>
-            <Item isCurrent={isCurrent}>
+          <NavItem
+            key={action.name + i}
+          >
+            <Item>
               {capitalize(action.name)}
             </Item>
           </NavItem>

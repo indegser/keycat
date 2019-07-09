@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Scrollbar } from 'design/atoms/Scrollbar'
 import JsonViewer from 'design/moles/JsonViewer'
 import ActionNav from 'design/moles/json-viewer/ActionNav'
-import { useDispatch } from 'store/store'
 import { payloadScrollHeight } from 'consts/consts';
 
 const Wrap = styled.div``;
@@ -27,23 +26,13 @@ const ActionCard = styled.div`
 
 const ActionTitle = styled.div`
   font-weight: 500;
+  margin-bottom: 8px;
   font-size: 16px;
 `
 
 const TxPayload = ({ payload }) => {
-  const dispatch = useDispatch()
-  const handleScroll = (e) => {
-    const { target } = e;
-    // dispatch(scrollActions.updateCurrent({
-    //   top: target.scrollTop,
-    //   height: target.scrollHeight,
-    // }))
-  }
-
-  console.log(payload)
-
   const { actions } = payload
-  
+
   return (
     <Wrap>
       <TxWrap>
@@ -52,13 +41,14 @@ const TxPayload = ({ payload }) => {
           <Scrollbar
             autoHeight
             autoHeightMax={payloadScrollHeight}
-            onScroll={handleScroll}
           >
-            {actions.map((action) => {
+            {actions.map((action, i) => {
               const { name, account } = action
               const title = `${account}.${name}`
               return (
-                <ActionCard key={title}>
+                <ActionCard
+                  key={title}
+                >
                   <ActionTitle>
                     {title}
                   </ActionTitle>

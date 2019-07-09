@@ -2,7 +2,7 @@
 
 ## Test accounts
 
-### Kylin
+### Jungle
 | Identifier   | Password                                            |
 | ------------ | --------------------------------------------------- |
 | lebronjames2 | 5JFJ5irexsvkmLW892DN3LcZmUYoCHm4ES7XD4zGGL3Y4mvLVU2 |
@@ -14,8 +14,9 @@
 | kitketkitket | 5JMyAG53UMb9Nz1becupF5so9M3RtUQKtpLFN84U4qitUfsaZ6M |
 | junglekeycat | 5KRv8aLAHDjdFwNG8gYa2n2Esax7nZ2dDGC8wYgEVtDjMXXXH45 |
 | donatekeycat | 5Jrb7mJQNbuFhV3SHNi7E1nJTWN9CiyFGbkCQWSKgLCYqJaozTH |
+| keycatheaven | 5JBMrR92GE8cLLhZDScNofo3kJ2PzzxD8qY1Z26Js9mD3PPELc4 |
 
-### eos-kylin.keycat.co
+### Kylin
 | Identifier   | Password                                            |
 | ------------ | --------------------------------------------------- |
 | keycatkeycat | 5JnWB6uHqkZnd82qzPnrsNWHoJvgz78RbqSZUQHpT32geg83b3b |
