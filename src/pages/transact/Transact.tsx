@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import TxPayload from './TxPayload';
+import TransactPayload from './TransactPayload';
 import Submit from 'design/moles/fields/Submit';
 import { getSearchParams } from 'utils/utils';
 import AccountField from 'design/moles/fields/AccountField';
@@ -59,10 +59,10 @@ const Transact: React.SFC<Props> = ({ path }) => {
     }
 
     if (mode === 'signTransaction') {
-      return <TxPayload payload={data[0]} />
+      return <TransactPayload payload={data[0]} />
     }
     
-    return <TxPayload payload={data[0]} />
+    return <TransactPayload payload={data[0]} />
   }, [])
 
   const handleSubmit = useCallback(({ values, ...formProps }) => {

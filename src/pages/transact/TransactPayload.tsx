@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import styled from 'styled-components'
 import { Scrollbar } from 'design/atoms/Scrollbar'
 import { payloadScrollHeight } from 'consts/consts';
@@ -17,7 +17,7 @@ const Container = styled.div`
   flex: 1 1;
 `;
 
-const TxPayload = ({ payload }) => {
+const TransactPayload = ({ payload }) => {
   const [focusedActionIndex, setFocusedActionIndex] = useState(0)
   const actions = useMemo(() => {
     return payload.actions.map(({ account, name, data }, i) => ({
@@ -53,4 +53,4 @@ const TxPayload = ({ payload }) => {
   );
 }
 
-export default TxPayload;
+export default TransactPayload;
