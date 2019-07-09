@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useCallback } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
-import ReactJsonView from 'react-json-view'
 import JsonParsedItem from './json-viewer/JsonParsedItem';
 
 const Container = styled.div`
