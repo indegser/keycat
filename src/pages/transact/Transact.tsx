@@ -16,7 +16,6 @@ import JsonViewer from 'design/moles/JsonViewer';
 
 interface Props {
   path: string,
-  signOnly?: boolean,
 }
 
 const Transact: React.SFC<Props> = ({ path }) => {

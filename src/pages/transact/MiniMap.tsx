@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { capitalize } from 'utils/stringUtils';
 import { icons } from 'assets/icons/icons';
@@ -54,21 +54,10 @@ const Item = styled.div`
   padding-left: 14px;
 `
 
-const ActionNav = ({ actions, navigation, setNavigation }) => {
+const MiniMap = ({ actions, focusedActionIndex }) => {
   if (!actions) {
     return null
   }
-
-  const {
-    focusedIndex,
-  } = navigation
-
-  const handleClick = useCallback((i) => {
-    setNavigation({
-      ...navigation,
-      lastClicked: i,
-    })
-  }, [focusedIndex])
 
   return (
     <Container>
@@ -78,14 +67,14 @@ const ActionNav = ({ actions, navigation, setNavigation }) => {
           Actions
         </span>
       </LabelContainer>
-      {actions.map((action, i) => {
+      {actions.map(({ id, name }) => {
         return (
           <NavItem
-            key={action.name + i}
-            data-current={i === focusedIndex}
+            key={id}
+            data-current={focusedActionIndex === id}
           >
             <Item>
-              {capitalize(action.name)}
+              {capitalize(name)}
             </Item>
           </NavItem>
         )
@@ -94,4 +83,4 @@ const ActionNav = ({ actions, navigation, setNavigation }) => {
   )  
 };
 
-export default ActionNav;
+export default MiniMap;

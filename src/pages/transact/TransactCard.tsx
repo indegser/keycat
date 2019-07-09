@@ -27,23 +27,12 @@ interface Props {
   title: string;
   data: object;
   index: number;
-  lastClicked: number|null,
+  id: any;
   onEnter: (index: number) => void;
 }
 
-const TransactCard: React.SFC<Props> = ({ title, data, index, onEnter, lastClicked }) => {
-  const handleEnter = () => onEnter(index)
-  const ref = useRef(null)
-
-  useEffect(() => {
-    if (lastClicked === null) return;
-
-    if (lastClicked === index) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-      })
-    }
-  }, [lastClicked])
+const TransactCard: React.SFC<Props> = ({ title, data, id, onEnter }) => {
+  const handleEnter = () => onEnter(id)
 
   return (
     <Waypoint
@@ -51,7 +40,7 @@ const TransactCard: React.SFC<Props> = ({ title, data, index, onEnter, lastClick
       bottomOffset="100px"
       onEnter={handleEnter}
     >
-      <Container ref={ref}>
+      <Container>
         <WaypointWrapper>
         </WaypointWrapper>
         <Title>
