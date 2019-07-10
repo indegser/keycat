@@ -54,6 +54,7 @@ const Meta = styled.div`
 `
 
 const Donation = ({ donation }) => {
+  return null
   const { blockchain, account, hash, amount, createdAt, rate } = donation
   const { symbol } = getBlockchainByName(blockchain)
   const href = useMemo(() => getTransactionHref(blockchain, hash), [])

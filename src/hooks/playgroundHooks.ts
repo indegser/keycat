@@ -1,6 +1,5 @@
-import { Keycat } from 'keycatjs';
+import { Keycat, _keycat } from 'keycatjs';
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { KEYCAT_ORIGIN } from 'consts/consts';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
@@ -53,31 +52,49 @@ export const useDonations = () => {
   }
 }
 
+const blockchains = {
+  eosJungle: {
+    name: 'eosJungle',
+    plugin: 'eos',
+    nodes: [
+      'https://jungleapi.eossweden.se:443',
+      'https://jungle.eosn.io:443',
+      'https://eos-jungle.eosblocksmith.io:443',
+      'https://jungle.eosphere.io:443',
+    ]
+  },
+  eos: {
+    name: 'eos',
+    plugin: 'eos',
+    nodes: [
+      'https://eos.greymass.com',
+      ​​'https://user-api.eoseoul.io',
+      ​'https://node1.zbeos.com',
+      ​​'https://api.eoslaomao.com',
+      ​​'https://api.jeda.one',​​
+    ],
+  },
+}
+
 export const usePlayground = () => {
   const { play: { account, blockchain } } = useStore()
   const dispatch = useDispatch()
 
   const keycat = useMemo(() => {
     const [name, network] = blockchain.split('-')
-    
-    if (name === 'eos' && !network) {
-      return new Keycat.Eos([
-        'https://eos.greymass.com',
-        ​​'https://user-api.eoseoul.io',
-        ​'https://node1.zbeos.com',
-        ​​'https://api.eoslaomao.com',
-        ​​'https://api.jeda.one',​​
-      ])
-    }
-
-    if (network === 'jungle') {
-      return new Keycat.EosJungle([
-        'https://jungleapi.eossweden.se:443',
-        'https://jungle.eosn.io:443',
-        'https://eos-jungle.eosblocksmith.io:443',
-        'https://jungle.eosphere.io:443',
-      ])
-    }
+    return _keycat({
+      ux: 'popup',
+      blockchain: {
+        name,
+        plugin: 'eos',
+        nodes: [
+          'https://jungleapi.eossweden.se:443',
+          'https://jungle.eosn.io:443',
+          'https://eos-jungle.eosblocksmith.io:443',
+          'https://jungle.eosphere.io:443',
+        ],
+      }
+    })
 
     if (network === 'kylin') {
       return new Keycat.EosKylin([
@@ -133,7 +150,6 @@ export const usePlayground = () => {
 
     try {
       const result = await keycat
-        .account(account.accountName || account.address)
         .signArbitraryData(data);
 
       alert(blockchain === 'klaytn-baobab' ? result.signature : result)
