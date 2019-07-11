@@ -5,7 +5,6 @@ import {
 
 const initialState = {
   working: false,
-  name: 'Keycat',
   account: sessionStorage.getItem('account'),
 }
 
