@@ -52,40 +52,26 @@ export const useDonations = () => {
   }
 }
 
-const blockchains = {
-  eosJungle: {
-    name: 'eosJungle',
-    plugin: 'eos',
-    nodes: [
-      'https://jungleapi.eossweden.se:443',
-      'https://jungle.eosn.io:443',
-      'https://eos-jungle.eosblocksmith.io:443',
-      'https://jungle.eosphere.io:443',
-    ]
-  },
-  eos: {
-    name: 'eos',
-    plugin: 'eos',
-    nodes: [
-      'https://eos.greymass.com',
-      ​​'https://user-api.eoseoul.io',
-      ​'https://node1.zbeos.com',
-      ​​'https://api.eoslaomao.com',
-      ​​'https://api.jeda.one',​​
-    ],
-  },
-}
-
 export const usePlayground = () => {
   const { play: { account, blockchain } } = useStore()
   const dispatch = useDispatch()
 
   const keycat = useMemo(() => {
-    const [name, network] = blockchain.split('-')
+    if (blockchain.includes('klaytn')) {
+      return _keycat({
+        ux: 'popup',
+        blockchain: {
+          name: blockchain,
+          plugin: 'klaytn',
+          rpcUrl: ''
+        }
+      })
+    }
+
     return _keycat({
       ux: 'popup',
       blockchain: {
-        name,
+        name: blockchain,
         plugin: 'eos',
         nodes: [
           'https://jungleapi.eossweden.se:443',
@@ -166,7 +152,6 @@ export const usePlayground = () => {
         .account(account.accountName || account.address)
         .signTransaction(transaction, { blocksBehind: 3 });
       
-      console.log(result)
       alert('success')
     } catch (err) {
       console.log(err);

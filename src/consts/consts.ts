@@ -13,25 +13,25 @@ export const blockchains = [
   {
     name: `eos`,
     types: [
-      `eos`,
-      `eosJungle`,
-      `eosKylin`,
-      `worbli`,
-      `bos`,
-      `telos`,
+      // `eos`,
+      `eos-jungle`,
+      // `eos-kylin`,
+      // `worbli`,
+      // `bos`,
+      // `telos`,
     ],
     symbol: `EOS`,
     precision: 4,
   },
-  {
-    name: `klaytn`,
-    types: [
-      `klaytn`,
-      `klaytnBaobab`,
-    ],
-    symbol: `KLAY`,
-    precision: 6,
-  },
+  // {
+  //   name: `klaytn`,
+  //   types: [
+  //     `klaytn`,
+  //     `klaytnBaobab`,
+  //   ],
+  //   symbol: `KLAY`,
+  //   precision: 6,
+  // },
 ]
 
 export const isBrowser = (typeof window !== 'undefined')
