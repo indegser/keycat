@@ -5,7 +5,6 @@ import PageLayout from 'design/layouts/PageLayout';
 import { media } from 'design/utils';
 import Features from './Features';
 import { AboutSection } from './About.styled';
-import Blockchains from './Blockchains';
 
 const Container = styled.div`
   max-width: 960px;
@@ -133,7 +132,6 @@ const About: React.SFC<Props> = () => {
             </GotoPlayground>
           </AboutSection>
           <Features />
-          <Blockchains />
         </Container>
       )}
     />

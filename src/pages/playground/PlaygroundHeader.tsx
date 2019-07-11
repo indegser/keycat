@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Favicon from 'design/icons/favicon.svg'
 import { usePlayground } from 'hooks/playgroundHooks';
 import Account from 'design/moles/Account';
 import SelectBlockchain from './SelectBlockchain';
 import { media } from 'design/utils';
 import { images } from 'assets/images/images';
+import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   width: 100%;
@@ -107,7 +107,7 @@ const PlaygroundHeader = () => {
           ) : (
             <SigninButton>
               Sign in with
-              <Favicon />
+              <icons.favicon />
             </SigninButton>
           )}
         </Signin>

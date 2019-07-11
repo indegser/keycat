@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { errorMessages } from 'consts/errors';
-import Info from 'design/icons/info.svg'
 import { useForm } from '../form/Form';
+import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   padding-top: 8px;
@@ -33,7 +32,7 @@ const FieldError = ({ name }) => {
   return (
     <Container>
       <InfoSpan>
-        <Info />
+        <icons.info />
       </InfoSpan>
       {message}
     </Container>

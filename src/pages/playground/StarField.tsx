@@ -2,7 +2,7 @@ import React from 'react'
 import Big from 'big.js'
 import styled from 'styled-components'
 import { Field } from 'formik';
-import StarIcon from 'design/icons/star.svg'
+import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -51,7 +51,7 @@ const StarField = ({ precision }) => {
                     })
                   }}
                 >
-                  <StarIcon />
+                  <icons.star />
                 </Star>
               ))}
             </Stars>

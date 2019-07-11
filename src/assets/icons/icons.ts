@@ -6,4 +6,8 @@ export const icons = {
   danger: require('./danger.svg').default,
   lock: require('./lock.svg').default,
   actions: require('./actions.svg').default,
+  info: require('./info.svg').default,
+  help: require('./help.svg').default,
+  favicon: require('./favicon.svg').default,
+  star: require('./star.svg').default,
 }

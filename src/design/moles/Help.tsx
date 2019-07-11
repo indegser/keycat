@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Markdown from 'react-markdown'
-import HelpIcon from 'design/icons/help.svg'
+import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -42,7 +42,7 @@ const Help = ({ type }) => {
   return (
     <Container>
       <HelpIconContainer>
-        <HelpIcon />
+        <icons.help />
       </HelpIconContainer>
       <HelpText>
         <Markdown source={text} />

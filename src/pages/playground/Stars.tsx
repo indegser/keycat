@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import StarIcon from 'design/icons/star.svg'
+import { icons } from 'assets/icons/icons';
 
 const Container = styled.div`
   display: grid;
@@ -30,7 +30,7 @@ const Stars = ({ rate }) => {
           key={i}
           data-starred={starred}
         >
-          <StarIcon />
+          <icons.star />
         </Star>
       ))}
     </Container>

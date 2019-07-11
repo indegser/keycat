@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Github from 'design/icons/github.svg'
 
 const Container = styled.footer`
   display: flex;
@@ -70,7 +69,6 @@ const Footer = () => {
         rel="noreferrer noopener"
       >
         <GitHubContainer>
-          <Github />
           <GitHash>
             Open-source
           </GitHash>
