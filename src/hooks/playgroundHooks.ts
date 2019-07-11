@@ -136,7 +136,6 @@ export const usePlayground = () => {
     })
   }, [blockchain])
 
-
   const sign = useCallback(async (e, data) => {
     e.preventDefault()
     if (!account) return;
@@ -154,6 +153,7 @@ export const usePlayground = () => {
   const signTransaction = useCallback(async (e, transaction) => {
     e.preventDefault()
 
+    console.log(account)
     try {
       const result = await keycat
         .account(account.accountName || account.address)
@@ -214,7 +214,7 @@ export const usePlayground = () => {
 
     try {
       const data = await keycat
-        .account(account.accountName)
+        .account(account.accountName || account.address)
         .transact(getPayload(), {
           blocksBehind: 3,
           expireSeconds: 30,
@@ -226,7 +226,7 @@ export const usePlayground = () => {
       const ref =  await col.add({
         blockchain,
         rate,
-        account: account.accountName,
+        account: account.accountName || account.address,
         hash: id,
         amount,
         createdAt: new Date(),

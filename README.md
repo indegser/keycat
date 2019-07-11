@@ -21,3 +21,7 @@
 | ------------ | --------------------------------------------------- |
 | keycatkeycat | 5JnWB6uHqkZnd82qzPnrsNWHoJvgz78RbqSZUQHpT32geg83b3b |
 | donatekeycat | 5K6jmXK56tt77toCiPUFX6xvGADhwJ2s5JFw7AHFitrQ8qVB2CJ |
+
+### KlaytnBaobab
+| Identifier | Password |
+| 0x1407592472e977887dd1f74325acd17f44eb7188 | 0x643b7eb72d5c3432ee58107f01096e10351d385f4efe777f976d0c779585bd34 |
