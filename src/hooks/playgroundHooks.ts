@@ -1,4 +1,4 @@
-import { Keycat, _keycat } from 'keycatjs';
+import { Keycat, Keycat2 } from 'keycatjs';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
@@ -52,27 +52,15 @@ export const useDonations = () => {
   }
 }
 
-export const usePlayground = () => {
-  const { play: { account, blockchain } } = useStore()
-  const dispatch = useDispatch()
-
-  const keycat = useMemo(() => {
-    if (blockchain.includes('klaytn')) {
-      return _keycat({
-        ux: 'popup',
-        blockchain: {
-          name: blockchain,
-          plugin: 'klaytn',
-          rpcUrl: ''
-        }
-      })
+const getBlockchainPayload = (blockchain) => {
+  switch (blockchain) {
+    case 'klaytn-baobab': {
+      return { rpcUrl: 'https://api.baobab.klaytn.net:8651' }
     }
-
-    return _keycat({
-      ux: 'popup',
-      blockchain: {
-        name: blockchain,
-        plugin: 'eos',
+    case 'klaytn':
+      return { rpcUrl: 'https://api.cypress.klaytn.net:8651' }
+    case 'eos-jungle':
+      return {
         nodes: [
           'https://jungleapi.eossweden.se:443',
           'https://jungle.eosn.io:443',
@@ -80,53 +68,72 @@ export const usePlayground = () => {
           'https://jungle.eosphere.io:443',
         ],
       }
+    case 'eos':
+      return {
+        nodes: [
+          'https://eos.greymass.com',
+          'https://user-api.eoseoul.io'
+        ]
+      }
+    case 'worbli': {
+      return {
+        nodes: [
+          'https://api.worbli.eosrio.io',
+          'https://api.worbli.eosdetroit.io',
+          'https://worbliapi.eosmetal.io',
+          'https://worbli-mainnet.eosblocksmith.io',
+          'https://worbli.eosio.sg',
+        ]
+      }
+    }
+    case 'bos':
+      return {
+        nodes: [
+          'https://apibos.eosfengwo.com',
+          'https://rpc.bos.nodepacific.com',
+          'https://bos.eosphere.io',
+        ]
+      }
+    case 'eos-kylin': {
+      return {
+        nodes: [
+          'https://api.kylin.alohaeos.com',
+          'http://api.kylin.helloeos.com.cn',
+          'https://kylin.eoscanada.com',
+          'http://api-kylin.starteos.io',
+          'http://api.kylin.eosbeijing.one:8880',
+        ]
+      }
+    }
+    case 'telos': {
+      return {
+        nodes: [
+          'https://telos.eosphere.io',
+          'https://telosapi.eosmetal.io',
+          'https://api.telos.eosindex.io',
+          'https://api.telos.africa:4443',
+          'https://telos.caleos.io',
+          'https://api.telos-21zephyr.com',
+        ]
+      }
+    }
+    default:
+      throw new Error('Cannot get payload of blockchain')
+  }
+}
+
+export const usePlayground = () => {
+  const { play: { account, blockchain } } = useStore()
+  const dispatch = useDispatch()
+
+  const keycat = useMemo(() => {
+    return new Keycat2({
+      ux: 'popup',
+      blockchain: {
+        name: blockchain,
+        ...getBlockchainPayload(blockchain),
+      }
     })
-
-    if (network === 'kylin') {
-      return new Keycat.EosKylin([
-        'https://api.kylin.alohaeos.com',
-        'http://api.kylin.helloeos.com.cn',
-        'https://kylin.eoscanada.com',
-        'http://api-kylin.starteos.io',
-        'http://api.kylin.eosbeijing.one:8880',
-      ])
-    }
-
-    if (network === 'worbli') {
-      return new Keycat.Worbli([
-        'https://api.worbli.eosrio.io',
-        'https://api.worbli.eosdetroit.io',
-        'https://worbliapi.eosmetal.io',
-        'https://worbli-mainnet.eosblocksmith.io',
-        'https://worbli.eosio.sg',
-      ])
-    }
-
-    if (network === 'bos') {
-      return new Keycat.Bos([
-        'https://apibos.eosfengwo.com',
-        'https://rpc.bos.nodepacific.com',
-        'https://bos.eosphere.io',
-      ])
-    }
-
-    if (network === 'telos') {
-      return new Keycat.Telos([
-        'https://telos.eosphere.io',
-        'https://telosapi.eosmetal.io',
-        'https://api.telos.eosindex.io',
-        'https://api.telos.africa:4443',
-        'https://telos.caleos.io',
-        'https://api.telos-21zephyr.com',
-      ])
-    }
-
-    return new Keycat.EosCustom([
-      'https://jungleapi.eossweden.se:443',
-      'https://jungle.eosn.io:443',
-      'https://eos-jungle.eosblocksmith.io:443',
-      'https://jungle.eosphere.io:443',
-    ], 'http://localhost:3030')
   }, [blockchain])
 
 
@@ -170,7 +177,6 @@ export const usePlayground = () => {
 
       dispatch(playActions.setAccount({ account }))
     } catch (err) {
-      if (err === 'CLOSED') return;
       alert(`Failed to signin with keycat! Message: ${err.message}`)
     }
   }, [blockchain])
