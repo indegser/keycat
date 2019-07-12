@@ -29,7 +29,15 @@ export const errors = {
   register: (fn: (msgs: typeof RegisterMessage) => any) => {
     const message = fn(RegisterMessage)
     return new KeycatError(message)
+  },
+  transact: (fn: (msgs: typeof TransactMessage) => any) => {
+    const message = fn(TransactMessage)
+    return new KeycatError(message)
   }
+}
+
+enum TransactMessage {
+
 }
 
 enum RegisterMessage {

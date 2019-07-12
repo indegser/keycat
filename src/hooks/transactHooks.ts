@@ -15,7 +15,9 @@ export const useTransact = (api) => {
       sendMessage('transact', { data: result }, client)
     } catch (err) {
       const { message, field } = err
-      setErrors({ [field]: message })
+      if (message && field) {
+        setErrors({ [field]: message })
+      }
     }
     dispatch(appActions.setWorking({ working: false }))
 

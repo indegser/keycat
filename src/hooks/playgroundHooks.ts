@@ -132,7 +132,8 @@ export const usePlayground = () => {
       blockchain: {
         name: blockchain,
         ...getBlockchainPayload(blockchain),
-      }
+      },
+      __keycatOrigin: 'http://localhost:3030'
     })
   }, [blockchain])
 
@@ -185,15 +186,15 @@ export const usePlayground = () => {
     const getPayload = () => {
       switch (blockchain) {
         case 'klaytn-baobab':
-          return {
-            from: account,
+          return [{
+            from: account.address,
             to: `0x57fdcc985f26ccc767aa4a748cd3e30bd4a77d54`,
             gasLimit: 9900000,
             gasPrice: caver.utils.toPeb('25', 'Ston'),
             value: caver.utils.toHex(caver.utils.toPeb(amount, 'KLAY'))
-          }
+          }]
         default:
-          return {
+          return [{
             actions: [{
               account: `eosio.token`,
               name: `transfer`,
@@ -208,17 +209,17 @@ export const usePlayground = () => {
                 memo: ``,
               }
             }],
-          }
+          }, {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }]
       }
     }
 
     try {
       const data = await keycat
         .account(account.accountName || account.address)
-        .transact(getPayload(), {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        })
+        .transact(...getPayload())
 
       const col = firestore.collection('donations')
       const { id } = parseTransactionResult(data, blockchain)

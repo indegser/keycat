@@ -61,11 +61,17 @@ class KlaytnPlugin extends BlockchainPlugin {
     return { address: wallet.address, blockchain: 'klaytn' }
   }
 
-  transact = async ({ password }, transaction) => {
+  transact = async ({ password, params: [transaction] }) => {
     const { rawTransaction } = await this.caver.klay.accounts
       .signTransaction(transaction, password)
-    
-    return this.caver.klay.sendSignedTransaction(rawTransaction)
+
+    try {
+      const response = await this.caver.klay.sendSignedTransaction(rawTransaction)
+      return response
+    } catch (err) {
+      alert(err.message)
+      throw err
+    }
   }
 }
 

@@ -13,6 +13,7 @@ import { useBlockchain } from 'hooks/blockchainHooks';
 import { dashCaseToCamelCase } from 'utils/stringUtils';
 import TransactMeta from './TransactMeta';
 import JsonViewer from 'design/moles/JsonViewer';
+import { useStore } from 'store/store';
 
 interface Props {
   path: string,
@@ -20,6 +21,7 @@ interface Props {
 
 const Transact: React.SFC<Props> = ({ path }) => {
   const { account, payload } = getSearchParams()
+  const { config: { blockchain: { plugin } } } = useStore()
   const blockchain = useBlockchain()
   
   const {
@@ -53,8 +55,8 @@ const Transact: React.SFC<Props> = ({ path }) => {
   const Payload = useMemo(() => {
     const args = atob(decodeURIComponent(payload as string))
     const data = JSON.parse(args)
-    
-    if (mode === 'signArbitraryData') {
+
+    if (mode === 'signArbitraryData' || plugin === 'klaytn') {
       return <JsonViewer src={data} />
     }
 
