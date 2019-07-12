@@ -1,4 +1,4 @@
-import { Keycat, Keycat2 } from 'keycatjs';
+import { Keycat } from 'keycatjs';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
@@ -127,13 +127,16 @@ export const usePlayground = () => {
   const dispatch = useDispatch()
 
   const keycat = useMemo(() => {
-    return new Keycat2({
+    // return new Keycat.EosCustom(
+    //   getBlockchainPayload(blockchain).nodes,
+    //   'https://custom.keycat.co',
+    // )
+    return new Keycat({
       ux: 'popup',
       blockchain: {
         name: blockchain,
-        ...getBlockchainPayload(blockchain),
+        ...getBlockchainPayload(blockchain) as any,
       },
-      __keycatOrigin: 'http://localhost:3030'
     })
   }, [blockchain])
 
@@ -154,7 +157,6 @@ export const usePlayground = () => {
   const signTransaction = useCallback(async (e, transaction) => {
     e.preventDefault()
 
-    console.log(account)
     try {
       const result = await keycat
         .account(account.accountName || account.address)
