@@ -165,15 +165,7 @@ class EosPlugin extends BlockchainPlugin {
 
   private guardValidAccount = async ({ account, password }) => {
     const publicKey = await this.getPubKey(password)
-
-    try {
-      const { account_names: accounts } = await this.nodeos(rpc => rpc.history_get_key_accounts(publicKey))
-      if (accounts.includes(account)) {
-        return publicKey
-      }
-    } catch (err) {
-      throw errors.signin(m => m.AccountNotFound)
-    }
+    return publicKey
   }
 
   private getAccountInfo = async ({ account, publicKey }) => {
@@ -181,7 +173,6 @@ class EosPlugin extends BlockchainPlugin {
       const {
         permissions,
       } = await this.nodeos(rpc => rpc.get_account(account))
-
       const auth = permissions.reduce((res, pm) => {
         // skip searching permission if there's already active perm.
         if (res.permission === 'active') return res
@@ -198,6 +189,8 @@ class EosPlugin extends BlockchainPlugin {
         permission: null,
         publicKey,
       })
+
+      alert(JSON.stringify(auth))
   
       return {
         ...auth,

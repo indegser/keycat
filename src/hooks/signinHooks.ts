@@ -5,7 +5,6 @@ import { appActions } from 'store/ducks/appDuck';
 import { sendMessage } from 'api/message';
 import { useBlockchain } from './blockchainHooks';
 import { buildUrl, mergeSearchParams, userAgent } from 'utils/utils';
-import { errors } from 'consts/errors';
 
 export const useSignin = () => {
   const dispatch = useDispatch()
@@ -26,6 +25,7 @@ export const useSignin = () => {
         account,
         password,
       })
+
       sendMessage('signin', { data: result }, client)
     } catch (err) {
       setErrors({ account: err })
