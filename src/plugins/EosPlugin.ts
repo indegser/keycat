@@ -190,8 +190,6 @@ class EosPlugin extends BlockchainPlugin {
         publicKey,
       })
 
-      alert(JSON.stringify(auth))
-  
       return {
         ...auth,
         accountName: account,
