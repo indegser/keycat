@@ -5,6 +5,7 @@ import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
 import { firestore } from 'services/Firebase';
 import { parseTransactionResult } from 'utils/blockchain';
+import { KEYCAT_ORIGIN } from 'consts/consts';
 
 const caver = new Caver()
 
@@ -134,8 +135,8 @@ export const usePlayground = () => {
     return new Keycat({
       ux: 'popup',
       blockchain: {
-        name: 'http://localhost:3030',
-        plugin: 'eos',
+        name: KEYCAT_ORIGIN || blockchain,
+        plugin: blockchain.split('-')[0],
         ...getBlockchainPayload(blockchain) as any,
       },
     })
