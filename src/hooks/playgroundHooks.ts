@@ -134,7 +134,8 @@ export const usePlayground = () => {
     return new Keycat({
       ux: 'popup',
       blockchain: {
-        name: blockchain,
+        name: 'http://localhost:3030',
+        plugin: 'eos',
         ...getBlockchainPayload(blockchain) as any,
       },
     })

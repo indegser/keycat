@@ -14,10 +14,7 @@ export const useTransact = (api) => {
       const result = await api(values)
       sendMessage('transact', { data: result }, client)
     } catch (err) {
-      const { message, field } = err
-      if (message && field) {
-        setErrors({ [field]: message })
-      }
+      setErrors({ account: err })
     }
     dispatch(appActions.setWorking({ working: false }))
 

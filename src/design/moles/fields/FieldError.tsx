@@ -23,6 +23,7 @@ const InfoSpan = styled.span`
 const FieldError = ({ name }) => {
   const { errors } = useForm()
   const error = errors[name]
+
   if (!error) return null
   
   const {

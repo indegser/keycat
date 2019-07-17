@@ -139,6 +139,8 @@ class EosPlugin extends BlockchainPlugin {
 
   transact = async ({ password, params }) => {
     const [transaction, options = {}] = params
+    await this.guardValidAccount({ password })
+
     try {
       return this.nodeos((rpc) => {
         const sig = new JsSignatureProvider([password]);
@@ -163,7 +165,7 @@ class EosPlugin extends BlockchainPlugin {
     }
   }
 
-  private guardValidAccount = async ({ account, password }) => {
+  private guardValidAccount = async ({ password }) => {
     const publicKey = await this.getPubKey(password)
     return publicKey
   }
