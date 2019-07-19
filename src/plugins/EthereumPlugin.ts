@@ -11,7 +11,7 @@ class EthereumPlugin extends BlockchainPlugin {
 
   constructor(private config: EthereumConfig) {
     super()
-    this.provider = ethers.getDefaultProvider(this.config.name)
+    this.provider = ethers.getDefaultProvider(this.config.name.replace('ethereum', 'homestead'))
   }
 
   getWallet = (password) => {

@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
-import { firestore } from 'services/Firebase';
+import { firestore, fetchBlockchainsFromFirebase } from 'services/Firebase';
 import { parseTransactionResult } from 'utils/blockchain';
 import { KEYCAT_ORIGIN } from 'consts/consts';
 
@@ -53,96 +53,38 @@ export const useDonations = () => {
   }
 }
 
-const getBlockchainPayload = (blockchain) => {
-  switch (blockchain) {
-    case 'ropsten': {
-      return { plugin: 'ethereum' }
-    }
-
-    case 'klaytn-baobab': {
-      return { rpcUrl: 'https://api.baobab.klaytn.net:8651' }
-    }
-    case 'klaytn':
-      return { rpcUrl: 'https://api.cypress.klaytn.net:8651' }
-    case 'eos-jungle':
-      return {
-        nodes: [
-          'https://jungleapi.eossweden.se:443',
-          'https://jungle.eosn.io:443',
-          'https://eos-jungle.eosblocksmith.io:443',
-          'https://jungle.eosphere.io:443',
-        ],
-      }
-    case 'eos':
-      return {
-        nodes: [
-          'https://eos.greymass.com',
-          'https://user-api.eoseoul.io'
-        ]
-      }
-    case 'worbli': {
-      return {
-        nodes: [
-          'https://api.worbli.eosrio.io',
-          'https://api.worbli.eosdetroit.io',
-          'https://worbliapi.eosmetal.io',
-          'https://worbli-mainnet.eosblocksmith.io',
-          'https://worbli.eosio.sg',
-        ]
-      }
-    }
-    case 'bos':
-      return {
-        nodes: [
-          'https://apibos.eosfengwo.com',
-          'https://rpc.bos.nodepacific.com',
-          'https://bos.eosphere.io',
-        ]
-      }
-    case 'eos-kylin': {
-      return {
-        nodes: [
-          'https://api.kylin.alohaeos.com',
-          'http://api.kylin.helloeos.com.cn',
-          'https://kylin.eoscanada.com',
-          'http://api-kylin.starteos.io',
-          'http://api.kylin.eosbeijing.one:8880',
-        ]
-      }
-    }
-    case 'telos': {
-      return {
-        nodes: [
-          'https://telos.eosphere.io',
-          'https://telosapi.eosmetal.io',
-          'https://api.telos.eosindex.io',
-          'https://api.telos.africa:4443',
-          'https://telos.caleos.io',
-          'https://api.telos-21zephyr.com',
-        ]
-      }
-    }
-    default:
-      throw new Error('Cannot get payload of blockchain')
-  }
-}
-
 export const usePlayground = () => {
-  const { play: { account, blockchain } } = useStore()
+  const { play: { account, blockchain, blockchains } } = useStore()
   const dispatch = useDispatch()
 
+  const fetchBlockchains = useCallback(async () => {
+    const entries = await fetchBlockchainsFromFirebase()
+    const entities = entries.reduce((res, blockchain) => {
+      const { id, name, testnets, ...options } = blockchain
+      res[name] = blockchain
+      for (const testnet of testnets) {
+        res[`${name}-${testnet.name}`] = {
+          ...options,
+          ...testnet,
+        }
+      }
+
+      return res
+    }, {})
+
+    dispatch(playActions.setBlockchains({ blockchains: { entities, entries } }))
+  }, [])
+
   const keycat = useMemo(() => {
-    // return new Keycat.EosCustom(
-    //   getBlockchainPayload(blockchain).nodes,
-    //   'https://custom.keycat.co',
-    // )
+    if (!blockchains) return null
+    const { name, ...chain } = blockchains.entities[blockchain]
 
     return new Keycat({
       ux: 'popup',
       blockchain: {
-        name: blockchain,
-        plugin: blockchain.split('-')[0],
-        ...getBlockchainPayload(blockchain) as any,
+        name,
+        ...chain,
+        plugin: blockchain.split('-')[0] as any,
       },
       __keycatOrigin: KEYCAT_ORIGIN,
     })
@@ -262,5 +204,6 @@ export const usePlayground = () => {
     signin,
     sign,
     signTransaction,
+    fetchBlockchains,
   }
 }

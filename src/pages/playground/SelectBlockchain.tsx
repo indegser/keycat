@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useDispatch, useStore } from 'store/store';
-import { blockchains } from 'consts/consts';
 import { playActions } from 'store/ducks/playDuck';
 import Select from 'design/atoms/Select';
 import { media } from 'design/utils';
+import { capitalize } from 'utils/stringUtils';
 
 const Container = styled.div`
   grid-area: select;
@@ -16,12 +16,14 @@ const Container = styled.div`
 `
 
 const SelectBlockchain = () => {
-  const { play: { blockchain } } = useStore()
+  const { play: { blockchain, blockchains } } = useStore()
   const dispatch = useDispatch()
 
   const handleChange = ({ target: { value: blockchain } }) => {
     dispatch(playActions.setBlockchain({ blockchain }))
   }
+
+  if (!blockchains) return 'loading...'
 
   return (
     <Container>
@@ -29,15 +31,20 @@ const SelectBlockchain = () => {
         onChange={handleChange}
         value={blockchain}
       >
-        {blockchains.map(({ name, types }) => (
-          types.map((type) => (
+        {blockchains.entries.map(({ name, testnets }) => (
+          <optgroup key={name} label={capitalize(name)}>
             <option
-              key={type}
-              value={type}
+              key={name}
+              value={name}
             >
-              {type}
+              {capitalize(name)}
             </option>
-          ))
+            {testnets.map(({ name: testnetName }) => (
+              <option key={testnetName} value={`${name}-${testnetName}`}>
+                {capitalize(testnetName)}
+              </option>
+            ))}
+          </optgroup>
         ))}
       </Select>
     </Container>
