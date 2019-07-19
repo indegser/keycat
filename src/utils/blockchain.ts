@@ -4,6 +4,14 @@ export const parseTransactionResult = (data, blockchain) => {
       id: data.transaction_id,
     }
   }
+
+  switch (blockchain) {
+    case 'ethereum':
+    case 'ropsten':
+      return {
+        id: data.hash
+      }
+  }
   return {
     id: data.transactionHash,
   }

@@ -56,7 +56,7 @@ const Transact: React.SFC<Props> = ({ path }) => {
     const args = atob(decodeURIComponent(payload as string))
     const data = JSON.parse(args)
 
-    if (mode === 'signArbitraryData' || plugin === 'klaytn') {
+    if (mode === 'signArbitraryData' || plugin !== 'eos') {
       return <JsonViewer src={data} />
     }
 

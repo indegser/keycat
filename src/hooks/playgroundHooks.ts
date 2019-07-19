@@ -55,6 +55,10 @@ export const useDonations = () => {
 
 const getBlockchainPayload = (blockchain) => {
   switch (blockchain) {
+    case 'ropsten': {
+      return { plugin: 'ethereum' }
+    }
+
     case 'klaytn-baobab': {
       return { rpcUrl: 'https://api.baobab.klaytn.net:8651' }
     }
@@ -132,13 +136,15 @@ export const usePlayground = () => {
     //   getBlockchainPayload(blockchain).nodes,
     //   'https://custom.keycat.co',
     // )
+
     return new Keycat({
       ux: 'popup',
       blockchain: {
-        name: KEYCAT_ORIGIN || blockchain,
+        name: blockchain,
         plugin: blockchain.split('-')[0],
         ...getBlockchainPayload(blockchain) as any,
       },
+      __keycatOrigin: KEYCAT_ORIGIN,
     })
   }, [blockchain])
 
@@ -174,12 +180,7 @@ export const usePlayground = () => {
   const signin = useCallback(async (e) => {
     e.preventDefault()
     try {
-      const auth = await keycat.signin()
-      let account = auth
-      if (blockchain.name === 'klaytn') {
-        account = { account: auth.address }
-      }
-
+      const account = await keycat.signin()
       dispatch(playActions.setAccount({ account }))
     } catch (err) {
       alert(`Failed to signin with keycat! Message: ${err.message}`)
@@ -197,6 +198,18 @@ export const usePlayground = () => {
             gasPrice: caver.utils.toPeb('25', 'Ston'),
             value: caver.utils.toHex(caver.utils.toPeb(amount, 'KLAY'))
           }]
+        case 'ethereum':
+        case 'ropsten': {
+          return [{
+            nonce: Math.random() * 100000000000000,
+            gasLimit: 21000,
+            gasPrice: '0x04a817c800',
+            to: '0xbac2A0348f4FBB6ce73905D7A56456CB55f4B870',
+            value: '0x02540be400',
+            data: '0x'
+          }]
+        }
+
         default:
           return [{
             actions: [{
@@ -228,7 +241,7 @@ export const usePlayground = () => {
       const col = firestore.collection('donations')
       const { id } = parseTransactionResult(data, blockchain)
   
-      const ref =  await col.add({
+      await col.add({
         blockchain,
         rate,
         account: account.accountName || account.address,
