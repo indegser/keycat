@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { usePlayground } from 'hooks/playgroundHooks';
-import Account from 'design/moles/Account';
-import SelectBlockchain from './SelectBlockchain';
-import { media } from 'design/utils';
-import { images } from 'assets/images/images';
-import { icons } from 'assets/icons/icons';
+import { usePlayground } from 'hooks/playgroundHooks'
+import Account from 'design/moles/Account'
+import SelectBlockchain from './SelectBlockchain'
+import { media } from 'design/utils'
+import { images } from 'assets/images/images'
+import { icons } from 'assets/icons/icons'
 
 const Container = styled.div`
   width: 100%;
   display: grid;
-  grid-template-areas: "logo select signin";
+  grid-template-areas: 'logo select signin';
   grid-template-columns: max-content max-content auto;
   grid-gap: 0 20px;
   align-items: center;
@@ -66,8 +66,8 @@ const Signin = styled.div`
   overflow: hidden;
   justify-content: flex-end;
   margin: 8px 0;
-  
-  &[data-with-account="false"] {
+
+  &[data-with-account='false'] {
     padding: 8px;
     margin-right: 0;
     fill: white;
@@ -98,10 +98,7 @@ const PlaygroundHeader = () => {
       </Logo>
       <SelectBlockchain />
       <SigninContainer>
-        <Signin
-          data-with-account={!!account}
-          onClick={signin}
-        >
+        <Signin data-with-account={!!account} onClick={signin}>
           {account ? (
             <Account account={account.accountName || account.address} size="sm" />
           ) : (

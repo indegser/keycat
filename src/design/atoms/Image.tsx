@@ -1,11 +1,9 @@
 import React from 'react'
 
 interface Props {
-  src: string,
+  src: string
 }
 
 export const Image: React.SFC<Props> = ({ src }) => {
-  return (
-    <img src={src}></img>
-  )
+  return <img src={src}></img>
 }

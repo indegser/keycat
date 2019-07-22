@@ -4,9 +4,9 @@
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
-    "rootDir": ".",
+    "rootDir": "src",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "lib": [
       "es6",
       "dom"

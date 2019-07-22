@@ -1,8 +1,8 @@
 import React from 'react'
 import Big from 'big.js'
 import styled from 'styled-components'
-import { Field } from 'formik';
-import { icons } from 'assets/icons/icons';
+import { Field } from 'formik'
+import { icons } from 'assets/icons/icons'
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -18,13 +18,13 @@ const Star = styled.div`
   width: 100%;
   color: #ddd;
   cursor: pointer;
-  transition: .2s color ease;
-  
-  &[data-starred="true"] {
-    color: #F28505 !important;
+  transition: 0.2s color ease;
+
+  &[data-starred='true'] {
+    color: #f28505 !important;
   }
-  
-  &[data-hoverred="true"] {
+
+  &[data-hoverred='true'] {
     color: rgba(242, 133, 5, 0.45);
   }
 `
@@ -47,7 +47,9 @@ const StarField = ({ precision }) => {
                     const rate = i + 1
                     form.setValues({
                       rate,
-                      amount: Big(1 / 10**precision).times(rate).toFixed(precision) 
+                      amount: Big(1 / 10 ** precision)
+                        .times(rate)
+                        .toFixed(precision),
                     })
                   }}
                 >

@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Field } from 'formik';
-import { Input } from 'design/atoms/Input';
+import { Field } from 'formik'
+import { Input } from 'design/atoms/Input'
 
 interface Props {
-  unit: string,
+  unit: string
 }
 
 const Container = styled.div`

@@ -1,11 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useStore } from 'store/store';
-import { dashCaseToCamelCase, capitalize } from 'utils/stringUtils';
+import { useStore } from 'store/store'
+import { dashCaseToCamelCase, capitalize } from 'utils/stringUtils'
 
-interface Props {
-
-}
+interface Props {}
 
 const Container = styled.div`
   font-size: 12px;
@@ -20,28 +18,25 @@ const Network = styled.span`
 `
 
 const NetworkStat: React.SFC<Props> = () => {
-  const { config: { blockchain } } = useStore()
+  const {
+    config: { blockchain },
+  } = useStore()
   if (!blockchain) return null
 
   const { name, network } = blockchain
-  
-  
+
   const displayName = network ? (
-      <>
-        <span>
-          {name.toUpperCase()}
-        </span>
-        <Network>
-          {network && network.slice(0, 1).toUpperCase() + network.slice(1)}
-        </Network>
-      </>
-    ) : capitalize(dashCaseToCamelCase(name))
+    <>
+      <span>{name.toUpperCase()}</span>
+      <Network>{network && network.slice(0, 1).toUpperCase() + network.slice(1)}</Network>
+    </>
+  ) : (
+    capitalize(dashCaseToCamelCase(name))
+  )
 
   return (
     <Container>
-      <div>
-        {displayName}
-      </div>
+      <div>{displayName}</div>
     </Container>
   )
 }

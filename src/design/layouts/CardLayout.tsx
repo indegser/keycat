@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import StatusBar from 'design/organs/status-bar/StatusBar'
-import { useStore } from 'store/store';
-import ProgressBar from 'design/organs/status-bar/ProgressBar';
-import { media } from 'design/utils';
-import Footer from 'design/organs/footer/Footer';
+import { useStore } from 'store/store'
+import ProgressBar from 'design/organs/status-bar/ProgressBar'
+import { media } from 'design/utils'
+import Footer from 'design/organs/footer/Footer'
 
 const Working = styled.div`
   position: absolute;
@@ -14,7 +14,7 @@ const Working = styled.div`
   right: 0;
   z-index: -1;
   background: #fff;
-  transition: .5s background-color ease;
+  transition: 0.5s background-color ease;
 `
 
 const Contents = styled.div`
@@ -37,11 +37,11 @@ const Contents = styled.div`
 const Container = styled.div`
   position: relative;
 
-  &[data-working="true"] {
+  &[data-working='true'] {
     pointer-events: none;
-    
+
     ${Contents} {
-      opacity: .2;
+      opacity: 0.2;
       filter: blur(1px);
     }
 
@@ -58,13 +58,13 @@ const AppBox = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
+
   ${media.greaterThan('601px')`
     --max-width: 400px;
     display: block;
     min-height: auto;
   `}
-`;
+`
 
 const Card = styled.div`
   margin: 0 auto;
@@ -86,11 +86,13 @@ const Card = styled.div`
 `
 
 interface Props {
-  title: string,
+  title: string
 }
 
 const CardLayout: React.SFC<Props> = ({ title, children }) => {
-  const { app: { working } } = useStore()
+  const {
+    app: { working },
+  } = useStore()
 
   return (
     <AppBox>
@@ -100,9 +102,7 @@ const CardLayout: React.SFC<Props> = ({ title, children }) => {
           <Working />
           <Contents>
             <StatusBar title={title} />
-            <main>
-              {children}
-            </main>
+            <main>{children}</main>
           </Contents>
         </Container>
       </Card>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { media } from 'design/utils';
+import { media } from 'design/utils'
 
 export const AboutSection = styled.section`
   padding: 80px 0;
@@ -19,7 +19,7 @@ export const AboutH5 = styled.h5`
 export const AboutP = styled.p`
   font-size: 15px;
   line-height: 22px;
-  color: #524B4B;
+  color: #524b4b;
 `
 
 export const AboutImg = styled.img`

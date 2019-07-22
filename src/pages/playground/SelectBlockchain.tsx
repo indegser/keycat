@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useDispatch, useStore } from 'store/store';
-import { playActions } from 'store/ducks/playDuck';
-import Select from 'design/atoms/Select';
-import { media } from 'design/utils';
-import { capitalize } from 'utils/stringUtils';
+import { useDispatch, useStore } from 'store/store'
+import { playActions } from 'store/ducks/playDuck'
+import Select from 'design/atoms/Select'
+import { media } from 'design/utils'
+import { capitalize } from 'utils/stringUtils'
 
 const Container = styled.div`
   grid-area: select;
@@ -16,7 +16,9 @@ const Container = styled.div`
 `
 
 const SelectBlockchain = () => {
-  const { play: { blockchain, blockchains } } = useStore()
+  const {
+    play: { blockchain, blockchains },
+  } = useStore()
   const dispatch = useDispatch()
 
   const handleChange = ({ target: { value: blockchain } }) => {
@@ -27,16 +29,10 @@ const SelectBlockchain = () => {
 
   return (
     <Container>
-      <Select
-        onChange={handleChange}
-        value={blockchain}
-      >
+      <Select onChange={handleChange} value={blockchain}>
         {blockchains.entries.map(({ name, testnets }) => (
           <optgroup key={name} label={capitalize(name)}>
-            <option
-              key={name}
-              value={name}
-            >
+            <option key={name} value={name}>
               {capitalize(name)}
             </option>
             {testnets.map(({ name: testnetName }) => (

@@ -1,11 +1,11 @@
 import React from 'react'
 import Big from 'big.js'
 import styled from 'styled-components'
-import { Button } from 'design/atoms/Button';
-import { Formik, Form } from 'formik';
-import { media } from 'design/utils';
-import StarField from './StarField';
-import { useStore } from 'store/store';
+import { Button } from 'design/atoms/Button'
+import { Formik, Form } from 'formik'
+import { media } from 'design/utils'
+import StarField from './StarField'
+import { useStore } from 'store/store'
 
 const Container = styled.div`
   margin-top: 20px;
@@ -50,7 +50,9 @@ const CurrentAmount = styled.div`
 `
 
 const DonateForm = ({ donate, account }) => {
-  const { play: { blockchain, blockchains } } = useStore()
+  const {
+    play: { blockchain, blockchains },
+  } = useStore()
   if (!blockchains) return null
 
   const { symbol, precision } = blockchains.entities[blockchain]
@@ -59,7 +61,7 @@ const DonateForm = ({ donate, account }) => {
       <Formik
         initialValues={{
           rate: 1,
-          amount: Big(1 / 10**precision).toFixed(precision),
+          amount: Big(1 / 10 ** precision).toFixed(precision),
         }}
         enableReinitialize
         onSubmit={donate}
@@ -69,19 +71,11 @@ const DonateForm = ({ donate, account }) => {
             <StarField precision={precision} />
             <InlineSubmit>
               <CurrentAmount>
-                <span>
-                  {values.amount}
-                </span>
-                <code>
-                  {symbol}
-                </code>
+                <span>{values.amount}</span>
+                <code>{symbol}</code>
               </CurrentAmount>
               <Submit>
-                <Button
-                  type="submit"
-                  disabled={!account}
-                  size="lg"
-                >
+                <Button type="submit" disabled={!account} size="lg">
                   Donate with {symbol}
                 </Button>
               </Submit>

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AboutSection, AboutH5, AboutP, AboutImg } from './About.styled';
-import { images } from 'assets/images/images';
-import { media } from 'design/utils';
-import EasyToUse from './EasyToUse';
+import { AboutSection, AboutH5, AboutP, AboutImg } from './About.styled'
+import { images } from 'assets/images/images'
+import { media } from 'design/utils'
+import EasyToUse from './EasyToUse'
 
 const Container = styled.div`
   display: grid;
@@ -33,7 +33,7 @@ const Features = () => {
       id: `second`,
       title: `Too Simple. Too Fast. Too Secure.`,
       desc: `Keycat offers never-seen wallet experience. After registering your account to Keycat, next time all you have to do is Click.`,
-    }
+    },
   ]
 
   return (
@@ -41,15 +41,9 @@ const Features = () => {
       <Container>
         {features.map(({ id, title, desc }) => (
           <Feature key={id}>
-            <AboutH5>
-              {title}
-            </AboutH5>
-            <AboutP>
-              {desc}
-            </AboutP>
-            {id === 'second' ? (
-              <EasyToUse />
-            ) : <AboutImg src={images[id]} />}
+            <AboutH5>{title}</AboutH5>
+            <AboutP>{desc}</AboutP>
+            {id === 'second' ? <EasyToUse /> : <AboutImg src={images[id]} />}
           </Feature>
         ))}
       </Container>

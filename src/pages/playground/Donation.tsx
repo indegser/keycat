@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
 import format from 'date-fns/format'
 import styled from 'styled-components'
-import Identicon from 'design/atoms/Identicon';
-import Stars from './Stars';
-import { getTransactionHref } from 'utils/blockchain';
-import { getBlockchainByName } from 'utils/utils';
+import Identicon from 'design/atoms/Identicon'
+import Stars from './Stars'
+import { getTransactionHref } from 'utils/blockchain'
+import { getBlockchainByName } from 'utils/utils'
 
 const Container = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const Detail = styled.a`
   margin-top: 6px;
   display: block;
 `
-  
+
 const Meta = styled.div`
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@ const Donation = ({ donation }) => {
   const { blockchain, account, hash, amount, createdAt, rate } = donation
   const blockchainConfig = getBlockchainByName(blockchain)
 
-  if (!blockchainConfig) return null;
+  if (!blockchainConfig) return null
   const { symbol } = blockchainConfig
 
   const href = useMemo(() => getTransactionHref(blockchain, hash), [])
@@ -68,18 +68,12 @@ const Donation = ({ donation }) => {
       <div>
         <Meta>
           <Stars rate={rate} />
-          <Date>
-            {`· ${format(createdAt.toDate(), 'MM/DD/YYYY')}`}
-          </Date>
+          <Date>{`· ${format(createdAt.toDate(), 'MM/DD/YYYY')}`}</Date>
         </Meta>
         <Text>
-          <code>
-            {account}
-          </code>
+          <code>{account}</code>
           {` donated`}
-          <code>
-            {`${amount} ${symbol}`}
-          </code>
+          <code>{`${amount} ${symbol}`}</code>
         </Text>
         <Detail href={href} target="_blank" rel="noopener noreferrer">
           Check Details

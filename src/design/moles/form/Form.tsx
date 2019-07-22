@@ -9,19 +9,19 @@ export const useForm = () => {
 }
 
 interface Props extends HTMLProps<HTMLFormElement> {
-  onSubmit: (a: any) => void,
+  onSubmit: (a: any) => void
 }
 
-export const Form: React.SFC<Props> = (props) => {
+export const Form: React.SFC<Props> = props => {
   const [errors, setErrors] = useState({})
   const ref = useRef(null)
 
-  const onSubmit = useCallback((e) => {
+  const onSubmit = useCallback(e => {
     e.preventDefault()
     setErrors({})
     const formData = new FormData(e.target)
     const values = {}
-    
+
     formData.forEach((value, key) => {
       values[key] = value
     })

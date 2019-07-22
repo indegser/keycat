@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { capitalize } from 'utils/stringUtils';
-import JsonParsedItem from './JsonParsedItem';
-import { JsonViewerKey } from './JsonViewer.styled';
+import { capitalize } from 'utils/stringUtils'
+import JsonParsedItem from './JsonParsedItem'
+import { JsonViewerKey } from './JsonViewer.styled'
 
 const Container = styled.div`
   padding-left: 12px;
@@ -13,7 +13,7 @@ const ObjectItem = styled.div`
 `
 
 interface Props {
-  src: object,
+  src: object
 }
 
 const ObjectView: React.SFC<Props> = ({ src }) => {
@@ -26,9 +26,7 @@ const ObjectView: React.SFC<Props> = ({ src }) => {
         const value = src[key]
         return (
           <ObjectItem key={`${key}_${i}`}>
-            <JsonViewerKey>
-              {`- ${capitalize(key)}`}
-            </JsonViewerKey>
+            <JsonViewerKey>{`- ${capitalize(key)}`}</JsonViewerKey>
             <JsonParsedItem src={value} />
           </ObjectItem>
         )

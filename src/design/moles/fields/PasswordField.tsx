@@ -1,16 +1,16 @@
 import React, { HTMLProps } from 'react'
 import styled from 'styled-components'
 import { Input } from 'design/atoms/Input'
-import FieldError from './FieldError';
+import FieldError from './FieldError'
 
 interface Props extends HTMLProps<HTMLInputElement> {
-  hidden?: boolean,
-  plain?: boolean,
-  name?: string,
+  hidden?: boolean
+  plain?: boolean
+  name?: string
 }
 
 const Container = styled.div`
-  &[data-hidden="true"] {
+  &[data-hidden='true'] {
     height: 0px;
     overflow: hidden;
     margin-top: 0px;

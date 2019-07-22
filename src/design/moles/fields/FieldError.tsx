@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useForm } from '../form/Form';
-import { icons } from 'assets/icons/icons';
+import { useForm } from '../form/Form'
+import { icons } from 'assets/icons/icons'
 
 const Container = styled.div`
   padding-top: 8px;
@@ -25,10 +25,8 @@ const FieldError = ({ name }) => {
   const error = errors[name]
 
   if (!error) return null
-  
-  const {
-    message,
-  } = error
+
+  const { message } = error
 
   return (
     <Container>

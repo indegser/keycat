@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { icons } from 'assets/icons/icons';
-import { media } from 'design/utils';
+import { icons } from 'assets/icons/icons'
+import { media } from 'design/utils'
 
 const Container = styled.div`
   --select-height: 36px;
@@ -43,7 +43,7 @@ const Selected = styled.div`
   border: 1px solid #ddd;
   border-radius: 4px;
 `
-  
+
 const SelectedValue = styled.span`
   font-size: 16px;
   font-weight: 500;
@@ -61,7 +61,7 @@ const SelectedArrow = styled.span`
 `
 
 interface Props extends React.HTMLProps<HTMLSelectElement> {
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 const Select: React.SFC<Props> = ({ children, value, onChange }) => {
@@ -78,19 +78,12 @@ const Select: React.SFC<Props> = ({ children, value, onChange }) => {
   return (
     <Container>
       <Selected>
-        <SelectedValue>
-          {value}
-        </SelectedValue>
+        <SelectedValue>{value}</SelectedValue>
         <SelectedArrow>
           <icons.downArrow width="1em" />
         </SelectedArrow>
       </Selected>
-      <HiddenSelect
-        onChange={onChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        value={value}
-      >
+      <HiddenSelect onChange={onChange} onFocus={handleFocus} onBlur={handleBlur} value={value}>
         {children}
       </HiddenSelect>
     </Container>

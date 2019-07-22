@@ -1,6 +1,6 @@
-import React, { useCallback, useState, HTMLProps } from 'react';
-import styled from 'styled-components';
-import { useStore } from 'store/store';
+import React, { useCallback, useState, HTMLProps } from 'react'
+import styled from 'styled-components'
+import { useStore } from 'store/store'
 
 export const Fields = styled.div`
   padding: var(--padding-x);
@@ -20,7 +20,7 @@ export const Input2 = styled.input`
   border: 0 !important;
   outline: none;
   -webkit-appearance: none;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
   box-sizing: border-box;
   font-size: 17px;
   // background-color: transparent;
@@ -40,7 +40,7 @@ export const Input2 = styled.input`
   &:-webkit-autofill {
     animation-name: onAutoFillStart;
   }
-  
+
   &:not(:-webkit-autofill) {
     animation-name: onAutoFillCancel;
   }
@@ -49,7 +49,7 @@ export const Input2 = styled.input`
 const Label = styled.div`
   padding: 0 8px;
   overflow: hidden;
-  max-width: calc(100% - (2*8px));
+  max-width: calc(100% - (2 * 8px));
   left: 8px;
   bottom: 17px;
   pointer-events: none;
@@ -59,9 +59,9 @@ const Label = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: auto;
-  transition: transform 150ms cubic-bezier(0.4,0,0.2,1),color 450ms cubic-bezier(0.4,0,0.2,1);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), color 450ms cubic-bezier(0.4, 0, 0.2, 1);
   background: #fff;
-  transform: scale(.75) translateY(-42px);
+  transform: scale(0.75) translateY(-42px);
 `
 
 const Container = styled.div`
@@ -78,14 +78,12 @@ const InputBorder = styled.div`
   right: 0;
   border-radius: 4px;
   pointer-events: none;
-  border: 1px solid rgba(0, 0, 0, .14);
+  border: 1px solid rgba(0, 0, 0, 0.14);
 
-  transition: .3s border-color ease;
+  transition: 0.3s border-color ease;
 `
 
-interface Props extends HTMLProps<HTMLInputElement> {
-
-}
+interface Props extends HTMLProps<HTMLInputElement> {}
 
 export const Input: React.SFC<Props> = ({ placeholder: label, style, ...props }) => {
   const [focused, setFocused] = useState(false)
@@ -100,11 +98,7 @@ export const Input: React.SFC<Props> = ({ placeholder: label, style, ...props })
 
   return (
     <Container style={style}>
-      <Input2
-        {...props}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
+      <Input2 {...props} onFocus={handleFocus} onBlur={handleBlur} />
       <InputBorder data-focused={focused} />
       <Label
         aria-hidden={true}

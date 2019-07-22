@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { icons } from 'assets/icons/icons';
+import { icons } from 'assets/icons/icons'
 
 const Container = styled.div`
   display: grid;
@@ -16,7 +16,7 @@ const Star = styled.div`
     display: block;
   }
 
-  &[data-starred="true"] {
+  &[data-starred='true'] {
     color: #f28505;
   }
 `
@@ -26,10 +26,7 @@ const Stars = ({ rate }) => {
   return (
     <Container>
       {stars.map((starred, i) => (
-        <Star
-          key={i}
-          data-starred={starred}
-        >
+        <Star key={i} data-starred={starred}>
           <icons.star />
         </Star>
       ))}
