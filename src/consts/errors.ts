@@ -1,7 +1,3 @@
-import createError from 'http-errors'
-
-export const AppError = createError
-
 class FormError extends Error {
   field: string
 
@@ -11,9 +7,7 @@ class FormError extends Error {
   }
 }
 
-const messagePick = () => {
-
-}
+const messagePick = () => {}
 
 export const errors = {
   invalidPassword: new FormError(412, 'password'),
@@ -33,15 +27,13 @@ export const errors = {
   transact: (fn: (msgs: typeof TransactMessage) => any) => {
     const message = fn(TransactMessage)
     return new KeycatError(message)
-  }
+  },
 }
 
-enum TransactMessage {
-
-}
+enum TransactMessage {}
 
 enum RegisterMessage {
-  NotRegisteredInKeychain = 'It seems account is not stored in keychain. Did you \"Save Password\"?',
+  NotRegisteredInKeychain = 'It seems account is not stored in keychain. Did you "Save Password"?',
 }
 
 export enum SigninErrorMessage {
@@ -70,5 +62,5 @@ export const errorMessages = {
     SIGN_TRANSACTION_FAILED: 'Cannot sign transaction',
     409: `Cannot find account from EOS network.`,
     412: `Account does not match with private key.`,
-  }
+  },
 }
