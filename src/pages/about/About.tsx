@@ -5,7 +5,7 @@ import PageLayout from 'design/layouts/PageLayout'
 import { media } from 'design/utils'
 import Features from './Features'
 import { AboutSection } from './About.styled'
-import Supports from './supports/Supports';
+import Supports from './supports/Supports'
 
 const Container = styled.div`
   max-width: 960px;
