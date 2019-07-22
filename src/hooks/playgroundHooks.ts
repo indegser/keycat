@@ -100,8 +100,6 @@ export const usePlayground = () => {
       return res
     }, {})
 
-    console.log(entities)
-
     dispatch(
       playActions.init({
         blockchain: entries[0].name,

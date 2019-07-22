@@ -9,11 +9,11 @@ import HashTalk from './hash-talk/HashTalk'
 import { usePlayground } from 'hooks/playgroundHooks'
 import { useStore } from 'store/store'
 
-interface Props {
+interface IProps {
   path: string
 }
 
-const Playground: React.SFC<Props> = () => {
+const Playground: React.FunctionComponent<IProps> = () => {
   const {
     play: { init },
   } = useStore()

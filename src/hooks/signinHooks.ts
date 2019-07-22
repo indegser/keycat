@@ -1,23 +1,26 @@
-import { useCallback } from 'react';
-import { navigate } from '@reach/router';
-import { useDispatch, useStore } from 'store/store';
-import { appActions } from 'store/ducks/appDuck';
-import { sendMessage } from 'api/message';
-import { useBlockchain } from './blockchainHooks';
-import { buildUrl, mergeSearchParams, userAgent } from 'utils/utils';
+import { useCallback } from 'react'
+import { navigate } from '@reach/router'
+import { useDispatch, useStore } from 'store/store'
+import { appActions } from 'store/ducks/appDuck'
+import { sendMessage } from 'api/message'
+import { useBlockchain } from './blockchainHooks'
+import { buildUrl, mergeSearchParams, userAgent } from 'utils/utils'
+import { sendGaEvent } from 'utils/ga'
 
 export const useSignin = () => {
   const dispatch = useDispatch()
-  const { config: { client } } = useStore()
+  const {
+    config: { client },
+  } = useStore()
   const blockchain = useBlockchain()
 
-  const setWorking = (working) => {
+  const setWorking = working => {
     dispatch(appActions.setWorking({ working }))
   }
 
   const signin = useCallback(async ({ values, setErrors }) => {
     const { account, password } = values
-    
+
     setWorking(true)
 
     try {
@@ -26,6 +29,7 @@ export const useSignin = () => {
         password,
       })
 
+      sendGaEvent('Authentication', 'Authenticated', result.address || result.accountName)
       sendMessage('signin', { data: result }, client)
     } catch (err) {
       setErrors({ account: err })
@@ -60,14 +64,9 @@ export const useSignin = () => {
   const verifyKeychain = useCallback(async ({ values, setErrors }) => {
     setWorking(true)
 
+    const result = values.payload
+    sendGaEvent('Authentication', 'Registered', result.address || result.accountName)
     sendMessage('register', { data: JSON.parse(values.payload) }, client)
-    // const verified = !!values.password;
-    // if (!verified) {
-    //   setErrors({
-    //     keychain: errors.register(msgs => msgs.NotRegisteredInKeychain),
-    //   })
-    // } else {
-    // }
 
     setWorking(false)
   }, [])
