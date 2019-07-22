@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { capitalize } from 'utils/stringUtils'
+import { IBlockchain } from 'types/types'
 
 const Container = styled.div`
   --px: 40px;
@@ -44,12 +45,12 @@ const NetworkName = styled.div`
 `
 
 interface IProps {
-  blockchain: any
+  blockchain: IBlockchain
 }
 
 const Blockchain: React.FunctionComponent<IProps> = ({ blockchain }) => {
-  const { name, website, icon, testnets = [] } = blockchain
-  const names = [name, ...testnets.map(t => t.name)]
+  const { name, displayName, website, icon, testnets = [] } = blockchain
+  const names = ['Mainnet', ...testnets.map(t => t.displayName || t.name)]
   return (
     <Container>
       <BlockchainIcon>
@@ -57,7 +58,7 @@ const Blockchain: React.FunctionComponent<IProps> = ({ blockchain }) => {
       </BlockchainIcon>
       <Header>
         <div>
-          <Name>{capitalize(name)}</Name>
+          <Name>{displayName || capitalize(name)}</Name>
           <Website>
             <a href={website} target="_blank">
               Website >

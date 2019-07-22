@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { fetchBlockchainsFromFirebase } from 'services/Firebase'
 import { AboutSection, AboutH5 } from '../About.styled'
 import Blockchain from './Blockchain'
+import { fetchBlockchainsJson } from 'api/webApi'
 
 const Blockchains = styled.div`
   display: grid;
@@ -15,8 +16,7 @@ const Supports: React.FunctionComponent<any> = () => {
   const [blockchains, setBlockchains] = useState(null)
 
   useEffect(() => {
-    fetch(`${PUBLIC_PATH}blockchains.json`)
-      .then(resp => resp.json())
+    fetchBlockchainsJson()
       .then(json => setBlockchains(json))
       .catch(() => null)
   }, [])

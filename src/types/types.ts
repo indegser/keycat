@@ -1,9 +1,22 @@
-export type Blockchain = {
-  id: string
+interface IEosConfig {
+  nodes: string[]
+}
+
+interface IKlaytnConfig {
+  rpcUrl: string
+}
+
+interface IEthereumConfig {
+  provider: string
+}
+
+export interface IBlockchain {
   name: string
-  network?: string
-  nodes?: string[]
+  displayName: string
+  website: string
   precision: number
   symbol: string
-  testnets: Partial<Blockchain>[]
+  icon: string
+  testnets: Array<Partial<IBlockchain>>
+  config: IEosConfig | IKlaytnConfig | IEthereumConfig
 }

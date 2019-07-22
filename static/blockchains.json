@@ -1,6 +1,7 @@
 [
   {
-    "name": "EOS",
+    "name": "eos",
+    "displayName": "EOS",
     "precision": 4,
     "symbol": "EOS",
     "website": "https://eos.io",
@@ -11,7 +12,8 @@
     },
     "testnets": [
       {
-        "name": "jungle",
+        "name": "eos-jungle",
+        "displayName": "Jungle",
         "config": {
           "nodes": [
             "https://jungleapi.eossweden.se:443",
@@ -21,7 +23,8 @@
         }
       },
       {
-        "name": "kylin",
+        "name": "eos-kylin",
+        "displayName": "Kylin",
         "config": {
           "nodes": ["https://api.kylin.alohaeos.com", "http://api.kylin.helloeos.com.cn", "https://kylin.eoscanada.com"]
         }
@@ -29,7 +32,8 @@
     ]
   },
   {
-    "name": "Ethereum",
+    "name": "ethereum",
+    "displayName": "Ethereum",
     "precision": 8,
     "symbol": "ETH",
     "website": "https://www.ethereum.org",
@@ -40,13 +44,15 @@
     },
     "testnets": [
       {
-        "name": "ropsten",
+        "name": "ethereum-ropsten",
+        "displayName": "Ropsten",
         "config": {
           "provider": "ropsten"
         }
       },
       {
-        "name": "rinkeby",
+        "name": "ethereum-rinkeby",
+        "displayName": "Rinkeby",
         "config": {
           "provider": "rinkeby"
         }
@@ -54,7 +60,8 @@
     ]
   },
   {
-    "name": "Klaytn",
+    "name": "klaytn",
+    "displayName": "Klaytn",
     "precision": 6,
     "symbol": "KLAY",
     "website": "https://www.klaytn.com",
@@ -65,7 +72,8 @@
     },
     "testnets": [
       {
-        "name": "baobab",
+        "name": "klaytn-baobab",
+        "displayName": "Baobab",
         "config": {
           "rpcUrl": "https://api.baobab.klaytn.net:8651"
         }
@@ -73,7 +81,8 @@
     ]
   },
   {
-    "name": "Telos",
+    "name": "telos",
+    "displayName": "Telos",
     "precision": 4,
     "symbol": "TLOS",
     "website": "https://telosfoundation.io",
@@ -89,7 +98,8 @@
     },
     "testnets": [
       {
-        "name": "Testnet",
+        "name": "telos-testnet",
+        "displayName": "Testnet",
         "config": {
           "nodes": [
             "https://api.testnet.telosgermany.io:443",
@@ -101,7 +111,8 @@
     ]
   },
   {
-    "name": "BOS",
+    "name": "bos",
+    "displayName": "BOS",
     "precision": 4,
     "symbol": "BOS",
     "website": "https://boscore.io",
@@ -112,7 +123,8 @@
     }
   },
   {
-    "name": "Worbli",
+    "name": "worbli",
+    "displayName": "Worbli",
     "precision": 4,
     "symbol": "WBI",
     "icon": "worbli.png",
@@ -128,7 +140,8 @@
     }
   },
   {
-    "name": "WAX",
+    "name": "wax",
+    "displayName": "WAX",
     "precision": 4,
     "symbol": "WAX",
     "icon": "wax.png",

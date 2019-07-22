@@ -30,16 +30,17 @@ const SelectBlockchain = () => {
   return (
     <Container>
       <Select onChange={handleChange} value={blockchain}>
-        {blockchains.entries.map(({ name, testnets }) => (
-          <optgroup key={name} label={capitalize(name)}>
+        {blockchains.entries.map(({ name, displayName, testnets }) => (
+          <optgroup key={name} label={displayName}>
             <option key={name} value={name}>
-              {capitalize(name)}
+              Mainnet
             </option>
-            {testnets.map(({ name: testnetName }) => (
-              <option key={testnetName} value={`${name}-${testnetName}`}>
-                {capitalize(testnetName)}
-              </option>
-            ))}
+            {testnets &&
+              testnets.map(({ name: value, displayName: testDisplayName }) => (
+                <option key={value} value={value}>
+                  {testDisplayName}
+                </option>
+              ))}
           </optgroup>
         ))}
       </Select>
