@@ -33,9 +33,7 @@ const PageHeader = () => {
       <Logo src={keycatLogo} />
       <Version>
         Current Version:
-        <CommitSha>
-          {COMMIT_REF.slice(0, 7)}
-        </CommitSha>
+        <CommitSha>{COMMIT_REF.slice(0, 7)}</CommitSha>
       </Version>
     </Container>
   )

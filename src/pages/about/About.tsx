@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import textBalancer from 'text-balancer'
-import PageLayout from 'design/layouts/PageLayout';
-import { media } from 'design/utils';
-import Features from './Features';
-import { AboutSection } from './About.styled';
+import PageLayout from 'design/layouts/PageLayout'
+import { media } from 'design/utils'
+import Features from './Features'
+import { AboutSection } from './About.styled'
 
 const Container = styled.div`
   max-width: 960px;
@@ -28,7 +28,7 @@ const Headline = styled.h1`
   line-height: 1;
   text-align: center;
   margin: 0 auto;
-  margin-bottom: .2em;
+  margin-bottom: 0.2em;
   font-family: var(--font-heading);
 
   ${media.lessThan('medium')`
@@ -64,7 +64,7 @@ const BrowserSupport = styled.div`
 const GotoArrow = styled.span`
   margin-left: 4px;
   display: inline-block;
-  transition: .2s transform ease;
+  transition: 0.2s transform ease;
 `
 
 const GotoPlayground = styled.div`
@@ -78,7 +78,7 @@ const GotoPlayground = styled.div`
     color: #277bff;
     text-align: center;
     border: 1px solid;
-    border-color: rgba(16,116,231,.5);
+    border-color: rgba(16, 116, 231, 0.5);
     user-select: none;
     vertical-align: middle;
     font-weight: 500;
@@ -90,17 +90,16 @@ const GotoPlayground = styled.div`
       border-color: #1074e7;
       text-decoration: none;
       color: #0366d6;
-      
+
       ${GotoArrow} {
         transform: translateX(4px);
       }
     }
   }
-
 `
 
 interface Props {
-  path: string,
+  path: string
 }
 
 const About: React.SFC<Props> = () => {
@@ -110,21 +109,18 @@ const About: React.SFC<Props> = () => {
 
   return (
     <PageLayout
-      main={(
+      main={
         <Container>
           <AboutSection>
-            <Headline className="balance-text">
-              Your Gateway to any Blockchain
-            </Headline>
+            <Headline className="balance-text">Your Gateway to any Blockchain</Headline>
             <Secondary className="balance-text">
-              Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain.
+              Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into
+              DApps in any blockchain.
             </Secondary>
             <GotoPlayground>
               <a href="/playground">
                 Visit Playground
-                <GotoArrow>
-                  →
-                </GotoArrow>
+                <GotoArrow>→</GotoArrow>
               </a>
               <BrowserSupport className="balance-text">
                 Keycat runs on Safari, Chrome, Firefox regardless of mobile or desktop.
@@ -133,7 +129,7 @@ const About: React.SFC<Props> = () => {
           </AboutSection>
           <Features />
         </Container>
-      )}
+      }
     />
   )
 }

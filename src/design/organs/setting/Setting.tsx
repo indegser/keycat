@@ -1,7 +1,5 @@
 import React from 'react'
 
-const Setting = () => {
-
-}
+const Setting = () => {}
 
 export default Setting

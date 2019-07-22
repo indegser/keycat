@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
-import styled from 'styled-components';
-import { media } from 'design/utils';
-import { Router, Location } from '@reach/router';
-import GlobalStyle from 'design/GlobalStyle';
-import { updatePageView } from 'utils/ga';
-import About from './about/About';
+import React, { Suspense } from 'react'
+import styled from 'styled-components'
+import { media } from 'design/utils'
+import { Router, Location } from '@reach/router'
+import GlobalStyle from 'design/GlobalStyle'
+import { updatePageView } from 'utils/ga'
+import About from './about/About'
 
 const Signin = React.lazy(() => import(/* webpackPrefetch: true */ './signin/Signin'))
 const Register = React.lazy(() => import(/* webpackPrefetch: true */ './register/Register'))

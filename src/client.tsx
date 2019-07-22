@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { StoreProvider } from 'store/store';
-import App from 'pages/App';
+import { StoreProvider } from 'store/store'
+import App from 'pages/App'
 
 const render = () => {
   ReactDOM.render(
@@ -13,12 +13,9 @@ const render = () => {
 }
 
 if (module['hot']) {
-  module['hot'].accept(
-    './pages/App',
-    render,
-  );
+  module['hot'].accept('./pages/App', render)
 }
 
 console.log(`Welcome ${COMMIT_REF}`)
 
-render();
+render()

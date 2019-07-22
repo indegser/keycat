@@ -14,7 +14,7 @@ const Container = styled.div`
 `
 
 interface Props {
-  account?: string,
+  account?: string
   size?: number
 }
 

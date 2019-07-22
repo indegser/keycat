@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import Identicon from 'design/atoms/Identicon';
+import Identicon from 'design/atoms/Identicon'
 
 const AccountName = styled.div`
   line-height: 16px;
   font-size: 15px;
   font-weight: 500;
-  letter-spacing: .1px;
+  letter-spacing: 0.1px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -27,20 +27,18 @@ const Container = styled.div`
   }
 `
 
-type AccountSize = "sm"|"md"|"lg"
+type AccountSize = 'sm' | 'md' | 'lg'
 
 interface Props {
-  account: string,
-  size?: AccountSize,
+  account: string
+  size?: AccountSize
 }
 
-const Account: React.SFC<Props> = ({ account = '', size="md" }) => {
+const Account: React.SFC<Props> = ({ account = '', size = 'md' }) => {
   return (
     <Container data-size={size}>
       <Identicon account={account} />
-      <AccountName>
-        {account}
-      </AccountName>
+      <AccountName>{account}</AccountName>
     </Container>
   )
 }

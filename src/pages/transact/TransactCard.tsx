@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import { Waypoint } from 'react-waypoint'
 import styled from 'styled-components'
-import JsonViewer from 'design/moles/JsonViewer';
+import JsonViewer from 'design/moles/JsonViewer'
 
 const Container = styled.div`
   position: relative;
@@ -24,28 +24,21 @@ const WaypointWrapper = styled.div`
 `
 
 interface Props {
-  title: string;
-  data: object;
-  index: number;
-  id: any;
-  onEnter: (index: number) => void;
+  title: string
+  data: object
+  index: number
+  id: any
+  onEnter: (index: number) => void
 }
 
 const TransactCard: React.SFC<Props> = ({ title, data, id, onEnter }) => {
   const handleEnter = () => onEnter(id)
 
   return (
-    <Waypoint
-      topOffset="150px"
-      bottomOffset="100px"
-      onEnter={handleEnter}
-    >
+    <Waypoint topOffset="150px" bottomOffset="100px" onEnter={handleEnter}>
       <Container>
-        <WaypointWrapper>
-        </WaypointWrapper>
-        <Title>
-          {title}
-        </Title>
+        <WaypointWrapper></WaypointWrapper>
+        <Title>{title}</Title>
         <JsonViewer src={data} />
       </Container>
     </Waypoint>

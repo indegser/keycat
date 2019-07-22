@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { Link } from '@reach/router'
-import CardLayout from 'design/layouts/CardLayout';
-import Submit from 'design/moles/fields/Submit';
-import { getSearchParams, appendSearchParamsToUrl } from 'utils/utils';
-import { Form } from 'design/moles/form/Form';
-import { Fields } from 'design/atoms/Input';
-import AccountField from 'design/moles/fields/AccountField';
-import PasswordField from 'design/moles/fields/PasswordField';
-import FieldError from 'design/moles/fields/FieldError';
-import { useSignin } from 'hooks/signinHooks';
+import CardLayout from 'design/layouts/CardLayout'
+import Submit from 'design/moles/fields/Submit'
+import { getSearchParams, appendSearchParamsToUrl } from 'utils/utils'
+import { Form } from 'design/moles/form/Form'
+import { Fields } from 'design/atoms/Input'
+import AccountField from 'design/moles/fields/AccountField'
+import PasswordField from 'design/moles/fields/PasswordField'
+import FieldError from 'design/moles/fields/FieldError'
+import { useSignin } from 'hooks/signinHooks'
 
 interface Props {
-  path: string;
-  account?: string;
+  path: string
+  account?: string
 }
 
 const Keychain: React.SFC<Props> = () => {
@@ -27,11 +27,7 @@ const Keychain: React.SFC<Props> = () => {
           <FieldError name="keychain" />
         </Fields>
         <Submit
-          sibling={() => (
-            <Link to={appendSearchParamsToUrl('/register')}>
-              Try Register again
-            </Link>
-          )}
+          sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Try Register again</Link>}
           help="keychain"
         />
       </Form>

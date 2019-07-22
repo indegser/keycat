@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { useStore } from 'store/store';
+import { useStore } from 'store/store'
 
 const Animation = keyframes`
   0% {
@@ -22,7 +22,7 @@ const Animation = keyframes`
 const MovingBar = styled.div`
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg,#0655e40d -2.25%,#e81a1a 101.34%,rgba(0,41,255,0) 101.35%);
+  background: linear-gradient(90deg, #0655e40d -2.25%, #e81a1a 101.34%, rgba(0, 41, 255, 0) 101.35%);
   transform-origin: center;
   filter: blur(2px);
 `
@@ -37,7 +37,7 @@ const Container = styled.div`
   border-top-left-radius: var(--card-border-radius);
   border-top-right-radius: var(--card-border-radius);
 
-  &[data-working=true] {
+  &[data-working='true'] {
     background: rgba(0, 163, 255, 0.07);
 
     ${MovingBar} {
@@ -48,13 +48,11 @@ const Container = styled.div`
 `
 
 const ProgressBar = () => {
-  const { app: { working } } = useStore()
+  const {
+    app: { working },
+  } = useStore()
 
-  return (
-    <Container data-working={working}>
-      {working && <MovingBar />}
-    </Container>
-  )
+  return <Container data-working={working}>{working && <MovingBar />}</Container>
 }
 
 export default ProgressBar

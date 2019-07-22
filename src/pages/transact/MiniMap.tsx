@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { capitalize } from 'utils/stringUtils';
-import { icons } from 'assets/icons/icons';
+import { capitalize } from 'utils/stringUtils'
+import { icons } from 'assets/icons/icons'
 
 const Container = styled.div`
   flex: 0 0 auto;
@@ -33,13 +33,13 @@ const NavItem = styled.div`
   color: rgb(116, 129, 141);
   cursor: default;
   user-select: none;
-  transition: .3s color ease, .2s border-color ease;
+  transition: 0.3s color ease, 0.2s border-color ease;
 
   // &:hover {
   //   color: var(--primary-color);
   // }
 
-  &[data-current=true] {
+  &[data-current='true'] {
     cursor: default;
     pointer-events: none;
     color: var(--primary-color);
@@ -50,7 +50,7 @@ const NavItem = styled.div`
 const Item = styled.div`
   font-weight: 500;
   font-size: 12px;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   padding-left: 14px;
 `
 
@@ -63,24 +63,17 @@ const MiniMap = ({ actions, focusedActionIndex }) => {
     <Container>
       <LabelContainer>
         <icons.actions />
-        <span>
-          Actions
-        </span>
+        <span>Actions</span>
       </LabelContainer>
       {actions.map(({ id, name }) => {
         return (
-          <NavItem
-            key={id}
-            data-current={focusedActionIndex === id}
-          >
-            <Item>
-              {capitalize(name)}
-            </Item>
+          <NavItem key={id} data-current={focusedActionIndex === id}>
+            <Item>{capitalize(name)}</Item>
           </NavItem>
         )
       })}
     </Container>
-  )  
-};
+  )
+}
 
-export default MiniMap;
+export default MiniMap

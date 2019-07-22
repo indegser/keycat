@@ -51,13 +51,16 @@ const FooterLink = styled.a`
   color: #666;
 `
 
-const links = [{
-  name: 'About',
-  link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/about',
-}, {
-  name: 'How-to-use',
-  link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/how-to-use',
-}]
+const links = [
+  {
+    name: 'About',
+    link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/about',
+  },
+  {
+    name: 'How-to-use',
+    link: 'https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/how-to-use',
+  },
+]
 
 const Footer = () => {
   return (
@@ -69,18 +72,13 @@ const Footer = () => {
         rel="noreferrer noopener"
       >
         <GitHubContainer>
-          <GitHash>
-            Open-source
-          </GitHash>
+          <GitHash>Open-source</GitHash>
         </GitHubContainer>
       </GitHubLink>
       <Right>
         {links.map(({ name, link }) => (
           <LinkContent key={link}>
-            <FooterLink
-              href={link} 
-              target="_blank"
-            >
+            <FooterLink href={link} target="_blank">
               {name}
             </FooterLink>
           </LinkContent>

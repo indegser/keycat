@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { svg } from 'assets/images/images';
+import { svg } from 'assets/images/images'
 
-const Container = styled.div`
-
-`
+const Container = styled.div``
 
 const Item = styled.div`
   display: flex;

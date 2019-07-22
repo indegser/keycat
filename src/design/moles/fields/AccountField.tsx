@@ -1,15 +1,15 @@
 import React, { HTMLProps } from 'react'
 import styled from 'styled-components'
 import { Input } from 'design/atoms/Input'
-import FieldError from './FieldError';
+import FieldError from './FieldError'
 
 interface Props extends HTMLProps<HTMLInputElement> {
-  hidden?: boolean,
-  plain?: boolean,
+  hidden?: boolean
+  plain?: boolean
 }
 
 const Container = styled.div`
-  &[data-hidden="true"] {
+  &[data-hidden='true'] {
     height: 0px;
     overflow: hidden;
   }
@@ -28,9 +28,7 @@ const AccountField = ({ hidden, ...inputProps }: Props) => {
         autoComplete="username"
         {...inputProps}
       />
-      {!hidden && (
-        <FieldError name="account" />
-      )}
+      {!hidden && <FieldError name="account" />}
     </Container>
   )
 }

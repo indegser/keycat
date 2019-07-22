@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Button } from 'design/atoms/Button';
-import Help from '../Help';
+import React from 'react'
+import styled from 'styled-components'
+import { Button } from 'design/atoms/Button'
+import Help from '../Help'
 
 const Container = styled.div`
   margin-bottom: var(--padding-x);
@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   justify-content: normal;
   align-items: flex-end;
-`;
+`
 
 const ButtonWrapper = styled.div`
   width: 100%;
@@ -23,16 +23,16 @@ const ButtonWrapper = styled.div`
   button {
     width: 100%;
   }
-`;
+`
 
 interface Props {
-  help?: string,
-  sibling?: React.SFC<any>,
-  disabled?: boolean,
-  onClick?: () => any,
+  help?: string
+  sibling?: React.SFC<any>
+  disabled?: boolean
+  onClick?: () => any
 }
 
-const Submit: React.SFC<Props> = (props) => {
+const Submit: React.SFC<Props> = props => {
   const { onClick, help, disabled, sibling: Sibling } = props
   return (
     <Container>
@@ -40,17 +40,13 @@ const Submit: React.SFC<Props> = (props) => {
         {help && <Help type={help} />}
         <ButtonWrapper>
           {Sibling && <Sibling />}
-          <Button
-            type="submit"
-            onClick={onClick}
-            disabled={disabled}
-          >
+          <Button type="submit" onClick={onClick} disabled={disabled}>
             Next
           </Button>
         </ButtonWrapper>
       </div>
     </Container>
-  );
+  )
 }
 
-export default Submit;
+export default Submit

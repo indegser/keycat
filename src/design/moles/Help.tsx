@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Markdown from 'react-markdown'
-import { icons } from 'assets/icons/icons';
+import { icons } from 'assets/icons/icons'
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -32,9 +32,9 @@ const HelpText = styled.div`
 `
 
 const helps = {
-  'signin': `Browser will auto-fill your saved account. If not, start your Keycat from **Import account**.`,
-  'register': `Try with account **{{ACCOUNT}}**. Private key is **{{PRIVATEKEY}}**`,
-  'keychain': `Whenever Dapp asks you to sign transaction, Keycat use a form for Keychain to auto-fill private key and sign transaction with it.`,
+  signin: `Browser will auto-fill your saved account. If not, start your Keycat from **Import account**.`,
+  register: `Try with account **{{ACCOUNT}}**. Private key is **{{PRIVATEKEY}}**`,
+  keychain: `Whenever Dapp asks you to sign transaction, Keycat use a form for Keychain to auto-fill private key and sign transaction with it.`,
 }
 
 const Help = ({ type }) => {

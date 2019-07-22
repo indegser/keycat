@@ -1,52 +1,52 @@
-import React, { useCallback, useMemo } from 'react';
-import TransactPayload from './TransactPayload';
-import Submit from 'design/moles/fields/Submit';
-import { getSearchParams } from 'utils/utils';
-import AccountField from 'design/moles/fields/AccountField';
-import PasswordField from 'design/moles/fields/PasswordField';
-import CardLayout from 'design/layouts/CardLayout';
-import { useTransact } from 'hooks/transactHooks';
-import { Fields } from 'design/atoms/Input';
-import FieldError from 'design/moles/fields/FieldError';
-import { Form } from 'design/moles/form/Form';
-import { useBlockchain } from 'hooks/blockchainHooks';
-import { dashCaseToCamelCase } from 'utils/stringUtils';
-import TransactMeta from './TransactMeta';
-import JsonViewer from 'design/moles/JsonViewer';
-import { useStore } from 'store/store';
+import React, { useCallback, useMemo } from 'react'
+import TransactPayload from './TransactPayload'
+import Submit from 'design/moles/fields/Submit'
+import { getSearchParams } from 'utils/utils'
+import AccountField from 'design/moles/fields/AccountField'
+import PasswordField from 'design/moles/fields/PasswordField'
+import CardLayout from 'design/layouts/CardLayout'
+import { useTransact } from 'hooks/transactHooks'
+import { Fields } from 'design/atoms/Input'
+import FieldError from 'design/moles/fields/FieldError'
+import { Form } from 'design/moles/form/Form'
+import { useBlockchain } from 'hooks/blockchainHooks'
+import { dashCaseToCamelCase } from 'utils/stringUtils'
+import TransactMeta from './TransactMeta'
+import JsonViewer from 'design/moles/JsonViewer'
+import { useStore } from 'store/store'
 
 interface Props {
-  path: string,
+  path: string
 }
 
 const Transact: React.SFC<Props> = ({ path }) => {
   const { account, payload } = getSearchParams()
-  const { config: { blockchain: { plugin } } } = useStore()
-  const blockchain = useBlockchain()
-  
   const {
-    api,
-    mode,
-    title,
-  } = useMemo(() => {
+    config: {
+      blockchain: { plugin },
+    },
+  } = useStore()
+  const blockchain = useBlockchain()
+
+  const { api, mode, title } = useMemo(() => {
     const mode = dashCaseToCamelCase(path.slice(1))
     const api = blockchain[mode]
 
     const titles = {
-      'signTransaction': 'Sign Transaction',
-      'signArbitraryData': 'Sign arbitrary data',
-      'transact': 'Sign Transaction',
+      signTransaction: 'Sign Transaction',
+      signArbitraryData: 'Sign arbitrary data',
+      transact: 'Sign Transaction',
     }
 
     return {
       api,
       mode,
-      title: titles[mode]
+      title: titles[mode],
     }
   }, [])
 
   const transact = useTransact(api)
-  
+
   const params = useMemo(() => {
     const args = atob(decodeURIComponent(payload as string))
     return JSON.parse(args)
@@ -63,7 +63,7 @@ const Transact: React.SFC<Props> = ({ path }) => {
     if (mode === 'signTransaction') {
       return <TransactPayload payload={data[0]} />
     }
-    
+
     return <TransactPayload payload={data[0]} />
   }, [])
 
@@ -91,7 +91,7 @@ const Transact: React.SFC<Props> = ({ path }) => {
         <Submit />
       </Form>
     </CardLayout>
-  );
+  )
 }
 
-export default Transact;
+export default Transact

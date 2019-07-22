@@ -8,7 +8,7 @@ phases:
       - BRANCH=master
       - echo build with commit ${COMMIT_REF}...
       - curl -o- -L https://yarnpkg.com/install.sh | bash
-      - yarn install --pure-lockfile
+      - yarn install --pure-lockfile --prod
   build:
     commands:
       - yarn build
