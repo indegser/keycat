@@ -1,11 +1,9 @@
-import { Keycat } from 'keycatjs';
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
 import { firestore, fetchBlockchainsFromFirebase } from 'services/Firebase';
 import { parseTransactionResult } from 'utils/blockchain';
-import { KEYCAT_ORIGIN } from 'consts/consts';
 
 const caver = new Caver()
 
@@ -191,9 +189,7 @@ export const usePlayground = () => {
     account,
     donate,
     signin,
-    // sign,
     blockchains,
-    // signTransaction,
     fetchBlockchains,
   }
 }
