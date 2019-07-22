@@ -86,7 +86,19 @@
         "https://api.telos.eosindex.io",
         "https://api.telos.africa:4443"
       ]
-    }
+    },
+    "testnets": [
+      {
+        "name": "Testnet",
+        "config": {
+          "nodes": [
+            "https://api.testnet.telosgermany.io:443",
+            "https://api.philo.telos.dutcheos.io:443",
+            "http://telos.eosbcn.com:8080"
+          ]
+        }
+      }
+    ]
   },
   {
     "name": "BOS",
@@ -113,6 +125,17 @@
         "https://worbliapi.eosmetal.io",
         "https://worbli-mainnet.eosblocksmith.io"
       ]
+    }
+  },
+  {
+    "name": "WAX",
+    "precision": 4,
+    "symbol": "WAX",
+    "icon": "wax.png",
+    "website": "https://wax.io",
+    "config": {
+      "plugin": "eos",
+      "nodes": ["https://chain.wax.io", "https://api.waxsweden.org", "https://wax.eosrio.io"]
     }
   }
 ]
