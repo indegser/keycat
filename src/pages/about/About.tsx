@@ -5,6 +5,7 @@ import PageLayout from 'design/layouts/PageLayout'
 import { media } from 'design/utils'
 import Features from './Features'
 import { AboutSection } from './About.styled'
+import Supports from './supports/Supports';
 
 const Container = styled.div`
   max-width: 960px;
@@ -98,11 +99,11 @@ const GotoPlayground = styled.div`
   }
 `
 
-interface Props {
+interface IProps {
   path: string
 }
 
-const About: React.SFC<Props> = () => {
+const About: React.FunctionComponent<IProps> = () => {
   useEffect(() => {
     textBalancer.balanceText()
   }, [])
@@ -127,6 +128,7 @@ const About: React.SFC<Props> = () => {
               </BrowserSupport>
             </GotoPlayground>
           </AboutSection>
+          <Supports />
           <Features />
         </Container>
       }

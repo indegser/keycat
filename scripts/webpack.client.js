@@ -9,14 +9,9 @@ const git = require('./git')
 const ROOT = path.resolve(__dirname, '..')
 
 module.exports = async (_, { mode = 'development' }) => {
-  const {
-    ORIGIN = 'http://localhost:3030',
-    BRANCH,
-    FIREBASE_API_KEY,
-  } = process.env
+  const { ORIGIN = 'http://localhost:3030', BRANCH, FIREBASE_API_KEY } = process.env
 
-  const COMMIT_REF = (process.env.COMMIT_REF || await git('rev-parse', 'HEAD'))
-    .slice(0, 7)
+  const COMMIT_REF = (process.env.COMMIT_REF || (await git('rev-parse', 'HEAD'))).slice(0, 7)
 
   const PRODUCTION = mode !== 'development'
   const publicPath = PRODUCTION ? `/${BRANCH}/${COMMIT_REF}/` : '/'
@@ -33,7 +28,7 @@ module.exports = async (_, { mode = 'development' }) => {
     },
     resolve: {
       modules: ['node_modules', path.resolve(ROOT, 'src')],
-      extensions: ['.tsx', '.ts', '.js']
+      extensions: ['.tsx', '.ts', '.js'],
     },
     plugins: [
       !PRODUCTION && new webpack.HotModuleReplacementPlugin(),
@@ -44,49 +39,53 @@ module.exports = async (_, { mode = 'development' }) => {
         COMMIT_REF: COMMIT_REF.slice(0, 7),
         ORIGIN,
       }),
-      PRODUCTION && new SriPlugin({
-        hashFuncNames: ['sha256', 'sha384'],
-        enabled: true,
-      }),
+      PRODUCTION &&
+        new SriPlugin({
+          hashFuncNames: ['sha256', 'sha384'],
+          enabled: true,
+        }),
       PRODUCTION && new webpack.HashedModuleIdsPlugin(),
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
         MODE: JSON.stringify(mode),
         BRANCH: JSON.stringify(BRANCH),
+        PUBLIC_PATH: JSON.stringify(publicPath),
         FIREBASE_API_KEY: JSON.stringify(FIREBASE_API_KEY),
       }),
-      new CspPlugin({
-        'base-uri': `'self'`,
-        'object-src': `'none'`,
-        'font-src': `https://fonts.gstatic.com`,
-        'script-src': [
-          `'self'`,
-          `'strict-dynamic'`,
-          `https://fonts.googleapis.com`,
-          `https://www.googletagmanager.com`,
-        ],
-        'style-src': [
-          `'self'`,
-          `https://fonts.googleapis.com`,
-          `'unsafe-inline'`,
-        ],
-      }, {
-        nonceEnabled: {
-          'style-src': false,
-        }
-      }),
-      new CopyPlugin([
-        { from: path.resolve(ROOT, 'static'), to: path.resolve(ROOT, 'public')}
-      ])
+      new CspPlugin(
+        {
+          'base-uri': `'self'`,
+          'object-src': `'none'`,
+          'font-src': `https://fonts.gstatic.com`,
+          'script-src': [
+            `'self'`,
+            `'strict-dynamic'`,
+            `https://fonts.googleapis.com`,
+            `https://www.googletagmanager.com`,
+          ],
+          'style-src': [`'self'`, `https://fonts.googleapis.com`, `'unsafe-inline'`],
+        },
+        {
+          nonceEnabled: {
+            'style-src': false,
+          },
+        },
+      ),
+      new CopyPlugin([{ from: path.resolve(ROOT, 'static'), to: path.resolve(ROOT, 'public') }]),
     ].filter(Boolean),
     module: {
       rules: [
-        { test: /\.tsx?$/, use: [{
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-          }
-        }]},
+        {
+          test: /\.tsx?$/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
+        },
         {
           test: /\.svg$/,
           loader: 'react-svg-loader',
@@ -97,12 +96,14 @@ module.exports = async (_, { mode = 'development' }) => {
         },
       ],
     },
-    externals: PRODUCTION ? {} : {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-    },
+    externals: PRODUCTION
+      ? {}
+      : {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
   }
-  
+
   if (!PRODUCTION) {
     config.devServer = {
       hot: true,

@@ -1,0 +1,118 @@
+[
+  {
+    "name": "EOS",
+    "precision": 4,
+    "symbol": "EOS",
+    "website": "https://eos.io",
+    "icon": "eos.svg",
+    "config": {
+      "plugin": "eos",
+      "nodes": ["https://eos.greymass.com", "https://user-api.eoseoul.io"]
+    },
+    "testnets": [
+      {
+        "name": "jungle",
+        "config": {
+          "nodes": [
+            "https://jungleapi.eossweden.se:443",
+            "https://jungle.eosn.io:443",
+            "https://eos-jungle.eosblocksmith.io:443"
+          ]
+        }
+      },
+      {
+        "name": "kylin",
+        "config": {
+          "nodes": ["https://api.kylin.alohaeos.com", "http://api.kylin.helloeos.com.cn", "https://kylin.eoscanada.com"]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Ethereum",
+    "precision": 8,
+    "symbol": "ETH",
+    "website": "https://www.ethereum.org",
+    "icon": "eth.svg",
+    "config": {
+      "plugin": "ethereum",
+      "provider": "homestead"
+    },
+    "testnets": [
+      {
+        "name": "ropsten",
+        "config": {
+          "provider": "ropsten"
+        }
+      },
+      {
+        "name": "rinkeby",
+        "config": {
+          "provider": "rinkeby"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Klaytn",
+    "precision": 6,
+    "symbol": "KLAY",
+    "website": "https://www.klaytn.com",
+    "icon": "klaytn.svg",
+    "config": {
+      "plugin": "klaytn",
+      "rpcUrl": "https://api.cypress.klaytn.net:8651"
+    },
+    "testnets": [
+      {
+        "name": "baobab",
+        "config": {
+          "rpcUrl": "https://api.baobab.klaytn.net:8651"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Telos",
+    "precision": 4,
+    "symbol": "TLOS",
+    "website": "https://telosfoundation.io",
+    "icon": "telos.png",
+    "config": {
+      "plugin": "eos",
+      "nodes": [
+        "https://telos.eosphere.io",
+        "https://telosapi.eosmetal.io",
+        "https://api.telos.eosindex.io",
+        "https://api.telos.africa:4443"
+      ]
+    }
+  },
+  {
+    "name": "BOS",
+    "precision": 4,
+    "symbol": "BOS",
+    "website": "https://boscore.io",
+    "icon": "bos.png",
+    "config": {
+      "plugin": "eos",
+      "nodes": ["https://apibos.eosfengwo.com", "https://rpc.bos.nodepacific.com", "https://bos.eosphere.io"]
+    }
+  },
+  {
+    "name": "Worbli",
+    "precision": 4,
+    "symbol": "WBI",
+    "icon": "worbli.png",
+    "website": "https://worbli.io",
+    "config": {
+      "plugin": "eos",
+      "nodes": [
+        "https://api.worbli.eosrio.io",
+        "https://api.worbli.eosdetroit.io",
+        "https://worbliapi.eosmetal.io",
+        "https://worbli-mainnet.eosblocksmith.io"
+      ]
+    }
+  }
+]

@@ -1,36 +1,56 @@
 <% const { options } = htmlWebpackPlugin %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Your Gateway to any Blockchain - Keycat</title>
-  <meta name="description" content="Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain." />
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Assistant:700&display=swap" rel="stylesheet">
-  <meta property="og:title" content="Your Gateway to any Blockchain - Keycat"/><meta property="og:description" content="Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain."/><meta name="og:image" content="<%= options.ORIGIN %><%= options.PUBLIC_PATH %>images/og-image.png"/><meta name="twitter:image" content="<%= options.ORIGIN %><%= options.PUBLIC_PATH %>images/og-image.png"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:creator" content="@indegser"/><meta name="twitter:title" content="Your Gateway to any Blockchain - Keycat"/><meta name="twitter:description" content="Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain."/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Your Gateway to any Blockchain - Keycat</title>
+    <meta
+      name="description"
+      content="Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain."
+    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Assistant:700&display=swap" rel="stylesheet" />
+    <meta property="og:title" content="Your Gateway to any Blockchain - Keycat" />
+    <meta
+      property="og:description"
+      content="Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain."
+    />
+    <meta name="og:image" content="<%= options.ORIGIN %><%= options.PUBLIC_PATH %>images/og-image.png" />
+    <meta name="twitter:image" content="<%= options.ORIGIN %><%= options.PUBLIC_PATH %>images/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@indegser" />
+    <meta name="twitter:title" content="Your Gateway to any Blockchain - Keycat" />
+    <meta
+      name="twitter:description"
+      content="Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into DApps in any blockchain."
+    />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="<%= options.PUBLIC_PATH %>icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="<%= options.PUBLIC_PATH %>icons/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="<%= options.PUBLIC_PATH %>icons/apple-touch-icon.png"/>
-</head>
-<body>
-  <div id="app"></div>
-  <% if(!options.PRODUCTION) { %>
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= options.PUBLIC_PATH %>icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= options.PUBLIC_PATH %>icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= options.PUBLIC_PATH %>icons/apple-touch-icon.png" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <% if(!options.PRODUCTION) { %>
     <script crossorigin src="https://unpkg.com/react@16.8.0/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16.8.0/umd/react-dom.development.js"></script>
-  <% } %>
-  <% if(options.PRODUCTION) { %>
+    <% } %> <% if(options.PRODUCTION) { %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script>
       window.GA_MEASUREMENT_ID = 'UA-121560623-3'
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121560623-3"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-121560623-3');
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'UA-121560623-3')
     </script>
-  <% } %>
-</body>
+    <% } %>
+  </body>
 </html>
