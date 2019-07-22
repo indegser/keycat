@@ -23,7 +23,7 @@ const SelectBlockchain = () => {
     dispatch(playActions.setBlockchain({ blockchain }))
   }
 
-  if (!blockchains) return 'loading...'
+  if (!blockchains) return <div>'...'</div>
 
   return (
     <Container>

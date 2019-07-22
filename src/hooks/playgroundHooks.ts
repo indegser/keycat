@@ -53,8 +53,27 @@ export const useDonations = () => {
   }
 }
 
+export const useHashTalk = () => {
+  const { play: { keycat } } = useStore()
+  const submitMessage = async ({ values }) => {
+    try {
+      const data = await keycat
+        .account(values.identifier)
+        .signArbitraryData(values.message)
+
+      console.log(data)
+    } catch (err) {
+      alert(err.message)
+    }
+  }
+
+  return {
+    submitMessage,
+  }
+}
+
 export const usePlayground = () => {
-  const { play: { account, blockchain, blockchains } } = useStore()
+  const { play: { keycat, account, blockchain, blockchains } } = useStore()
   const dispatch = useDispatch()
 
   const fetchBlockchains = useCallback(async () => {
@@ -72,62 +91,32 @@ export const usePlayground = () => {
       return res
     }, {})
 
-    dispatch(playActions.setBlockchains({ blockchains: { entities, entries } }))
+    dispatch(playActions.init({
+      blockchain: entries[0].name,
+      blockchains: { entities, entries },
+    }))
   }, [])
-
-  const keycat = useMemo(() => {
-    if (!blockchains) return null
-    const { name, ...chain } = blockchains.entities[blockchain]
-
-    return new Keycat({
-      ux: 'popup',
-      blockchain: {
-        name,
-        ...chain,
-        plugin: blockchain.split('-')[0] as any,
-      },
-      __keycatOrigin: KEYCAT_ORIGIN,
-    })
-  }, [blockchain])
-
-  const sign = useCallback(async (e, data) => {
-    e.preventDefault()
-    if (!account) return;
-
-    try {
-      const result = await keycat
-        .signArbitraryData(data);
-
-      alert(blockchain === 'klaytn-baobab' ? result.signature : result)
-    } catch (err) {
-      console.log(err)
-    }
-  }, [account, blockchain])
-
-  const signTransaction = useCallback(async (e, transaction) => {
-    e.preventDefault()
-
-    try {
-      const result = await keycat
-        .account(account.accountName || account.address)
-        .signTransaction(transaction, { blocksBehind: 3 });
-      
-      alert('success')
-    } catch (err) {
-      console.log(err);
-    }
-
-  }, [account, blockchain])
 
   const signin = useCallback(async (e) => {
     e.preventDefault()
     try {
-      const account = await keycat.signin()
-      dispatch(playActions.setAccount({ account }))
+      const {
+        accountName,
+        address,
+        publicKey,
+      } = await keycat.signin()
+
+      dispatch(playActions.setAccount({
+        account: {
+          identifier: accountName || address,
+          address: publicKey || address,
+          accountName,
+        },
+      }))
     } catch (err) {
       alert(`Failed to signin with keycat! Message: ${err.message}`)
     }
-  }, [blockchain])
+  }, [keycat])
 
   const donate = useCallback(async ({ rate, amount }, formik) => {
     const getPayload = () => {
@@ -202,8 +191,9 @@ export const usePlayground = () => {
     account,
     donate,
     signin,
-    sign,
-    signTransaction,
+    // sign,
+    blockchains,
+    // signTransaction,
     fetchBlockchains,
   }
 }

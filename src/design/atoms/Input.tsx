@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, HTMLProps } from 'react';
 import styled from 'styled-components';
 import { useStore } from 'store/store';
 
@@ -83,7 +83,11 @@ const InputBorder = styled.div`
   transition: .3s border-color ease;
 `
 
-export const Input = ({ placeholder: label, ...props }) => {
+interface Props extends HTMLProps<HTMLInputElement> {
+
+}
+
+export const Input: React.SFC<Props> = ({ placeholder: label, style, ...props }) => {
   const [focused, setFocused] = useState(false)
 
   const handleFocus = useCallback(() => {
@@ -95,7 +99,7 @@ export const Input = ({ placeholder: label, ...props }) => {
   }, [])
 
   return (
-    <Container>
+    <Container style={style}>
       <Input2
         {...props}
         onFocus={handleFocus}

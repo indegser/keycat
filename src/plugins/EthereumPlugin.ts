@@ -53,7 +53,7 @@ class EthereumPlugin extends BlockchainPlugin {
 
   signArbitraryData = ({ password, params }) => {
     const { wallet } = this.getWallet(password)
-    return wallet.signMessage(params)
+    return wallet.signMessage(params[0])
   }
 }
 
