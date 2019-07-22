@@ -1,6 +1,7 @@
 import { useStore } from "store/store";
 import EosPlugin from "plugins/EosPlugin";
 import KlaytnPlugin from "plugins/KlaytnPlugin";
+import EthereumPlugin from "plugins/EthereumPlugin";
 
 export const useBlockchain = () => {
   const { config: { blockchain } } = useStore()
@@ -9,6 +10,8 @@ export const useBlockchain = () => {
       return new EosPlugin(blockchain)
     case 'klaytn':
       return new KlaytnPlugin(blockchain)
+    case 'ethereum':
+      return new EthereumPlugin(blockchain)
     default:
       return null;
   }

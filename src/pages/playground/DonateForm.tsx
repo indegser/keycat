@@ -6,7 +6,6 @@ import { Formik, Form } from 'formik';
 import { media } from 'design/utils';
 import StarField from './StarField';
 import { useStore } from 'store/store';
-import { getBlockchainByName } from 'utils/utils';
 
 const Container = styled.div`
   margin-top: 20px;
@@ -51,8 +50,10 @@ const CurrentAmount = styled.div`
 `
 
 const DonateForm = ({ donate, account }) => {
-  const { play: { blockchain } } = useStore()
-  const { symbol, precision } = getBlockchainByName(blockchain)
+  const { play: { blockchain, blockchains } } = useStore()
+  if (!blockchains) return null
+
+  const { symbol, precision } = blockchains.entities[blockchain]
   return (
     <Container>
       <Formik

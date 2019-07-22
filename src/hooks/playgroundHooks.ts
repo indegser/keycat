@@ -1,11 +1,9 @@
-import { Keycat } from 'keycatjs';
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store';
 import { playActions } from 'store/ducks/playDuck';
-import { firestore } from 'services/Firebase';
+import { firestore, fetchBlockchainsFromFirebase } from 'services/Firebase';
 import { parseTransactionResult } from 'utils/blockchain';
-import { KEYCAT_ORIGIN } from 'consts/consts';
 
 const caver = new Caver()
 
@@ -53,138 +51,70 @@ export const useDonations = () => {
   }
 }
 
-const getBlockchainPayload = (blockchain) => {
-  switch (blockchain) {
-    case 'klaytn-baobab': {
-      return { rpcUrl: 'https://api.baobab.klaytn.net:8651' }
+export const useHashTalk = () => {
+  const { play: { keycat } } = useStore()
+  const submitMessage = async ({ values }) => {
+    try {
+      const data = await keycat
+        .account(values.identifier)
+        .signArbitraryData(values.message)
+
+      console.log(data)
+    } catch (err) {
+      alert(err.message)
     }
-    case 'klaytn':
-      return { rpcUrl: 'https://api.cypress.klaytn.net:8651' }
-    case 'eos-jungle':
-      return {
-        nodes: [
-          'https://jungleapi.eossweden.se:443',
-          'https://jungle.eosn.io:443',
-          'https://eos-jungle.eosblocksmith.io:443',
-          'https://jungle.eosphere.io:443',
-        ],
-      }
-    case 'eos':
-      return {
-        nodes: [
-          'https://eos.greymass.com',
-          'https://user-api.eoseoul.io'
-        ]
-      }
-    case 'worbli': {
-      return {
-        nodes: [
-          'https://api.worbli.eosrio.io',
-          'https://api.worbli.eosdetroit.io',
-          'https://worbliapi.eosmetal.io',
-          'https://worbli-mainnet.eosblocksmith.io',
-          'https://worbli.eosio.sg',
-        ]
-      }
-    }
-    case 'bos':
-      return {
-        nodes: [
-          'https://apibos.eosfengwo.com',
-          'https://rpc.bos.nodepacific.com',
-          'https://bos.eosphere.io',
-        ]
-      }
-    case 'eos-kylin': {
-      return {
-        nodes: [
-          'https://api.kylin.alohaeos.com',
-          'http://api.kylin.helloeos.com.cn',
-          'https://kylin.eoscanada.com',
-          'http://api-kylin.starteos.io',
-          'http://api.kylin.eosbeijing.one:8880',
-        ]
-      }
-    }
-    case 'telos': {
-      return {
-        nodes: [
-          'https://telos.eosphere.io',
-          'https://telosapi.eosmetal.io',
-          'https://api.telos.eosindex.io',
-          'https://api.telos.africa:4443',
-          'https://telos.caleos.io',
-          'https://api.telos-21zephyr.com',
-        ]
-      }
-    }
-    default:
-      throw new Error('Cannot get payload of blockchain')
+  }
+
+  return {
+    submitMessage,
   }
 }
 
 export const usePlayground = () => {
-  const { play: { account, blockchain } } = useStore()
+  const { play: { keycat, account, blockchain, blockchains } } = useStore()
   const dispatch = useDispatch()
 
-  const keycat = useMemo(() => {
-    // return new Keycat.EosCustom(
-    //   getBlockchainPayload(blockchain).nodes,
-    //   'https://custom.keycat.co',
-    // )
-    return new Keycat({
-      ux: 'popup',
-      blockchain: {
-        name: KEYCAT_ORIGIN || blockchain,
-        plugin: blockchain.split('-')[0],
-        ...getBlockchainPayload(blockchain) as any,
-      },
-    })
-  }, [blockchain])
+  const fetchBlockchains = useCallback(async () => {
+    const entries = await fetchBlockchainsFromFirebase()
+    const entities = entries.reduce((res, blockchain) => {
+      const { id, name, testnets, ...options } = blockchain
+      res[name] = blockchain
+      for (const testnet of testnets) {
+        res[`${name}-${testnet.name}`] = {
+          ...options,
+          ...testnet,
+        }
+      }
 
-  const sign = useCallback(async (e, data) => {
-    e.preventDefault()
-    if (!account) return;
+      return res
+    }, {})
 
-    try {
-      const result = await keycat
-        .signArbitraryData(data);
-
-      alert(blockchain === 'klaytn-baobab' ? result.signature : result)
-    } catch (err) {
-      console.log(err)
-    }
-  }, [account, blockchain])
-
-  const signTransaction = useCallback(async (e, transaction) => {
-    e.preventDefault()
-
-    try {
-      const result = await keycat
-        .account(account.accountName || account.address)
-        .signTransaction(transaction, { blocksBehind: 3 });
-      
-      alert('success')
-    } catch (err) {
-      console.log(err);
-    }
-
-  }, [account, blockchain])
+    dispatch(playActions.init({
+      blockchain: entries[0].name,
+      blockchains: { entities, entries },
+    }))
+  }, [])
 
   const signin = useCallback(async (e) => {
     e.preventDefault()
     try {
-      const auth = await keycat.signin()
-      let account = auth
-      if (blockchain.name === 'klaytn') {
-        account = { account: auth.address }
-      }
+      const {
+        accountName,
+        address,
+        publicKey,
+      } = await keycat.signin()
 
-      dispatch(playActions.setAccount({ account }))
+      dispatch(playActions.setAccount({
+        account: {
+          identifier: accountName || address,
+          address: publicKey || address,
+          accountName,
+        },
+      }))
     } catch (err) {
       alert(`Failed to signin with keycat! Message: ${err.message}`)
     }
-  }, [blockchain])
+  }, [keycat])
 
   const donate = useCallback(async ({ rate, amount }, formik) => {
     const getPayload = () => {
@@ -197,6 +127,18 @@ export const usePlayground = () => {
             gasPrice: caver.utils.toPeb('25', 'Ston'),
             value: caver.utils.toHex(caver.utils.toPeb(amount, 'KLAY'))
           }]
+        case 'ethereum':
+        case 'ropsten': {
+          return [{
+            nonce: Math.random() * 100000000000000,
+            gasLimit: 21000,
+            gasPrice: '0x04a817c800',
+            to: '0xbac2A0348f4FBB6ce73905D7A56456CB55f4B870',
+            value: '0x02540be400',
+            data: '0x'
+          }]
+        }
+
         default:
           return [{
             actions: [{
@@ -228,7 +170,7 @@ export const usePlayground = () => {
       const col = firestore.collection('donations')
       const { id } = parseTransactionResult(data, blockchain)
   
-      const ref =  await col.add({
+      await col.add({
         blockchain,
         rate,
         account: account.accountName || account.address,
@@ -247,7 +189,7 @@ export const usePlayground = () => {
     account,
     donate,
     signin,
-    sign,
-    signTransaction,
+    blockchains,
+    fetchBlockchains,
   }
 }

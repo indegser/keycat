@@ -24,6 +24,16 @@ export const blockchains = [
     precision: 4,
   },
   {
+    name: `ethereum`,
+    types: [
+      `ethereum`,
+      `ropsten`,
+      `rinkeby`
+    ],
+    symbol: `ETH`,
+    precision: 8,
+  },
+  {
     name: `klaytn`,
     types: [
       `klaytn`,
