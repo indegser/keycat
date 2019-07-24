@@ -1,23 +1,41 @@
-import { useStore } from "store/store";
-import EosPlugin from "plugins/EosPlugin";
-import KlaytnPlugin from "plugins/KlaytnPlugin";
-import EthereumPlugin from "plugins/EthereumPlugin";
+import { useStore } from 'store/store'
+import { BlockchainPlugin } from 'plugins/Plugin.interface'
 
-export const useBlockchain = () => {
-  const { config: { blockchain } } = useStore()
+export const useBlockchain = (): BlockchainPlugin => {
+  const {
+    config: { blockchain },
+  } = useStore()
+
+  const injectConfig = module => {
+    module.default(blockchain)
+  }
+
+  let loader
+
   switch (blockchain.plugin || blockchain.name) {
     case 'eos':
-      return new EosPlugin(blockchain)
-    case 'klaytn':
-      return new KlaytnPlugin(blockchain)
+      loader = import(/* webpackChunkName: "eos" */ 'plugins/EosPlugin').then(injectConfig)
+      break
+    // case 'klaytn':
+    //   loader = import(/* webpackChunkName: "klaytn" */ 'plugins/KlaytnPlugin').then(injectConfig)
+    //   break
     case 'ethereum':
-      return new EthereumPlugin(blockchain)
+      loader = import(/* webpackChunkName: "ethereum" */ 'plugins/EthereumPlugin').then(injectConfig)
+      break
     default:
-      return null;
+      return
   }
-}
 
-export const useIdentifier = () => {
-  const { play: { account } } = useStore()
-  
+  const apis = async method => {
+    const plugin = await loader
+    return plugin[method]
+  }
+
+  return {
+    signin: apis['signin'],
+    register: apis['register'],
+    signTransaction: apis['signTransaction'],
+    transact: apis['transact'],
+    signArbitraryData: apis['signArbitraryData'],
+  }
 }

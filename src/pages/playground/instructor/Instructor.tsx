@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Keycat } from 'keycatjs'
 import Web3 from 'web3'
 

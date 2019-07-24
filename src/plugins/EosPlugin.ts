@@ -1,61 +1,8 @@
 import ecc from 'eosjs-ecc'
-import { errors } from 'consts/errors';
-import { JsonRpc, Api } from 'eosjs';
-import { BlockchainPlugin, ISignin } from './Plugin.interface';
-import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
-
-const eosNodesByNetwork = {
-  'jungle': [
-    'https://jungleapi.eossweden.se:443',
-    'https://jungle.eosn.io:443',
-    'https://eos-jungle.eosblocksmith.io:443',
-    'https://jungle.eosphere.io:443',
-  ],
-  'main': [
-    "https://eos.greymass.com",
-    ​​"https://user-api.eoseoul.io",
-    ​"https://node1.zbeos.com",
-    ​​"https://api.eoslaomao.com",
-    ​​"https://api.jeda.one",​​
-    // "https://api.eosbeijing.one",
-    // ​​"https://api-mainnet.eosgravity.com",
-    // ​​"https://rpc.eosys.io",
-    // ​​"https://api.eosn.io",
-    // ​​"https://hapi.eosrio.io",
-  ],
-  'kylin': [
-    'https://api.kylin.alohaeos.com',
-    'http://api.kylin.helloeos.com.cn',
-    'https://kylin.eoscanada.com',
-    'http://api-kylin.starteos.io',
-    'http://api.kylin.eosbeijing.one:8880',
-    // 'http://kylin-testnet.jeda.one:8888/v1/chain/get_info',
-    // 'http://kylin.meet.one:8888/v1/chain/get_info',
-  ],
-  'worbli': [
-    'https://api.worbli.eosrio.io',
-    'https://api.worbli.eosdetroit.io',
-    'https://worbliapi.eosmetal.io',
-    'https://worbli-mainnet.eosblocksmith.io',
-    'https://worbli.eosio.sg',
-    // 'https://api.worbli.eosnewyork.io',
-    // 'http://api.worbli.eostribe.io',
-    // 'https://worbli.eosphere.io',
-  ],
-  'bos': [
-    'https://apibos.eosfengwo.com',
-    'https://rpc.bos.nodepacific.com',
-    'https://bos.eosphere.io',
-  ],
-  'telos': [
-    'https://telos.eosphere.io',
-    'https://telosapi.eosmetal.io',
-    'https://api.telos.eosindex.io',
-    'https://api.telos.africa:4443',
-    'https://telos.caleos.io',
-    'https://api.telos-21zephyr.com',
-  ],
-};
+import { errors } from 'consts/errors'
+import { JsonRpc, Api } from 'eosjs'
+import { BlockchainPlugin, ISignin } from './Plugin.interface'
+import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
 
 class EosPlugin extends BlockchainPlugin {
   config: any
@@ -64,13 +11,12 @@ class EosPlugin extends BlockchainPlugin {
   constructor(props) {
     super()
     this.config = props
-    
-    const { network = 'main', nodes } = props
-    const networks = Object.keys(eosNodesByNetwork)
-    this.nodes = nodes || eosNodesByNetwork[networks.includes(network) ? network : 'main']
+
+    const { nodes } = props
+    this.nodes = nodes
   }
 
-  getIdentifier = (account) => {
+  getIdentifier = account => {
     return account.accountName
   }
 
@@ -90,10 +36,10 @@ class EosPlugin extends BlockchainPlugin {
     const { nodes } = this
     return nodes.reduce(async (promise, cand, i) => {
       try {
-        const res = await promise;
-        return res;
+        const res = await promise
+        return res
       } catch (err) {
-        if (i === (nodes.length)) {
+        if (i === nodes.length) {
           throw err
         } else {
           const rpc = new JsonRpc(cand)
@@ -114,7 +60,7 @@ class EosPlugin extends BlockchainPlugin {
     try {
       return ecc.sign(JSON.stringify(params), password)
     } catch (err) {
-      alert(err.message);
+      alert(err.message)
     }
   }
 
@@ -142,8 +88,8 @@ class EosPlugin extends BlockchainPlugin {
     await this.guardValidAccount({ password })
 
     try {
-      return this.nodeos((rpc) => {
-        const sig = new JsSignatureProvider([password]);
+      return this.nodeos(rpc => {
+        const sig = new JsSignatureProvider([password])
         const api = new Api({ rpc, signatureProvider: sig })
         const transactOptions = options
 
@@ -155,10 +101,7 @@ class EosPlugin extends BlockchainPlugin {
           transactOptions.expireSeconds = 30
         }
 
-        return api.transact(
-          transaction,
-          transactOptions,
-        )
+        return api.transact(transaction, transactOptions)
       })
     } catch (err) {
       throw errors.transactionFailed
@@ -172,25 +115,26 @@ class EosPlugin extends BlockchainPlugin {
 
   private getAccountInfo = async ({ account, publicKey }) => {
     try {
-      const {
-        permissions,
-      } = await this.nodeos(rpc => rpc.get_account(account))
-      const auth = permissions.reduce((res, pm) => {
-        // skip searching permission if there's already active perm.
-        if (res.permission === 'active') return res
-  
-        const { perm_name: permission, required_auth: auth } = pm
-        const { keys } = auth
-        const exist = keys.filter(({ key }) => key === publicKey).length > 0
-        if (exist) {
-          res.permission = permission
-        }
-  
-        return res
-      }, {
-        permission: null,
-        publicKey,
-      })
+      const { permissions } = await this.nodeos(rpc => rpc.get_account(account))
+      const auth = permissions.reduce(
+        (res, pm) => {
+          // skip searching permission if there's already active perm.
+          if (res.permission === 'active') return res
+
+          const { perm_name: permission, required_auth: auth } = pm
+          const { keys } = auth
+          const exist = keys.filter(({ key }) => key === publicKey).length > 0
+          if (exist) {
+            res.permission = permission
+          }
+
+          return res
+        },
+        {
+          permission: null,
+          publicKey,
+        },
+      )
 
       return {
         ...auth,
@@ -199,8 +143,8 @@ class EosPlugin extends BlockchainPlugin {
     } catch (err) {
       throw errors.signin(m => m.AccountNotFound)
     }
-  } 
-  
+  }
+
   signin = async (payload: ISignin): Promise<any> => {
     const { account } = payload
     const publicKey = await this.guardValidAccount(payload)

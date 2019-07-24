@@ -1,12 +1,9 @@
 import { useState, useCallback, useEffect } from 'react'
-import Caver from 'caver-js'
 import { useDispatch, useStore } from 'store/store'
 import { playActions } from 'store/ducks/playDuck'
 import { firestore, fetchBlockchainsFromFirebase } from 'services/Firebase'
 import { parseTransactionResult } from 'utils/blockchain'
 import { fetchBlockchainsJson } from 'api/webApi'
-
-const caver = new Caver()
 
 export const useDonations = () => {
   const [data, set] = useState({
@@ -134,16 +131,6 @@ export const usePlayground = () => {
     async ({ rate, amount }, formik) => {
       const getPayload = () => {
         switch (blockchain) {
-          case 'klaytn-baobab':
-            return [
-              {
-                from: account.address,
-                to: `0x57fdcc985f26ccc767aa4a748cd3e30bd4a77d54`,
-                gasLimit: 9900000,
-                gasPrice: caver.utils.toPeb('25', 'Ston'),
-                value: caver.utils.toHex(caver.utils.toPeb(amount, 'KLAY')),
-              },
-            ]
           case 'ethereum':
           case 'ropsten': {
             return [
