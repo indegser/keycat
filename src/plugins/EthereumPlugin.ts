@@ -1,32 +1,40 @@
 import * as ethers from 'ethers'
-import { BlockchainPlugin } from './Plugin.interface';
-import { errors } from 'consts/errors';
+import { BlockchainPlugin } from './Plugin.interface'
+import { errors } from 'consts/errors'
 
-interface EthereumConfig {
-  name: string;
+interface IEthereumConfig {
+  name: string
+  provider: string
 }
 
 class EthereumPlugin extends BlockchainPlugin {
-  provider: any
+  private provider: any
 
-  constructor(private config: EthereumConfig) {
+  constructor(private config: IEthereumConfig) {
     super()
-    this.provider = ethers.getDefaultProvider(this.config.name.replace('ethereum', 'homestead'))
+
+    const { provider } = this.config
+    try {
+      const url = new URL(provider)
+      this.provider = new ethers.providers.JsonRpcProvider(url.href)
+    } catch (err) {
+      this.provider = ethers.getDefaultProvider(provider)
+    }
   }
 
-  getWallet = (password) => {
+  public getWallet = password => {
     try {
       const wallet = new ethers.Wallet(password)
       return {
         wallet,
-        walletWithProvider: new ethers.Wallet(password, this.provider)
+        walletWithProvider: new ethers.Wallet(password, this.provider),
       }
     } catch (err) {
       throw errors.signin(m => m.InvalidPassword)
     }
   }
 
-  signin = async ({ account, password }) => {
+  public signin = async ({ account, password }) => {
     this.getWallet(password)
     return {
       address: account,
@@ -34,24 +42,27 @@ class EthereumPlugin extends BlockchainPlugin {
     }
   }
 
-  register = this.signin
+  public register = this.signin
 
-  transact = async (payload) => {
+  public transact = async payload => {
     const signedTransaction = await this.signTransaction(payload)
     try {
       const { wait, ...result } = await this.provider.sendTransaction(signedTransaction)
       return result
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  signTransaction = ({ password, params }) => {
+  public signTransaction = async ({ password, params }) => {
     const { wallet } = this.getWallet(password)
-    return wallet.sign(params[0])
+    const { from: _from, gas: _gas, ...transaction } = params[0]
+    const sig = await wallet.sign(transaction)
+
+    return sig
   }
 
-  signArbitraryData = ({ password, params }) => {
+  public signArbitraryData = ({ password, params }) => {
     const { wallet } = this.getWallet(password)
     return wallet.signMessage(params[0])
   }

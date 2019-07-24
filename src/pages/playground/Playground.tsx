@@ -8,6 +8,7 @@ import Wallet from './wallet/Wallet'
 import HashTalk from './hash-talk/HashTalk'
 import { usePlayground } from 'hooks/playgroundHooks'
 import { useStore } from 'store/store'
+import Instructor from './instructor/Instructor'
 
 interface IProps {
   path: string
@@ -30,6 +31,7 @@ const Playground: React.FunctionComponent<IProps> = () => {
       header={<PlaygroundHeader />}
       main={
         <Router path="playground">
+          <Route path="ethereum" component={Instructor} />
           <Route path="hash-talk" component={HashTalk} />
           <Route default component={Donate} />
           <Route path="wallet" component={Wallet} />

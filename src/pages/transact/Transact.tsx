@@ -33,6 +33,7 @@ const Transact: React.SFC<Props> = ({ path }) => {
     const api = blockchain[mode]
 
     const titles = {
+      sign: 'Sign Transaction',
       signTransaction: 'Sign Transaction',
       signArbitraryData: 'Sign arbitrary data',
       transact: 'Sign Transaction',
