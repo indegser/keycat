@@ -20,7 +20,8 @@ class EthereumPlugin extends BlockchainPlugin {
 
   public getWallet = password => {
     try {
-      return this.provider.eth.accounts.privateKeyToAccount(password)
+      const web3 = new Web3(this.config.rpcUrl)
+      return web3.eth.accounts.privateKeyToAccount(password)
     } catch (err) {
       throw errors.signin(m => m.InvalidPassword)
     }
@@ -48,10 +49,10 @@ class EthereumPlugin extends BlockchainPlugin {
 
   public signTransaction = async ({ password, params }) => {
     const wallet = this.getWallet(password)
-    const { from: _from, gas: _gas, ...transaction } = params[0]
-    const sig = await wallet.sign(transaction)
+    const { gas: _gas, ...transaction } = params[0]
+    const { rawTransaction } = await wallet.signTransaction(transaction)
 
-    return sig
+    return rawTransaction
   }
 
   public signArbitraryData = ({ password, params }) => {

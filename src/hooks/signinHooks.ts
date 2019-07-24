@@ -43,6 +43,7 @@ export const useSignin = () => {
 
     setWorking(true)
     try {
+      const blockchain = await plugin.wait()
       const accountInfo = await blockchain.register({ account, password })
       const url = buildUrl({
         pathname: 'session',

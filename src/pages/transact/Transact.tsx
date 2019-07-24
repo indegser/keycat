@@ -9,7 +9,6 @@ import { useTransact } from 'hooks/transactHooks'
 import { Fields } from 'design/atoms/Input'
 import FieldError from 'design/moles/fields/FieldError'
 import { Form } from 'design/moles/form/Form'
-import { useBlockchain } from 'hooks/blockchainHooks'
 import { dashCaseToCamelCase } from 'utils/stringUtils'
 import TransactMeta from './TransactMeta'
 import JsonViewer from 'design/moles/JsonViewer'
@@ -26,11 +25,9 @@ const Transact: React.SFC<Props> = ({ path }) => {
       blockchain: { plugin },
     },
   } = useStore()
-  const blockchain = useBlockchain()
 
-  const { api, mode, title } = useMemo(() => {
+  const { mode, title } = useMemo(() => {
     const mode = dashCaseToCamelCase(path.slice(1))
-    const api = blockchain[mode]
 
     const titles = {
       sign: 'Sign Transaction',
@@ -40,13 +37,12 @@ const Transact: React.SFC<Props> = ({ path }) => {
     }
 
     return {
-      api,
       mode,
       title: titles[mode],
     }
   }, [])
 
-  const transact = useTransact(api)
+  const transact = useTransact(mode)
 
   const params = useMemo(() => {
     const args = atob(decodeURIComponent(payload as string))
