@@ -1,13 +1,18 @@
 import { useStore } from 'store/store'
 import { BlockchainPlugin } from 'plugins/Plugin.interface'
 
-export const useBlockchain = (): BlockchainPlugin => {
+interface IBlockchainPayload {
+  wait: () => Promise<BlockchainPlugin>
+}
+
+export const useBlockchain = (): IBlockchainPayload => {
   const {
     config: { blockchain },
   } = useStore()
 
   const injectConfig = module => {
-    module.default(blockchain)
+    const Plugin = module.default
+    return new Plugin(blockchain)
   }
 
   let loader
@@ -26,16 +31,7 @@ export const useBlockchain = (): BlockchainPlugin => {
       return
   }
 
-  const apis = async method => {
-    const plugin = await loader
-    return plugin[method]
-  }
-
   return {
-    signin: apis['signin'],
-    register: apis['register'],
-    signTransaction: apis['signTransaction'],
-    transact: apis['transact'],
-    signArbitraryData: apis['signArbitraryData'],
+    wait: () => loader,
   }
 }

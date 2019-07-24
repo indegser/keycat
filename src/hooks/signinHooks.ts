@@ -12,7 +12,7 @@ export const useSignin = () => {
   const {
     config: { client },
   } = useStore()
-  const blockchain = useBlockchain()
+  const plugin = useBlockchain()
 
   const setWorking = working => {
     dispatch(appActions.setWorking({ working }))
@@ -24,6 +24,7 @@ export const useSignin = () => {
     setWorking(true)
 
     try {
+      const blockchain = await plugin.wait()
       const result = await blockchain.signin({
         account,
         password,

@@ -1,4 +1,4 @@
-import * as ethers from 'ethers'
+import Web3 from 'web3'
 import { BlockchainPlugin } from './Plugin.interface'
 import { errors } from 'consts/errors'
 
@@ -13,22 +13,14 @@ class EthereumPlugin extends BlockchainPlugin {
   constructor(private config: IEthereumConfig) {
     super()
 
-    const { provider } = this.config
-    try {
-      const url = new URL(provider)
-      this.provider = new ethers.providers.JsonRpcProvider(url.href)
-    } catch (err) {
-      this.provider = ethers.getDefaultProvider(provider)
-    }
+    const { rpcUrl } = this.config
+    const url = new URL(rpcUrl)
+    this.provider = new Web3(url)
   }
 
   public getWallet = password => {
     try {
-      const wallet = new ethers.Wallet(password)
-      return {
-        wallet,
-        walletWithProvider: new ethers.Wallet(password, this.provider),
-      }
+      return this.provider.eth.accounts.privateKeyToAccount(password)
     } catch (err) {
       throw errors.signin(m => m.InvalidPassword)
     }
@@ -55,7 +47,7 @@ class EthereumPlugin extends BlockchainPlugin {
   }
 
   public signTransaction = async ({ password, params }) => {
-    const { wallet } = this.getWallet(password)
+    const wallet = this.getWallet(password)
     const { from: _from, gas: _gas, ...transaction } = params[0]
     const sig = await wallet.sign(transaction)
 
@@ -63,7 +55,7 @@ class EthereumPlugin extends BlockchainPlugin {
   }
 
   public signArbitraryData = ({ password, params }) => {
-    const { wallet } = this.getWallet(password)
+    const wallet = this.getWallet(password)
     return wallet.signMessage(params[0])
   }
 }
