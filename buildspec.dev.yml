@@ -7,9 +7,7 @@ phases:
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - BRANCH=develop
       - echo build with sha:$COMMIT_REF on branch:$BRANCH
-      - if [ -d "node_modules/websocket" ]; then \
-        rm -rf node_modules/websocket/.git \
-        fi
+      - rm -rf node_modules/*/.git/
       - npm install --only=prod
   build:
     commands:
