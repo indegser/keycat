@@ -6,7 +6,7 @@ phases:
     commands:
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - BRANCH=develop
-      - echo build with sha:$COMMIT_REF
+      - echo build with sha:$COMMIT_REF on branch:$BRANCH
       - npm install --only=prod
   build:
     commands:
