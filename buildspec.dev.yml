@@ -5,6 +5,7 @@ phases:
       nodejs: 10
     commands:
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - BRANCH=develop
       - echo build with sha:$COMMIT_REF
       - npm install --only=prod
   build:

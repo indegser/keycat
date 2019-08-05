@@ -14,7 +14,7 @@ module.exports = async (_, { mode = 'development' }) => {
   const COMMIT_REF = (process.env.COMMIT_REF || (await git('rev-parse', 'HEAD'))).slice(0, 7)
 
   const PRODUCTION = mode !== 'development'
-  const publicPath = PRODUCTION ? `/${BRANCH}/${COMMIT_REF}/` : '/'
+  const publicPath = PRODUCTION ? `/dist/${COMMIT_REF}/` : '/'
 
   const config = {
     entry: path.resolve(ROOT, 'src', 'client.tsx'),
