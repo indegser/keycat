@@ -5,22 +5,17 @@ phases:
       nodejs: 10
     commands:
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - BRANCH=develop
-      - echo build with commit ${COMMIT_REF}...
-      - curl -o- -L https://yarnpkg.com/install.sh | bash
-      - yarn install --pure-lockfile --prod
+      - BRANCH=$CODEBUILD_WEBHOOK_HEAD_REF
+      - echo build with <${COMMIT_REF}> on branch [$BRANCH]
+      - npm install --only=prod
   build:
     commands:
-      - yarn build
+      - npm run build
   post_build:
     commands:
-      - aws s3 sync public s3://keycat.co/develop/${COMMIT_REF}
-      - aws cloudfront update-distribution --id E227N52V1F7MY8 --default-root-object develop/${COMMIT_REF}/index.html
+      - aws s3 sync public s3://keycat.co/dist/${COMMIT_REF}
+      - aws cloudfront update-distribution --id E227N52V1F7MY8 --default-root-object dist/${COMMIT_REF}/index.html
 
 cache:
   paths:
-  - 'node_modules/**/*'
-
-# artifacts:
-#   files:
-#     - 'public/**/*'
+    - 'node_modules/**/*'
