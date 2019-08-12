@@ -30,7 +30,7 @@ export const useSignin = () => {
         password,
       })
 
-      sendGaEvent('Authentication', 'Authenticated', result.address || result.accountName)
+      sendGaEvent('Signin', 'signin', result.address || result.accountName)
       sendMessage('signin', { data: result }, client)
     } catch (err) {
       setErrors({ account: err })
@@ -67,7 +67,7 @@ export const useSignin = () => {
     setWorking(true)
 
     const result = values.payload
-    sendGaEvent('Authentication', 'Registered', result.address || result.accountName)
+    sendGaEvent('Signin', 'register', result.address || result.accountName)
     sendMessage('register', { data: JSON.parse(values.payload) }, client)
 
     setWorking(false)
