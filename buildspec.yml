@@ -6,15 +6,16 @@ phases:
     commands:
       - COMMIT_REF=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - BRANCH=master
-      - echo build with sha:$COMMIT_REF
+      - echo build with sha:$COMMIT_REF on branch:$BRANCH
+      - rm -rf node_modules/*/.git/
       - npm install --only=prod
   build:
     commands:
       - npm run build
   post_build:
     commands:
-      - aws s3 sync public s3://keycat.co/${COMMIT_REF}
-      - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object ${COMMIT_REF}/index.html
+      - aws s3 sync public s3://keycat.co/dist/${COMMIT_REF}
+      - aws cloudfront update-distribution --id E1QONAGSSYRR0Z --default-root-object dist/${COMMIT_REF}/index.html
 
 cache:
   paths:
