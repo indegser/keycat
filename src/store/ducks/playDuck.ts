@@ -31,6 +31,7 @@ export const playActions = {
 const buildKeycatWithState = (state: Partial<IPlayState>) => {
   const { blockchains, blockchain } = state
   const { name, config } = blockchains.entities[blockchain]
+
   return new Keycat({
     blockchain: {
       name,

@@ -4,7 +4,6 @@ import PageLayout from 'design/layouts/PageLayout'
 import PlaygroundHeader from './PlaygroundHeader'
 import Donate from './Donate'
 import { Route } from 'design/moles/Route'
-import Wallet from './wallet/Wallet'
 import HashTalk from './hash-talk/HashTalk'
 import { usePlayground } from 'hooks/playgroundHooks'
 import { useStore } from 'store/store'
@@ -34,7 +33,6 @@ const Playground: React.FunctionComponent<IProps> = () => {
           <Route path="ethereum" component={Instructor} />
           <Route path="hash-talk" component={HashTalk} />
           <Route default component={Donate} />
-          <Route path="wallet" component={Wallet} />
         </Router>
       }
     />
