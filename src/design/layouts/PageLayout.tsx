@@ -13,6 +13,12 @@ const Container = styled.div`
   }
 `
 
+const Header = styled.header`
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.9);
+`
+
 interface Props {
   header?: ReactNode
   footer?: ReactNode
@@ -24,7 +30,7 @@ const PageLayout: React.SFC<Props> = ({ header, footer, main }) => {
     <div style={{ height: '100vh' }}>
       <Scrollbar>
         <Container>
-          <header>{header || <PageHeader />}</header>
+          <Header>{header || <PageHeader />}</Header>
           <main>{main}</main>
           <footer>{footer}</footer>
         </Container>
