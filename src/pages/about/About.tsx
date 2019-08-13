@@ -6,11 +6,11 @@ import { media } from 'design/utils'
 import Features from './Features'
 import { AboutSection } from './About.styled'
 import Supports from './supports/Supports'
+import { Typewriter } from 'modules/modules'
 
 const Container = styled.div`
   max-width: 960px;
-  margin: 48px auto;
-  margin-top: 96px;
+  margin: 0 auto 48px auto;
   padding: 0 24px;
   color: #24292e;
   box-sizing: border-box;
@@ -25,11 +25,9 @@ const Container = styled.div`
 `
 
 const Headline = styled.h1`
-  font-size: 64px;
-  line-height: 1;
-  text-align: center;
+  font-size: 80px;
+  line-height: 1.1;
   margin: 0 auto;
-  margin-bottom: 0.2em;
   font-family: var(--font-heading);
 
   ${media.lessThan('medium')`
@@ -48,6 +46,7 @@ const Secondary = styled.h2`
   text-align: center;
   margin: 20px auto;
   max-width: 480px;
+  font-family: var(--font-serif);
 
   ${media.lessThan('small')`
     font-size: 18px;
@@ -113,8 +112,28 @@ const About: React.FunctionComponent<IProps> = () => {
       main={
         <Container>
           <AboutSection>
-            <Headline className="balance-text">Your Gateway to any Blockchain</Headline>
-            <Secondary className="balance-text">
+            <Headline>{`Let's free`}</Headline>
+            <Headline>
+              <Typewriter
+                options={{
+                  loop: true,
+                  cursor: '|',
+                }}
+                onInit={w => {
+                  w.typeString('Blockchains')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('Dapps')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('Ourselves')
+                    .pauseFor(2000)
+                    .start()
+                }}
+              />
+            </Headline>
+            <Headline>from wallet</Headline>
+            <Secondary>
               Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into
               DApps in any blockchain.
             </Secondary>

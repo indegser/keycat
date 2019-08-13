@@ -27,8 +27,8 @@ const GlobalStyle = createGlobalStyle`
     --footer-link-color: #757575;
     --footer-link-hover-color: #403d3d;
     --monospace: menlo, monaco, consolas, hack, monospace;
-    --font-heading: -apple-system, BlinkMacSystemFont, Assistant, Roboto, Segoe UI, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    --font-serif: Buenard, georgia, serif;
+    --font-heading: -apple-system, BlinkMacSystemFont, Source Code Pro, menlo, monaco, consolas, hack, monospace;
     --font-sans: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     --card-border-radius: 4px;
