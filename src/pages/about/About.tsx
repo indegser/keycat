@@ -40,17 +40,17 @@ const Headline = styled.h1`
 `
 
 const Secondary = styled.h2`
-  font-size: 22px;
+  font-size: 20px;
+  line-height: 1.4;
   color: #333;
   font-weight: 400;
-  text-align: center;
-  margin: 20px auto;
+  margin: 20px 0;
   max-width: 480px;
   font-family: var(--font-serif);
+  padding-left: 24px;
 
   ${media.lessThan('small')`
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 16px;
   `}
 `
 
@@ -112,7 +112,6 @@ const About: React.FunctionComponent<IProps> = () => {
       main={
         <Container>
           <AboutSection>
-            <Headline>{`Let's free`}</Headline>
             <Headline>
               <Typewriter
                 options={{
@@ -120,22 +119,28 @@ const About: React.FunctionComponent<IProps> = () => {
                   cursor: '|',
                 }}
                 onInit={w => {
-                  w.typeString('Blockchains')
+                  w.typeString('Chrome')
                     .pauseFor(2000)
                     .deleteAll()
-                    .typeString('Dapps')
+                    .typeString('Safari')
                     .pauseFor(2000)
                     .deleteAll()
-                    .typeString('Ourselves')
+                    .typeString('Firefox')
                     .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('iOS')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('Android')
+                    .pauseFor(2000)
+                    .deleteAll()
                     .start()
                 }}
               />
             </Headline>
-            <Headline>from wallet</Headline>
+            <Headline>is-a-wallet</Headline>
             <Secondary>
-              Access blockchain everywhere just like your email. Keycat is an authenticator and can be integrated into
-              DApps in any blockchain.
+              No installations needed. <br /> Keycat runs on Chrome, Firefox, Safari. <br /> Mobile and Desktop.
             </Secondary>
             <GotoPlayground>
               <a href="/playground">
