@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AboutSection, AboutH5, AboutP, AboutImg } from './About.styled'
+import { AboutSection, AboutH5, AboutParagraph, AboutImg } from './About.styled'
 import { images } from 'assets/images/images'
 import { media } from 'design/utils'
 import EasyToUse from './EasyToUse'
@@ -42,7 +42,7 @@ const Features = () => {
         {features.map(({ id, title, desc }) => (
           <Feature key={id}>
             <AboutH5>{title}</AboutH5>
-            <AboutP>{desc}</AboutP>
+            <AboutParagraph>{desc}</AboutParagraph>
             {id === 'second' ? <EasyToUse /> : <AboutImg src={images[id]} />}
           </Feature>
         ))}

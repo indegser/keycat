@@ -16,16 +16,18 @@ const Container = styled.div`
 const Header = styled.header`
   position: sticky;
   top: 0;
+  backdrop-filter: saturate(180%) blur(20px);
+  z-index: 999;
   background: rgba(255, 255, 255, 0.9);
 `
 
-interface Props {
+interface IProps {
   header?: ReactNode
   footer?: ReactNode
   main?: ReactNode
 }
 
-const PageLayout: React.SFC<Props> = ({ header, footer, main }) => {
+const PageLayout: React.FunctionComponent<IProps> = ({ header, footer, main }) => {
   return (
     <div style={{ height: '100vh' }}>
       <Scrollbar>

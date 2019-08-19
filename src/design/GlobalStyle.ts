@@ -2,8 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: var(--font-sans);
     font-size: 16px;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -29,8 +28,14 @@ const GlobalStyle = createGlobalStyle`
     --monospace: menlo, monaco, consolas, hack, monospace;
     --font-serif: Buenard, georgia, serif;
     --font-heading: -apple-system, BlinkMacSystemFont, Source Code Pro, menlo, monaco, consolas, hack, monospace;
-    --font-sans: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI, Oxygen,
+    --font-sans: -apple-system, BlinkMacSystemFont, Inter, Roboto, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+    @supports (font-variation-settings: normal) {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Inter var', Roboto, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    }
+
     --card-border-radius: 4px;
 
     --focused-border-color: #1148fd;

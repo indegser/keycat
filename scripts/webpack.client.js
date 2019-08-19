@@ -56,14 +56,15 @@ module.exports = async (_, { mode = 'development' }) => {
         {
           'base-uri': `'self'`,
           'object-src': `'none'`,
-          'font-src': `https://fonts.gstatic.com`,
+          'font-src': [`https://fonts.gstatic.com`, `https://rsms.me`],
           'script-src': [
             `'self'`,
             `'strict-dynamic'`,
+            `https://rsms.me`,
             `https://fonts.googleapis.com`,
             `https://www.googletagmanager.com`,
           ],
-          'style-src': [`'self'`, `https://fonts.googleapis.com`, `'unsafe-inline'`],
+          'style-src': [`'self'`, `https://rsms.me`, `https://fonts.googleapis.com`, `'unsafe-inline'`],
         },
         {
           nonceEnabled: {

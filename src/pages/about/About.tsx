@@ -7,6 +7,7 @@ import Features from './Features'
 import { AboutSection } from './About.styled'
 import Supports from './supports/Supports'
 import { Typewriter } from 'modules/modules'
+import Why from './Why'
 
 const Container = styled.div`
   max-width: 960px;
@@ -25,10 +26,9 @@ const Container = styled.div`
 `
 
 const Headline = styled.h1`
-  font-size: 80px;
-  line-height: 1.1;
-  margin: 0 auto;
-  font-family: var(--font-heading);
+  font-size: 92px;
+  line-height: 1;
+  margin: 0;
 
   ${media.lessThan('medium')`
     font-size: 56px;
@@ -39,26 +39,10 @@ const Headline = styled.h1`
   `}
 `
 
-const Secondary = styled.h2`
-  font-size: 20px;
-  line-height: 1.4;
-  color: #333;
-  font-weight: 400;
-  margin: 20px 0;
-  max-width: 480px;
-  font-family: var(--font-serif);
-  padding-left: 24px;
-
-  ${media.lessThan('small')`
-    font-size: 16px;
-  `}
-`
-
 const BrowserSupport = styled.div`
-  font-size: 14px;
+  font-size: 15px;
   color: #808080;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 8px;
 `
 
 const GotoArrow = styled.span`
@@ -116,7 +100,7 @@ const About: React.FunctionComponent<IProps> = () => {
               <Typewriter
                 options={{
                   loop: true,
-                  cursor: '|',
+                  cursor: '_',
                 }}
                 onInit={w => {
                   w.typeString('Chrome')
@@ -139,19 +123,15 @@ const About: React.FunctionComponent<IProps> = () => {
               />
             </Headline>
             <Headline>is-a-wallet</Headline>
-            <Secondary>
-              No installations needed. <br /> Keycat runs on Chrome, Firefox, Safari. <br /> Mobile and Desktop.
-            </Secondary>
+            <BrowserSupport>Keycat runs on Safari, Chrome, Firefox regardless of mobile or desktop.</BrowserSupport>
             <GotoPlayground>
               <a href="/playground">
                 Visit Playground
                 <GotoArrow>→</GotoArrow>
               </a>
-              <BrowserSupport className="balance-text">
-                Keycat runs on Safari, Chrome, Firefox regardless of mobile or desktop.
-              </BrowserSupport>
             </GotoPlayground>
           </AboutSection>
+          <Why />
           <Supports />
           <Features />
         </Container>

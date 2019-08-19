@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { media } from 'design/utils'
+import { typography } from 'design/typography'
 
 export const AboutSection = styled.section`
   padding: 80px 0;
@@ -9,6 +10,11 @@ export const AboutSection = styled.section`
   `}
 `
 
+export const AboutHeadline = styled.h2`
+  font-family: var(--font-heading);
+  font-size: 52px;
+`
+
 export const AboutH5 = styled.h5`
   font-size: 18px;
   font-weight: 500;
@@ -16,10 +22,9 @@ export const AboutH5 = styled.h5`
   margin: 0;
 `
 
-export const AboutP = styled.p`
-  font-size: 15px;
-  line-height: 22px;
-  color: #524b4b;
+export const AboutParagraph = styled.p`
+  ${typography[17]}
+  color: #111;
 `
 
 export const AboutImg = styled.img`
