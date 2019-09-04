@@ -34,7 +34,6 @@ module.exports = async (_, { mode = 'development' }) => {
       new HtmlPlugin({
         template: path.resolve(ROOT, 'src', 'client.html'),
         PRODUCTION,
-        PUBLIC_PATH: publicPath,
         COMMIT_REF: COMMIT_REF.slice(0, 7),
         ORIGIN,
       }),
