@@ -47,7 +47,7 @@ module.exports = async (_, { mode = 'development' }) => {
         COMMIT_REF: JSON.stringify(COMMIT_REF),
         MODE: JSON.stringify(mode),
         BRANCH: JSON.stringify(''),
-        PUBLIC_PATH: JSON.stringify(publicPath),
+        PUBLIC_PATH: JSON.stringify(''),
       }),
       new CspPlugin(
         {
