@@ -9,12 +9,11 @@ const git = require('./git')
 const ROOT = path.resolve(__dirname, '..')
 
 module.exports = async (_, { mode = 'development' }) => {
-  const { ORIGIN = 'http://localhost:3030', BRANCH, FIREBASE_API_KEY } = process.env
+  const { ORIGIN = 'http://localhost:3030' } = process.env
 
   const COMMIT_REF = (process.env.COMMIT_REF || (await git('rev-parse', 'HEAD'))).slice(0, 7)
 
   const PRODUCTION = mode !== 'development'
-  const publicPath = PRODUCTION ? `/dist/${COMMIT_REF}/` : '/'
 
   const config = {
     entry: path.resolve(ROOT, 'src', 'client.tsx'),
@@ -22,7 +21,7 @@ module.exports = async (_, { mode = 'development' }) => {
     devtool: PRODUCTION ? 'source-map' : 'cheap-source-map',
     output: {
       path: path.resolve('public'),
-      publicPath,
+      publicPath: '/',
       filename: `[hash].js`,
       crossOriginLoading: 'anonymous',
     },
@@ -48,9 +47,8 @@ module.exports = async (_, { mode = 'development' }) => {
       new webpack.DefinePlugin({
         COMMIT_REF: JSON.stringify(COMMIT_REF),
         MODE: JSON.stringify(mode),
-        BRANCH: JSON.stringify(BRANCH),
+        BRANCH: JSON.stringify(''),
         PUBLIC_PATH: JSON.stringify(publicPath),
-        FIREBASE_API_KEY: JSON.stringify(FIREBASE_API_KEY),
       }),
       new CspPlugin(
         {
@@ -115,24 +113,24 @@ module.exports = async (_, { mode = 'development' }) => {
     }
   }
 
-  if (PRODUCTION) {
-    config.optimization = {
-      runtimeChunk: 'single',
-      splitChunks: {
-        // chunks: 'all',
-        // maxInitialRequests: Infinity,
-        // minSize: 0,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            chunks: 'all',
-            priority: 1,
-            maxSize: 300 * 1024,
-          },
-        },
-      },
-    }
-  }
+  // if (PRODUCTION) {
+  //   config.optimization = {
+  //     runtimeChunk: 'single',
+  //     splitChunks: {
+  //       // chunks: 'all',
+  //       // maxInitialRequests: Infinity,
+  //       // minSize: 0,
+  //       cacheGroups: {
+  //         vendor: {
+  //           test: /[\\/]node_modules[\\/]/,
+  //           chunks: 'all',
+  //           priority: 1,
+  //           maxSize: 300 * 1024,
+  //         },
+  //       },
+  //     },
+  //   }
+  // }
 
   return config
 }

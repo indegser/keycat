@@ -10,7 +10,7 @@ const Signin = React.lazy(() => import(/* webpackPrefetch: true */ './signin/Sig
 const Register = React.lazy(() => import(/* webpackPrefetch: true */ './register/Register'))
 const Keychain = React.lazy(() => import(/* webpackPrefetch: true */ './register/Keychain'))
 const Transact = React.lazy(() => import(/* webpackPrefetch: true */ './transact/Transact'))
-const Playground = React.lazy(() => import(/* webpackPrefetch: true */ './playground/Playground'))
+// const Playground = React.lazy(() => import(/* webpackPrefetch: true */ './playground/Playground'))
 
 const AppContainer = styled.div`
   display: flex;
@@ -38,7 +38,6 @@ const App = () => {
           <Router>
             <About path="/" />
             <Signin path="/signin" />
-            <Playground path="/playground/*" />
             <Transact path="/transact" />
             <Transact path="/sign-transaction" />
             <Transact path="/sign-arbitrary-data" />
