@@ -25,7 +25,7 @@ export const useBlockchain = (): IBlockchainPayload => {
     //   loader = import(/* webpackChunkName: "klaytn" */ 'plugins/KlaytnPlugin').then(injectConfig)
     //   break
     case 'ethereum':
-      loader = import(/* webpackChunkName: "ethereum" */ 'plugins/EthereumPlugin').then(injectConfig)
+      // loader = import(/* webpackChunkName: "ethereum" */ 'plugins/EthereumPlugin').then(injectConfig)
       break
     default:
       return

@@ -5,9 +5,7 @@ import PageLayout from 'design/layouts/PageLayout'
 import { media } from 'design/utils'
 import Features from './Features'
 import { AboutSection } from './About.styled'
-import Supports from './supports/Supports'
 import { Typewriter } from 'modules/modules'
-import Why from './Why'
 
 const Container = styled.div`
   max-width: 960px;
@@ -124,15 +122,7 @@ const About: React.FunctionComponent<IProps> = () => {
             </Headline>
             <Headline>is-a-wallet</Headline>
             <BrowserSupport>Keycat runs on Safari, Chrome, Firefox regardless of mobile or desktop.</BrowserSupport>
-            <GotoPlayground>
-              <a href="/playground">
-                Visit Playground
-                <GotoArrow>→</GotoArrow>
-              </a>
-            </GotoPlayground>
           </AboutSection>
-          <Why />
-          <Supports />
           <Features />
         </Container>
       }
