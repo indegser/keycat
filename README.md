@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/367c332f-988f-41bf-8a1d-27a5d081af77/deploy-status)](https://app.netlify.com/sites/keycat/deploys)
+
 # Philosophy
 
 Too many apis for each blockchains.

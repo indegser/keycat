@@ -1,1 +1,5 @@
+# Redirect default Netlify subdomain to primary domain
+https://keycat.netlify.com/* https://keycat.co/:splat 301!
+
+# SPA
 /* /index.html 200
