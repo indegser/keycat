@@ -46,6 +46,7 @@ const CreateAccount = props => {
             name: 'CreateAccountError',
           },
         })
+        setIsSubmitDisabled(true)
       }
     } catch (error) {
       const { response } = error
@@ -63,12 +64,16 @@ const CreateAccount = props => {
             name: 'CreateAccountError',
           },
         })
+        setIsSubmitDisabled(true)
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   useEffect(() => {
     if (accountHandle) {
+      setIsLoading(true)
       const timer = setTimeout(fetchHandleAvailability, 500)
       return () => clearTimeout(timer)
     }
