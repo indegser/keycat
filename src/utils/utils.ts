@@ -1,10 +1,10 @@
 import qs from 'query-string'
 import UAParser from 'ua-parser-js'
-import { blockchains } from 'consts/consts';
+import { blockchains } from 'consts/consts'
 
-export const appendSearchParamsToUrl = (url) => {
-  const { search } = new URL(location.href);
-  return url + search;
+export const appendSearchParamsToUrl = url => {
+  const { search } = new URL(location.href)
+  return url + search
 }
 
 export const mergeSearchParams = (newParams: object) => {
@@ -16,8 +16,8 @@ export const mergeSearchParams = (newParams: object) => {
 }
 
 interface IBuildUrlProps {
-  pathname?: string,
-  search?: string,
+  pathname?: string
+  search?: string
 }
 
 export const buildUrl = ({ pathname, search }: IBuildUrlProps) => {
@@ -25,7 +25,7 @@ export const buildUrl = ({ pathname, search }: IBuildUrlProps) => {
   if (pathname) {
     url.pathname = pathname
   }
-  
+
   if (search) {
     url.search = `?${search}`
   }
@@ -37,34 +37,55 @@ export const getSearchParams = (): any => {
   return qs.parse(location.search)
 }
 
-
 interface UserAgent {
-  browser: { name: string, version: string };
-  device: { model: string, type: string };
-  os: { name: string, version: string };
+  browser: { name: string; version: string }
+  device: { model: string; type: string }
+  os: { name: string; version: string }
 }
 
 export const userAgent: UserAgent = new UAParser().getResult()
 
-const getHashCode = (str) => {
-  var hash = 0;
-  if (str.length == 0) return hash;
+const getHashCode = str => {
+  var hash = 0
+  if (str.length == 0) return hash
   for (var i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-      hash = hash & hash; // Convert to 32bit integer
+    hash = str.charCodeAt(i) + ((hash << 5) - hash)
+    hash = hash & hash // Convert to 32bit integer
   }
-  return hash;
+  return hash
 }
 
-const intToHSL = (int) => {
-  var shortened = int % 360;
-  return "hsl(" + shortened + ",100%,30%)";
+const intToHSL = int => {
+  var shortened = int % 360
+  return 'hsl(' + shortened + ',100%,30%)'
 }
 
-export const getColorFromString = (str) => {
+export const getColorFromString = str => {
   return intToHSL(getHashCode(str))
 }
 
-export const getBlockchainByName = (name) => {
+export const getBlockchainByName = name => {
   return blockchains.filter(({ types }) => types.includes(name))[0]
+}
+
+export function debounce(func: Function, wait: number, immediate: boolean): any {
+  let timeout
+
+  return function executedFunction() {
+    const context = this
+    const args = arguments
+
+    const later = function() {
+      timeout = null
+      if (!immediate) func.apply(context, args)
+    }
+
+    const callNow = immediate && !timeout
+
+    if (timeout) clearTimeout(timeout)
+
+    timeout = setTimeout(later, wait)
+
+    if (callNow) func.apply(context, args)
+  }
 }

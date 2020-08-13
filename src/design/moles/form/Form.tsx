@@ -25,14 +25,20 @@ export const Form: React.SFC<Props> = props => {
     formData.forEach((value, key) => {
       values[key] = value
     })
-
-    props.onSubmit({ setErrors, values })
+    console.log('error values: ', values)
+    props.onSubmit({ setErrors })
   }, [])
+
+  const onChange = () => {
+    props.onChange({ setErrors })
+  }
+
+  const totalErrors = { ...errors, ...props.errors }
 
   return (
     <FormContext.Provider
       value={{
-        errors,
+        errors: totalErrors,
       }}
     >
       <form ref={ref} {...props} onSubmit={onSubmit} />

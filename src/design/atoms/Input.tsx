@@ -98,7 +98,7 @@ export const Input: React.SFC<Props> = ({ placeholder: label, style, ...props })
 
   return (
     <Container style={style}>
-      <Input2 {...props} onFocus={handleFocus} onBlur={handleBlur} />
+      <Input2 {...props} onFocus={handleFocus} onBlur={handleBlur} className="input-text" />
       <InputBorder data-focused={focused} />
       <Label
         aria-hidden={true}

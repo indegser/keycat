@@ -27,7 +27,7 @@ const FieldError = ({ name }) => {
   if (!error) return null
 
   const { message } = error
-
+  console.log('errors: ', errors)
   return (
     <Container>
       <InfoSpan>
