@@ -29,10 +29,6 @@ export const Form: React.SFC<Props> = props => {
     props.onSubmit({ setErrors })
   }, [])
 
-  const onChange = () => {
-    props.onChange({ setErrors })
-  }
-
   const totalErrors = { ...errors, ...props.errors }
 
   return (

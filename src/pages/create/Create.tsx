@@ -10,7 +10,7 @@ import { Fields } from 'design/atoms/Input'
 import FieldError from 'design/moles/fields/FieldError'
 import SpinnerField from 'design/moles/fields/SpinnerField'
 import { Form } from 'design/moles/form/Form'
-import { appendSearchParamsToUrl, debounce } from 'utils'
+import { appendSearchParamsToUrl, useDebounce } from 'utils'
 import { Button } from 'design/atoms/Button'
 import axios from 'axios'
 
@@ -47,19 +47,17 @@ const CreateAccount = props => {
         })
       }
     } catch (error) {
-      console.log('error: ', JSON.stringify(error))
+      console.log('error: ', error)
     }
   }
 
-  const debouncedFetchHandleAvailability = debounce(fetchHandleAvailability, 700, true)
-
   useEffect(() => {
-    debouncedFetchHandleAvailability()
+    const timer = setTimeout(fetchHandleAvailability, 700)
+    return () => clearTimeout(timer)
   }, [accountHandle])
 
   const onChangeAccountHandle = (e: any) => {
     const newAccountHandle = e.target.value
-    console.log('newAccountHandle:')
     setErrors({})
     setAccountHandle(newAccountHandle)
   }
