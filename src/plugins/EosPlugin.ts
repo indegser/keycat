@@ -32,6 +32,15 @@ class EosPlugin extends BlockchainPlugin {
     }
   }
 
+  getNewKeyPair = async (): { privateKey: string; publicKey: string } => {
+    const privateKey = await ecc.randomKey() // EOSkey...
+    const publicKey = await this.getPubKey(privateKey)
+    return {
+      privateKey,
+      publicKey,
+    }
+  }
+
   private nodeos = async (api: (arg0: JsonRpc) => any) => {
     const { nodes } = this
     return nodes.reduce(async (promise, cand, i) => {

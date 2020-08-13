@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useStore } from '../../store/store'
 import { Link, navigate } from '@reach/router'
 import Submit from 'design/moles/fields/Submit'
-import Create from 'design/moles/fields/Create'
-import PasswordField from 'design/moles/fields/PasswordField'
-import { useSignin } from 'hooks/signinHooks'
 import CardLayout from 'design/layouts/CardLayout'
 import { Fields } from 'design/atoms/Input'
-import FieldError from 'design/moles/fields/FieldError'
 import SpinnerField from 'design/moles/fields/SpinnerField'
 import { Form } from 'design/moles/form/Form'
-import { appendSearchParamsToUrl, useDebounce } from 'utils'
-import { Button } from 'design/atoms/Button'
+import { appendSearchParamsToUrl } from 'utils'
 import axios from 'axios'
+import { useBlockchain } from '../../hooks/blockchainHooks'
 
 const CreateAccount = props => {
-  const { signin } = useSignin()
+  const plugin = useBlockchain()
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
@@ -85,9 +81,22 @@ const CreateAccount = props => {
     setAccountHandle(newAccountHandle)
   }
 
+  const onClickSubmit = async () => {
+    console.log('plugin is now: ', plugin)
+    console.log('process.env: ', process.env)
+    const blockchain = await plugin.wait()
+    const activeKeys = await blockchain.getNewKeyPair()
+    const ownerKeys = await blockchain.getNewKeyPair()
+    const keys = {
+      activeKeys,
+      ownerKeys,
+    }
+    console.log('keys: ', keys)
+  }
+
   return (
     <CardLayout title="Create Telos Account">
-      <Form action="post" noValidate onSubmit={signin} errors={errors}>
+      <Form action="post" noValidate onSubmit={onClickSubmit} errors={errors}>
         <Fields>
           <SpinnerField onChange={onChangeAccountHandle} isLoading={isLoading} name={'createAccount'} />
         </Fields>
