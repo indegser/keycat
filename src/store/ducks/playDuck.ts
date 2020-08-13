@@ -1,6 +1,6 @@
 import { handleActions, createAction } from 'redux-actions'
 import { IBlockchain } from 'types/types'
-import { Keycat } from 'keycatjs'
+import { Keycat } from '@telosnetwork/telos-keycatjs'
 import { KEYCAT_ORIGIN } from 'consts/consts'
 
 const initialState: Partial<IPlayState> = {

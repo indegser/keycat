@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Keycat } from 'keycatjs'
+import { Keycat } from '@telosnetwork/telos-keycatjs'
 import Web3 from 'web3'
 
 const Instructor = () => {

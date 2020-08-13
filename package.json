@@ -1,5 +1,5 @@
 {
-  "name": "keycat",
+  "name": "@telosnetwork/telos-keycat",
   "version": "0.1.0",
   "scripts": {
     "start": "webpack-dev-server --config ./scripts/webpack.client.js",
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "@telosnetwork/telos-keycatjs": "git://github.com/telosnetwork/telos-keycatjs.git",
     "big.js": "^5.2.2",
     "copy-webpack-plugin": "^5.0.3",
     "csp-html-webpack-plugin": "^3.0.1",
@@ -19,7 +20,6 @@
     "formik": "^1.5.7",
     "html-webpack-plugin": "^3.2.0",
     "jdenticon": "^2.1.1",
-    "keycatjs": "^0.9.3",
     "query-string": "^6.5.0",
     "react": "^16.8",
     "react-custom-scrollbars": "^4.2.1",
