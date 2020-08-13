@@ -41,7 +41,7 @@ const Submit: React.SFC<Props> = props => {
         <ButtonWrapper>
           {Sibling && <Sibling />}
           <Button type="submit" onClick={onClick} disabled={disabled}>
-            Next
+            {props.children || 'Next'}
           </Button>
         </ButtonWrapper>
       </div>

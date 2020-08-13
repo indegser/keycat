@@ -10,16 +10,17 @@ import FieldError from 'design/moles/fields/FieldError'
 import AccountField from 'design/moles/fields/AccountField'
 import { Form } from 'design/moles/form/Form'
 import { appendSearchParamsToUrl } from 'utils/utils'
+import { Button } from 'design/atoms/Button'
 
 const SigninAccount = props => {
   const { signin } = useSignin()
 
-  const onClickCreateNewAccount = () => {
-    navigate(appendSearchParamsToUrl('/create'))
+  const onClickSignin = () => {
+    navigate(appendSearchParamsToUrl('/signin'))
   }
 
   return (
-    <CardLayout title={`Sign-in`}>
+    <CardLayout title={`Create Telos Account`}>
       <Form action="post" noValidate onSubmit={signin}>
         <Fields>
           <AccountField />
@@ -28,7 +29,7 @@ const SigninAccount = props => {
         </Fields>
         <Submit help="signin" sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>} />
       </Form>
-      <Create onClick={onClickCreateNewAccount} help="create" />
+      <Submit onClick={onClickSignin}>Sign in</Submit>
     </CardLayout>
   )
 }
