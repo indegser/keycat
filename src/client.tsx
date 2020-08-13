@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { StoreProvider } from 'store/store'
 import App from 'pages/App'
-
+import './assets/scss/index.scss'
 const render = () => {
   ReactDOM.render(
     <StoreProvider>
