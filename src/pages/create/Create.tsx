@@ -16,6 +16,7 @@ import axios from 'axios'
 
 const CreateAccount = props => {
   const { signin } = useSignin()
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [accountHandle, setAccountHandle] = useState('')
@@ -38,7 +39,7 @@ const CreateAccount = props => {
         url: `${nodes[0]}/v2/state/get_account?account=${accountHandle}`,
       })
       console.log('handleAvailabilityResponse: ', handleAvailabilityResponse)
-      if (handleAvailabilityResponse.statusText === 'OK') {
+      if (handleAvailabilityResponse.status === 200) {
         setErrors({
           createAccount: {
             message: 'Account handle unavailable, please try another',
@@ -47,13 +48,30 @@ const CreateAccount = props => {
         })
       }
     } catch (error) {
-      console.log('error: ', error)
+      const { response } = error
+      console.log('response: ', JSON.stringify(response))
+      if (response.status === 500) {
+        if (response.data.message === 'Account not found!') {
+          setIsSubmitDisabled(false)
+        }
+      }
+      if (response.status === 400) {
+        console.log(400)
+        setErrors({
+          createAccount: {
+            message: 'Invalid account handle. Must be 12 characters long, alphabetical, or 1-5',
+            name: 'CreateAccountError',
+          },
+        })
+      }
     }
   }
 
   useEffect(() => {
-    const timer = setTimeout(fetchHandleAvailability, 700)
-    return () => clearTimeout(timer)
+    if (accountHandle) {
+      const timer = setTimeout(fetchHandleAvailability, 500)
+      return () => clearTimeout(timer)
+    }
   }, [accountHandle])
 
   const onChangeAccountHandle = (e: any) => {
@@ -68,7 +86,11 @@ const CreateAccount = props => {
         <Fields>
           <SpinnerField onChange={onChangeAccountHandle} isLoading={isLoading} name={'createAccount'} />
         </Fields>
-        <Submit help="signin" sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>} />
+        <Submit
+          disabled={isSubmitDisabled}
+          help="signin"
+          sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
+        />
       </Form>
       <Submit onClick={onClickSignin}>Sign in</Submit>
     </CardLayout>
