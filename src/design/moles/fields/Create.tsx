@@ -46,7 +46,7 @@ const Create: React.SFC<Props> = props => {
       <div style={{ width: '100%' }}>
         <ButtonWrapper>
           {Sibling && <Sibling />}
-          <SecondaryButton type="submit" onClick={onClick} disabled={disabled}>
+          <SecondaryButton className="secondaryButton" type="submit" onClick={onClick} disabled={disabled}>
             Create New Account
           </SecondaryButton>
         </ButtonWrapper>

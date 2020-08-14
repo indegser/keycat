@@ -35,4 +35,10 @@ button {
   i.loader.loading {
     top: 5px;
   }
+
+  &.secondaryButton {
+    &:hover {
+      box-shadow: none;
+    }
+  }
 }
