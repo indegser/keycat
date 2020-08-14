@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CardLayout from 'design/layouts/CardLayout'
 import { Fields } from 'design/atoms/Input'
 import AccountField from 'design/moles/fields/AccountField'
@@ -10,13 +10,21 @@ import { Form } from '../../design/moles/form/Form'
 const SaveKey = props => {
   const { state } = props.location
   const { accountHandle, keys } = state
+  const [isBoxChecked, setIsBoxChecked] = useState(false)
 
   const onClickSave = () => {
-    navigate('/signin')
+    console.log('isBoxChecked: ', isBoxChecked)
+    if (isBoxChecked) {
+      navigate('/signin')
+    }
+  }
+
+  const onChangeCheckmark = e => {
+    setIsBoxChecked(!isBoxChecked)
   }
 
   return (
-    <CardLayout title="Review Telos Account Into" className="">
+    <CardLayout title="Review Telos Account Into">
       <Form method="post" noValidate onSubmit={onClickSave}>
         <Fields>
           <p>
@@ -43,8 +51,13 @@ const SaveKey = props => {
           </p>
           <AccountField value={accountHandle} readOnly />
           <PasswordField value={keys.activeKeys.privateKey} readOnly />
+          <br />
+          <input name={'myCheck'} value="myCheckbox" type="checkbox" onChange={onChangeCheckmark} /> I have copied and
+          stored my keys
         </Fields>
-        <Submit onClick={onClickSave}>Save</Submit>
+        <Submit onClick={onClickSave} disabled={!isBoxChecked}>
+          Save
+        </Submit>
       </Form>
     </CardLayout>
   )
