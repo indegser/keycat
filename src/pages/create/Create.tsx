@@ -110,13 +110,18 @@ const CreateAccount = props => {
         url: 'https://api.telos.net/v1/testnet/account',
         method: 'POST',
         data: {
-          accountName: values.accountHandle,
+          accountName: accountHandle,
           ownerKey: keys.ownerKeys.publicKey,
           activeKey: keys.activeKeys.publicKey,
         },
       })
       console.log('createAccountResponse: ', createAccountResponse)
+      if (createAccountResponse.status !== 200) {
+        throw new Error()
+      }
+      navigate('/review', { state: { accountHandle, keys } })
     } catch (error) {
+      console.log('error: ', error)
     } finally {
       setIsCreatingAccount(false)
     }
@@ -132,8 +137,8 @@ const CreateAccount = props => {
       </Fields>
       <Submit
         disabled={isSubmitDisabled}
-        help="signin"
         sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
+        onClick={onClickSubmit}
       >
         {isCreatingAccount ? <i className={'loader loading'}></i> : 'Create'}
       </Submit>

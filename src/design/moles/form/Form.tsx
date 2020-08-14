@@ -37,7 +37,7 @@ export const Form: React.SFC<Props> = props => {
         errors: totalErrors,
       }}
     >
-      <form ref={ref} {...props} onSubmit={onSubmit} />
+      <form ref={ref} {...props} onSubmit={onSubmit} className="form" />
     </FormContext.Provider>
   )
 }
