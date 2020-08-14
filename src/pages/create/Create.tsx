@@ -12,9 +12,11 @@ import { useBlockchain } from '../../hooks/blockchainHooks'
 
 const CreateAccount = props => {
   const plugin = useBlockchain()
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+  const [isValid, setIsValid] = useState(false)
+  const [isAvailable, setIsAvailable] = useState(false)
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false)
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
   const [errors, setErrors] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
   const [accountHandle, setAccountHandle] = useState('')
   const store = useStore()
   const {
@@ -34,71 +36,89 @@ const CreateAccount = props => {
       const handleAvailabilityResponse = await axios({
         url: `${nodes[0]}/v2/state/get_account?account=${accountHandle}`,
       })
-      console.log('handleAvailabilityResponse: ', handleAvailabilityResponse)
       if (handleAvailabilityResponse.status === 200) {
         setErrors({
-          createAccount: {
+          accountHandle: {
             message: 'Account handle unavailable, please try another',
             name: 'CreateAccountError',
           },
         })
-        setIsSubmitDisabled(true)
+        setIsAvailable(false)
       }
     } catch (error) {
       const { response } = error
-      console.log('response: ', JSON.stringify(response))
       if (response.status === 500) {
         if (response.data.message === 'Account not found!') {
-          setIsSubmitDisabled(false)
+          setIsAvailable(true)
         }
       }
-      if (response.status === 400) {
-        console.log(400)
-        setErrors({
-          createAccount: {
-            message: 'Invalid account handle. Must be 12 characters long, alphabetical, or 1-5',
-            name: 'CreateAccountError',
-          },
-        })
-        setIsSubmitDisabled(true)
-      }
     } finally {
-      setIsLoading(false)
+      setIsCheckingAvailability(false)
     }
   }
 
   useEffect(() => {
-    if (accountHandle) {
-      setIsLoading(true)
+    if (accountHandle && isValid) {
+      setIsCheckingAvailability(true)
       const timer = setTimeout(fetchHandleAvailability, 500)
       return () => clearTimeout(timer)
     }
   }, [accountHandle])
 
   const onChangeAccountHandle = (e: any) => {
-    const newAccountHandle = e.target.value
     setErrors({})
+    const newAccountHandle = e.target.value
+    const regexPattern = new RegExp(/^[a-z1-5]+$/i)
+    if (newAccountHandle.length !== 12 || !regexPattern.test(newAccountHandle)) {
+      setErrors({
+        accountHandle: {
+          message: 'Invalid account handle. Must be 12 characters long, alphabetical, or 1-5',
+          name: 'CreateAccountError',
+        },
+      })
+      setIsAvailable(false) // for now assume invalid handles unavailable
+      setIsValid(false)
+    } else {
+      setIsValid(true)
+    }
     setAccountHandle(newAccountHandle)
   }
 
-  const onClickSubmit = async () => {
-    console.log('plugin is now: ', plugin)
-    console.log('process.env: ', process.env)
+  const onClickSubmit = async ({ values }) => {
+    setIsCreatingAccount(true)
+    console.log('values: ', values)
     const blockchain = await plugin.wait()
+    console.log('plugin is now: ', plugin)
     const activeKeys = await blockchain.getNewKeyPair()
     const ownerKeys = await blockchain.getNewKeyPair()
     const keys = {
       activeKeys,
       ownerKeys,
     }
-    console.log('keys: ', keys)
+    try {
+      const createAccountResponse = await axios({
+        url: 'https://api.telos.net/v1/testnet/account',
+        method: 'POST',
+        data: {
+          accountName: values.accountHandle,
+          ownerKey: keys.ownerKeys.publicKey,
+          activeKey: keys.activeKeys.publicKey,
+        },
+      })
+      console.log('createAccountResponse: ', createAccountResponse)
+    } catch (error) {
+    } finally {
+      setIsCreatingAccount(false)
+    }
   }
+
+  const isSubmitDisabled = isCheckingAvailability || isCreatingAccount || !isValid || !isAvailable
 
   return (
     <CardLayout title="Create Telos Account">
       <Form action="post" noValidate onSubmit={onClickSubmit} errors={errors}>
         <Fields>
-          <SpinnerField onChange={onChangeAccountHandle} isLoading={isLoading} name={'createAccount'} />
+          <SpinnerField onChange={onChangeAccountHandle} isLoading={isCheckingAvailability} name={'accountHandle'} />
         </Fields>
         <Submit
           disabled={isSubmitDisabled}

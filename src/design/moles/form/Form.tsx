@@ -25,8 +25,8 @@ export const Form: React.SFC<Props> = props => {
     formData.forEach((value, key) => {
       values[key] = value
     })
-    console.log('error values: ', values)
-    props.onSubmit({ setErrors })
+    console.log('values: ', values)
+    props.onSubmit({ values, setErrors })
   }, [])
 
   const totalErrors = { ...errors, ...props.errors }
