@@ -9,6 +9,7 @@ import { Form } from 'design/moles/form/Form'
 import { appendSearchParamsToUrl } from 'utils'
 import axios from 'axios'
 import { useBlockchain } from '../../hooks/blockchainHooks'
+import InputError from '../../design/moles/fields/InputError'
 
 const CreateAccount = props => {
   const plugin = useBlockchain()
@@ -18,13 +19,13 @@ const CreateAccount = props => {
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
   const [errors, setErrors] = useState({})
   const [accountHandle, setAccountHandle] = useState('')
+  const [keys, setKeys] = useState(null)
   const store = useStore()
   const {
     config: {
       blockchain: { nodes },
     },
   } = store
-  console.log('store: ', store)
 
   const onClickSignin = () => {
     navigate(appendSearchParamsToUrl('/signin'))
@@ -84,15 +85,26 @@ const CreateAccount = props => {
     setAccountHandle(newAccountHandle)
   }
 
-  const onClickSubmit = async ({ values }) => {
-    setIsCreatingAccount(true)
+  useEffect(() => {
+    generateKeys()
+  }, [])
+
+  const generateKeys = async () => {
+    console.log('generating keys,  keys were: ', keys)
     const blockchain = await plugin.wait()
     const activeKeys = await blockchain.getNewKeyPair()
     const ownerKeys = await blockchain.getNewKeyPair()
-    const keys = {
+    console.log('setting keys to: ', activeKeys, ownerKeys)
+    setKeys({
       activeKeys,
       ownerKeys,
-    }
+    })
+  }
+
+  const onClickSubmit = async ({ values }) => {
+    setIsCreatingAccount(true)
+    console.log('onClickSubmit, keys: ', keys)
+    console.log('onClickSubmit, values: ', values)
     try {
       const createAccountResponse = await axios({
         url: 'https://api.telos.net/v1/testnet/account',
@@ -111,21 +123,20 @@ const CreateAccount = props => {
   }
 
   const isSubmitDisabled = isCheckingAvailability || isCreatingAccount || !isValid || !isAvailable
-
+  console.log('keys: ', keys)
   return (
     <CardLayout title="Create Telos Account">
-      <Form action="post" noValidate onSubmit={onClickSubmit} errors={errors}>
-        <Fields>
-          <SpinnerField onChange={onChangeAccountHandle} isLoading={isCheckingAvailability} name={'accountHandle'} />
-        </Fields>
-        <Submit
-          disabled={isSubmitDisabled}
-          help="signin"
-          sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
-        >
-          {isCreatingAccount ? <i className={'loader loading'}></i> : 'Create'}
-        </Submit>
-      </Form>
+      <Fields>
+        <SpinnerField onChange={onChangeAccountHandle} isLoading={isCheckingAvailability} name={'accountHandle'} />
+        <InputError message={errors.accountHandle && errors.accountHandle.message} />
+      </Fields>
+      <Submit
+        disabled={isSubmitDisabled}
+        help="signin"
+        sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
+      >
+        {isCreatingAccount ? <i className={'loader loading'}></i> : 'Create'}
+      </Submit>
       <Submit onClick={onClickSignin}>Sign in</Submit>
     </CardLayout>
   )
