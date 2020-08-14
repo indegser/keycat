@@ -86,9 +86,7 @@ const CreateAccount = props => {
 
   const onClickSubmit = async ({ values }) => {
     setIsCreatingAccount(true)
-    console.log('values: ', values)
     const blockchain = await plugin.wait()
-    console.log('plugin is now: ', plugin)
     const activeKeys = await blockchain.getNewKeyPair()
     const ownerKeys = await blockchain.getNewKeyPair()
     const keys = {
@@ -124,7 +122,9 @@ const CreateAccount = props => {
           disabled={isSubmitDisabled}
           help="signin"
           sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
-        />
+        >
+          {isCreatingAccount ? <i className={'loader loading'}></i> : 'Create'}
+        </Submit>
       </Form>
       <Submit onClick={onClickSignin}>Sign in</Submit>
     </CardLayout>

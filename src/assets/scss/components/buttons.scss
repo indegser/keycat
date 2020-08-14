@@ -1,19 +1,4 @@
-.spinner-field {
-  .inputcontainer {
-    position: relative;
-  }
-
-  input {
-    width: 100%;
-    font-size: 20px;
-    box-sizing: border-box;
-  }
-
-  .icon-container {
-    position: absolute;
-    right: 10px;
-    top: calc(50% - 10px);
-  }
+button {
   .loader {
     position: relative;
     height: 20px;
@@ -47,12 +32,7 @@
     }
   }
 
-  @keyframes around {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  i.loader.loading {
+    top: 5px;
   }
 }
