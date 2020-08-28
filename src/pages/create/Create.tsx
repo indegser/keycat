@@ -10,6 +10,38 @@ import { appendSearchParamsToUrl } from 'utils'
 import axios from 'axios'
 import { useBlockchain } from '../../hooks/blockchainHooks'
 import InputError from '../../design/moles/fields/InputError'
+import styled from 'styled-components'
+import { Button } from 'design/atoms/Button'
+
+const Container = styled.div`
+  margin-bottom: var(--padding-x);
+  padding: 0 var(--padding-x);
+  flex: 1 1;
+  display: flex;
+  justify-content: normal;
+  align-items: flex-end;
+`
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-gap: 20px;
+  grid-auto-flow: column;
+  align-items: center;
+  font-size: 15px;
+
+  button {
+    width: 100%;
+  }
+`
+
+const SecondaryButton = styled(Button)`
+  &&& {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    background: white;
+  }
+`
 
 const CreateAccount = props => {
   const plugin = useBlockchain()
@@ -89,12 +121,11 @@ const CreateAccount = props => {
   const generateKeys = async () => {
     console.log('generating keys,  keys were: ', keys)
     const blockchain = await plugin.wait()
-    const activeKeys = await blockchain.getNewKeyPair()
-    const ownerKeys = await blockchain.getNewKeyPair()
-    console.log('setting keys to: ', activeKeys, ownerKeys)
+    const newKeys = await blockchain.getNewKeyPair()
+    console.log('setting keys to: ', newKeys)
     setKeys({
-      activeKeys,
-      ownerKeys,
+      activeKeys: newKeys,
+      ownerKeys: newKeys,
     })
   }
 
@@ -139,7 +170,15 @@ const CreateAccount = props => {
       >
         {isCreatingAccount ? <i className={'loader loading'}></i> : 'Create'}
       </Submit>
-      <Submit onClick={onClickSignin}>Sign in</Submit>
+      <Container>
+        <div style={{ width: '100%' }}>
+          <ButtonWrapper>
+            <SecondaryButton className="secondaryButton" type="submit" onClick={onClickSignin}>
+              Sign in
+            </SecondaryButton>
+          </ButtonWrapper>
+        </div>
+      </Container>
     </CardLayout>
   )
 }

@@ -32,20 +32,12 @@ const SaveKey = props => {
             <strong>please let your browser save the credentials, and also copy them to a safe place:</strong>
             <br />
             <br />
-            <strong>Owner Private Key: </strong>
+            <strong>Private Key: </strong>
             {keys.ownerKeys.privateKey}
             <br />
             <br />
-            <strong>Owner Public Key: </strong>
+            <strong>Public Key: </strong>
             {keys.ownerKeys.publicKey}
-            <br />
-            <br />
-            <strong>Active Private Key: </strong>
-            {keys.activeKeys.privateKey}
-            <br />
-            <br />
-            <strong>Active Public Key: </strong>
-            {keys.activeKeys.publicKey}
             <br />
             <br />
           </p>

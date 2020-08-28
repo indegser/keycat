@@ -30,17 +30,18 @@ interface Props {
   sibling?: React.SFC<any>
   disabled?: boolean
   onClick?: () => any
+  className?: string
 }
 
 const Submit: React.SFC<Props> = props => {
-  const { onClick, help, disabled, sibling: Sibling } = props
+  const { onClick, help, disabled, sibling: Sibling, className } = props
   return (
     <Container>
       <div style={{ width: '100%' }}>
         {help && <Help type={help} />}
         <ButtonWrapper>
           {Sibling && <Sibling />}
-          <Button type="submit" onClick={onClick} disabled={disabled}>
+          <Button type="submit" onClick={onClick} disabled={disabled} className={className}>
             {props.children || 'Next'}
           </Button>
         </ButtonWrapper>
