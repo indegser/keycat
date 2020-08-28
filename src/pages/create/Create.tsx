@@ -35,23 +35,20 @@ const CreateAccount = props => {
     console.log('fetching handle: ', accountHandle)
     try {
       const handleAvailabilityResponse = await axios({
-        url: `${nodes[0]}/v2/state/get_account?account=${accountHandle}`,
+        url: `${nodes[0]}/v1/accounts/${accountHandle}`,
       })
-      if (handleAvailabilityResponse.status === 200) {
+      if (handleAvailabilityResponse.data === 204) {
+        setIsAvailable(true)
+      }
+    } catch (error) {
+      console.log('error case, error: ', error)
+      if (error.response.status === 400) {
         setErrors({
           accountHandle: {
             message: 'Account handle unavailable, please try another',
             name: 'CreateAccountError',
           },
         })
-        setIsAvailable(false)
-      }
-    } catch (error) {
-      const { response } = error
-      if (response.status === 500) {
-        if (response.data.message === 'Account not found!') {
-          setIsAvailable(true)
-        }
       }
     } finally {
       setIsCheckingAvailability(false)
@@ -130,7 +127,7 @@ const CreateAccount = props => {
   const isSubmitDisabled = isCheckingAvailability || isCreatingAccount || !isValid || !isAvailable
   console.log('keys: ', keys)
   return (
-    <CardLayout title="Create Telos Account">
+    <CardLayout title="Create Telos Testnet Account">
       <Fields>
         <SpinnerField onChange={onChangeAccountHandle} isLoading={isCheckingAvailability} name={'accountHandle'} />
         <InputError message={errors.accountHandle && errors.accountHandle.message} />
