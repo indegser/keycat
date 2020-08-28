@@ -24,7 +24,7 @@ const SaveKey = props => {
   }
 
   return (
-    <CardLayout title="Review Telos Account Into">
+    <CardLayout title="Review Telos Testnet Account Into">
       <Form method="post" noValidate onSubmit={onClickSave}>
         <Fields>
           <p>
