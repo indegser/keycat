@@ -40,7 +40,7 @@ interface Props {
 }
 
 const Create: React.SFC<Props> = props => {
-  const { onClick, help, disabled, sibling: Sibling } = props
+  const { onClick, disabled, sibling: Sibling } = props
   return (
     <Container>
       <div style={{ width: '100%' }}>

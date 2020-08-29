@@ -6,75 +6,88 @@ import PasswordField from '../../design/moles/fields/PasswordField'
 import Submit from 'design/moles/fields/Submit'
 import { navigate } from '@reach/router'
 import { Form } from '../../design/moles/form/Form'
-import { appendSearchParamsToUrl } from 'utils'
 
 const SaveKey = props => {
   const { state } = props.location
-  const [keys, setKeys] = useState({
-    ownerKeys: {
-      privateKey: '',
-      publicKey: ''
-    },
-    activeKeys: {
-      privateKey: '',
-      publicKey: ''
-    }
-  })
-  const [accountHandle, setAccountHandle] = useState('')
+  const { accountHandle, keys } = state
+  const [accountHandleInput, setAccountHandleInput] = useState('')
+  const [privateKeyInput, setPrivateKeyInput] = useState('')
   const [isBoxChecked, setIsBoxChecked] = useState(false)
+  const [doesInputMatch, setDoesInputMatch] = useState(false)
+  const [error, setError] = useState('')
 
-  useEffect(() => {
-    console.log('executing useEffect')
-    const timer = setTimeout(() => {
-      console.log('executing timeout')
-      setAccountHandle(state.accountHandle)
-      setKeys(state.keys)
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-
-  const onClickSave = (e) => {
-    console.log('isBoxChecked: ', isBoxChecked, 'e: ', e)
+  const onClickSave = () => {
+    console.log('isBoxChecked: ', isBoxChecked)
     if (isBoxChecked) {
-      navigate(appendSearchParamsToUrl('/go-to-signin'))
+      navigate('/signin')
     }
   }
+
+  useEffect(() => {
+    const delayedInput = setTimeout(() => {
+      document.getElementById('account-name').value = ''
+      document.getElementById('private-key').value = ''
+    }, 1000)
+
+    return () => clearTimeout(delayedInput)
+  }, [])
+
+  useEffect(() => {
+    checkInputMatches()
+  }, [accountHandleInput, privateKeyInput])
 
   const onChangeCheckmark = e => {
     setIsBoxChecked(!isBoxChecked)
   }
 
+  const onChangeAccountHandle = (event) => {
+    const input = event.target.value
+    setAccountHandleInput(input)
+  }
+
+  const onChangePrivateKey = (event) => {
+    const input = event.target.value
+    setPrivateKeyInput(input)
+  }
+
+  const checkInputMatches = () => {
+    if ((accountHandleInput === accountHandle) && (privateKeyInput === keys.ownerKeys.privateKey)) {
+      setDoesInputMatch(true)
+      setError('')
+    } else {
+      setError('Inputs do not match account info')
+    }
+  }
+
+  console.log('accountHandle: ', accountHandle, 'keys: ', keys)
   return (
     <CardLayout title="Review Telos Testnet Account Into">
-      <Form method="post" noValidate onSubmit={onClickSave}>
+      <Form method="post" noValidate onSubmit={onClickSave} autoComplete="off">
         <Fields>
           <p>
-            The following are your Telos keys,{' '}
-            <strong>please let your browser save the credentials, and also copy them to a safe place:</strong>
-            <br />
-            <br />
-            <strong>Private Key: </strong>
-            {keys.ownerKeys.privateKey}
-            <br />
-            <br />
-            <strong>Public Key: </strong>
-            {keys.ownerKeys.publicKey}
-            <br />
-            <br />
+            The following is your critical Telos info,{' '}
+            <strong>please copy and paste these values into the fields below, and store them in a safe place:</strong>
           </p>
-          <AccountField defaultValue={accountHandle} />
-          <PasswordField defaultValue={keys.activeKeys.privateKey} />
+          <p style={{ textAlign: 'center' }}>
+            <strong>Account: </strong><br /><br />
+            {accountHandle}
+            <br />
+            <br />
+            <strong>Private Key: </strong><br /><br />
+            {keys.ownerKeys.privateKey}
+          </p>
+          <AccountField onChange={onChangeAccountHandle} value={accountHandleInput} id="account-name" autoComplete="off" />
+          <PasswordField onChange={onChangePrivateKey} value={privateKeyInput} id="private-key" autoComplete="off" />
+          <p style={{ color: 'red' }}>{!!error && error}</p>
           <br />
           <input name={'myCheck'} value="myCheckbox" type="checkbox" onChange={onChangeCheckmark} /> I have copied and
           stored my keys
         </Fields>
-        <Submit onClick={onClickSave} disabled={!isBoxChecked}>
+        <Submit onClick={onClickSave} disabled={!isBoxChecked || !doesInputMatch}>
           Save
         </Submit>
       </Form>
-    </CardLayout>
+    </CardLayout >
   )
 }
 

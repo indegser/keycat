@@ -45,8 +45,8 @@ const SecondaryButton = styled(Button)`
 
 const CreateAccount = props => {
   const plugin = useBlockchain()
-  const [isValid, setIsValid] = useState(false)
-  const [isAvailable, setIsAvailable] = useState(false)
+  const [isValid, setIsValid] = useState(true)
+  const [isAvailable, setIsAvailable] = useState(true)
   const [isCreatingAccount, setIsCreatingAccount] = useState(false)
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
   const [errors, setErrors] = useState({})
@@ -64,53 +64,53 @@ const CreateAccount = props => {
   }
 
   const fetchHandleAvailability = async () => {
-    console.log('fetching handle: ', accountHandle)
-    try {
-      const handleAvailabilityResponse = await axios({
-        url: `${nodes[0]}/v1/accounts/${accountHandle}`,
-      })
-      if (handleAvailabilityResponse.data === 204) {
-        setIsAvailable(true)
-      }
-    } catch (error) {
-      console.log('error case, error: ', error)
-      if (error.response.status === 400) {
-        setErrors({
-          accountHandle: {
-            message: 'Account handle unavailable, please try another',
-            name: 'CreateAccountError',
-          },
-        })
-      }
-    } finally {
-      setIsCheckingAvailability(false)
-    }
+    // console.log('fetching handle: ', accountHandle)
+    // try {
+    //   const handleAvailabilityResponse = await axios({
+    //     url: `${nodes[0]}/v1/accounts/${accountHandle}`,
+    //   })
+    //   if (handleAvailabilityResponse.data === 204) {
+    //     setIsAvailable(true)
+    //   }
+    // } catch (error) {
+    //   console.log('error case, error: ', error)
+    //   if (error.response.status === 400) {
+    //     setErrors({
+    //       accountHandle: {
+    //         message: 'Account handle unavailable, please try another',
+    //         name: 'CreateAccountError',
+    //       },
+    //     })
+    //   }
+    // } finally {
+    //   setIsCheckingAvailability(false)
+    // }
   }
 
-  useEffect(() => {
-    if (accountHandle && isValid) {
-      setIsCheckingAvailability(true)
-      const timer = setTimeout(fetchHandleAvailability, 500)
-      return () => clearTimeout(timer)
-    }
-  }, [accountHandle])
+  // useEffect(() => {
+  //   if (accountHandle && isValid) {
+  //     setIsCheckingAvailability(true)
+  //     const timer = setTimeout(fetchHandleAvailability, 500)
+  //     return () => clearTimeout(timer)
+  //   }
+  // }, [accountHandle])
 
   const onChangeAccountHandle = (e: any) => {
     setErrors({})
     const newAccountHandle = e.target.value
-    const regexPattern = new RegExp(/^[a-z1-5]+$/i)
-    if (newAccountHandle.length !== 12 || !regexPattern.test(newAccountHandle)) {
-      setErrors({
-        accountHandle: {
-          message: 'Invalid account handle. Must be 12 characters long, alphabetical, or 1-5',
-          name: 'CreateAccountError',
-        },
-      })
-      setIsAvailable(false) // for now assume invalid handles unavailable
-      setIsValid(false)
-    } else {
-      setIsValid(true)
-    }
+    // const regexPattern = new RegExp(/^[a-z1-5]+$/i)
+    // if (newAccountHandle.length !== 12 || !regexPattern.test(newAccountHandle)) {
+    //   setErrors({
+    //     accountHandle: {
+    //       message: 'Invalid account handle. Must be 12 characters long, alphabetical, or 1-5',
+    //       name: 'CreateAccountError',
+    //     },
+    //   })
+    //   setIsAvailable(false) // for now assume invalid handles unavailable
+    //   setIsValid(false)
+    // } else {
+    setIsValid(true)
+    // }
     setAccountHandle(newAccountHandle)
   }
 
@@ -164,6 +164,7 @@ const CreateAccount = props => {
         <InputError message={errors.accountHandle && errors.accountHandle.message} />
       </Fields>
       <Submit
+        disabled={isSubmitDisabled}
         sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
         onClick={onClickSubmit}
       >
