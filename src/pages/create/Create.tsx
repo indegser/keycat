@@ -130,29 +130,29 @@ const CreateAccount = props => {
   }
 
   const onClickSubmit = async ({ values }) => {
-    setIsCreatingAccount(true)
-    console.log('onClickSubmit, keys: ', keys)
-    console.log('onClickSubmit, values: ', values)
-    try {
-      const createAccountResponse = await axios({
-        url: 'https://api.telos.net/v1/testnet/account',
-        method: 'POST',
-        data: {
-          accountName: accountHandle,
-          ownerKey: keys.ownerKeys.publicKey,
-          activeKey: keys.activeKeys.publicKey,
-        },
-      })
-      console.log('createAccountResponse: ', createAccountResponse)
-      if (createAccountResponse.status !== 200) {
-        throw new Error()
-      }
-      navigate('/review', { state: { accountHandle, keys } })
-    } catch (error) {
-      console.log('error: ', error)
-    } finally {
-      setIsCreatingAccount(false)
-    }
+    // setIsCreatingAccount(true)
+    // console.log('onClickSubmit, keys: ', keys)
+    // console.log('onClickSubmit, values: ', values)
+    // try {
+    //   const createAccountResponse = await axios({
+    //     url: 'https://api.telos.net/v1/testnet/account',
+    //     method: 'POST',
+    //     data: {
+    //       accountName: accountHandle,
+    //       ownerKey: keys.ownerKeys.publicKey,
+    //       activeKey: keys.activeKeys.publicKey,
+    //     },
+    //   })
+    //   console.log('createAccountResponse: ', createAccountResponse)
+    //   if (createAccountResponse.status !== 200) {
+    //     throw new Error()
+    //   }
+    navigate('/review', { state: { accountHandle, keys } })
+    // } catch (error) {
+    //   console.log('error: ', error)
+    // } finally {
+    //   setIsCreatingAccount(false)
+    // }
   }
 
   const isSubmitDisabled = isCheckingAvailability || isCreatingAccount || !isValid || !isAvailable
@@ -164,7 +164,6 @@ const CreateAccount = props => {
         <InputError message={errors.accountHandle && errors.accountHandle.message} />
       </Fields>
       <Submit
-        disabled={isSubmitDisabled}
         sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}
         onClick={onClickSubmit}
       >
