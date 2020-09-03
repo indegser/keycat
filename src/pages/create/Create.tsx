@@ -64,10 +64,20 @@ const CreateAccount = props => {
   }
 
   const fetchHandleAvailability = async () => {
+    const { name } = store.config.blockchain
+
+    let url
+    if (name === 'telos') {
+      url = 'api.telos.net'
+    } else if (name === 'telos-testnet') {
+      url = 'api-dev.telos.net'
+    } else {
+      throw new Error('Invalid blockchain name')
+    }
     console.log('fetching handle: ', accountHandle)
     try {
       const handleAvailabilityResponse = await axios({
-        url: `${nodes[0]}/v1/accounts/${accountHandle}`,
+        url: `http://${url}/v1/accounts/${accountHandle}`,
       })
       if (handleAvailabilityResponse.data === 204) {
         setIsAvailable(true)
@@ -130,12 +140,22 @@ const CreateAccount = props => {
   }
 
   const onClickSubmit = async ({ values }) => {
+    const { name } = store.config.blockchain
+    console.log('in Create, store is: ', store)
     setIsCreatingAccount(true)
     console.log('onClickSubmit, keys: ', keys)
     console.log('onClickSubmit, values: ', values)
+    let url
+    if (name === 'telos') {
+      url = 'api.telos.net'
+    } else if (name === 'telos-testnet') {
+      url = 'api-dev.telos.net'
+    } else {
+      throw new Error('Invalid blockchain name')
+    }
     try {
       const createAccountResponse = await axios({
-        url: 'https://api.telos.net/v1/testnet/account',
+        url: `https://${url}/v1/testnet/account`,
         method: 'POST',
         data: {
           accountName: accountHandle,

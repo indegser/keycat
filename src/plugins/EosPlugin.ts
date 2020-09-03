@@ -43,6 +43,7 @@ class EosPlugin extends BlockchainPlugin {
 
   private nodeos = async (api: (arg0: JsonRpc) => any) => {
     const { nodes } = this
+    console.log('nodes: ', nodes)
     return nodes.reduce(async (promise, cand, i) => {
       try {
         const res = await promise
@@ -121,6 +122,7 @@ class EosPlugin extends BlockchainPlugin {
 
   private getAccountInfo = async ({ account, publicKey }) => {
     try {
+      console.log('this.nodeos: ', this.nodeos)
       const { permissions } = await this.nodeos(rpc => rpc.get_account(account))
       const auth = permissions.reduce(
         (res, pm) => {
@@ -152,6 +154,7 @@ class EosPlugin extends BlockchainPlugin {
   }
 
   signin = async (payload: ISignin): Promise<any> => {
+    console.log('payload is: ', payload)
     const { account } = payload
     const publicKey = await this.guardValidAccount(payload)
     return this.getAccountInfo({ account, publicKey })
