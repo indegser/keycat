@@ -24,15 +24,6 @@ const SaveKey = props => {
   }
 
   useEffect(() => {
-    const delayedInput = setTimeout(() => {
-      document.getElementById('account-name').value = ''
-      document.getElementById('private-key').value = ''
-    }, 1000)
-
-    return () => clearTimeout(delayedInput)
-  }, [])
-
-  useEffect(() => {
     checkInputMatches()
   }, [accountHandleInput, privateKeyInput])
 
@@ -40,18 +31,18 @@ const SaveKey = props => {
     setIsBoxChecked(!isBoxChecked)
   }
 
-  const onChangeAccountHandle = (event) => {
+  const onChangeAccountHandle = event => {
     const input = event.target.value
     setAccountHandleInput(input)
   }
 
-  const onChangePrivateKey = (event) => {
+  const onChangePrivateKey = event => {
     const input = event.target.value
     setPrivateKeyInput(input)
   }
 
   const checkInputMatches = () => {
-    if ((accountHandleInput === accountHandle) && (privateKeyInput === keys.ownerKeys.privateKey)) {
+    if (accountHandleInput === accountHandle && privateKeyInput === keys.ownerKeys.privateKey) {
       setDoesInputMatch(true)
       setError('')
     } else {
@@ -69,14 +60,23 @@ const SaveKey = props => {
             <strong>please copy and paste these values into the fields below, and store them in a safe place:</strong>
           </p>
           <p style={{ textAlign: 'center' }}>
-            <strong>Account: </strong><br /><br />
+            <strong>Account: </strong>
+            <br />
+            <br />
             {accountHandle}
             <br />
             <br />
-            <strong>Private Key: </strong><br /><br />
+            <strong>Private Key: </strong>
+            <br />
+            <br />
             {keys.ownerKeys.privateKey}
           </p>
-          <AccountField onChange={onChangeAccountHandle} value={accountHandleInput} id="account-name" autoComplete="off" />
+          <AccountField
+            onChange={onChangeAccountHandle}
+            value={accountHandleInput}
+            id="account-name"
+            autoComplete="off"
+          />
           <PasswordField onChange={onChangePrivateKey} value={privateKeyInput} id="private-key" autoComplete="off" />
           <p style={{ color: 'red' }}>{!!error && error}</p>
           <br />
@@ -87,7 +87,7 @@ const SaveKey = props => {
           Save
         </Submit>
       </Form>
-    </CardLayout >
+    </CardLayout>
   )
 }
 
