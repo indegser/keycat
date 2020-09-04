@@ -45,8 +45,8 @@ const SecondaryButton = styled(Button)`
 
 const CreateAccount = props => {
   const plugin = useBlockchain()
-  const [isValid, setIsValid] = useState(true)
-  const [isAvailable, setIsAvailable] = useState(true)
+  const [isValid, setIsValid] = useState(false)
+  const [isAvailable, setIsAvailable] = useState(false)
   const [isCreatingAccount, setIsCreatingAccount] = useState(false)
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
   const [errors, setErrors] = useState({})
