@@ -77,7 +77,7 @@ const CreateAccount = props => {
     console.log('fetching handle: ', accountHandle)
     try {
       const handleAvailabilityResponse = await axios({
-        url: `https://${url}/v1/accounts/${accountHandle}`,
+        url: `https://${url}/v1/accounts/${accountHandle.toLowerCase()}`,
       })
       if (handleAvailabilityResponse.data === 204) {
         setIsAvailable(true)
@@ -158,7 +158,7 @@ const CreateAccount = props => {
         url: `https://${url}/v1/testnet/account`,
         method: 'POST',
         data: {
-          accountName: accountHandle,
+          accountName: accountHandle.toLowerCase(),
           ownerKey: keys.ownerKeys.publicKey,
           activeKey: keys.activeKeys.publicKey,
         },
