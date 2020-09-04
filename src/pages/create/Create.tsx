@@ -77,7 +77,7 @@ const CreateAccount = props => {
     console.log('fetching handle: ', accountHandle)
     try {
       const handleAvailabilityResponse = await axios({
-        url: `http://${url}/v1/accounts/${accountHandle}`,
+        url: `https://${url}/v1/accounts/${accountHandle}`,
       })
       if (handleAvailabilityResponse.data === 204) {
         setIsAvailable(true)
