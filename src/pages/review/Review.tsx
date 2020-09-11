@@ -6,6 +6,8 @@ import PasswordField from '../../design/moles/fields/PasswordField'
 import Submit from 'design/moles/fields/Submit'
 import { navigate } from '@reach/router'
 import { Form } from '../../design/moles/form/Form'
+import { FaRegCopy } from 'react-icons/fa'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const SaveKey = props => {
   const { state } = props.location
@@ -15,6 +17,7 @@ const SaveKey = props => {
   const [isBoxChecked, setIsBoxChecked] = useState(false)
   const [doesInputMatch, setDoesInputMatch] = useState(false)
   const [error, setError] = useState('')
+  const [isCopiedToClipboard, setIsCopiedToClipboard] = useState(false)
 
   const onClickSave = () => {
     console.log('isBoxChecked: ', isBoxChecked)
@@ -50,44 +53,59 @@ const SaveKey = props => {
     }
   }
 
+  const onCopy = () => {
+    setIsCopiedToClipboard(true)
+    console.log('copied')
+  }
+
   console.log('accountHandle: ', accountHandle, 'keys: ', keys)
   return (
-    <CardLayout title="Review Telos Testnet Account Into">
-      <Form method="post" noValidate onSubmit={onClickSave} autoComplete="off">
-        <Fields>
-          <p>
-            The following is your critical Telos info,{' '}
-            <strong>please copy and paste these values into the fields below, and store them in a safe place:</strong>
-          </p>
-          <p style={{ textAlign: 'center' }}>
-            <strong>Account: </strong>
+    <div>
+      <CardLayout title="Review Telos Testnet Account Into">
+        <Form method="post" noValidate onSubmit={onClickSave} autoComplete="off" className="review-page">
+          <Fields>
+            <p>
+              The following is your critical Telos info,{' '}
+              <strong>please copy and paste these values into the fields below, and store them in a safe place:</strong>
+            </p>
+            <p style={{ textAlign: 'center' }}>
+              <strong>Account: </strong>
+              <br />
+              <br />
+              {accountHandle}
+              <br />
+              <br />
+              <strong>Private Key: </strong>
+              <br />
+              <br />
+              <div className="private-key-wrap">
+                <div>{keys.ownerKeys.privateKey}</div>
+                <CopyToClipboard className="copy-icon-wrap" text={keys.ownerKeys.privateKey} onCopy={onCopy}>
+                  <FaRegCopy color="black" className="copy-icon" size={22} style={{ fontWeight: 100 }} />
+                </CopyToClipboard>
+              </div>
+            </p>
+            {isCopiedToClipboard && (
+              <p className="is-copied-confirmation">Private key successfully copied to clipboard</p>
+            )}
+            <AccountField
+              onChange={onChangeAccountHandle}
+              value={accountHandleInput}
+              id="account-name"
+              autoComplete="off"
+            />
+            <PasswordField onChange={onChangePrivateKey} value={privateKeyInput} id="private-key" autoComplete="off" />
+            <p style={{ color: 'red', textAlign: 'center', fontSize: 12 }}>{!!error && error}</p>
             <br />
-            <br />
-            {accountHandle}
-            <br />
-            <br />
-            <strong>Private Key: </strong>
-            <br />
-            <br />
-            {keys.ownerKeys.privateKey}
-          </p>
-          <AccountField
-            onChange={onChangeAccountHandle}
-            value={accountHandleInput}
-            id="account-name"
-            autoComplete="off"
-          />
-          <PasswordField onChange={onChangePrivateKey} value={privateKeyInput} id="private-key" autoComplete="off" />
-          <p style={{ color: 'red' }}>{!!error && error}</p>
-          <br />
-          <input name={'myCheck'} value="myCheckbox" type="checkbox" onChange={onChangeCheckmark} /> I have copied and
-          stored my keys
-        </Fields>
-        <Submit onClick={onClickSave} disabled={!isBoxChecked || !doesInputMatch}>
-          Save
-        </Submit>
-      </Form>
-    </CardLayout>
+            <input name={'myCheck'} value="myCheckbox" type="checkbox" onChange={onChangeCheckmark} /> I have copied and
+            stored my keys
+          </Fields>
+          <Submit onClick={onClickSave} disabled={!isBoxChecked || !doesInputMatch}>
+            Save
+          </Submit>
+        </Form>
+      </CardLayout>
+    </div>
   )
 }
 

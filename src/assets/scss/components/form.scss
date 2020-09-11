@@ -1,3 +1,26 @@
 .form {
   overflow-wrap: anywhere;
 }
+
+.copy-icon-wrap {
+  padding: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.private-key-wrap {
+  display: flex;
+  flex-direction: row;
+}
+.copy-icon {
+  font-weight: 100;
+}
+
+.is-copied-confirmation {
+  color: green;
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
