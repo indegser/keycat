@@ -167,7 +167,7 @@ const CreateAccount = props => {
       if (createAccountResponse.status !== 200) {
         throw new Error()
       }
-      navigate('/review', { state: { accountHandle, keys } })
+      navigate('/review', { state: { accountHandle: accountHandle.toLowerCase(), keys } })
     } catch (error) {
       console.log('error: ', error)
     } finally {
