@@ -31,3 +31,11 @@
   margin-bottom: 14px;
   font-size: 12px;
 }
+
+.close-button {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 26px;
+}

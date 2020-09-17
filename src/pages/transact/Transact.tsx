@@ -13,6 +13,7 @@ import { dashCaseToCamelCase } from 'utils/stringUtils'
 import TransactMeta from './TransactMeta'
 import JsonViewer from 'design/moles/JsonViewer'
 import { useStore } from 'store/store'
+import { Link } from '@reach/router'
 
 interface Props {
   path: string
@@ -74,6 +75,10 @@ const Transact: React.SFC<Props> = ({ path }) => {
     })
   }, [])
 
+  const handleClose = () => {
+    window.close()
+  }
+
   return (
     <CardLayout title={title}>
       <TransactMeta account={account} />
@@ -86,6 +91,11 @@ const Transact: React.SFC<Props> = ({ path }) => {
           <FieldError name="password" />
         </Fields>
         <Submit />
+        <div>
+          <Link to={'#'} onClick={handleClose} className="close-button">
+            Close
+          </Link>
+        </div>
       </Form>
     </CardLayout>
   )
