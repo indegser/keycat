@@ -141,6 +141,7 @@ const CreateAccount = props => {
 
   const onClickSubmit = async ({ values }) => {
     const { name } = store.config.blockchain
+    const lowerCaseAccountHandle = accountHandle.toLowerCase()
     console.log('in Create, store is: ', store)
     setIsCreatingAccount(true)
     console.log('onClickSubmit, keys: ', keys)
@@ -158,7 +159,7 @@ const CreateAccount = props => {
         url: `https://${url}/v1/testnet/account`,
         method: 'POST',
         data: {
-          accountName: accountHandle.toLowerCase(),
+          accountName: lowerCaseAccountHandle,
           ownerKey: keys.ownerKeys.publicKey,
           activeKey: keys.activeKeys.publicKey,
         },
@@ -167,7 +168,7 @@ const CreateAccount = props => {
       if (createAccountResponse.status !== 200) {
         throw new Error()
       }
-      navigate('/review', { state: { accountHandle: accountHandle.toLowerCase(), keys } })
+      navigate('/review', { state: { accountHandle: lowerCaseAccountHandle, keys } })
     } catch (error) {
       console.log('error: ', error)
     } finally {

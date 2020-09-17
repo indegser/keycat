@@ -17,7 +17,8 @@ const SaveKey = props => {
   const [isBoxChecked, setIsBoxChecked] = useState(false)
   const [doesInputMatch, setDoesInputMatch] = useState(false)
   const [error, setError] = useState('')
-  const [isCopiedToClipboard, setIsCopiedToClipboard] = useState(false)
+  const [isPrivateKeyCopiedToClipboard, setIsPrivateKeyCopiedToClipboard] = useState(false)
+  const [isAccountHandleCopiedToClipboard, setIsAccountHandleCopiedToClipboard] = useState(false)
 
   const onClickSave = () => {
     console.log('isBoxChecked: ', isBoxChecked)
@@ -49,12 +50,19 @@ const SaveKey = props => {
       setDoesInputMatch(true)
       setError('')
     } else {
-      setError('Inputs do not match account info')
+      setError('Inputs do not match account info. Be sure to use all-lowercase account name')
     }
   }
 
-  const onCopy = () => {
-    setIsCopiedToClipboard(true)
+  const onCopyPrivateKey = () => {
+    setIsPrivateKeyCopiedToClipboard(true)
+    setIsAccountHandleCopiedToClipboard(false)
+    console.log('copied')
+  }
+
+  const onCopyAccountHandle = () => {
+    setIsAccountHandleCopiedToClipboard(true)
+    setIsPrivateKeyCopiedToClipboard(false)
     console.log('copied')
   }
 
@@ -69,24 +77,31 @@ const SaveKey = props => {
               <strong>please copy and paste these values into the fields below, and store them in a safe place:</strong>
             </p>
             <p style={{ textAlign: 'center' }}>
-              <strong>Account: </strong>
+              <strong>Account (all lowercase): </strong>
               <br />
               <br />
-              {accountHandle}
-              <br />
+              <div className="account-handle-wrap">
+                <div>{accountHandle}</div>
+                <CopyToClipboard className="copy-icon-wrap" text={accountHandle} onCopy={onCopyAccountHandle}>
+                  <FaRegCopy color="black" className="copy-icon" size={22} style={{ fontWeight: 100 }} />
+                </CopyToClipboard>
+              </div>
               <br />
               <strong>Private Key: </strong>
               <br />
               <br />
               <div className="private-key-wrap">
                 <div>{keys.ownerKeys.privateKey}</div>
-                <CopyToClipboard className="copy-icon-wrap" text={keys.ownerKeys.privateKey} onCopy={onCopy}>
+                <CopyToClipboard className="copy-icon-wrap" text={keys.ownerKeys.privateKey} onCopy={onCopyPrivateKey}>
                   <FaRegCopy color="black" className="copy-icon" size={22} style={{ fontWeight: 100 }} />
                 </CopyToClipboard>
               </div>
             </p>
-            {isCopiedToClipboard && (
+            {isPrivateKeyCopiedToClipboard && (
               <p className="is-copied-confirmation">Private key successfully copied to clipboard</p>
+            )}
+            {isAccountHandleCopiedToClipboard && (
+              <p className="is-copied-confirmation">Account handle successfully copied to clipboard</p>
             )}
             <AccountField
               onChange={onChangeAccountHandle}
@@ -98,7 +113,7 @@ const SaveKey = props => {
             <p style={{ color: 'red', textAlign: 'center', fontSize: 12 }}>{!!error && error}</p>
             <br />
             <input name={'myCheck'} value="myCheckbox" type="checkbox" onChange={onChangeCheckmark} /> I have copied and
-            stored my keys
+            stored my account and key
           </Fields>
           <Submit onClick={onClickSave} disabled={!isBoxChecked || !doesInputMatch}>
             Save
