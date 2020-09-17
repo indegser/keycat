@@ -17,8 +17,9 @@ interface Props {
 }
 
 const ObjectView: React.SFC<Props> = ({ src }) => {
+  if (!src) return null
   const keys = Object.keys(src)
-  if (keys.length === 0) return null
+  // if (keys.length === 0) return null
 
   return (
     <Container>
