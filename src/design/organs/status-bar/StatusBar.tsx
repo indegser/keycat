@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import NetworkStat from './NetworkStat'
 import { icons } from 'assets/icons/icons'
+import TelosSignLogo from 'assets/telos.png'
 
 const Container = styled.div`
   position: relative;
@@ -27,7 +28,7 @@ const StatusBar: React.SFC<Props> = ({ title }) => {
     <>
       <NetworkStat />
       <Container>
-        <icons.favicon fill="#222" width={76} />
+        <img style={{ width: 150, height: 150 }} src={TelosSignLogo} />
         <Title>{title}</Title>
       </Container>
     </>
