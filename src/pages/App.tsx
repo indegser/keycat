@@ -7,6 +7,9 @@ import { updatePageView } from 'utils/ga'
 import About from './about/About'
 
 const Signin = React.lazy(() => import(/* webpackPrefetch: true */ './signin/Signin'))
+const Create = React.lazy(() => import(/* webpackPrefetch: true */ './create/Create'))
+const Review = React.lazy(() => import('./review/Review'))
+const GoToSignin = React.lazy(() => import(/* webpackPrefetch: true */ './review/GoToSignin'))
 const Register = React.lazy(() => import(/* webpackPrefetch: true */ './register/Register'))
 const Keychain = React.lazy(() => import(/* webpackPrefetch: true */ './register/Keychain'))
 const Transact = React.lazy(() => import(/* webpackPrefetch: true */ './transact/Transact'))
@@ -38,6 +41,9 @@ const App = () => {
           <Router>
             <About path="/" />
             <Signin path="/signin" />
+            <Create path="/create" />
+            <Review path="/review" />
+            <GoToSignin path="/go-to-signin" />
             <Transact path="/transact" />
             <Transact path="/sign-transaction" />
             <Transact path="/sign-arbitrary-data" />

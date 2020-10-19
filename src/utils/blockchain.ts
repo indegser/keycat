@@ -9,7 +9,7 @@ export const parseTransactionResult = (data, blockchain) => {
     case 'ethereum':
     case 'ropsten':
       return {
-        id: data.hash
+        id: data.hash,
       }
   }
   return {
@@ -26,6 +26,6 @@ export const getTransactionHref = (blockchain, txId) => {
     case 'klaytn-baobab':
       return `https://baobab.klaytnscope.com/tx/${txId}`
     default:
-      return ``
+      return
   }
 }

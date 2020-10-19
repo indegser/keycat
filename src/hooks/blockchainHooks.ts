@@ -9,7 +9,6 @@ export const useBlockchain = (): IBlockchainPayload => {
   const {
     config: { blockchain },
   } = useStore()
-
   const injectConfig = module => {
     const Plugin = module.default
     return new Plugin(blockchain)

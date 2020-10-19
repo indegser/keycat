@@ -26,7 +26,7 @@ export const useSignin = () => {
     try {
       const blockchain = await plugin.wait()
       const result = await blockchain.signin({
-        account,
+        account: account.toLowerCase(),
         password,
       })
 

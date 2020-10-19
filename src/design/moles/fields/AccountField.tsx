@@ -24,7 +24,7 @@ const AccountField = ({ hidden, ...inputProps }: Props) => {
         spellCheck="false"
         tabIndex={hidden ? -1 : 0}
         autoCorrect="false"
-        placeholder="Account"
+        placeholder="Account (lowercase)"
         autoComplete="username"
         {...inputProps}
       />

@@ -20,14 +20,10 @@ const InfoSpan = styled.span`
   }
 `
 
-const FieldError = ({ name }) => {
-  const { errors } = useForm()
-  const error = errors[name]
+const InputError = props => {
+  const { message } = props
+  if (!message) return null
 
-  if (!error) return null
-
-  const { message } = error
-  console.log('errors: ', errors)
   return (
     <Container>
       <InfoSpan>
@@ -38,4 +34,4 @@ const FieldError = ({ name }) => {
   )
 }
 
-export default FieldError
+export default InputError

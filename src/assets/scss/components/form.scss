@@ -1,0 +1,41 @@
+.form {
+  overflow-wrap: anywhere;
+}
+
+.copy-icon-wrap {
+  padding: 0 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.private-key-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.account-handle-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.copy-icon {
+  font-weight: 100;
+}
+
+.is-copied-confirmation {
+  color: green;
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+
+.close-button {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 26px;
+}

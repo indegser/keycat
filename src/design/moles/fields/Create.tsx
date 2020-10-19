@@ -24,30 +24,35 @@ const ButtonWrapper = styled.div`
     width: 100%;
   }
 `
+const SecondaryButton = styled(Button)`
+  &&& {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    background: white;
+  }
+`
 
 interface Props {
   help?: string
   sibling?: React.SFC<any>
   disabled?: boolean
   onClick?: () => any
-  className?: string
 }
 
-const Submit: React.SFC<Props> = props => {
-  const { onClick, help, disabled, sibling: Sibling, className } = props
+const Create: React.SFC<Props> = props => {
+  const { onClick, disabled, sibling: Sibling } = props
   return (
     <Container>
       <div style={{ width: '100%' }}>
-        {help && <Help type={help} />}
         <ButtonWrapper>
           {Sibling && <Sibling />}
-          <Button type="submit" onClick={onClick} disabled={disabled} className={className}>
-            {props.children || 'Next'}
-          </Button>
+          <SecondaryButton className="secondaryButton" type="submit" onClick={onClick} disabled={disabled}>
+            Create New Account
+          </SecondaryButton>
         </ButtonWrapper>
       </div>
     </Container>
   )
 }
 
-export default Submit
+export default Create
