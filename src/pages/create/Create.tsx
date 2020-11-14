@@ -6,6 +6,7 @@ import CardLayout from 'design/layouts/CardLayout'
 import { Fields } from 'design/atoms/Input'
 import SpinnerField from 'design/moles/fields/SpinnerField'
 import { Form } from 'design/moles/form/Form'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { appendSearchParamsToUrl } from 'utils'
 import axios from 'axios'
 import { useBlockchain } from '../../hooks/blockchainHooks'
@@ -42,6 +43,10 @@ const SecondaryButton = styled(Button)`
     background: white;
   }
 `
+
+const onChangeRecaptcha = value => {
+  console.log('Captcha value:', value)
+}
 
 const CreateAccount = props => {
   const plugin = useBlockchain()
@@ -184,6 +189,18 @@ const CreateAccount = props => {
         <SpinnerField onChange={onChangeAccountHandle} isLoading={isCheckingAvailability} name={'accountHandle'} />
         <InputError message={errors.accountHandle && errors.accountHandle.message} />
       </Fields>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 18,
+          marginBottom: 18,
+        }}
+      >
+        <ReCAPTCHA sitekey="6LeGBeEZAAAAAHP1EkKhZ1ECxlLgXD8Dr8c9nkuz" onChange={onChangeRecaptcha} />
+      </div>
       <Submit
         disabled={isSubmitDisabled}
         sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>}

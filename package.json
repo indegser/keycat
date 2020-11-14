@@ -25,6 +25,7 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8",
+    "react-google-recaptcha": "^2.1.0",
     "react-icons": "^3.11.0",
     "react-markdown": "^4.0.8",
     "react-svg-loader": "^3.0.1",
