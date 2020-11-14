@@ -44,10 +44,6 @@ const SecondaryButton = styled(Button)`
   }
 `
 
-const onChangeRecaptcha = value => {
-  console.log('Captcha value:', value)
-}
-
 const CreateAccount = props => {
   const plugin = useBlockchain()
   const [isValid, setIsValid] = useState(false)
@@ -56,6 +52,7 @@ const CreateAccount = props => {
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
   const [errors, setErrors] = useState({})
   const [accountHandle, setAccountHandle] = useState('')
+  const [recaptchaValue, setRecaptchaValue] = useState('')
   const [keys, setKeys] = useState(null)
   const store = useStore()
   const {
@@ -66,6 +63,10 @@ const CreateAccount = props => {
 
   const onClickSignin = () => {
     navigate(appendSearchParamsToUrl('/signin'))
+  }
+
+  const onChangeRecaptcha = value => {
+    setRecaptchaValue(value)
   }
 
   const fetchHandleAvailability = async () => {
@@ -161,9 +162,10 @@ const CreateAccount = props => {
     }
     try {
       const createAccountResponse = await axios({
-        url: `https://${url}/v1/testnet/account`,
+        url: `https://${url}/v1/recaptchaCreate`,
         method: 'POST',
         data: {
+          recaptchaResponse: recaptchaValue,
           accountName: lowerCaseAccountHandle,
           ownerKey: keys.ownerKeys.publicKey,
           activeKey: keys.activeKeys.publicKey,
