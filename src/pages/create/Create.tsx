@@ -199,7 +199,7 @@ const CreateAccount = props => {
           marginBottom: 18,
         }}
       >
-        <ReCAPTCHA sitekey="6LeGBeEZAAAAAHP1EkKhZ1ECxlLgXD8Dr8c9nkuz" onChange={onChangeRecaptcha} />
+        <ReCAPTCHA sitekey="6Ld-_eIZAAAAAF6JsrFudo_uQjRL4eqPAZE40I3o" onChange={onChangeRecaptcha} />
       </div>
       <Submit
         disabled={isSubmitDisabled}
