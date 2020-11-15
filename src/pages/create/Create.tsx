@@ -160,8 +160,9 @@ const CreateAccount = props => {
     } else {
       throw new Error('Invalid blockchain name')
     }
+    let createAccountResponse
     try {
-      const createAccountResponse = await axios({
+      createAccountResponse = await axios({
         url: `https://${url}/v1/recaptchaCreate`,
         method: 'POST',
         data: {
@@ -171,13 +172,20 @@ const CreateAccount = props => {
           activeKey: keys.activeKeys.publicKey,
         },
       })
-      console.log('createAccountResponse: ', createAccountResponse)
       if (createAccountResponse.status !== 200) {
-        throw new Error()
+        throw new Error(createAccountResponse.data)
+      }
+      if (!createAccountResponse.data.success) {
+        throw new Error(createAccountResponse.data.message)
       }
       navigate('/review', { state: { accountHandle: lowerCaseAccountHandle, keys } })
     } catch (error) {
-      console.log('error: ', error)
+      setErrors({
+        accountHandle: {
+          message: error.message,
+          name: 'CreateAccountError',
+        },
+      })
     } finally {
       setIsCreatingAccount(false)
     }
