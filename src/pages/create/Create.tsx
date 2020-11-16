@@ -57,7 +57,7 @@ const CreateAccount = props => {
   const store = useStore()
   const {
     config: {
-      blockchain: { nodes },
+      blockchain: { nodes, name },
     },
   } = store
 
@@ -70,8 +70,6 @@ const CreateAccount = props => {
   }
 
   const fetchHandleAvailability = async () => {
-    const { name } = store.config.blockchain
-
     let url
     if (name === 'telos') {
       url = 'api.telos.net'
@@ -146,12 +144,8 @@ const CreateAccount = props => {
   }
 
   const onClickSubmit = async ({ values }) => {
-    const { name } = store.config.blockchain
     const lowerCaseAccountHandle = accountHandle.toLowerCase()
-    console.log('in Create, store is: ', store)
     setIsCreatingAccount(true)
-    console.log('onClickSubmit, keys: ', keys)
-    console.log('onClickSubmit, values: ', values)
     let url
     if (name === 'telos') {
       url = 'api.telos.net'
@@ -191,10 +185,11 @@ const CreateAccount = props => {
     }
   }
 
-  const isSubmitDisabled = isCheckingAvailability || isCreatingAccount || !isValid || !isAvailable
-  console.log('keys: ', keys)
+  const isSubmitDisabled = isCheckingAvailability || isCreatingAccount || !isValid || !isAvailable || !recaptchaValue
+  const chainSyntax = name === 'telos' ? 'Telos' : 'Telos Testnet'
+
   return (
-    <CardLayout title="Create Telos Testnet Account">
+    <CardLayout title={`Create ${chainSyntax} Account`}>
       <Fields>
         <SpinnerField onChange={onChangeAccountHandle} isLoading={isCheckingAvailability} name={'accountHandle'} />
         <InputError message={errors.accountHandle && errors.accountHandle.message} />
