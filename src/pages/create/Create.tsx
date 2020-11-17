@@ -133,10 +133,8 @@ const CreateAccount = props => {
   }, [])
 
   const generateKeys = async () => {
-    console.log('generating keys,  keys were: ', keys)
     const blockchain = await plugin.wait()
     const newKeys = await blockchain.getNewKeyPair()
-    console.log('setting keys to: ', newKeys)
     setKeys({
       activeKeys: newKeys,
       ownerKeys: newKeys,
@@ -156,30 +154,31 @@ const CreateAccount = props => {
     }
     let createAccountResponse
     try {
-      createAccountResponse = await axios({
-        url: `https://${url}/v1/recaptchaCreate`,
+      createAccountResponse = await fetch(`https://${url}/v1/recaptchaCreate`, {
         method: 'POST',
-        data: {
+        body: JSON.stringify({
           recaptchaResponse: recaptchaValue,
           accountName: lowerCaseAccountHandle,
           ownerKey: keys.ownerKeys.publicKey,
           activeKey: keys.activeKeys.publicKey,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
         },
       })
-      if (createAccountResponse.status !== 200) {
-        throw new Error(createAccountResponse.data)
-      }
-      if (!createAccountResponse.data.success) {
-        throw new Error(createAccountResponse.data.message)
+      const createAccountData = await createAccountResponse.json()
+      if (!createAccountResponse.ok) {
+        setErrors({
+          accountHandle: {
+            message: createAccountData.message,
+            name: 'CreateAccountError',
+          },
+        })
+        return
       }
       navigate('/review', { state: { accountHandle: lowerCaseAccountHandle, keys } })
     } catch (error) {
-      setErrors({
-        accountHandle: {
-          message: error.message,
-          name: 'CreateAccountError',
-        },
-      })
+      console.log('in catch and error is: ', JSON.stringify(error.message))
     } finally {
       setIsCreatingAccount(false)
     }
