@@ -309,10 +309,10 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@telosnetwork/telos-keycatjs@0.12.3":
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/@telosnetwork/telos-keycatjs/-/telos-keycatjs-0.12.3.tgz#49d2ef58b190af8ca332f0db33fca1f0756c9291"
-  integrity sha512-+tqli96Q+VqUw/CqHpub4stXBsDQknULaeDrwy1AQof2bK45ydmZFVF/QnG9d4iWENmSZVsDZ7uwUV487YpQsg==
+"@telosnetwork/telos-keycatjs@0.12.4":
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/@telosnetwork/telos-keycatjs/-/telos-keycatjs-0.12.4.tgz#c42b020ba066597f17569e16007ea812b308b41d"
+  integrity sha512-8OXJlG+wbyS/tooXhb81zd3MTJI7Q2Xfr/qjC/UItkW0kILHPd3fzLYYq7gyg9FbsgIGAyt3KMyFy8kSRFM6Vw==
   dependencies:
     query-string "^6.5.0"
 
