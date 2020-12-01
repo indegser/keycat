@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
-    "@telosnetwork/telos-keycatjs": "0.11.2",
+    "@telosnetwork/telos-keycatjs": "git://github.com/telosnetwork/telos-keycatjs#a0c2794f8c23716c3c450b601528f09a0fef74ad",
     "axios": "^0.19.2",
     "big.js": "^5.2.2",
     "copy-webpack-plugin": "^5.0.3",

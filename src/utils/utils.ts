@@ -68,3 +68,18 @@ export const getColorFromString = str => {
 export const getBlockchainByName = name => {
   return blockchains.filter(({ types }) => types.includes(name))[0]
 }
+export const fromBinary = binary => {
+  const bytes = new Uint8Array(binary.length)
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = binary.charCodeAt(i)
+  }
+  return String.fromCharCode(...new Uint16Array(bytes.buffer))
+}
+
+export const toBinary = str => {
+  const codeUnits = new Uint16Array(str.length)
+  for (let i = 0; i < codeUnits.length; i++) {
+    codeUnits[i] = str.charCodeAt(i)
+  }
+  return String.fromCharCode(...new Uint8Array(codeUnits.buffer))
+}

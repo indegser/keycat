@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import TransactPayload from './TransactPayload'
 import Submit from 'design/moles/fields/Submit'
-import { getSearchParams } from 'utils/utils'
+import { getSearchParams, fromBinary, toBinary } from 'utils/utils'
 import AccountField from 'design/moles/fields/AccountField'
 import PasswordField from 'design/moles/fields/PasswordField'
 import CardLayout from 'design/layouts/CardLayout'
@@ -46,12 +46,12 @@ const Transact: React.SFC<Props> = ({ path }) => {
   const transact = useTransact(mode)
 
   const params = useMemo(() => {
-    const args = atob(decodeURIComponent(payload as string))
+    const args = fromBinary(atob(decodeURIComponent(payload as string)))
     return JSON.parse(args)
   }, [])
 
   const Payload = useMemo(() => {
-    const args = atob(decodeURIComponent(payload as string))
+    const args = fromBinary(atob(decodeURIComponent(payload as string)))
     const data = JSON.parse(args)
 
     if (mode === 'signArbitraryData' || plugin !== 'eos') {
