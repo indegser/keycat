@@ -46,12 +46,16 @@ const Transact: React.SFC<Props> = ({ path }) => {
   const transact = useTransact(mode)
 
   const params = useMemo(() => {
-    const args = fromBinary(atob(decodeURIComponent(payload as string)))
+    const decodedPayload = decodeURIComponent(payload as string)
+    const intermediate = atob(decodedPayload)
+    const args = fromBinary(intermediate)
     return JSON.parse(args)
   }, [])
 
   const Payload = useMemo(() => {
-    const args = fromBinary(atob(decodeURIComponent(payload as string)))
+    const decodedPayload = decodeURIComponent(payload as string)
+    const intermediate = atob(decodedPayload)
+    const args = fromBinary(intermediate)
     const data = JSON.parse(args)
 
     if (mode === 'signArbitraryData' || plugin !== 'eos') {
