@@ -23,7 +23,7 @@ const SigninAccount = props => {
       <Form action="post" noValidate onSubmit={signin}>
         <Fields>
           <AccountField />
-          <PasswordField hidden />
+          <PasswordField />
           <FieldError name="password" />
         </Fields>
         <Submit help="signin" sibling={() => <Link to={appendSearchParamsToUrl('/register')}>Import Account</Link>} />
