@@ -89,8 +89,8 @@ const Transact: React.SFC<Props> = ({ path }) => {
       <Form method="post" noValidate onSubmit={handleSubmit}>
         <Fields>
           {Payload}
-          <AccountField defaultValue={account as string} hidden />
-          <PasswordField hidden />
+          <AccountField defaultValue={account as string} />
+          <PasswordField />
           <FieldError name="account" />
           <FieldError name="password" />
         </Fields>
