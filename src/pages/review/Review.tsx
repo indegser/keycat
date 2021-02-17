@@ -11,7 +11,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const SaveKey = props => {
   const { state } = props.location
-  const { accountHandle, keys } = state
+  const { accountHandle, keys, name } = state
   const [accountHandleInput, setAccountHandleInput] = useState('')
   const [privateKeyInput, setPrivateKeyInput] = useState('')
   const [isBoxChecked, setIsBoxChecked] = useState(false)
@@ -66,10 +66,12 @@ const SaveKey = props => {
     console.log('copied')
   }
 
-  console.log('accountHandle: ', accountHandle, 'keys: ', keys)
+  const chainSyntax = name === 'telos' ? 'Telos' : 'Telos Testnet'
+
+  console.log('accountHandle: ', accountHandle, 'keys: ', keys, 'props: ', props)
   return (
     <div>
-      <CardLayout title="Review Telos Testnet Account Into">
+      <CardLayout title={`Review ${chainSyntax} Account Into`}>
         <Form method="post" noValidate onSubmit={onClickSave} autoComplete="off" className="review-page">
           <Fields>
             <p>

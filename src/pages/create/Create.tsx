@@ -176,7 +176,7 @@ const CreateAccount = props => {
         })
         return
       }
-      navigate('/review', { state: { accountHandle: lowerCaseAccountHandle, keys } })
+      navigate('/review', { state: { accountHandle: lowerCaseAccountHandle, keys, name } })
     } catch (error) {
       console.log('in catch and error is: ', JSON.stringify(error.message))
     } finally {
